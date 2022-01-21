@@ -1,9 +1,11 @@
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { navTheme } from './utils/styles/theme';
+import { ThemeProvider } from 'styled-components';
+
 ReactDOM.render(
-    <BrowserRouter>
+    <ThemeProvider theme={navTheme}>
         <App />
-    </BrowserRouter>,
+    </ThemeProvider>,
     document.getElementById('root'),
 );
