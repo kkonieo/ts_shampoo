@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// 예비용... 안해두면 자꾸 오류남 ㅡㅡ
 interface Props {
     key: string;
 };
@@ -7,11 +8,13 @@ interface Props {
 const Login: React.FC<Props> = ({ key }) => {
     return (
         <ContainerDiv>
-            <p>EliceFolio</p>
-            <form>
-                <input />
-                <input />
-            </form>
+            <FormDiv>
+                <p>EliceFolio</p>
+                <form>
+                    <Input placeholder='아이디' />
+                    <Input placeholder='비밀번호' />
+                </form>
+            </FormDiv>
         </ContainerDiv>
     );
 };
@@ -19,7 +22,21 @@ const Login: React.FC<Props> = ({ key }) => {
 export default Login;
 
 // styled-components
+
+// 배경 div
 const ContainerDiv = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #F5F5F5;
+`;
+
+// form div
+const FormDiv = styled.div`
     background-color: white;
 
     width: 400px;
@@ -27,5 +44,23 @@ const ContainerDiv = styled.div`
 
     border-radius: 20px;
 
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+// 아이디, 비밀번호 입력창
+const Input = styled.input`
+    all: unset;
+
+    display: block;
+
+    padding: 10px;
+    margin: 10px 0;
+
+    border-color: #E0E0E0;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
 `;
