@@ -22,6 +22,10 @@ export default Login;
 const ContainerDiv = styled.div`
     background-color: white;
 
-    width: 500px;
-    height: 600px;
+    width: 400px;
+    height: 410px;
+
+    border-radius: 20px;
+
+    margin: auto;
 `;
