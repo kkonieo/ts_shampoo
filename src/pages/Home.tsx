@@ -1,5 +1,5 @@
-import { Header } from '../components/main/Header';
-import { PortfolioList } from '../components/main/PortfolioList';
+import { Header } from '../components/home/Header';
+import { PortfolioList } from '../components/home/PortfolioList';
 
 export const Home = () => {
     return (
