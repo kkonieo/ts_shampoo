@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-// 예비용... 안해두면 자꾸 오류남 ㅡㅡ
 interface Props {
-    key: string;
+    key?: string;
 };
 
 const LoginButton: React.FC<Props> = ({ key }) => {
+    // console.log(theme);
     return (
         <Button type="submit">로그인</Button>
     );
@@ -15,7 +15,7 @@ export default LoginButton;
 
 // styled-components
 
-const Button = styled.button`
+const Button = styled.button<Props>`
     all: unset;
 
     display: block;

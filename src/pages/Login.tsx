@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import LoginButton from '../components/LoginButton';
 
-// 예비용... 안해두면 자꾸 오류남 ㅡㅡ
 interface Props {
-    key: string;
+    key?: string;
 };
 
 const Login: React.FC<Props> = ({ key }) => {
@@ -15,8 +14,8 @@ const Login: React.FC<Props> = ({ key }) => {
                     <Input placeholder='아이디' />
                     <Input placeholder='비밀번호' />
                 </form>
-                <LoginButton key="" />
-                <LoginButton key="" />
+                <LoginButton />
+                <LoginButton />
             </FormDiv>
         </ContainerDiv>
     );
