@@ -12,6 +12,8 @@ function App() {
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="nav" element={<NavPage />}>
                     <Route path="project" element={<HomePage />} />
+                    <Route path="aboutme" element={<PageNotFound />} />
+                    <Route path="contact" element={<p>하하</p>} />
                 </Route>
                 <Route path="404" element={<PageNotFound />} />
             </Routes>
