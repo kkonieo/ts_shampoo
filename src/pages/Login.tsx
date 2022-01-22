@@ -21,7 +21,7 @@ const Login: React.FC<Props> = ({ key }) => {
     );
 };
 
-export default Login;
+export { Login };
 
 // styled-components
 
