@@ -1,13 +1,15 @@
 import styled from 'styled-components';
+import { navTheme } from '../utils/styles/theme';
 
 interface Props {
-    key?: string;
+    color: string;
+    text: string;
 };
 
-const LoginButton: React.FC<Props> = ({ key }) => {
-    // console.log(theme);
+const LoginButton = ({ color, text }: Props) => {
+
     return (
-        <Button type="submit">로그인</Button>
+        <Button type="submit" color={color} text={text} >{text}</Button>
     );
 };
 
@@ -28,6 +30,8 @@ const Button = styled.button<Props>`
     border-radius: 50px;
 
     text-align: center;
-    color: white;
-    background-color: #5993F6;
+    color: ${ props => props.text === "로그인" ? "white" : "#757575" };
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
+
+    background-color: ${ props => props.color === "main" ? navTheme.color.main : navTheme.color.background };
 `;

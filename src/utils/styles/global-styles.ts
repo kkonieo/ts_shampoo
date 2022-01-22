@@ -14,22 +14,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     @font-face {
-        font-family: 'Apple SD Gothic Neo','EliceRegular','Montserrat','Helvetica',sans-serif;
-        fontsize : 12px | 0.8em;
-        font-style: normal;
-        font-weight:300;
-        font-style:normal;
-        line-height: 20px | 120%;
-    }
-
-    @font-face {
         font-family: 'AppleSDGothicNeo';
         src: url(${process.env.PUBLIC}/font/AppleSDGothicNeoR.woff2);
     }
 
     @font-face {
         font-family : 'Montserrat';
-        src: url()
+        src: url(${process.env.PUBLIC}/font/Montserrat.ttf);
         unicode-range: U+0041-005A,U+0061-007A;
     }
 
@@ -37,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
         font-family : 'Montserrat-italic';
         font-style: italic;
         font-weight: 300;
-        src: url(${process.env.PUBLIC})
+        src: url(${process.env.PUBLIC}/font/Montserrat-Italic.ttf);
         unicode-range: U+0041-005A,U+0061-007A;
     }
 

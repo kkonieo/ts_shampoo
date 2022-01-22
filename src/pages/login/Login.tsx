@@ -14,8 +14,8 @@ const Login: React.FC<Props> = ({ key }) => {
                     <Input placeholder='아이디' />
                     <Input placeholder='비밀번호' />
                 </form>
-                <LoginButton />
-                <LoginButton />
+                <LoginButton color="main" text="로그인" />
+                <LoginButton color="background" text="회원가입" />
             </FormDiv>
         </ContainerDiv>
     );
