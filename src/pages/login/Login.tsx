@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LoginButton from '../components/LoginButton';
+import LoginButton from '../../components/LoginButton';
 
 interface Props {
     key?: string;
@@ -21,7 +21,7 @@ const Login: React.FC<Props> = ({ key }) => {
     );
 };
 
-export { Login };
+export default Login;
 
 // styled-components
 

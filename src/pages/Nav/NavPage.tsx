@@ -2,6 +2,48 @@ import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
 import { Link, useLocation, useOutlet } from 'react-router-dom';
 
+const NavPage = () => {
+    //중첩 라우팅된 페이지
+    const outlet = useOutlet();
+
+    // 현재 주소 파악
+    const location = useLocation();
+    return (
+        <Div>
+            <NavContainer>
+                <NavDiv>
+                    <IconDiv>
+                        <Link to="..">
+                            <img src={`${process.env.PUBLIC_URL}/img/home.svg`} alt="홈으로 가기" />
+                        </Link>
+                        <Link to="/nav/mypage">
+                            <img src={`${process.env.PUBLIC_URL}/img/cog-outline.svg`} alt="마이 페이지" />
+                        </Link>
+                    </IconDiv>
+                    <UserPictureDiv></UserPictureDiv>
+                    <h2>Minyoung Lee</h2>
+                    <ul>
+                        <li className={location.pathname === '/nav' ? 'active' : ''}>
+                            <Link to="">About me</Link>
+                        </li>
+                        <li className={location.pathname === '/nav/project' ? 'active' : ''}>
+                            <Link to="project">Project</Link>
+                        </li>
+                        <li className={location.pathname === '/nav/contact' ? 'active' : ''}>
+                            <Link to="contact">Contact</Link>
+                        </li>
+                    </ul>
+                </NavDiv>
+                <ContentDiv>{outlet}</ContentDiv>
+            </NavContainer>
+        </Div>
+    );
+};
+
+export default NavPage;
+
+// styled-components
+
 // 전체 배경화면
 const Div = styled.div`
     background-color: #f5f5f5;
@@ -85,43 +127,3 @@ const IconDiv = styled.div`
     margin-left: auto;
     opacity: 0.6;
 `;
-
-const NavPage = () => {
-    //중첩 라우팅된 페이지
-    const outlet = useOutlet();
-
-    // 현재 주소 파악
-    const location = useLocation();
-    return (
-        <Div>
-            <NavContainer>
-                <NavDiv>
-                    <IconDiv>
-                        <Link to="..">
-                            <img src={`${process.env.PUBLIC_URL}/img/home.svg`} alt="홈으로 가기" />
-                        </Link>
-                        <Link to="/nav/mypage">
-                            <img src={`${process.env.PUBLIC_URL}/img/cog-outline.svg`} alt="마이 페이지" />
-                        </Link>
-                    </IconDiv>
-                    <UserPictureDiv></UserPictureDiv>
-                    <h2>Minyoung Lee</h2>
-                    <ul>
-                        <li className={location.pathname === '/nav' ? 'active' : ''}>
-                            <Link to="">About me</Link>
-                        </li>
-                        <li className={location.pathname === '/nav/project' ? 'active' : ''}>
-                            <Link to="project">Project</Link>
-                        </li>
-                        <li className={location.pathname === '/nav/contact' ? 'active' : ''}>
-                            <Link to="contact">Contact</Link>
-                        </li>
-                    </ul>
-                </NavDiv>
-                <ContentDiv>{outlet}</ContentDiv>
-            </NavContainer>
-        </Div>
-    );
-};
-
-export default NavPage;

@@ -2,7 +2,7 @@
 import 정리용 페이지
 import {HomePage, NavPage, PageNotFound} from './components'    
 */
-export { HomePage } from './Home';
-export { NavPage } from './Nav';
+export { HomePage } from './home';
+export { NavPage } from './nav';
 export { PageNotFound } from './PageNotFound';
-export { Login } from './Login';
+export { Login } from './login';
