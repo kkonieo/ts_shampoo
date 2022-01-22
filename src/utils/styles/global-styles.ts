@@ -7,10 +7,35 @@ const GlobalStyle = createGlobalStyle`
     html,
     body{
         overflow:hidden;
+        line-height: 1.2;
+        word-wrap: break-word;
+        font-size: 16px;
     }
 
     * {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+    ol,
+    ul,
+    li {
+        list-style: none;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        border: 0;
     }
 
     @font-face {
