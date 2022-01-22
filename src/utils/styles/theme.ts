@@ -1,5 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 import color from './color';
+
+// theme 지정
 const navTheme: DefaultTheme = {
     color: {
         background: color.gray,

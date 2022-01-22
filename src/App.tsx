@@ -11,9 +11,10 @@ function App() {
                 <Route path="*" element={<Navigate to="404" />} />
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="nav" element={<NavPage />}>
-                    <Route path="project" element={<HomePage />} />
-                    <Route path="aboutme" element={<PageNotFound />} />
-                    <Route path="contact" element={<p>하하</p>} />
+                    <Route path="" element={<p>aboutme</p>} />
+                    <Route path="project" element={<p>project</p>} />
+                    <Route path="contact" element={<p>contact</p>} />
+                    <Route path="mypage" element={<p>mypage</p>} />
                 </Route>
                 <Route path="404" element={<PageNotFound />} />
             </Routes>
