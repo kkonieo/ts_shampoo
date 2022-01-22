@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { navTheme } from '../utils/styles/theme';
 
+// props로 버튼 컬러와 내부 텍스트 받기
 interface Props {
     color: string;
     text: string;

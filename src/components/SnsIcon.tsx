@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+// size props를 받아서 사이즈 조절
+// class명은 레이아웃에 맞춰서 위치 조절을 위함
+
 interface Size {
     size?: string;
 }
