@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LoginButton from '../../components/LoginButton';
+import { GithubImg, GoogleImg, KakaotalkImg, LoginButton } from '../../components';
 
 interface Props {
     key?: string;
@@ -16,6 +16,11 @@ const Login: React.FC<Props> = ({ key }) => {
                 </form>
                 <LoginButton color="main" text="로그인" />
                 <LoginButton color="background" text="회원가입" />
+                <IconDiv>
+                    <GithubImg />
+                    <GoogleImg />
+                    <KakaotalkImg />
+                </IconDiv>
             </FormDiv>
         </ContainerDiv>
     );
@@ -67,4 +72,22 @@ const Input = styled.input`
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
+`;
+
+// 아이콘 영역
+const IconDiv = styled.div`
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+
+    width: 100%;
+
+    margin-top: 20px;
+    
+    & .githubIcon {
+        justify-self: end;
+    }
+
+    & .googleIcon {
+        justify-self: center;
+    }
 `;

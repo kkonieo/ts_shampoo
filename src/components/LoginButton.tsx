@@ -13,7 +13,7 @@ const LoginButton = ({ color, text }: Props) => {
     );
 };
 
-export default LoginButton;
+export { LoginButton };
 
 // styled-components
 
@@ -34,4 +34,6 @@ const Button = styled.button<Props>`
     font-family: 'AppleSDGothicNeo', 'sans-serif';
 
     background-color: ${ props => props.color === "main" ? navTheme.color.main : navTheme.color.background };
+
+    cursor: pointer;
 `;
