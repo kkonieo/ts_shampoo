@@ -14,4 +14,6 @@ export default SignUpCompleted;
 
 const TextP = styled.p`
     font-size: 2rem;
+    font-family: 'Montserrat', 'sans-serif';
+    font-weight: 800;
 `;

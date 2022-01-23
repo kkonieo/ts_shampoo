@@ -1,6 +1,7 @@
 import { LoginButton } from '../../components';
 import { useState } from 'react';
 import { Dropdown } from 'semantic-ui-react'
+import styled from 'styled-components';
 
 const SignUpJob = () => {
 
@@ -17,7 +18,7 @@ const SignUpJob = () => {
         <>
             <p>EliceFolio</p>
             <form style={{ position: "relative" }}>
-                <p>직군을 선택해주세요.</p>
+                <TextP>직군을 선택해주세요.</TextP>
                 <Dropdown placeholder='직군' fluid search selection options={jobOptions} />
                 <LoginButton type='submit' text='다음으로' className='gray_button' />
             </form>
@@ -26,3 +27,9 @@ const SignUpJob = () => {
 };
 
 export default SignUpJob;
+
+// styled-components
+
+const TextP = styled.p`
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
+`;

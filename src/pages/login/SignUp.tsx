@@ -8,7 +8,7 @@ interface Props {
 
 const SignUp: React.FC<Props> = ({ key }) => {
 
-    const [page, setPage] = useState<number>(1); // 0은 정보 입력, 1은 직군 선택
+    const [page, setPage] = useState<number>(0); // 0은 정보 입력, 1은 직군 선택
 
     const renderPage = renderHTML();
     

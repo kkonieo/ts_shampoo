@@ -1,18 +1,26 @@
 import styled from 'styled-components';
 import { LoginButton } from '../../components';
+import { Dropdown, Input as SemanticInput } from 'semantic-ui-react'
 
 const SignUpUser = () => {
+
+    const options = [
+        { key: 'naver', text: 'naver.com', value: '.naver.com' },
+        { key: 'daum', text: 'daum.net', value: '.daum.net' },
+        { key: 'google', text: 'gmail.com', value: '.gmail.com' },
+    ]
+    
     return (
         <>
             <p>EliceFolio</p>
-            <form style={{position: "relative"}}>
-                <Input placeholder='아이디(이메일주소)' />
+            <FormDiv style={{position: "relative"}}>
+                <SemanticInput label={<Dropdown defaultValue='.naver.com' options={options} />} labelPosition='right' placeholder='아이디(이메일주소)' />
                 <DoubleCheckButton type='button' text='중복확인' className='blue_button' />
                 <Input placeholder='이름' />
-                <Input placeholder='비밀번호' />
-                <Input placeholder='비밀번호 확인' />
+                <Input placeholder='비밀번호' type="password" />
+                <Input placeholder='비밀번호 확인' type="password" />
                 <LoginButton type='submit' text='다음으로' className='gray_button' />
-            </form>
+            </FormDiv>
         </>
     );
 };
@@ -29,7 +37,7 @@ const Input = styled.input`
     display: block;
 
     padding: 10px;
-    margin: 10px 0;
+    margin: 5px 0;
 
     width: 300px;
 
@@ -49,4 +57,26 @@ const DoubleCheckButton = styled(LoginButton)`
 
     color: white;
     background-color: #5993F6;
+`;
+
+const FormDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    & .ui.input {
+        margin: 5px 0;
+    }
+
+    & .ui[class*="right labeled"].input>input {
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    & .ui[class*="right labeled"].input>input::placeholder {
+        color: gray;
+    }
+
+    & .ui.labeled.input>.label {
+        padding: 10px;
+    }
 `;
