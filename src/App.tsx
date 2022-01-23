@@ -3,6 +3,8 @@ import { HomePage, NavPage, PageNotFound } from './pages';
 
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
+
+//라우팅 및 전체 css 적용
 function App() {
     return (
         <BrowserRouter>
