@@ -10,8 +10,9 @@ const SignUp: React.FC<Props> = ({ key }) => {
     return (
         <LoginDiv>
             <p>EliceFolio</p>
-            <form>
+            <form style={{position: "relative"}}>
                 <Input placeholder='아이디(이메일주소)' />
+                <DoubleCheckButton type='button' text='중복확인' className='blue_button' />
                 <Input placeholder='이름' />
                 <Input placeholder='비밀번호' />
                 <Input placeholder='비밀번호 확인' />
@@ -41,4 +42,16 @@ const Input = styled.input`
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
+`;
+
+const DoubleCheckButton = styled(LoginButton)`
+    position: absolute;
+
+    top: 0;
+    right: -130px;
+
+    width: 100px;
+
+    color: white;
+    background-color: #5993F6;
 `;
