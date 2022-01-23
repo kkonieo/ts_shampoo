@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { HomePage, NavPage, PageNotFound, Login } from './pages';
+import { HomePage, NavPage, PageNotFound, Login, SignUp } from './pages';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
 
@@ -10,6 +10,7 @@ function App() {
             <Routes>
                 <Route path="*" element={<Navigate to="404" />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/singup" element={<SignUp />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="nav" element={<NavPage />}>
                     <Route path="" element={<p>aboutme</p>} />
