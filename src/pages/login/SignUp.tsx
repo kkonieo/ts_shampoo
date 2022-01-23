@@ -15,7 +15,7 @@ const SignUp: React.FC<Props> = ({ key }) => {
                 <Input placeholder='이름' />
                 <Input placeholder='비밀번호' />
                 <Input placeholder='비밀번호 확인' />
-                <LoginButton type="submit" text="다음으로" />
+                <LoginButton type='submit' text='다음으로' className='gray_button' />
             </form>
         </LoginDiv>
     );

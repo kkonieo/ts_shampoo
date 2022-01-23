@@ -13,8 +13,8 @@ const Login: React.FC<Props> = ({ key }) => {
             <form>
                 <Input placeholder='아이디' />
                 <Input placeholder='비밀번호' />
-                <LoginButton type="submit" text="로그인" />
-                <LoginButton type="button" text="회원가입" to="/singup" />
+                <LoginButton type='submit' text='로그인' className='blue_button' />
+                <LoginButton type='button' text='회원가입' to='/singup' className='gray_button' />
             </form>
             <IconDiv>
                 <GithubImg />
