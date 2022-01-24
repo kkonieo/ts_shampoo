@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import LoginDiv from './LoginDiv';
-import { GithubImg, GoogleImg, KakaotalkImg, LoginButton } from '../../components';
+import { GithubImg, GoogleImg, KakaotalkImg, LoginButton, LoginInput } from '../../components';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +35,7 @@ const Login: React.FC<Props> = ({ key }) => {
     // useForm 세팅
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
-        // console.log("onSubmit", data)
+        console.log("onSubmit", data)
         setUser(current => {
             return {
                 ...current,
@@ -51,19 +51,19 @@ const Login: React.FC<Props> = ({ key }) => {
     return (
         <LoginDiv>
             <p>EliceFolio</p>
-            <form onSubmit={onSubmit}>
-                <Input
+            <Form onSubmit={onSubmit}>
+                <LoginInput
                     type="email"
                     placeholder='아이디'
                     {...register("userId", { required: true })} />
-                <Input
+                <LoginInput
                     type="password"
                     placeholder='비밀번호'
                     {...register("userPassword", { required: true })} />
                 {errors.userPassword && <p>{errors.userPassword.message}</p>}
                 <LoginButton type='submit' text='로그인' className='blue_button' />
                 <LoginButton type='button' text='회원가입' to='/singup' className='gray_button' />
-            </form>
+            </Form>
             <IconDiv>
                 <GithubImg />
                 <GoogleImg />
@@ -76,23 +76,6 @@ const Login: React.FC<Props> = ({ key }) => {
 export default Login;
 
 // styled-components
-
-// 아이디, 비밀번호 입력창
-const Input = styled.input`
-    all: unset;
-
-    display: block;
-
-    padding: 10px;
-    margin: 10px 0;
-
-    width: 300px;
-
-    border-color: #E0E0E0;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 5px;
-`;
 
 // 아이콘 영역
 const IconDiv = styled.div`
@@ -110,4 +93,9 @@ const IconDiv = styled.div`
     & .googleIcon {
         justify-self: center;
     }
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
 `;

@@ -39,7 +39,7 @@ const Button = styled.button<Props>`
 
     width: 300px;
 
-    margin: 10px 0;
+    margin: 5px 0;
     padding: 10px;
 
     border-radius: 50px;
