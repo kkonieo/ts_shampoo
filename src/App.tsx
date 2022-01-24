@@ -18,6 +18,7 @@ function App() {
                     <Route path="contact" element={<p>contact</p>} />
                     <Route path="mypage" element={<p>mypage</p>} />
                 </Route>
+                <Route path="detail" element={<p>detail</p>} />
                 <Route path="404" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>

@@ -1,9 +1,9 @@
-import { CardDiv } from '../../components/div';
+import { ProjectCardDiv } from '../../components/project';
 import styled from 'styled-components';
 const ProjectPage = () => {
     return (
         <Div>
-            <CardDiv />
+            <ProjectCardDiv />
         </Div>
     );
 };

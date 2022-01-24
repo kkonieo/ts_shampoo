@@ -75,7 +75,7 @@ const NavDiv = styled.div`
     font-family: 'Montserrat', 'EliceRegular', 'Heltica';
     font-weight: bold;
     background: ${navTheme.color.main};
-    border-radius: 15px 0 0 15px;
+    border-radius: 30px 0 0 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,7 +117,7 @@ const NavLinkUl = styled.ul`
 
 //오른쪽 컨텐츠 영역
 const ContentDiv = styled.div`
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 30px 30px 0;
     width: 82%;
     background-color: white;
     overflow-y: auto;
