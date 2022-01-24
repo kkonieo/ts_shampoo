@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import LoginDiv from './LoginDiv';
-import { GithubImg, GoogleImg, KakaotalkImg, LoginButton, LoginInput } from '../../components';
+import { GithubImg, GoogleImg, KakaotalkImg, LoginButton, LoginInput, Form } from '../../components';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +35,7 @@ const Login: React.FC<Props> = ({ key }) => {
     // useForm 세팅
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
-        console.log("onSubmit", data)
+        // console.log("onSubmit", data)
         setUser(current => {
             return {
                 ...current,
@@ -93,9 +93,4 @@ const IconDiv = styled.div`
     & .googleIcon {
         justify-self: center;
     }
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
 `;
