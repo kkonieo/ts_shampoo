@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { HomePage, NavPage, PageNotFound } from './pages';
+import { HomePage, NavPage, PageNotFound, ProjectPage } from './pages';
 
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
@@ -14,7 +14,7 @@ function App() {
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="nav" element={<NavPage />}>
                     <Route path="" element={<p>aboutme</p>} />
-                    <Route path="project" element={<p>project</p>} />
+                    <Route path="project" element={<ProjectPage />} />
                     <Route path="contact" element={<p>contact</p>} />
                     <Route path="mypage" element={<p>mypage</p>} />
                 </Route>

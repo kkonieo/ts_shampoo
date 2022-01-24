@@ -4,10 +4,7 @@ import normalize from 'styled-normalize';
 //전역 css
 const GlobalStyle = createGlobalStyle`
     ${normalize}
-    html,
-    body{
-        overflow:hidden;
-    }
+    
 
     * {
         box-sizing: border-box;

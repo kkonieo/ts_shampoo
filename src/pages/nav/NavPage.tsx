@@ -61,7 +61,6 @@ const BackgroundDiv = styled.div`
 
 // 페이지
 const NavContainer = styled.div`
-    overflow: hidden;
     max-width: 920px;
     height: 70vh;
     width: 80vw;
@@ -119,9 +118,14 @@ const NavLinkUl = styled.ul`
 //오른쪽 컨텐츠 영역
 const ContentDiv = styled.div`
     border-radius: 0 15px 15px 0;
-    overflow: hidden;
     width: 82%;
     background-color: white;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 // 사용자 이미지
@@ -138,7 +142,7 @@ const UserPictureDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+
     border: 10px solid ${navTheme.color.sub};
     img {
         padding: 7%;
