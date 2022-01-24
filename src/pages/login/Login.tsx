@@ -3,6 +3,7 @@ import LoginDiv from './LoginDiv';
 import { GithubImg, GoogleImg, KakaotalkImg, LoginButton } from '../../components';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     key?: string;
@@ -15,6 +16,8 @@ type FormData = {
 
 const Login: React.FC<Props> = ({ key }) => {
 
+    const navigate = useNavigate();
+
     // 유저 정보
     const [user, setUser] = useState<FormData>({
         userId: "",
@@ -24,13 +27,13 @@ const Login: React.FC<Props> = ({ key }) => {
     // 더미 데이터
     const dummyUser: FormData = {
         userId: "dummy",
-        userPassword: "12345678",
+        userPassword: "12345678a",
     };
     
     // console.log("user", user);
 
     // useForm 세팅
-    const { register, handleSubmit } = useForm<FormData>();
+    const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
         // console.log("onSubmit", data)
         setUser(current => {
@@ -40,14 +43,24 @@ const Login: React.FC<Props> = ({ key }) => {
                 userPassword: data.userPassword,
             }
         });
+        if (user === dummyUser) {
+            navigate('/');
+        }
     });
 
     return (
         <LoginDiv>
             <p>EliceFolio</p>
             <form onSubmit={onSubmit}>
-                <Input type="email" placeholder='아이디' {...register("userId", { required: true })} />
-                <Input type="password" placeholder='비밀번호' {...register("userPassword", { required: true })} />
+                <Input
+                    type="email"
+                    placeholder='아이디'
+                    {...register("userId", { required: true })} />
+                <Input
+                    type="password"
+                    placeholder='비밀번호'
+                    {...register("userPassword", { required: true })} />
+                {errors.userPassword && <p>{errors.userPassword.message}</p>}
                 <LoginButton type='submit' text='로그인' className='blue_button' />
                 <LoginButton type='button' text='회원가입' to='/singup' className='gray_button' />
             </form>
@@ -63,7 +76,6 @@ const Login: React.FC<Props> = ({ key }) => {
 export default Login;
 
 // styled-components
-
 
 // 아이디, 비밀번호 입력창
 const Input = styled.input`
