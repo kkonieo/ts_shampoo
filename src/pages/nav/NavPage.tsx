@@ -2,11 +2,6 @@ import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
 import { Link, useLocation, useOutlet } from 'react-router-dom';
 import { IconDiv } from '../../components';
-// 전체 배경화면
-
-// 사용자 이미지 영억
-
-// 아이콘 영역
 
 const NavLink = () => {
     const location = useLocation();
@@ -61,9 +56,8 @@ const BackgroundDiv = styled.div`
 
 // 페이지
 const NavContainer = styled.div`
-    max-width: 920px;
     height: 70vh;
-    width: 80vw;
+    width: 70vw;
     display: flex;
 `;
 

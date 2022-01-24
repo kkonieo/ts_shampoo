@@ -12,13 +12,13 @@ function App() {
             <Routes>
                 <Route path="*" element={<Navigate to="404" />} />
                 <Route path="/" element={<HomePage />}></Route>
-                <Route path="nav" element={<NavPage />}>
+                <Route path="nav/:id" element={<NavPage />}>
                     <Route path="" element={<p>aboutme</p>} />
                     <Route path="project" element={<ProjectPage />} />
                     <Route path="contact" element={<p>contact</p>} />
                     <Route path="mypage" element={<p>mypage</p>} />
+                    <Route path="detail/:id" element={<p>detail</p>} />
                 </Route>
-                <Route path="detail" element={<p>detail</p>} />
                 <Route path="404" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>

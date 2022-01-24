@@ -1,54 +1,46 @@
 import styled from 'styled-components';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-type ProjectProps = {
+export interface IProjectProps {
+    id: number;
     imgSrc?: string;
     title: string;
-    body: Array<string>;
-};
+    startDate: string;
+    endDate: string;
+    techStack: Array<string>;
+    animatedImg?: string;
+    staticImg?: string;
+    explain?: string;
+    liveDemoUrl?: string;
+    GithubUrl?: string;
+}
 
-const ProjectCard: React.FunctionComponent<ProjectProps> = (props) => {
-    const [playerState, setPlayerState] = useState<boolean>(false);
-    const [gifState, setGifState] = useState<boolean>(false);
-    const videoRef = useRef<HTMLVideoElement>(null);
+const ProjectCard: React.FunctionComponent<IProjectProps> = ({ ...props }) => {
+    const [gifToggle, setGifToggle] = useState<boolean>(false);
     const imgRef = useRef<HTMLImageElement>(null);
 
-    useEffect(() => {
-        if (!videoRef.current) {
-            return;
-        } else {
-            videoRef.current.src = `${process.env.PUBLIC_URL}/video/Test.mp4`;
-        }
-        if (!imgRef.current) {
-            return;
-        } else {
-            imgRef.current.src = 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original';
-        }
-    }, []);
-
     const handleGifPlayer = () => {
-        setGifState((current) => !current);
+        setGifToggle((current) => !current);
     };
     return (
         <ProjectCardDiv>
             <div className="project" onMouseOver={handleGifPlayer} onMouseOut={handleGifPlayer}>
-                <img
-                    alt={props?.title}
-                    ref={imgRef}
-                    src={
-                        gifState
-                            ? 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original'
-                            : 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original'
-                    }
-                />
+                <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.animatedImg}` : `${props?.staticImg}`} />
             </div>
             <div className="explain">
                 <p>
                     <b>{props?.title}</b>
                 </p>
-                {props?.body.map((explain: string) => (
-                    <p>{explain.length < 38 ? explain : explain.substring(0, 35) + '...'}</p>
-                ))}
+
+                {/*
+                길이가 일정이상 길면 뒷부분을 ...으로 대체한다
+                */}
+                <p>{`제작기간 :  ${props.startDate + ' ~ ' + props.endDate}`}</p>
+                <p>{`기술스택 :  ${
+                    props.techStack.join(',').length < 38
+                        ? props.techStack.join(',')
+                        : props.techStack.join(',').substring(0, 35) + '...'
+                }`}</p>
             </div>
         </ProjectCardDiv>
     );

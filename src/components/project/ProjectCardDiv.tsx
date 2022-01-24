@@ -1,32 +1,52 @@
-import ProjectCard from './ProjectCard';
+import ProjectCard, { IProjectProps } from './ProjectCard';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-type ExplainProps = {
-    imgSrc: string;
-    title: string;
-    body: string[];
-};
 
-const datas: ExplainProps[] = [
+const datas: IProjectProps[] = [
     {
-        imgSrc: 'Test.png',
+        id: 0,
         title: '프로젝트 토끼토끼',
-        body: ['제작기간 : 2021.01.30 ~ 2021.02.30', '기술 스택 : Django, Flask, TypeScript'],
+        startDate: '2021.01.30',
+        endDate: '2021.02.30',
+        techStack: ['Django', 'Flask', 'TypeScript'],
+        animatedImg: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+        staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
     },
     {
-        imgSrc: 'Test.png',
+        id: 2,
         title: '프로젝트 토끼토끼',
-        body: ['제작기간 : 2021.01.30 ~ 2021.02.30', '기술 스택 : Django, Flask, TypeScript'],
+        startDate: '2021.01.30',
+        endDate: '2021.02.30',
+        techStack: ['Django', 'Flask', 'TypeScript'],
+        animatedImg: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+        staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
     },
     {
-        imgSrc: 'Test.png',
+        id: 3,
         title: '프로젝트 토끼토끼',
-        body: ['제작기간 : 2021.01.30 ~ 2021.02.30', '기술 스택 : Django, Flask, TypeScript'],
+        startDate: '2021.01.30',
+        endDate: '2021.02.30',
+        techStack: ['Django', 'Flask', 'TypeScript'],
+        animatedImg: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+        staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
     },
     {
-        imgSrc: 'Test.png',
+        id: 4,
         title: '프로젝트 토끼토끼',
-        body: ['제작기간 : 2021.02.30 ~ 2021.03.30', '기술 스택 : Django, Flask, TypeScript'],
+        startDate: '2021.01.30',
+        endDate: '2021.02.30',
+        techStack: ['Django', 'Flask', 'TypeScript'],
+        animatedImg: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+        staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
+    },
+    {
+        id: 5,
+        title: '프로젝트 토끼토끼',
+        startDate: '2021.01.30',
+        endDate: '2021.02.30',
+        techStack: ['Django', 'Flask', 'TypeScript'],
+        animatedImg: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+        staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
     },
 ];
 
@@ -34,7 +54,7 @@ const ProjectCardDiv = () => {
     return (
         <GridDiv>
             {datas.map((data, idx) => (
-                <Link to="../../detail">
+                <Link to={`../detail/${data.id}`}>
                     <ProjectCard key={data.title + idx} {...data} />
                 </Link>
             ))}
