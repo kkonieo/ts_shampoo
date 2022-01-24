@@ -57,9 +57,8 @@ const Div = styled.div`
 // 페이지
 const NavContainer = styled.div`
     overflow: hidden;
-    max-width: 920px;
     height: 70vh;
-    width: 80vw;
+    width: 70vw;
     display: flex;
 `;
 
