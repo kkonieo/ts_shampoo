@@ -1,18 +1,28 @@
 import styled from 'styled-components';
 import LoginDiv from './LoginDiv';
 import { GithubImg, GoogleImg, KakaotalkImg, LoginButton } from '../../components';
+import { useForm } from "react-hook-form";
 
 interface Props {
     key?: string;
 };
 
+type FormData = {
+    userid: string;
+    userpassword: string;
+  };
+
 const Login: React.FC<Props> = ({ key }) => {
+
+    const { register, setValue, handleSubmit } = useForm<FormData>();
+    const onSubmit = handleSubmit(data => console.log(data));
+
     return (
         <LoginDiv>
             <p>EliceFolio</p>
-            <form>
-                <Input placeholder='아이디' />
-                <Input placeholder='비밀번호' />
+            <form onSubmit={onSubmit}>
+                <Input type="email" placeholder='아이디' {...register("userid")} />
+                <Input type="password" placeholder='비밀번호' {...register("userpassword")} />
                 <LoginButton type='submit' text='로그인' className='blue_button' />
                 <LoginButton type='button' text='회원가입' to='/singup' className='gray_button' />
             </form>
