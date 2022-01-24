@@ -2,27 +2,52 @@ import styled from 'styled-components';
 import LoginDiv from './LoginDiv';
 import { GithubImg, GoogleImg, KakaotalkImg, LoginButton } from '../../components';
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 
 interface Props {
     key?: string;
 };
 
 type FormData = {
-    userid: string;
-    userpassword: string;
+    userId: string;
+    userPassword: string;
   };
 
 const Login: React.FC<Props> = ({ key }) => {
 
-    const { register, setValue, handleSubmit } = useForm<FormData>();
-    const onSubmit = handleSubmit(data => console.log(data));
+    // 유저 정보
+    const [user, setUser] = useState<FormData>({
+        userId: "",
+        userPassword: "",
+    });
+
+    // 더미 데이터
+    const dummyUser: FormData = {
+        userId: "dummy",
+        userPassword: "12345678",
+    };
+    
+    // console.log("user", user);
+
+    // useForm 세팅
+    const { register, handleSubmit } = useForm<FormData>();
+    const onSubmit = handleSubmit(data => {
+        // console.log("onSubmit", data)
+        setUser(current => {
+            return {
+                ...current,
+                userId: data.userId,
+                userPassword: data.userPassword,
+            }
+        });
+    });
 
     return (
         <LoginDiv>
             <p>EliceFolio</p>
             <form onSubmit={onSubmit}>
-                <Input type="email" placeholder='아이디' {...register("userid")} />
-                <Input type="password" placeholder='비밀번호' {...register("userpassword")} />
+                <Input type="email" placeholder='아이디' {...register("userId", { required: true })} />
+                <Input type="password" placeholder='비밀번호' {...register("userPassword", { required: true })} />
                 <LoginButton type='submit' text='로그인' className='blue_button' />
                 <LoginButton type='button' text='회원가입' to='/singup' className='gray_button' />
             </form>
