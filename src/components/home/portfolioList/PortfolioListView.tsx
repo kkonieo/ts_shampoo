@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PortfolioListSection = styled.section`
-    width: 80vw;
+    min-width: 80vw;
     margin: 0 auto;
     margin-top: 24px;
     position: relative;
@@ -58,7 +59,7 @@ const UserPortfolioListDiv = styled.div`
     /* HACK: 정렬을 어떤식으로 하면 좋을지 */
     justify-content: center;
 `;
-const PortfolioDiv = styled.div`
+const PortfolioLink = styled(Link)`
     border: 1px solid #e0e0e0;
     width: 30%;
     height: 260px;
@@ -67,6 +68,8 @@ const PortfolioDiv = styled.div`
     display: flex;
     flex-basis: 260px;
     flex-direction: column;
+    text-decoration: none;
+    color: #3a3a3a;
 `;
 const PortfolioTitleDiv = styled.div`
     width: 100%;
@@ -107,12 +110,12 @@ export const PortfolioListView = ({ userInfo }: { userInfo: Array<UserInfoProps>
     // Portfolio 카드 컴포넌트
     const Portfolio = ({ name, job }: UserInfoProps): JSX.Element => {
         return (
-            <PortfolioDiv>
+            <PortfolioLink to="#">
                 <PortfolioTitleDiv>
                     <PortfolioName>{name}</PortfolioName>
                     <PortfolioJob>{job}</PortfolioJob>
                 </PortfolioTitleDiv>
-            </PortfolioDiv>
+            </PortfolioLink>
         );
     };
 
