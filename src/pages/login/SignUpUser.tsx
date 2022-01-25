@@ -18,16 +18,8 @@ const SignUpUser = () => {
         console.log("getValues", getValues("userId"));
     }
 
-    // 메일 주소
-    const options = [
-        { key: '없음', text: '이메일 선택', value: '이메일 선택' },
-        { key: 'naver', text: 'naver.com', value: '.naver.com' },
-        { key: 'daum', text: 'daum.net', value: '.daum.net' },
-        { key: 'google', text: 'gmail.com', value: '.gmail.com' },
-    ]
-
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors}, getValues, watch } = useForm<FormData>();
+    const { register, handleSubmit, formState: {errors}, getValues } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
         setNewUser(current => {
             return {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { navTheme } from '../utils/styles/theme';
+import { navTheme } from '../../utils/styles/theme';
 import { useNavigate } from 'react-router-dom';
 
 // props로 버튼 컬러와 내부 텍스트 받기

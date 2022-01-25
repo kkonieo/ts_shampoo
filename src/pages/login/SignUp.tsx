@@ -1,6 +1,7 @@
 import LoginDiv from './LoginDiv';
 import { SignUpUser, SignUpJob, SignUpCompleted } from './index';
-import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { pageState } from '../../utils/data/atom';
 
 interface Props {
     key?: string;
@@ -9,7 +10,7 @@ interface Props {
 const SignUp: React.FC<Props> = ({ key }) => {
 
     // 0은 정보 입력, 1은 직군 선택, 2는 가입 완료
-    const [page, setPage] = useState<number>(0);
+    const page = useRecoilValue<number>(pageState);
 
     const renderPage = renderHTML();
     
