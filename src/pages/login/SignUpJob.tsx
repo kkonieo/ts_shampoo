@@ -1,5 +1,4 @@
 import { LoginButton } from '../../components';
-import { useState } from 'react';
 import { Dropdown } from 'semantic-ui-react'
 import styled from 'styled-components';
 
