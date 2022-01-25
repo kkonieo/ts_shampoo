@@ -8,6 +8,7 @@ interface Props {
     text: string;
     to?: string; // 네비게이터용
     className: string; // 버튼 색상 바꾸기용
+    onClick?(): void; // 함수 핸들링용
 };
 
 const LoginButton = ({ type, text, to, className }: Props) => {
@@ -24,7 +25,7 @@ const LoginButton = ({ type, text, to, className }: Props) => {
     }
 
     return (
-        <Button type={type} text={text} onClick={handleClick} className={className} >{text}</Button>
+        <Button type={type} onClick={handleClick} className={className} >{text}</Button>
     );
 };
 
@@ -32,7 +33,7 @@ export { LoginButton };
 
 // styled-components
 
-const Button = styled.button<Props>`
+const Button = styled.button<{className: string}>`
     all: unset;
 
     display: block;

@@ -12,6 +12,12 @@ type FormData = {
   
 const SignUpUser = () => {
 
+    // 이메일 중복확인 하는 함수
+    function handleDoubleCheck(): void {
+        // 서버로 보내서 중복 확인하는 로직 들어가야함
+        console.log("getValues", getValues("userId"));
+    }
+
     // 메일 주소
     const options = [
         { key: '없음', text: '이메일 선택', value: '이메일 선택' },
@@ -21,7 +27,7 @@ const SignUpUser = () => {
     ]
 
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors}, getValues } = useForm<FormData>();
+    const { register, handleSubmit, formState: {errors}, getValues, watch } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
         setNewUser(current => {
             return {
@@ -44,8 +50,6 @@ const SignUpUser = () => {
         userPassword: "",
     });
 
-    console.log("newUser", newUser);
-
     return (
         <>
             <p>EliceFolio</p>
@@ -53,13 +57,14 @@ const SignUpUser = () => {
                 <DoubleCheckButton
                     type='button'
                     text='중복확인'
-                    className='blue_button' />
+                    className="blue_button"
+                    onClick={handleDoubleCheck} />
                 <LoginInput
                     placeholder='아이디 (이메일주소)' 
                     {...register('userId', {
                         required: true,
                         pattern: {
-                            value: /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/,
+                            value: /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/, // eslint-disable-line
                             message: "올바른 이메일 형식이 아닙니다."
                         }
                     })} />
@@ -96,7 +101,7 @@ const SignUpUser = () => {
                         }
                     })} />
                 {errors.userPasswordCheck && <ErrorP>{errors.userPasswordCheck.message}</ErrorP>}
-                <LoginButton type='submit' text='다음으로' className='gray_button' />
+                <LoginButton type='submit' text='다음으로' className="blue_button" />
             </FormDiv>
         </>
     );

@@ -20,7 +20,7 @@ const SignUpJob = () => {
             <form style={{ position: "relative" }}>
                 <TextP>직군을 선택해주세요.</TextP>
                 <Dropdown placeholder='직군' fluid search selection options={jobOptions} />
-                <LoginButton type='submit' text='다음으로' className='gray_button' />
+                <LoginButton type='submit' text='다음으로' className="blue_button" />
             </form>
         </>
     );

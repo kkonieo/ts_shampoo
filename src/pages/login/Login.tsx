@@ -61,8 +61,8 @@ const Login: React.FC<Props> = ({ key }) => {
                     placeholder='비밀번호'
                     {...register("userPassword", { required: true })} />
                 {errors.userPassword && <p>{errors.userPassword.message}</p>}
-                <LoginButton type='submit' text='로그인' className='blue_button' />
-                <LoginButton type='button' text='회원가입' to='/singup' className='gray_button' />
+                <LoginButton type='submit' text='로그인' className="blue_button" />
+                <LoginButton type='button' text='회원가입' to='/singup' className="gray_button" />
             </Form>
             <IconDiv>
                 <GithubImg />
