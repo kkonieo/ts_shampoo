@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { LoginButton, LoginInput, Form } from '../../components';
 import { useForm, } from "react-hook-form";
+import { useSetRecoilState  } from 'recoil';
+import { pageState } from '../../utils/data/atom';
+import 'semantic-ui-css/semantic.min.css'
 
 type FormData = {
     userId: string;
@@ -21,6 +24,7 @@ const SignUpUser = () => {
     // useForm 세팅
     const { register, handleSubmit, formState: {errors}, getValues } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
+        // 서버로 보내서 가입 시키는 로직 들어가야함
         setNewUser(current => {
             return {
                 ...current,
@@ -29,6 +33,7 @@ const SignUpUser = () => {
                 userPassword: data.userPassword,
             }
         })
+        setPage(1);
     });
 
     // 새로 가입하는 유저 정보
@@ -42,6 +47,8 @@ const SignUpUser = () => {
         userPassword: "",
     });
 
+    const setPage = useSetRecoilState<number>(pageState);
+
     return (
         <>
             <p>EliceFolio</p>
@@ -54,7 +61,7 @@ const SignUpUser = () => {
                 <LoginInput
                     placeholder='아이디 (이메일주소)' 
                     {...register('userId', {
-                        required: true,
+                        required: "아이디를 입력해주세요",
                         pattern: {
                             value: /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/, // eslint-disable-line
                             message: "올바른 이메일 형식이 아닙니다."
@@ -69,7 +76,7 @@ const SignUpUser = () => {
                     placeholder='비밀번호 (영문, 숫자, 특수문자 포함 8글자 이상)'
                     type='password'
                     {...register('userPassword', {
-                        required: true, 
+                        required: "비밀번호를 입력해주세요", 
                         minLength: {
                             value: 8,
                             message: "비밀번호는 8자 이상 입력해주세요."
@@ -84,7 +91,7 @@ const SignUpUser = () => {
                     placeholder='비밀번호 확인'
                     type='password'
                     {...register('userPasswordCheck', {
-                        required: true,
+                        required: "비밀번호를 한번 더 입력해주세요",
                         validate: {
                             passwordChecking: (value: string) => {
                                 const password = getValues('userPassword');
@@ -139,4 +146,5 @@ const FormDiv = styled(Form)`
 const ErrorP = styled.p`
     font-size: 0.5rem;
     color: red;
+    line-height: 0;
 `;

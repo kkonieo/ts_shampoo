@@ -12,8 +12,8 @@ const SignUp: React.FC<Props> = ({ key }) => {
     // 0은 정보 입력, 1은 직군 선택, 2는 가입 완료
     const page = useRecoilValue<number>(pageState);
 
-    const renderPage = renderHTML();
-    
+    // 페이지에 따라 컴포넌트 렌더링할 함수
+
     function renderHTML() {
         if (page === 0) {
             return (
@@ -29,6 +29,9 @@ const SignUp: React.FC<Props> = ({ key }) => {
             )
         }
     }
+    
+    const renderPage = renderHTML();
+
 
     return (
         <LoginDiv>

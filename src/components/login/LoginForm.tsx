@@ -15,6 +15,10 @@ const LoginInput = styled.input`
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
+
+    &::placeholder {
+        font-size: 0.8rem;
+    }
 `;
 
 // 폼 전체 감싸는 태그

@@ -1,6 +1,8 @@
 import { LoginButton } from '../../components';
 import { Dropdown } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
+import { pageState } from '../../utils/data/atom';
 
 const SignUpJob = () => {
 
@@ -12,6 +14,9 @@ const SignUpJob = () => {
         { key: '빅데이터', value: '빅데이터', text: '빅데이터' },
         { key: '안드로이드', value: '안드로이드', text: '안드로이드' },
     ]
+
+    // recoil 페이지 세팅
+    const setPage = useSetRecoilState<number>(pageState);
     
     return (
         <>
