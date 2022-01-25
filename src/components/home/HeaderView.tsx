@@ -53,7 +53,7 @@ const LogoutButton = styled(Button)`
     border: 1px solid ${defaultButton.color.border};
 `;
 
-export const HeaderView = ({ login }: { login: boolean }) => {
+export const HeaderView = ({ login, name }: { login: boolean; name: string }) => {
     const Login = () => {
         return (
             <>
@@ -68,7 +68,7 @@ export const HeaderView = ({ login }: { login: boolean }) => {
         return (
             <>
                 <NavLink to="#">나의 포트폴리오</NavLink>
-                <IdSpan>{'엘리스'}님</IdSpan>
+                <IdSpan>{name}님</IdSpan>
                 <LogoutButton>로그아웃</LogoutButton>
             </>
         );
