@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { blueButton, defaultButton } from '../../utils/styles/theme';
@@ -53,12 +54,20 @@ const LogoutButton = styled(Button)`
     border: 1px solid ${defaultButton.color.border};
 `;
 
-export const HeaderView = ({ login, name }: { login: boolean; name: string }) => {
+export const HeaderView = ({ name }: { name: string }) => {
+    const [login, setLogin] = useState<boolean>(false);
+
     const Login = () => {
         return (
             <>
                 <ButtonGroupDiv>
-                    <Button>로그인</Button>
+                    <Button
+                        onClick={() => {
+                            setLogin(false);
+                        }}
+                    >
+                        로그인
+                    </Button>
                     <SignupButton>회원가입</SignupButton>
                 </ButtonGroupDiv>
             </>
@@ -69,7 +78,13 @@ export const HeaderView = ({ login, name }: { login: boolean; name: string }) =>
             <>
                 <NavLink to="#">나의 포트폴리오</NavLink>
                 <IdSpan>{name}님</IdSpan>
-                <LogoutButton>로그아웃</LogoutButton>
+                <LogoutButton
+                    onClick={() => {
+                        setLogin(true);
+                    }}
+                >
+                    로그아웃
+                </LogoutButton>
             </>
         );
     };

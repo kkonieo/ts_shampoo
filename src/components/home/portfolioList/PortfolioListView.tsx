@@ -70,6 +70,10 @@ const PortfolioLink = styled(Link)`
     flex-direction: column;
     text-decoration: none;
     color: #3a3a3a;
+
+    &:hover {
+        box-shadow: 2px 6px 10px rgb(0, 0, 0, 0.1);
+    }
 `;
 const PortfolioTitleDiv = styled.div`
     width: 100%;
