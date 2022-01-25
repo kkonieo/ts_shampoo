@@ -6,3 +6,4 @@ export { HomePage } from './home';
 export { NavPage } from './nav';
 export { PageNotFound } from './PageNotFound';
 export { Login, SignUp } from './login';
+export { ContactMe } from './contact/ContactMe';
