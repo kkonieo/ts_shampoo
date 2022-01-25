@@ -55,8 +55,8 @@ const UserPortfolioListDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    justify-content: center;
     /* HACK: 정렬을 어떤식으로 하면 좋을지 */
+    justify-content: center;
 `;
 const PortfolioDiv = styled.div`
     border: 1px solid #e0e0e0;
@@ -97,50 +97,14 @@ const MoreButton = styled.button`
     border-radius: 9999px;
 `;
 
-export const PortfolioListView = () => {
-    interface UserInfoProps {
-        name: string;
-        job: string;
-    }
-
+interface UserInfoProps {
+    name: string;
+    job: string;
+}
+export const PortfolioListView = ({ userInfo }: { userInfo: Array<UserInfoProps> }) => {
     const [filterActive, setFilterActive] = useState<boolean>(false);
 
-    // 유저 포트폴리오 임의 생성을 위한 더미 데이터
-    const UserInfo: UserInfoProps[] = [
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-    ];
-
+    // Portfolio 카드 컴포넌트
     const Portfolio = ({ name, job }: UserInfoProps): JSX.Element => {
         return (
             <PortfolioDiv>
@@ -152,6 +116,7 @@ export const PortfolioListView = () => {
         );
     };
 
+    // TODO: filter 구현하기
     const Filter = (): JSX.Element => {
         return (
             <FilterForm>
@@ -169,7 +134,7 @@ export const PortfolioListView = () => {
         );
     };
 
-    let UserPortfolioList: JSX.Element[] = UserInfo.map((item: UserInfoProps) => {
+    let UserPortfolioList: JSX.Element[] = userInfo.map((item: UserInfoProps) => {
         return <Portfolio {...item} />;
     });
 
