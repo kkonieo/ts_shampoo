@@ -1,6 +1,21 @@
 import { DefaultTheme } from 'styled-components';
 import color from './color';
 
+// COMMON STYLE
+// button styled 지정
+const blueButton: DefaultTheme = {
+    color: {
+        background: color.lightBlue,
+        text: color.white,
+    },
+};
+const defaultButton: DefaultTheme = {
+    color: {
+        background: '#f5f5f5',
+        text: '#757575',
+    },
+};
+
 // theme 지정
 const navTheme: DefaultTheme = {
     color: {
@@ -18,4 +33,4 @@ const darkTheme: DefaultTheme = {
     },
 };
 
-export { navTheme, darkTheme };
+export { navTheme, blueButton, defaultButton, darkTheme };

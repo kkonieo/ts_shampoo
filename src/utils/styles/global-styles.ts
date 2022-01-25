@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     ${normalize}
     html,
     body{
-        overflow:hidden;
+        /* overflow:hidden; */
         line-height: 1.2;
         word-wrap: break-word;
         font-size: 16px;

@@ -6,7 +6,7 @@ const color: { [key in Color]: string } = {
     lightBlue: '#5993F6',
     lightGreen: '#6DDEC0',
     gray: '#E0E0E0',
-    black: '3A3A3A',
+    black: '#3A3A3A',
     white: '#FFFFFF',
 };
 
