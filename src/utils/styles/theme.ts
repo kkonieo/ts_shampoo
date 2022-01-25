@@ -13,6 +13,7 @@ const defaultButton: DefaultTheme = {
     color: {
         background: '#f5f5f5',
         text: '#757575',
+        border: '#e0e0e0',
     },
 };
 

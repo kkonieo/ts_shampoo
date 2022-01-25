@@ -42,19 +42,45 @@ const SignupButton = styled(Button)`
     color: ${defaultButton.color.text};
     margin-left: 12px;
 `;
+const IdSpan = styled.span`
+    margin-left: 20px;
+`;
+const LogoutButton = styled(Button)`
+    margin-left: 16px;
+    width: 96px;
+    background-color: ${defaultButton.color.background};
+    color: ${defaultButton.color.text};
+    border: 1px solid ${defaultButton.color.border};
+`;
 
-export const HeaderView = () => {
+export const HeaderView = ({ login }: { login: boolean }) => {
+    const Login = () => {
+        return (
+            <>
+                <ButtonGroupDiv>
+                    <Button>로그인</Button>
+                    <SignupButton>회원가입</SignupButton>
+                </ButtonGroupDiv>
+            </>
+        );
+    };
+    const Logout = () => {
+        return (
+            <>
+                <NavLink to="#">나의 포트폴리오</NavLink>
+                <IdSpan>{'엘리스'}님</IdSpan>
+                <LogoutButton>로그아웃</LogoutButton>
+            </>
+        );
+    };
+
     return (
         <>
             <Header>
                 <Logo>EliceFolio</Logo>
                 <Nav>
                     <NavLink to="#">팀 소개</NavLink>
-                    <NavLink to="#">나의 포트폴리오</NavLink>
-                    <ButtonGroupDiv>
-                        <Button>로그인</Button>
-                        <SignupButton>회원가입</SignupButton>
-                    </ButtonGroupDiv>
+                    {login ? <Login /> : <Logout />}
                 </Nav>
             </Header>
         </>
