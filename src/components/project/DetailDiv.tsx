@@ -2,9 +2,24 @@ import { IProjectProps } from './ProjectCard';
 import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
 
+interface btnData {
+    url: string;
+    urlName: string;
+}
+
 const DetailDiv: React.FunctionComponent<IProjectProps> = (props) => {
-    const handleWindowOpen = () => {
-        window.open('https://youtube.com', '_blank');
+    const dt: btnData[] = [
+        {
+            url: 'https://youtube.com',
+            urlName: 'youtube',
+        },
+        {
+            url: 'https://github.com',
+            urlName: 'github',
+        },
+    ];
+    const handleWindowOpen = (url: string) => {
+        window.open(url, '_blank');
     };
     const data: string =
         '엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. 엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. 엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다.';
@@ -32,8 +47,9 @@ const DetailDiv: React.FunctionComponent<IProjectProps> = (props) => {
                 {props.techStack.map((tech, idx) => (idx === 0 ? tech : ', ' + tech))}
             </ExplainDiv>
             <ButtonDiv>
-                props.urlArray.map
-                <button onClick={(src) => handleWindowOpen}>이름</button>
+                {dt.map((d) => (
+                    <button onClick={() => handleWindowOpen(d.url)}>{d.urlName}</button>
+                ))}
             </ButtonDiv>
         </DetailContainer>
     );
@@ -47,7 +63,6 @@ const DetailContainer = styled.div`
     flex-direction: column;
     text-align: left;
     justify-content: center;
-    margin-left: 5%;
 `;
 
 const Hr = styled.hr`
@@ -58,8 +73,8 @@ const Hr = styled.hr`
 `;
 const GifDiv = styled.div`
     width: 90%;
-    margin-top: 5%;
-    height: 30%;
+    margin-top: 2.5%;
+    margin-left: 5%;
     background-color: ${navTheme.color.background};
     border-radius: 15px;
 

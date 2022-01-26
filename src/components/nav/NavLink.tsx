@@ -6,7 +6,13 @@ const NavLink = () => {
     console.log(JSON.stringify(location));
     return (
         <NavLinkUl>
-            <li className={location.pathname.slice() === '/aboutme' ? 'active' : ''}>
+            <li
+                className={
+                    location.pathname.slice(-8) === '/project' || location.pathname.slice(-8) === '/contact'
+                        ? ''
+                        : 'active'
+                }
+            >
                 <Link to="">About me</Link>
             </li>
             <li className={location.pathname.slice(-8) === '/project' ? 'active' : ''}>

@@ -41,6 +41,7 @@ const BackgroundDiv = styled.div`
 const NavContainer = styled.div`
     height: 70vh;
     width: 70vw;
+    min-height: 480px;
     display: flex;
 `;
 
@@ -81,10 +82,11 @@ const NavDiv = styled.div`
 const ContentDiv = styled.div`
     border-radius: 0 30px 30px 0;
     width: 82%;
+    min-width: 400px;
     background-color: white;
     overflow-y: auto;
     scrollbar-width: none;
-
+    padding: 2.5%;
     ::-webkit-scrollbar {
         display: none;
     }

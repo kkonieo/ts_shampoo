@@ -69,7 +69,6 @@ const GridDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-row-gap: 2.5%;
-    margin: 2.5%;
     a {
         text-decoration: none;
     }
