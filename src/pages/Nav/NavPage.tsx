@@ -70,7 +70,7 @@ const NavDiv = styled.div`
 //오른쪽 컨텐츠 영역
 const ContentDiv = styled.div`
     border-radius: 0 15px 15px 0;
-    overflow: hidden;
+    overflow: scroll;
     width: 82%;
     background-color: white;
 `;
