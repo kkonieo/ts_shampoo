@@ -3,7 +3,8 @@ import { HomePage, NavPage, PageNotFound } from './pages';
 
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
-import { AboutMePage } from './pages/about-me';
+import { AboutMePage } from "./pages/Nav/index";
+
 function App() {
     return (
         <BrowserRouter>
