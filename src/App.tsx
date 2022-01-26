@@ -1,11 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { DetailPage, HomePage, NavPage, PageNotFound, ProjectPage } from './pages';
+import { DetailPage, HomePage, NavPage, PageNotFound, ProjectPage, AboutMePage } from './pages';
 
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
 
 //라우팅 및 전체 css 적용
-import { AboutMePage } from './pages/about-me';
 function App() {
     return (
         <BrowserRouter>

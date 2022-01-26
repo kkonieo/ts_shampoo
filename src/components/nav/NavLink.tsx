@@ -7,7 +7,7 @@ const NavLink = () => {
     return (
         <NavLinkUl>
             <li className={location.pathname.slice() === '/aboutme' ? 'active' : ''}>
-                <Link to="aboutme">About me</Link>
+                <Link to="">About me</Link>
             </li>
             <li className={location.pathname.slice(-8) === '/project' ? 'active' : ''}>
                 <Link to="project">Project</Link>
