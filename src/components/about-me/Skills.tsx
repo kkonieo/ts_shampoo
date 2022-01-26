@@ -70,7 +70,6 @@ const TagArea = styled.div`
     padding: 10px;
     box-sizing: border-box;
     width: 100%;
-    height: auto;
     display: flex;
     flex-direction: row;
 `;
