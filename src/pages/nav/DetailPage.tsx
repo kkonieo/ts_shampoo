@@ -1,5 +1,6 @@
 import { DetailDiv } from '../../components';
 import { IProjectProps } from '../../components/project/ProjectCard';
+import SubTitle from '../../components/SubTitle';
 const data: IProjectProps = {
     id: 0,
     title: '프로젝트 토끼토끼',
@@ -10,7 +11,12 @@ const data: IProjectProps = {
     staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
 };
 const DetailPage = () => {
-    return <DetailDiv {...data}></DetailDiv>;
+    return (
+        <>
+            <SubTitle text="📂 Project" />
+            <DetailDiv {...data}></DetailDiv>
+        </>
+    );
 };
 
 export default DetailPage;

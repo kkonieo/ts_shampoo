@@ -26,7 +26,6 @@ const DetailDiv: React.FunctionComponent<IProjectProps> = (props) => {
     return (
         <DetailContainer>
             <h2>{props.title}</h2>
-            <Hr />
             <p>{`개발기간 : ${props.startDate} ~ ${props.endDate}`}</p>
             <GifDiv>
                 <img
@@ -65,12 +64,6 @@ const DetailContainer = styled.div`
     justify-content: center;
 `;
 
-const Hr = styled.hr`
-    border-color: ${navTheme.color.background};
-    width: 100%;
-    margin-left: 0;
-    margin: auto;
-`;
 const GifDiv = styled.div`
     width: 90%;
     margin-top: 2.5%;

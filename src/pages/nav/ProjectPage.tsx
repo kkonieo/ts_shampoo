@@ -4,7 +4,7 @@ import SubTitle from '../../components/SubTitle';
 const ProjectPage = () => {
     return (
         <Div>
-            <SubTitle text="🧑‍💻 About me" />
+            <SubTitle text="📂 Project" />
             <ProjectCardDiv />
         </Div>
     );
