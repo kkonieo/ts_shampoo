@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Summary } from "../../components/about-me";
-import { Skills } from "../../components/skills";
+// import { Skills } from "../../components/skills";
 
 interface Props{
     userName:string;
@@ -16,7 +16,7 @@ const AboutMePage = () => {
     return (
     <Div>
         <Summary contents={tmpContents}/>
-        <Skills/>
+        {/* <Skills/> */}
     </Div>
     );
 };
