@@ -11,6 +11,10 @@ const Header = styled.header`
     align-items: center;
     box-shadow: 0 1px 4px rgb(0, 0, 0, 0.1);
 `;
+const LogoLink = styled(Link)`
+    text-decoration: none;
+    color: #3a3a3a;
+`;
 const Logo = styled.h1`
     font-size: 24px;
     margin-left: 40px;
@@ -92,7 +96,9 @@ export const HeaderView = ({ name }: { name: string }) => {
     return (
         <>
             <Header>
-                <Logo>EliceFolio</Logo>
+                <LogoLink to="/">
+                    <Logo>EliceFolio</Logo>
+                </LogoLink>
                 <Nav>
                     <NavLink to="#">팀 소개</NavLink>
                     {login ? <Login /> : <Logout />}
