@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import { aboutMeProps } from 'AboutMePageModuel';
 
-interface Props {
-    skill: string;
-    onSkillClick: any;
-}
-
-const SkillTag = ({ skill, onSkillClick }: Props) => {
+const SkillTag = ({ skill, onSkillClick }: aboutMeProps.SkillsDetailProps) => {
     return (
         <TagDiv data-value={skill} onClick={onSkillClick}>
             <TagNameDiv>{skill}</TagNameDiv>
