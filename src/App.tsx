@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
 
 //라우팅 및 전체 css 적용
+import { AboutMePage } from './pages/about-me';
 function App() {
     return (
         <BrowserRouter>
@@ -12,8 +13,8 @@ function App() {
             <Routes>
                 <Route path="*" element={<Navigate to="PageNotFound" />} />
                 <Route path="/" element={<HomePage />}></Route>
-                <Route path="/:id" element={<NavPage />}>
-                    <Route path="" element={<p>aboutme</p>} />
+                <Route path="nav" element={<NavPage />}>
+                    <Route path="" element={<AboutMePage />} />
                     <Route path="project" element={<ProjectPage />} />
                     <Route path="contact" element={<p>contact</p>} />
                     <Route path="mypage" element={<p>mypage</p>} />
