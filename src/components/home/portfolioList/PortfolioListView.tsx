@@ -1,7 +1,157 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {HomeProps} from 'HomeModule';
+import { HomeProps } from 'HomeModule';
+
+export const PortfolioListView = ({
+    userInfo,
+    positions,
+    stacks,
+}: {
+    userInfo: Array<HomeProps.UserInfoProps>;
+    positions: Array<string>;
+    stacks: Array<string>;
+}) => {
+    const [positionActive, setPositionActive] = useState<boolean>(false);
+    const [stackActive, setStackActive] = useState<boolean>(false);
+
+    // Portfolio 카드 컴포넌트
+    const Portfolio = ({ name, job }: HomeProps.UserInfoProps): JSX.Element => {
+        return (
+            <PortfolioLink to="#">
+                <PortfolioTitleDiv>
+                    <PortfolioName>{name}</PortfolioName>
+                    <PortfolioJob>{job}</PortfolioJob>
+                </PortfolioTitleDiv>
+            </PortfolioLink>
+        );
+    };
+
+    let UserPortfolioList: JSX.Element[] = userInfo.map((item: HomeProps.UserInfoProps, idx) => {
+        return <Portfolio key={idx} {...item} />;
+    });
+
+    // filter form 구현하는 로직
+    const filterBox: any = useRef(null);
+    const [selectedFilter, setSelectedFilter] = useState<string[]>([]);
+
+    const addFilter = (e: React.SyntheticEvent) => {
+        let target = e.target as HTMLInputElement;
+        let value = target.value;
+        if (selectedFilter.indexOf(value) < 0) {
+            setSelectedFilter((current) => {
+                const newFilterList = [...current, value];
+                return newFilterList;
+            });
+        } else {
+            setSelectedFilter((current) => {
+                let newSelectedFilter = [...current];
+                const idx = newSelectedFilter.indexOf(value);
+                newSelectedFilter.splice(idx, 1);
+                return newSelectedFilter;
+            });
+        }
+    };
+
+    // 직군, 기술스택의 checkbox창 만드는 로직
+    const Filter = ({ data }: { data: Array<string> }): JSX.Element => {
+        return (
+            <FilterContainerForm ref={filterBox}>
+                <div>
+                    {data.map((item, idx) => {
+                        return (
+                            <InputDiv key={idx}>
+                                <FilterInput
+                                    type="checkbox"
+                                    value={item}
+                                    id={item}
+                                    onChange={addFilter}
+                                    checked={selectedFilter.indexOf(item) >= 0}
+                                />
+                                <FilterLabel htmlFor={item}>{item}</FilterLabel>
+                            </InputDiv>
+                        );
+                    })}
+                </div>
+            </FilterContainerForm>
+        );
+    };
+
+    // filter 선택한 항목들 UI 나타내는 컴포넌트
+
+    const selectedFilterMemo = useMemo(() => {
+        return selectedFilter.map((item, idx): JSX.Element => {
+            return (
+                <FilterItems key={idx}>
+                    {item}
+                    <CloseButton>
+                        <img
+                            alt="close button"
+                            src={`${process.env.PUBLIC_URL}/img/close.svg`}
+                            onClick={() => {
+                                setSelectedFilter((current) => {
+                                    let newSelectedFilter = [...current];
+                                    const idx = newSelectedFilter.indexOf(item);
+                                    newSelectedFilter.splice(idx, 1);
+                                    return newSelectedFilter;
+                                });
+                            }}
+                        />
+                    </CloseButton>
+                </FilterItems>
+            );
+        });
+    }, [selectedFilter]);
+
+    // filter 에서 외부를 클릭했을시, filter form이 사라지게 하는 로직
+    const onLeaveFocusFilter = useCallback((e) => {
+        if (!filterBox.current) return;
+        if (!filterBox.current.contains(e.target)) {
+            setPositionActive(false);
+            setStackActive(false);
+        }
+    }, []);
+
+    return (
+        <PortfolioListSection onClick={onLeaveFocusFilter}>
+            <PortfolioListContainerDiv>
+                {/* Filter */}
+                <FilterDiv>
+                    {/* Position */}
+                    <FilterPositionDiv>
+                        <FilterButton
+                            onClick={() => {
+                                positionActive ? setPositionActive(false) : setPositionActive(true);
+                            }}
+                        >
+                            직군
+                        </FilterButton>
+                        {positionActive && <Filter data={positions} />}
+                    </FilterPositionDiv>
+                    {/* Stack */}
+                    <FilterStackDiv>
+                        <FilterButton
+                            onClick={() => {
+                                stackActive ? setStackActive(false) : setStackActive(true);
+                            }}
+                        >
+                            기술 스택
+                        </FilterButton>
+                        {stackActive && <Filter data={stacks} />}
+                    </FilterStackDiv>
+                </FilterDiv>
+                {/* Selected filter list */}
+                <FiltersListDiv>{selectedFilterMemo}</FiltersListDiv>
+                {/* Portfolio List */}
+                <UserPortfolioListDiv>{UserPortfolioList}</UserPortfolioListDiv>
+                {/* MORE Button */}
+                <MoreDiv>
+                    <MoreButton>더보기</MoreButton>
+                </MoreDiv>
+            </PortfolioListContainerDiv>
+        </PortfolioListSection>
+    );
+};
 
 const PortfolioListSection = styled.section`
     position: relative;
@@ -15,7 +165,7 @@ const FilterDiv = styled.div`
     display: flex;
     height: 36px;
     margin-bottom: 12px;
-    padding: 0 20px;
+    padding: 0 0px;
 `;
 const FilterPositionDiv = styled.div`
     position: relative;
@@ -53,15 +203,19 @@ const FilterContainerForm = styled.form`
 const FilterStackDiv = styled.div`
     position: relative;
 `;
+const FiltersListDiv = styled.div`
+    margin-bottom: 20px;
+`;
 
 const FilterItems = styled.div`
-    height: 44px;
+    height: 36px;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     padding: 10px;
     margin-left: 8px;
+    margin-bottom: 8px;
     color: #757575;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 `;
@@ -69,7 +223,6 @@ const CloseButton = styled.button`
     /* border: 2px solid blue; */
     padding-left: 6px;
 `;
-
 const UserPortfolioListDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -121,113 +274,3 @@ const MoreButton = styled.button`
     border: 1px solid #e0e0e0;
     border-radius: 9999px;
 `;
-
-export const PortfolioListView = ({
-    userInfo,
-    positions,
-    stacks,
-}: {
-    userInfo: Array<HomeProps.UserInfoProps>;
-    positions: Array<string>;
-    stacks: Array<string>;
-}) => {
-    const [positionActive, setPositionActive] = useState<boolean>(true);
-    const [stackActive, setStackActive] = useState<boolean>(false);
-    const [selectedFilter, setSelectedFilter] = useState<string[]>(['test', 'test1']);
-
-    // Portfolio 카드 컴포넌트
-    const Portfolio = ({ name, job }: HomeProps.UserInfoProps): JSX.Element => {
-        return (
-            <PortfolioLink to="#">
-                <PortfolioTitleDiv>
-                    <PortfolioName>{name}</PortfolioName>
-                    <PortfolioJob>{job}</PortfolioJob>
-                </PortfolioTitleDiv>
-            </PortfolioLink>
-        );
-    };
-
-    let UserPortfolioList: JSX.Element[] = userInfo.map((item: HomeProps.UserInfoProps, idx) => {
-        return <Portfolio key={idx} {...item} />;
-    });
-
-    // TODO: filter 구현하기
-    const filterBox: any = useRef(null);
-    const Filter = ({ data, type }: { data: Array<string>; type: string }): JSX.Element => {
-        const dataList = data.map((item, idx) => {
-            return (
-                <InputDiv key={idx}>
-                    <FilterInput type="checkbox" value={item} id={item} />
-                    <FilterLabel htmlFor={item}>{item}</FilterLabel>
-                </InputDiv>
-            );
-        });
-        return (
-            <FilterContainerForm ref={filterBox}>
-                <div>{dataList}</div>
-            </FilterContainerForm>
-        );
-    };
-
-    // filter 에서 외부를 클릭했을시, filter form이 사라지게 하는 로직
-    const onLeaveFocusFilter = useCallback((e) => {
-        if (!filterBox.current) return;
-        if (!filterBox.current.contains(e.target)) {
-            setPositionActive(false);
-            setStackActive(false);
-        }
-    }, []);
-
-    // filter 선택한 스택들 UI 나타내는 컴포넌트
-    const selectedFilterList = selectedFilter.map((item, idx) => {
-        return (
-            <FilterItems key={idx}>
-                {item}
-                <CloseButton>
-                    <img alt="close button" src={`${process.env.PUBLIC_URL}/img/close.svg`} />
-                </CloseButton>
-            </FilterItems>
-        );
-    });
-
-    return (
-        <PortfolioListSection onClick={onLeaveFocusFilter}>
-            <PortfolioListContainerDiv>
-                {/* Filter */}
-                <FilterDiv>
-                    {/* Position */}
-                    <FilterPositionDiv>
-                        <FilterButton
-                            onClick={() => {
-                                positionActive ? setPositionActive(false) : setPositionActive(true);
-                            }}
-                        >
-                            직군
-                        </FilterButton>
-                        {positionActive && <Filter data={positions} type="position" />}
-                    </FilterPositionDiv>
-                    {/* Stack */}
-                    <FilterStackDiv>
-                        <FilterButton
-                            onClick={() => {
-                                stackActive ? setStackActive(false) : setStackActive(true);
-                            }}
-                        >
-                            기술 스택
-                        </FilterButton>
-                        {stackActive && <Filter data={stacks} type="stack" />}
-                    </FilterStackDiv>
-                    <br />
-                    {/* Selected filter list */}
-                    {selectedFilter && selectedFilterList}
-                </FilterDiv>
-                {/* Portfolio List */}
-                <UserPortfolioListDiv>{UserPortfolioList}</UserPortfolioListDiv>
-                {/* MORE Button */}
-                <MoreDiv>
-                    <MoreButton>더보기</MoreButton>
-                </MoreDiv>
-            </PortfolioListContainerDiv>
-        </PortfolioListSection>
-    );
-};
