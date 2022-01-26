@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
-
+  
 export const pageState = atom<number>({
-    key: 'signUpPage',
+    key: 'pageState',
     default: 0,
 });

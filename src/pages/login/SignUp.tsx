@@ -1,4 +1,4 @@
-import LoginDiv from './LoginDiv';
+import LoginContainer from './LoginContainer';
 import { SignUpUser, SignUpJob, SignUpCompleted } from './index';
 import { useRecoilValue } from 'recoil';
 import { pageState } from '../../utils/data/atom';
@@ -34,9 +34,9 @@ const SignUp: React.FC<Props> = ({ key }) => {
 
 
     return (
-        <LoginDiv>
+        <LoginContainer>
             {renderPage}
-        </LoginDiv>
+        </LoginContainer>
     );
 };
 

@@ -4,7 +4,6 @@ import { LoginButton, LoginInput, Form } from '../../components';
 import { useForm, } from "react-hook-form";
 import { useSetRecoilState  } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import 'semantic-ui-css/semantic.min.css'
 
 type FormData = {
     userId: string;
@@ -47,6 +46,7 @@ const SignUpUser = () => {
         userPassword: "",
     });
 
+    // recoil 페이지 세팅
     const setPage = useSetRecoilState<number>(pageState);
 
     return (

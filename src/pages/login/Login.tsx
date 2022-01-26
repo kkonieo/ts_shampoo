@@ -1,52 +1,13 @@
 import styled from 'styled-components';
-import LoginDiv from './LoginDiv';
-import { GithubImg, GoogleImg, NaverImg, LoginButton, LoginInput, Form } from '../../components';
-import { useForm } from "react-hook-form";
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import LoginContainer from './LoginContainer';
+import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components';
+import { useNavigate, Link } from 'react-router-dom';
 
-interface Props {
-    key?: string;
-};
-
-type FormData = {
-    userId: string;
-    userPassword: string;
-  };
-
-const Login: React.FC<Props> = ({ key }) => {
+const Login = () => {
 
     const navigate = useNavigate();
 
-    // 유저 정보
-    const [user, setUser] = useState<FormData>({
-        userId: "",
-        userPassword: "",
-    });
-
-    // 더미 데이터
-    const dummyUser: FormData = {
-        userId: "dummy",
-        userPassword: "12345678a",
-    };
-    
     // console.log("user", user);
-
-    // useForm 세팅
-    const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
-    const onSubmit = handleSubmit(data => {
-        // console.log("onSubmit", data)
-        setUser(current => {
-            return {
-                ...current,
-                userId: data.userId,
-                userPassword: data.userPassword,
-            }
-        });
-        if (user === dummyUser) {
-            navigate('/');
-        }
-    });
 
     // // 카카오 로그인 테스트
     // const handleGetKakao = async () => {
@@ -89,27 +50,24 @@ const Login: React.FC<Props> = ({ key }) => {
 
 
     return (
-        <LoginDiv>
-            <p>EliceFolio</p>
-            <Form onSubmit={onSubmit}>
-                <LoginInput
-                    type="email"
-                    placeholder='아이디'
-                    {...register("userId", { required: true })} />
-                <LoginInput
-                    type="password"
-                    placeholder='비밀번호'
-                    {...register("userPassword", { required: true })} />
-                {errors.userPassword && <p>{errors.userPassword.message}</p>}
-                <LoginButton type='submit' text='로그인' className="blue_button" />
-                <LoginButton type='button' text='회원가입' to='/singup' className="gray_button" />
-            </Form>
+        <LoginContainer>
+            <Logo>EliceFolio</Logo>
+            <SnsLoginButton text='깃허브로 로그인' to="github" color="black" />
+            <SnsLoginButton text='구글로 로그인' to='google' color="#EA4335" />
+            <SnsLoginButton text='네이버로 로그인' to='naver' color="#19CE60" />
+            <TextP>회원이 아니신가요?</TextP>
             <IconDiv>
-                <GithubImg />
-                <GoogleImg />
-                <NaverImg />
+                <Link to="/signup" className="githubIcon">
+                    <GithubImg />
+                </Link>
+                <Link to="/signup" className="googleIcon">
+                    <GoogleImg />
+                </Link>
+                <Link to="/signup" className="naverIcon">
+                    <NaverImg />
+                </Link>
             </IconDiv>
-        </LoginDiv>
+        </LoginContainer>
     );
 };
 
@@ -117,14 +75,25 @@ export default Login;
 
 // styled-components
 
+// 로고 (완성되면 삭제 예정)
+const Logo = styled.p`
+    background-color: #5993F6;
+    width: 200px;
+    height: 80px;
+
+    margin-bottom: 30px;
+
+    @media screen and (max-height: 340px) {
+    margin-bottom: 1vh;
+}
+`;
+
 // 아이콘 영역
 const IconDiv = styled.div`
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
 
     width: 100%;
-
-    margin-top: 20px;
     
     & .githubIcon {
         justify-self: end;
@@ -133,4 +102,16 @@ const IconDiv = styled.div`
     & .googleIcon {
         justify-self: center;
     }
+`;
+
+const TextP = styled.p`
+    color: #757575;
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
+
+    margin: 1.5rem 0;
+
+    @media screen and (max-height: 340px) {
+    margin: 5vh 0;
+}
+    
 `;
