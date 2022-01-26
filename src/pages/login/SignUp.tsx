@@ -1,5 +1,5 @@
 import LoginContainer from './LoginContainer';
-import { SignUpUser, SignUpJob, SignUpCompleted } from './index';
+import { SignUpUser, SignUpCompleted } from './index';
 import { useRecoilValue } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 
@@ -18,10 +18,6 @@ const SignUp: React.FC<Props> = ({ key }) => {
         if (page === 0) {
             return (
                 <SignUpUser />
-            )
-        } else if (page === 1) {
-            return (
-                <SignUpJob />
             )
         } else {
             return (

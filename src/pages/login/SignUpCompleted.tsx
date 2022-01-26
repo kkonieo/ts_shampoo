@@ -16,4 +16,8 @@ const TextP = styled.p`
     font-size: 2rem;
     font-family: 'Montserrat', 'sans-serif';
     font-weight: 800;
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+    }
 `;
