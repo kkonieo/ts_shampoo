@@ -29,15 +29,16 @@ display: inline-block;
 cursor: pointer;
 `;
 
-const KakaotalkImg = styled.img.attrs(() => ({
-    src: `${process.env.PUBLIC_URL}/img/kakaotalk.svg`,
-    alt: "카카오톡 아이콘",
-    className: "kakaotalkIcon"
+const NaverImg = styled.img.attrs(() => ({
+    src: `${process.env.PUBLIC_URL}/img/naver.svg`,
+    alt: "네이버 아이콘",
+    className: "NaverIcon"
 }))<Size>`
 width: ${ props => props.size ? props.size : "30px" };
 height: ${ props => props.size ? props.size : "30px" };
 display: inline-block;
 cursor: pointer;
+/* filter: invert(44%) sepia(30%) saturate(6278%) hue-rotate(337deg) brightness(90%) contrast(103%); */
 `;
 
-export { GithubImg, GoogleImg, KakaotalkImg };
+export { GithubImg, GoogleImg, NaverImg };

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import LoginDiv from './LoginDiv';
-import { GithubImg, GoogleImg, KakaotalkImg, LoginButton, LoginInput, Form } from '../../components';
+import { GithubImg, GoogleImg, NaverImg, LoginButton, LoginInput, Form } from '../../components';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -48,6 +48,46 @@ const Login: React.FC<Props> = ({ key }) => {
         }
     });
 
+    // // 카카오 로그인 테스트
+    // const handleGetKakao = async () => {
+    //     const REST_API_KEY = process.env.REACT_APP_CLIENT_ID;
+    //     const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+    //     // console.log('REST_API_KEY', REST_API_KEY);
+    //     // console.log('REDIRECT_URI', REDIRECT_URI);
+    //     const kakaoGet = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    //     window.open(kakaoGet);
+
+    //     try {    
+    //         const response = axios.get(kakaoGet)
+    //                     .then(() => {
+    //                         const tokenCode = new URL(window.location.href).searchParams.get('code')
+                    
+    //                         const tokenPost = axios({
+    //                             method: "post",
+    //                             url: "https://kauth.kakao.com/oauth/token",
+    //                             data: {
+    //                                 "grant_type": "authorization_code",
+    //                                 "client_id": `${REST_API_KEY}`,
+    //                                 "code": `${tokenCode}`,
+    //                                 "redirect_uri": `${REDIRECT_URI}`,
+    //                             },
+    //                             headers: {
+    //                                 "Content-Type": "application/x-www-form-urlencoded"
+    //                             },
+    //                         })
+    //                             .then((response) => console.log(response))
+
+    //                     })
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+
+
+
     return (
         <LoginDiv>
             <p>EliceFolio</p>
@@ -67,7 +107,7 @@ const Login: React.FC<Props> = ({ key }) => {
             <IconDiv>
                 <GithubImg />
                 <GoogleImg />
-                <KakaotalkImg />
+                <NaverImg />
             </IconDiv>
         </LoginDiv>
     );
