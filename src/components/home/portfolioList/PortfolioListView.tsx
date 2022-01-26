@@ -123,6 +123,7 @@ export const PortfolioListView = ({
                             onClick={() => {
                                 positionActive ? setPositionActive(false) : setPositionActive(true);
                             }}
+                            isActive={positionActive}
                         >
                             직군
                         </FilterButton>
@@ -134,6 +135,7 @@ export const PortfolioListView = ({
                             onClick={() => {
                                 stackActive ? setStackActive(false) : setStackActive(true);
                             }}
+                            isActive={stackActive}
                         >
                             기술 스택
                         </FilterButton>
@@ -170,15 +172,19 @@ const FilterDiv = styled.div`
 const FilterPositionDiv = styled.div`
     position: relative;
 `;
-const FilterButton = styled.button`
+const FilterStackDiv = styled.div`
+    position: relative;
+`;
+const FilterButton = styled.button<HomeProps.IFilterProps>`
     width: 280px;
     height: 44px;
     border: 1px solid #e0e0e0;
     padding: 10px;
     margin-left: 12px;
-    color: #757575;
+    color: ${(props: any) => (props.isActive ? '#3a3a3a' : '#757575')};
     border-radius: 4px;
     text-align: left;
+    background-color: ${(props: any) => (props.isActive ? '#f5f5f5' : '#fff')};
 `;
 const InputDiv = styled.div`
     margin: 6px 8px;
@@ -200,9 +206,6 @@ const FilterContainerForm = styled.form`
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
 `;
-const FilterStackDiv = styled.div`
-    position: relative;
-`;
 const FiltersListDiv = styled.div`
     margin-bottom: 20px;
 `;
@@ -212,6 +215,7 @@ const FilterItems = styled.div`
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     padding: 10px;
+    margin-top: 8px;
     margin-left: 8px;
     margin-bottom: 8px;
     color: #757575;
@@ -220,7 +224,6 @@ const FilterItems = styled.div`
     justify-content: center;
 `;
 const CloseButton = styled.button`
-    /* border: 2px solid blue; */
     padding-left: 6px;
 `;
 const UserPortfolioListDiv = styled.div`

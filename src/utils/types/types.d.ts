@@ -11,11 +11,14 @@ declare module 'AboutMePageModuel' {
     }
 }
 
-declare module 'HomeModule'{ 
-    export namespace HomeProps{
+declare module 'HomeModule' {
+    export namespace HomeProps {
         interface UserInfoProps {
             name: string;
             job: string;
+        }
+        interface IFilterProps {
+            isActive: boolean;
         }
     }
 }
