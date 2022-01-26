@@ -3,11 +3,7 @@ import { SignUpUser, SignUpCompleted } from './index';
 import { useRecoilValue } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 
-interface Props {
-    key?: string;
-};
-
-const SignUp: React.FC<Props> = ({ key }) => {
+const SignUp = () => {
 
     // 0은 정보 입력, 1은 직군 선택, 2는 가입 완료
     const page = useRecoilValue<number>(pageState);

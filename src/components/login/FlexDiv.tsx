@@ -10,4 +10,6 @@ export const RowDiv = styled.div`
 export const ColumnDiv = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;

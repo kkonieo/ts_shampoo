@@ -35,6 +35,22 @@ declare module 'SnsLoginButton' {
 
 declare module 'LoginContainer' {
     interface LoginContainerProps {
-        children: React.ReactNode;
+            children: React.ReactNode;
+        }
     }
+
+declare module 'LoginButton' {
+    interface LoginButtonProps {
+        type: "submit";
+        text: string;
+        className: "blue_button" | "gray_button"; // 버튼 컬러 바꾸기용
+    };
+}
+
+declare module 'SignUp' {
+    type SignUpProps = {
+        userEmail?: string;
+        userName: string;
+        userJob: string;
+    };
 }

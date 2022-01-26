@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { SubTitle } from '../../components';
 
-interface Props {
-    key?: string;
-};
-
 const ContactMe = () => {
 
 

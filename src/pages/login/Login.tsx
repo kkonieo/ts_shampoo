@@ -83,7 +83,7 @@ const Logo = styled.p`
 
     margin-bottom: 30px;
 
-    @media (max-height: 340px) {
+    @media screen and (max-height: 340px) {
     margin-bottom: 1vh;
 }
 `;

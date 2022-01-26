@@ -1,40 +1,33 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { LoginButton, RowDiv, ColumnDiv } from '../../components';
-import { useForm, } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSetRecoilState  } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-
-type FormData = {
-    userId: string;
-    userName: string;
-    userJob: string;
-};
+import { SignUpProps } from 'SignUp'
   
 const SignUpUser = () => {
 
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
+    const { register, handleSubmit, formState: {errors} } = useForm<SignUpProps>();
     const onSubmit = handleSubmit(data => {
         console.log(data);
         // 서버로 보내서 가입 시키는 로직 들어가야함
         setNewUser(current => {
             return {
                 ...current,
-                userId: data.userId,
                 userName: data.userName,
+                userJob: data.userJob,
             }
         })
         setPage(1);
     });
 
     // 새로 가입하는 유저 정보
-    const [newUser, setNewUser] = useState<{
-        userId: string;
-        userName: string;
-    }>({
-        userId: "",
+    const [newUser, setNewUser] = useState<SignUpProps>({
+        userEmail: "",
         userName: "",
+        userJob: "",
     });
 
     // recoil 페이지 세팅
@@ -59,7 +52,6 @@ const SignUpUser = () => {
                         <p>이메일</p>
                         <p>example@naver.com</p>
                     </InformationDiv>
-                    {errors.userId && <ErrorP>{errors.userId.message}</ErrorP>}
                     <InformationDiv>
                         <p>이름</p>
                         <LoginInput

@@ -1,31 +1,12 @@
 import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
-import { useNavigate } from 'react-router-dom';
+import { LoginButtonProps } from 'LoginButton';
 
-// props로 버튼 컬러와 내부 텍스트 받기
-interface Props {
-    type: "button" | "submit";
-    text: string;
-    to?: string; // 네비게이터용
-    className: string; // 버튼 색상 바꾸기용
-    onClick?(): void; // 함수 핸들링용
-};
 
-const LoginButton = ({ type, text, to, className }: Props) => {
-
-    // 버튼에 따라 어느 홈페이지로 보낼지 선택!
-    const navigate = useNavigate();
-
-    function handleClick(): void {
-        if (to === undefined) {
-            return;
-        } else {
-            navigate(to);
-        }
-    }
+const LoginButton = ({ type, text, className }: LoginButtonProps) => {
 
     return (
-        <Button type={type} onClick={handleClick} className={className} >{text}</Button>
+        <Button type={type} className={className} >{text}</Button>
     );
 };
 
