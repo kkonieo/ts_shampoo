@@ -41,5 +41,39 @@ export const PortfolioList = (): JSX.Element => {
             job: '백엔드 개발자',
         },
     ];
-    return <PortfolioListView userInfo={userInfo} />;
+
+    const positions: string[] = [
+        '프론트엔드',
+        '백엔드',
+        '데이터 분석가',
+        '데이터 엔지니어',
+        '인공지능',
+        '보안 관련',
+        '인프라',
+        '임베디드',
+        '사물인터넷',
+        '게임 클라이언트',
+        '웹 풀스택',
+        '안드로이드 앱',
+        '아이폰 앱',
+    ];
+
+    const stacks: string[] = [
+        'Java',
+        'JavaScript',
+        'Python',
+        'Djanggo',
+        'React',
+        'Typescript',
+        'Flask',
+        'git',
+        'Vue',
+        'HTML',
+        'CSS',
+        'SCSS',
+        'jQuery',
+        'Docker',
+    ];
+
+    return <PortfolioListView userInfo={userInfo} positions={positions} stacks={stacks} />;
 };

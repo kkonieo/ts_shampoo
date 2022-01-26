@@ -1,58 +1,75 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PortfolioListSection = styled.section`
-    min-width: 80vw;
+    position: relative;
+`;
+const PortfolioListContainerDiv = styled.div`
+    max-width: 1200px;
     margin: 0 auto;
     margin-top: 24px;
-    position: relative;
 `;
 const FilterDiv = styled.div`
     display: flex;
     height: 36px;
-    margin-bottom: 20px;
-    padding: 0 40px;
+    margin-bottom: 12px;
+    padding: 0 20px;
 `;
-
+const FilterPositionDiv = styled.div`
+    position: relative;
+`;
 const FilterButton = styled.button`
-    height: 36px;
+    width: 280px;
+    height: 44px;
     border: 1px solid #e0e0e0;
     padding: 10px;
-    position: relative;
+    margin-left: 12px;
     color: #757575;
     border-radius: 4px;
+    text-align: left;
 `;
-const FilterForm = styled.form`
-    width: 300px;
-    height: 140px;
+const InputDiv = styled.div`
+    margin: 6px 8px;
+    font-size: 16px;
+`;
+const FilterInput = styled.input`
+    margin-right: 8px;
+`;
+const FilterLabel = styled.label``;
+const FilterContainerForm = styled.form`
+    width: 280px;
+    height: 400px;
     position: absolute;
-    bottom: -140px;
+    bottom: -400px;
     left: 0;
-    background-color: #f5f5f5;
+    margin-left: 12px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
 `;
-const FilterIntput = styled.input`
-    margin-top: 60px;
-    width: 260px;
-    height: 40px;
-    border-radius: 9999px;
+const FilterStackDiv = styled.div`
+    position: relative;
 `;
-const FilterCloseButton = styled.button`
-    position: absolute;
-    top: 20px;
-    right: 20px;
-`;
-const FilterItems = styled.button`
-    height: 36px;
+
+const FilterItems = styled.div`
+    height: 44px;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     padding: 10px;
     margin-left: 8px;
     color: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+const CloseButton = styled.button`
+    /* border: 2px solid blue; */
+    padding-left: 6px;
 `;
 
 const UserPortfolioListDiv = styled.div`
-    /* border: 2px solid blue; */
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -108,8 +125,18 @@ interface UserInfoProps {
     name: string;
     job: string;
 }
-export const PortfolioListView = ({ userInfo }: { userInfo: Array<UserInfoProps> }) => {
-    const [filterActive, setFilterActive] = useState<boolean>(false);
+export const PortfolioListView = ({
+    userInfo,
+    positions,
+    stacks,
+}: {
+    userInfo: Array<UserInfoProps>;
+    positions: Array<string>;
+    stacks: Array<string>;
+}) => {
+    const [positionActive, setPositionActive] = useState<boolean>(true);
+    const [stackActive, setStackActive] = useState<boolean>(false);
+    const [selectedFilter, setSelectedFilter] = useState<string[]>(['test', 'test1']);
 
     // Portfolio 카드 컴포넌트
     const Portfolio = ({ name, job }: UserInfoProps): JSX.Element => {
@@ -123,47 +150,86 @@ export const PortfolioListView = ({ userInfo }: { userInfo: Array<UserInfoProps>
         );
     };
 
+    let UserPortfolioList: JSX.Element[] = userInfo.map((item: UserInfoProps, idx) => {
+        return <Portfolio key={idx} {...item} />;
+    });
+
     // TODO: filter 구현하기
-    const Filter = (): JSX.Element => {
+    const filterBox: any = useRef(null);
+    const Filter = ({ data, type }: { data: Array<string>; type: string }): JSX.Element => {
+        const dataList = data.map((item, idx) => {
+            return (
+                <InputDiv key={idx}>
+                    <FilterInput type="checkbox" value={item} id={item} />
+                    <FilterLabel htmlFor={item}>{item}</FilterLabel>
+                </InputDiv>
+            );
+        });
         return (
-            <FilterForm>
-                <label>
-                    <FilterIntput type="text" />
-                </label>
-                <FilterCloseButton
-                    onClick={() => {
-                        setFilterActive(false);
-                    }}
-                >
-                    닫기
-                </FilterCloseButton>
-            </FilterForm>
+            <FilterContainerForm ref={filterBox}>
+                <div>{dataList}</div>
+            </FilterContainerForm>
         );
     };
 
-    let UserPortfolioList: JSX.Element[] = userInfo.map((item: UserInfoProps) => {
-        return <Portfolio {...item} />;
+    // filter 에서 외부를 클릭했을시, filter form이 사라지게 하는 로직
+    const onLeaveFocusFilter = useCallback((e) => {
+        if (!filterBox.current) return;
+        if (!filterBox.current.contains(e.target)) {
+            setPositionActive(false);
+            setStackActive(false);
+        }
+    }, []);
+
+    const selectedFilterList = selectedFilter.map((item, idx) => {
+        return (
+            <FilterItems key={idx}>
+                {item}
+                <CloseButton>
+                    <img alt="close button" src={`${process.env.PUBLIC_URL}/img/close.svg`} />
+                </CloseButton>
+            </FilterItems>
+        );
     });
 
     return (
-        <PortfolioListSection>
-            <FilterDiv>
-                <FilterButton
-                    onClick={() => {
-                        setFilterActive(true);
-                    }}
-                >
-                    필터
-                    {filterActive && <Filter />}
-                </FilterButton>
-                {/* TODO: filter를 어떤식으로 만들건지 */}
-                <FilterItems># 프론트엔드 개발자</FilterItems>
-                <FilterItems># 백엔드 개발자</FilterItems>
-            </FilterDiv>
-            <UserPortfolioListDiv>{UserPortfolioList}</UserPortfolioListDiv>
-            <MoreDiv>
-                <MoreButton>더보기</MoreButton>
-            </MoreDiv>
+        <PortfolioListSection onClick={onLeaveFocusFilter}>
+            <PortfolioListContainerDiv>
+                {/* Filter */}
+                <FilterDiv>
+                    {/* Position */}
+                    <FilterPositionDiv>
+                        <FilterButton
+                            onClick={() => {
+                                positionActive ? setPositionActive(false) : setPositionActive(true);
+                            }}
+                        >
+                            직군
+                        </FilterButton>
+                        {positionActive && <Filter data={positions} type="position" />}
+                    </FilterPositionDiv>
+                    {/* Stack */}
+                    <FilterStackDiv>
+                        <FilterButton
+                            onClick={() => {
+                                stackActive ? setStackActive(false) : setStackActive(true);
+                            }}
+                        >
+                            기술 스택
+                        </FilterButton>
+                        {stackActive && <Filter data={stacks} type="stack" />}
+                    </FilterStackDiv>
+                    <br />
+                    {/* Selected filter list */}
+                    {selectedFilter && selectedFilterList}
+                </FilterDiv>
+                {/* Portfolio List */}
+                <UserPortfolioListDiv>{UserPortfolioList}</UserPortfolioListDiv>
+                {/* MORE Button */}
+                <MoreDiv>
+                    <MoreButton>더보기</MoreButton>
+                </MoreDiv>
+            </PortfolioListContainerDiv>
         </PortfolioListSection>
     );
 };
