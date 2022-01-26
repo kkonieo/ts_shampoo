@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {HomeProps} from 'HomeModule';
 
 const PortfolioListSection = styled.section`
     position: relative;
@@ -121,16 +122,12 @@ const MoreButton = styled.button`
     border-radius: 9999px;
 `;
 
-interface UserInfoProps {
-    name: string;
-    job: string;
-}
 export const PortfolioListView = ({
     userInfo,
     positions,
     stacks,
 }: {
-    userInfo: Array<UserInfoProps>;
+    userInfo: Array<HomeProps.UserInfoProps>;
     positions: Array<string>;
     stacks: Array<string>;
 }) => {
@@ -139,7 +136,7 @@ export const PortfolioListView = ({
     const [selectedFilter, setSelectedFilter] = useState<string[]>(['test', 'test1']);
 
     // Portfolio 카드 컴포넌트
-    const Portfolio = ({ name, job }: UserInfoProps): JSX.Element => {
+    const Portfolio = ({ name, job }: HomeProps.UserInfoProps): JSX.Element => {
         return (
             <PortfolioLink to="#">
                 <PortfolioTitleDiv>
@@ -150,7 +147,7 @@ export const PortfolioListView = ({
         );
     };
 
-    let UserPortfolioList: JSX.Element[] = userInfo.map((item: UserInfoProps, idx) => {
+    let UserPortfolioList: JSX.Element[] = userInfo.map((item: HomeProps.UserInfoProps, idx) => {
         return <Portfolio key={idx} {...item} />;
     });
 
@@ -181,6 +178,7 @@ export const PortfolioListView = ({
         }
     }, []);
 
+    // filter 선택한 스택들 UI 나타내는 컴포넌트
     const selectedFilterList = selectedFilter.map((item, idx) => {
         return (
             <FilterItems key={idx}>

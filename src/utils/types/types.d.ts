@@ -10,3 +10,12 @@ declare module 'AboutMePageModuel' {
         }
     }
 }
+
+declare module 'HomeModule'{ 
+    export namespace HomeProps{
+        interface UserInfoProps {
+            name: string;
+            job: string;
+        }
+    }
+}
