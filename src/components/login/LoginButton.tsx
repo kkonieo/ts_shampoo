@@ -38,9 +38,8 @@ const Button = styled.button<{className: string}>`
 
     display: block;
 
-    width: 300px;
+    width: 150px;
 
-    margin: 5px 0;
     padding: 10px;
 
     border-radius: 50px;

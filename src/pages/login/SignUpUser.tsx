@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { LoginButton, LoginInput, Form } from '../../components';
+import { LoginButton, RowDiv, ColumnDiv } from '../../components';
 import { useForm, } from "react-hook-form";
 import { useSetRecoilState  } from 'recoil';
 import { pageState } from '../../utils/data/atom';
@@ -8,28 +8,21 @@ import { pageState } from '../../utils/data/atom';
 type FormData = {
     userId: string;
     userName: string;
-    userPassword: string;
-    userPasswordCheck: string;
+    userJob: string;
 };
   
 const SignUpUser = () => {
 
-    // 이메일 중복확인 하는 함수
-    function handleDoubleCheck(): void {
-        // 서버로 보내서 중복 확인하는 로직 들어가야함
-        console.log("getValues", getValues("userId"));
-    }
-
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors}, getValues } = useForm<FormData>();
+    const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
     const onSubmit = handleSubmit(data => {
+        console.log(data);
         // 서버로 보내서 가입 시키는 로직 들어가야함
         setNewUser(current => {
             return {
                 ...current,
                 userId: data.userId,
                 userName: data.userName,
-                userPassword: data.userPassword,
             }
         })
         setPage(1);
@@ -39,69 +32,56 @@ const SignUpUser = () => {
     const [newUser, setNewUser] = useState<{
         userId: string;
         userName: string;
-        userPassword: string;
     }>({
         userId: "",
         userName: "",
-        userPassword: "",
     });
 
     // recoil 페이지 세팅
     const setPage = useSetRecoilState<number>(pageState);
 
+    // 더미 데이터
+    const jobOptions = [
+        { key: '1', value: '백엔드' },
+        { key: '2', value: '프론트엔드' },
+        { key: '3', value: '풀스택' },
+        { key: '4', value: '보안' },
+        { key: '5', value: '빅데이터' },
+        { key: '6', value: '안드로이드' },
+    ]
+
     return (
         <>
-            <p>EliceFolio</p>
-            <FormDiv onSubmit={onSubmit}>
-                <DoubleCheckButton
-                    type='button'
-                    text='중복확인'
-                    className="blue_button"
-                    onClick={handleDoubleCheck} />
-                <LoginInput
-                    placeholder='아이디 (이메일주소)' 
-                    {...register('userId', {
-                        required: "아이디를 입력해주세요",
-                        pattern: {
-                            value: /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/, // eslint-disable-line
-                            message: "올바른 이메일 형식이 아닙니다."
-                        }
-                    })} />
-                {errors.userId && <ErrorP>{errors.userId.message}</ErrorP>}
-                <LoginInput
-                    placeholder='이름'
-                    {...register('userName', { required: "이름을 입력해주세요." })} />
-                {errors.userName && <ErrorP>{errors.userName.message}</ErrorP>}
-                <LoginInput
-                    placeholder='비밀번호 (영문, 숫자, 특수문자 포함 8글자 이상)'
-                    type='password'
-                    {...register('userPassword', {
-                        required: "비밀번호를 입력해주세요", 
-                        minLength: {
-                            value: 8,
-                            message: "비밀번호는 8자 이상 입력해주세요."
-                        },
-                        pattern: {
-                            value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
-                            message: "비밀번호는 영문/숫자/특수문자 조합만 가능합니다."
-                        }
-                    })} />
-                {errors.userPassword && <ErrorP>{errors.userPassword.message}</ErrorP>}
-                <LoginInput
-                    placeholder='비밀번호 확인'
-                    type='password'
-                    {...register('userPasswordCheck', {
-                        required: "비밀번호를 한번 더 입력해주세요",
-                        validate: {
-                            passwordChecking: (value: string) => {
-                                const password = getValues('userPassword');
-                                return value === password || "비밀번호가 일치하지 않습니다."
-                            },
-                        }
-                    })} />
-                {errors.userPasswordCheck && <ErrorP>{errors.userPasswordCheck.message}</ErrorP>}
-                <LoginButton type='submit' text='다음으로' className="blue_button" />
-            </FormDiv>
+            <Logo>EliceFolio</Logo>
+            <Form onSubmit={onSubmit}>
+                <FormDiv>
+                    <InformationDiv>
+                        <p>이메일</p>
+                        <p>example@naver.com</p>
+                    </InformationDiv>
+                    {errors.userId && <ErrorP>{errors.userId.message}</ErrorP>}
+                    <InformationDiv>
+                        <p>이름</p>
+                        <LoginInput
+                            placeholder='이름'
+                                {...register('userName', { required: "이름을 입력해주세요." })} />
+                    </InformationDiv>
+                    {errors.userName && <ErrorP>{errors.userName.message}</ErrorP>}
+                    <InformationDiv>
+                        <p>직군</p>
+                        <LoginInput list="job" placeholder="직군을 선택해주세요." {...register('userJob', {
+                            required: "직군을 선택해주세요.",
+                        })} />
+                        <datalist id="job">
+                            {jobOptions.map((item) => {
+                                return <option value={item.value} />
+                            })}
+                        </datalist>
+                    </InformationDiv>
+                    {errors.userJob && <ErrorP>{errors.userJob.message}</ErrorP>}
+                </FormDiv>
+                <LoginButton type='submit' text='가입하기' className="blue_button" />
+            </Form>
         </>
     );
 };
@@ -110,37 +90,68 @@ export default SignUpUser;
 
 // styled-components
 
-const DoubleCheckButton = styled(LoginButton)`
-    position: absolute;
-
-    top: 0;
-    right: -130px;
-
-    width: 100px;
-
-    color: white;
+// 로고 (완성되면 삭제 예정)
+const Logo = styled.p`
     background-color: #5993F6;
+    width: 200px;
+    height: 80px;
+
+    margin-bottom: 30px;
+
+    @media screen and (max-height: 340px) {
+    margin-bottom: 1vh;
+}
 `;
 
-const FormDiv = styled(Form)`
-    position: relative;
+// 이름, 직군 입력창
+const LoginInput = styled.input`
+    all: unset;
 
-    & .ui.input {
-        margin: 5px 0;
-    }
+    display: block;
 
-    & .ui[class*="right labeled"].input>input {
-        border-radius: 5px;
-        padding: 10px;
-    }
+    padding: 10px;
+    margin: 5px 0;
 
-    & .ui[class*="right labeled"].input>input::placeholder {
-        color: gray;
-    }
+    width: 230px;
 
-    & .ui.labeled.input>.label {
-        padding: 10px;
+    border-color: #E0E0E0;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
+
+    &::placeholder {
+        font-size: 0.8rem;
     }
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    & div:nth-child(1) {
+        justify-content: initial;
+    }
+`;
+
+const InformationDiv = styled(RowDiv)`
+    justify-content: space-between;
+
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
+    color: #757575;
+
+    width: 300px;
+
+    & p:nth-child(2) {
+        margin-left: 20px;
+    }
+`;
+
+const FormDiv = styled(ColumnDiv)`
+    margin-bottom: 30px;
 `;
 
 const ErrorP = styled.p`

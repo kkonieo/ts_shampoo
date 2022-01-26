@@ -47,11 +47,11 @@ const FormDiv = styled.div<{pathname: string}>`
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 450px) {
+    @media (max-width: ${props => props.pathname === '/login' ? '450px' : '800px'}) {
     width: 90%;
     }
 
-    @media screen and (max-height: 500px) {
+    @media (max-height: 500px) {
     height: 90%;
     }
 `;
