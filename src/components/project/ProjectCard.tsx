@@ -2,17 +2,22 @@ import styled from 'styled-components';
 import React, { useRef, useState } from 'react';
 
 export interface IProjectProps {
+    /*
+    아이디 번호
+    프로젝트 제목
+    제작시작일자
+    제작종료일자
+    기술스택
+    마우스 올리면 나올 GIF
+    기본 상태의 프로젝트 사진
+    */
     id: number;
-    imgSrc?: string;
     title: string;
     startDate: string;
     endDate: string;
     techStack: Array<string>;
     animatedImg?: string;
     staticImg?: string;
-    explain?: string;
-    liveDemoUrl?: string;
-    GithubUrl?: string;
 }
 
 const ProjectCard: React.FunctionComponent<IProjectProps> = ({ ...props }) => {

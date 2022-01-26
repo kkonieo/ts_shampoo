@@ -1,24 +1,7 @@
 import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
-import { Link, useLocation, useOutlet } from 'react-router-dom';
-import { IconDiv } from '../../components';
-
-const NavLink = () => {
-    const location = useLocation();
-    return (
-        <NavLinkUl>
-            <li className={location.pathname === '/nav' ? 'active' : ''}>
-                <Link to="">About me</Link>
-            </li>
-            <li className={location.pathname === '/nav/project' ? 'active' : ''}>
-                <Link to="project">Project</Link>
-            </li>
-            <li className={location.pathname === '/nav/contact' ? 'active' : ''}>
-                <Link to="contact">Contact</Link>
-            </li>
-        </NavLinkUl>
-    );
-};
+import { useOutlet } from 'react-router-dom';
+import { IconDiv, NavLink } from '../../components';
 
 const NavPage = () => {
     //중첩 라우팅된 페이지
@@ -93,21 +76,6 @@ const NavDiv = styled.div`
 `;
 
 // 클릭 시 다른 페이지로 이동하는 링크들
-const NavLinkUl = styled.ul`
-    padding: 0;
-    list-style: none;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    li {
-        width: 80%;
-        padding: 1vh;
-        text-align: center;
-    }
-`;
 
 //오른쪽 컨텐츠 영역
 const ContentDiv = styled.div`
