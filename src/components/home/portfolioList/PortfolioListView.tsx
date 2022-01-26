@@ -167,7 +167,7 @@ const FilterDiv = styled.div`
     display: flex;
     height: 36px;
     margin-bottom: 12px;
-    padding: 0 0px;
+    padding: 0 36px;
 `;
 const FilterPositionDiv = styled.div`
     position: relative;
@@ -181,10 +181,15 @@ const FilterButton = styled.button<HomeProps.IFilterProps>`
     border: 1px solid #e0e0e0;
     padding: 10px;
     margin-left: 12px;
-    color: ${(props: any) => (props.isActive ? '#3a3a3a' : '#757575')};
+    color: ${(props) => (props.isActive ? '#3a3a3a' : '#757575')};
     border-radius: 4px;
     text-align: left;
-    background-color: ${(props: any) => (props.isActive ? '#f5f5f5' : '#fff')};
+    background-color: ${(props) => (props.isActive ? '#f5f5f5' : '#fff')};
+
+    &:hover {
+        color: #3a3a3a;
+        background-color: #f5f5f5;
+    }
 `;
 const InputDiv = styled.div`
     margin: 6px 8px;
@@ -208,6 +213,7 @@ const FilterContainerForm = styled.form`
 `;
 const FiltersListDiv = styled.div`
     margin-bottom: 20px;
+    padding: 0 36px;
 `;
 
 const FilterItems = styled.div`
