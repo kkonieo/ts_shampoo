@@ -34,4 +34,4 @@ const darkTheme: DefaultTheme = {
     },
 };
 
-export { navTheme, blueButton, defaultButton, darkTheme };
+export { navTheme, darkTheme, blueButton, defaultButton };
