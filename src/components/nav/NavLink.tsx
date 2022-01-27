@@ -1,24 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
+
 const NavLink = () => {
-    const [linkNumber, setLinkNumber] = useState(0);
+    const { pathname } = useLocation();
     return (
         <NavLinkUl>
-            <li className={linkNumber === 0 ? 'active' : ''}>
-                <Link to="" onClick={() => setLinkNumber(0)}>
-                    About me
-                </Link>
+            <li className={pathname.includes('/aboutme') ? 'active' : ''}>
+                <Link to="aboutme">About me</Link>
             </li>
-            <li className={linkNumber === 1 ? 'active' : ''}>
-                <Link to="project" onClick={() => setLinkNumber(1)}>
-                    Project
-                </Link>
+            <li className={pathname.includes('/project') ? 'active' : ''}>
+                <Link to="project">Project</Link>
             </li>
-            <li className={linkNumber === 2 ? 'active' : ''}>
-                <Link to="contact" onClick={() => setLinkNumber(2)}>
-                    Contact
-                </Link>
+            <li className={pathname.includes('/contact') ? 'active' : ''}>
+                <Link to="contact">Contact</Link>
             </li>
         </NavLinkUl>
     );

@@ -82,9 +82,10 @@ const NavDiv = styled.div`
 const ContentDiv = styled.div`
     border-radius: 0 30px 30px 0;
     width: 82%;
-    min-width: 400px;
+    min-width: 700px;
     background-color: white;
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: none;
     padding: 2.5%;
     ::-webkit-scrollbar {

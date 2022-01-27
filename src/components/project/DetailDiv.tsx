@@ -1,4 +1,4 @@
-import { IProjectProps } from './ProjectCard';
+import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
 
@@ -7,7 +7,7 @@ interface btnData {
     urlName: string;
 }
 
-const DetailDiv: React.FunctionComponent<IProjectProps> = (props) => {
+const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) => {
     const dt: btnData[] = [
         {
             url: 'https://youtube.com',

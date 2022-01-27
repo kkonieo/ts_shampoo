@@ -1,17 +1,20 @@
 import { ProjectCardDiv } from '../../components/project';
-import styled from 'styled-components';
 import SubTitle from '../../components/SubTitle';
+import { useState } from 'react';
+import { ProjectEditPage } from '..';
 const ProjectPage = () => {
+    const [editToggle, setEditToggle] = useState<Boolean>(false);
+    const handleChangeToggle = () => {
+        console.log('됨');
+        setEditToggle((current) => !current);
+    };
     return (
-        <Div>
-            <SubTitle text="📂 Project" />
-            <ProjectCardDiv />
-        </Div>
+        <>
+            <SubTitle text="📂 Project" onClick={handleChangeToggle} />
+            {!editToggle && <ProjectCardDiv></ProjectCardDiv>}
+            {editToggle && <ProjectEditPage />}
+        </>
     );
 };
 
 export default ProjectPage;
-
-const Div = styled.div`
-    overflow: visible;
-`;

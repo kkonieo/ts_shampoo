@@ -1,7 +1,9 @@
 import { DetailDiv } from '../../components';
-import { IProjectProps } from '../../components/project/ProjectCard';
+import { ProjectProps } from 'ProjectPageModule';
 import SubTitle from '../../components/SubTitle';
-const data: IProjectProps = {
+import { useState } from 'react';
+import { DetailEditPage } from '..';
+const data: ProjectProps.IProjectProps = {
     id: 0,
     title: '프로젝트 토끼토끼',
     startDate: '2021.01.30',
@@ -11,10 +13,16 @@ const data: IProjectProps = {
     staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
 };
 const DetailPage = () => {
+    const [editToggle, setEditToggle] = useState<Boolean>(false);
+    const handleChangeToggle = () => {
+        console.log('됨');
+        setEditToggle((current) => !current);
+    };
     return (
         <>
-            <SubTitle text="📂 Project" />
-            <DetailDiv {...data}></DetailDiv>
+            <SubTitle text="📂 Project" onClick={handleChangeToggle} />
+            {!editToggle && <DetailDiv {...data}></DetailDiv>}
+            {editToggle && <DetailEditPage />}
         </>
     );
 };

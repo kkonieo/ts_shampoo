@@ -57,7 +57,7 @@ const ProjectCardDiv = () => {
     return (
         <GridDiv>
             {datas.map((data, idx) => (
-                <Link to={`../detail/${data.id}`}>
+                <Link to={`${idx}`}>
                     <ProjectCard key={data.title + idx} {...data} />
                 </Link>
             ))}
