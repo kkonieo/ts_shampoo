@@ -63,7 +63,6 @@ const Div = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 10px;
 `;
 
 const TagArea = styled.div`

@@ -11,6 +11,7 @@ const SkillTag = ({ skill, onSkillClick }: aboutMeProps.SkillsDetailProps) => {
 
 export default SkillTag;
 
+//TODO : 글자 길이에 따라서 폰트 사이즈 조정
 const TagDiv = styled.div`
     width: 100px;
     height: 30px;

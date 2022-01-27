@@ -27,6 +27,7 @@ const Div = styled.div`
 
 const DetailTitle = styled.div`
     font-size: 18px;
+    height: 30px;
     font-weight: 600;
     border-radius: 8px 8px 0px 0px;
     box-sizing: border-box;
