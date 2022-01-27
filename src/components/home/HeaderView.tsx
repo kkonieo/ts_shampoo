@@ -41,12 +41,6 @@ const Button = styled.button`
     background-color: ${blueButton.color.background};
     color: ${blueButton.color.text};
 `;
-const SignupButton = styled(Button)`
-    width: 96px;
-    background-color: ${defaultButton.color.background};
-    color: ${defaultButton.color.text};
-    margin-left: 12px;
-`;
 const IdSpan = styled.span`
     margin-left: 20px;
 `;
@@ -72,7 +66,6 @@ export const HeaderView = ({ name }: { name: string }) => {
                     >
                         로그인
                     </Button>
-                    <SignupButton>회원가입</SignupButton>
                 </ButtonGroupDiv>
             </>
         );
@@ -100,7 +93,7 @@ export const HeaderView = ({ name }: { name: string }) => {
                     <Logo>EliceFolio</Logo>
                 </LogoLink>
                 <Nav>
-                    <NavLink to="#">팀 소개</NavLink>
+                    <NavLink to="#">서비스 소개</NavLink>
                     {login ? <Login /> : <Logout />}
                 </Nav>
             </Header>
