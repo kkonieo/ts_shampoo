@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 import { LoginContainer } from './LoginContainer';
 import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { pageState } from '../../utils/data/atom';
+import { useEffect } from 'react';
 
 const Login = () => {
+
+    // recoil 페이지 세팅
+    const setPage = useSetRecoilState<number>(pageState);
 
     const navigate = useNavigate();
 
@@ -60,6 +66,9 @@ const Login = () => {
             navigate('/signup');
         }
     }
+
+    // 회원가입 페이지 번호 리셋
+    useEffect(() => setPage(0));
 
     return (
         <LoginContainer>

@@ -144,6 +144,8 @@ const InformationDiv = styled(RowDiv)`
 
 const FormDiv = styled(ColumnDiv)`
     margin-bottom: 30px;
+
+    align-items: center;
 `;
 
 const ErrorP = styled.p`

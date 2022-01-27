@@ -37,7 +37,7 @@ export const ContainerArticle = styled.article`
 const FormDiv = styled.div<{pathname: string}>`
     background-color: white;
 
-    width: ${props => props.pathname === '/login' ? '29.2vw' : '800px'};
+    width: ${props => props.pathname === '/login' ? '29.2vw' : '52vw'};
     height: 66.4vh;
 
     border-radius: 20px;
@@ -46,12 +46,4 @@ const FormDiv = styled.div<{pathname: string}>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: ${props => props.pathname === '/login' ? '450px' : '800px'}) {
-    width: 90%;
-    }
-
-    @media (max-height: 500px) {
-    height: 90%;
-    }
 `;
