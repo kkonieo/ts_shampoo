@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Summary, Skills } from '../../components';
-import { Resume } from '../../components/about-me';
+import { Resume, SkillsTest } from '../../components/about-me';
 
 const AboutMePage = () => {
     //유저의 간단한 자기 소개
@@ -16,7 +16,7 @@ const AboutMePage = () => {
     return (
         <Div>
             <Summary contents={tmpContents} />
-            <Skills />
+            <SkillsTest />
             <Resume />
         </Div>
     );

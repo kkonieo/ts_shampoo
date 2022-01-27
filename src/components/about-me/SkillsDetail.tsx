@@ -4,13 +4,15 @@ import { aboutMeProps } from 'AboutMePageModuel';
 const SkillsDetail = ({ skillTitles, skillDescribes }: aboutMeProps.SkillsProps) => {
     return (
         <Div>
-            <DetailTitle>{skillTitles}</DetailTitle>
+            <DetailTitle>{skillTitles === '' ? 'My Skill' : skillTitles}</DetailTitle>
             <DetailContentsArea>
                 {/* 클릭시에 바뀌도록 구현 예정*/}
                 {skillTitles === '' ? (
                     <EmptyDetail>자세히 알고싶다면 스킬을 클릭해보세요!</EmptyDetail>
-                ) : (
+                ) : skillDescribes !== undefined ? (
                     skillDescribes.map((item, idx) => <DetailContentItem key={idx}>{item}</DetailContentItem>)
+                ) : (
+                    ''
                 )}
             </DetailContentsArea>
         </Div>
