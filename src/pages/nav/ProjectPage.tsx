@@ -2,6 +2,7 @@ import { SubTitleEdit, ProjectCardDiv } from '../../components';
 import { useState, useMemo } from 'react';
 import { ProjectEditPage } from '..';
 import { ProjectProps } from 'ProjectPageModule';
+import { useParams } from 'react-router-dom';
 
 const datas: ProjectProps.IProjectProps[] = [
     {
@@ -70,16 +71,11 @@ const ProjectPage = () => {
     return (
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            {editToggle && (
-                <form>
-                    제작 시작일: <input type="text" />
-                    제작 종료일: <input type="text" />
-                </form>
-            )}
+
             {!editToggle && <ProjectCardDiv {...data}></ProjectCardDiv>}
-            {editToggle && <ProjectEditPage />}
             {editToggle && (
                 <>
+                    <ProjectEditPage />
                     <button onClick={handleChangeToggle}>수정</button>
                     <button onClick={handleChangeToggle}>취소</button>
                 </>

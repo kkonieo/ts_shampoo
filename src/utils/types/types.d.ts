@@ -14,7 +14,7 @@ declare module 'AboutMePageModuel' {
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
         interface IProjectProps {
-            id: number;
+            id: any;
             title: string;
             startDate: string;
             endDate: string;
