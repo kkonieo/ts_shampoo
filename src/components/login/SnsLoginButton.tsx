@@ -36,8 +36,8 @@ const SnsButton = styled.button<{ color: string, to: string }>`
 
     position: relative;
 
-    width: 300px;
-    height: 50px;
+    width: 19.5vw;
+    height: 6.7vh;
 
     margin: 5px 0;
 
@@ -46,6 +46,7 @@ const SnsButton = styled.button<{ color: string, to: string }>`
     text-align: center;
     font-family: 'AppleSDGothicNeo', 'sans-serif';
     color: white;
+    font-size: 1vw;
 
     background-color: ${ props => props.color };
 

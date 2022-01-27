@@ -13,9 +13,7 @@ const GithubImg = styled.img.attrs(() => ({
     name: "githubIcon",
     className: "githubIcon"
 }))<Size>`
-width: ${ props => props.size ? props.size : "30px" };
-height: ${ props => props.size ? props.size : "30px" };
-display: inline-block;
+width: ${ props => props.size ? props.size : "10%" };
 cursor: pointer;
 `;
 
@@ -25,9 +23,7 @@ const GoogleImg = styled.img.attrs(() => ({
     name: "googleIcon",
     className: "googleIcon"
 }))<Size>`
-width: ${ props => props.size ? props.size : "30px" };
-height: ${ props => props.size ? props.size : "30px" };
-display: inline-block;
+width: ${ props => props.size ? props.size : "10%" };
 cursor: pointer;
 `;
 
@@ -37,9 +33,7 @@ const NaverImg = styled.img.attrs(() => ({
     name: "naverIcon",
     className: "naverIcon"
 }))<Size>`
-width: ${ props => props.size ? props.size : "30px" };
-height: ${ props => props.size ? props.size : "30px" };
-display: inline-block;
+width: ${ props => props.size ? props.size : "10%" };
 cursor: pointer;
 `;
 

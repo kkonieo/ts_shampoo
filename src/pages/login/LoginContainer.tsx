@@ -37,8 +37,8 @@ export const ContainerArticle = styled.article`
 const FormDiv = styled.div<{pathname: string}>`
     background-color: white;
 
-    width: ${props => props.pathname === '/login' ? '450px' : '800px'};
-    height: 500px;
+    width: ${props => props.pathname === '/login' ? '29.2vw' : '800px'};
+    height: 66.4vh;
 
     border-radius: 20px;
 

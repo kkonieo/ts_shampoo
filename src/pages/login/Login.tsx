@@ -61,7 +61,6 @@ const Login = () => {
         }
     }
 
-
     return (
         <LoginContainer>
             <Logo>EliceFolio</Logo>
@@ -70,9 +69,9 @@ const Login = () => {
             <SnsLoginButton text='네이버로 로그인' to='naver' color="#19CE60" />
             <TextP>회원이 아니신가요?</TextP>
             <IconDiv onClick={e => handleClick(e)}>
-                <GithubImg />
-                <GoogleImg />
-                <NaverImg />
+                <GithubImg size="20%" />
+                <GoogleImg size="40%" />
+                <NaverImg size="20%" />
             </IconDiv>
         </LoginContainer>
     );
@@ -85,8 +84,8 @@ export { Login };
 // 로고 (완성되면 삭제 예정)
 const Logo = styled.p`
     background-color: #5993F6;
-    width: 200px;
-    height: 80px;
+    width: 13vw;
+    height: 10.6vh;
 
     margin-bottom: 30px;
 
@@ -114,11 +113,8 @@ const IconDiv = styled.div`
 const TextP = styled.p`
     color: #757575;
     font-family: 'AppleSDGothicNeo', 'sans-serif';
+    font-size: 1vw;
 
-    margin: 1.5rem 0;
-
-    @media screen and (max-height: 340px) {
-    margin: 5vh 0;
-}
+    margin: 3vh 0;
     
 `;
