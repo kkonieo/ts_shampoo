@@ -54,7 +54,7 @@ const ContentsDiv = styled(ColumnDiv)`
 const UserDiv = styled(ColumnDiv)`
     width: 90%;
 
-    margin-top: 10px;
+    margin-top: 20px;
 `;
 
 const UserNameP = styled.p`
@@ -91,8 +91,13 @@ const ValueDiv = styled(ColumnDiv)`
 `;
 
 const EmailDiv = styled(ColumnDiv)`
+    display: grid;
+    grid-template-rows: 1fr 1fr 10fr;
+
+    row-gap: 10px;
+
     width: 90%;
-    height: 300px;
+    height: 42vh;
 
     margin-top: 20px;
     padding: 30px;
@@ -112,7 +117,7 @@ const EmailDiv = styled(ColumnDiv)`
     & textarea {
         all: unset;
 
-        height: 60%;
+        height: 90%;
         padding: 10px;
 
         border: 1px solid #E0E0E0;
@@ -126,16 +131,12 @@ const InputDiv = styled.div`
 
     column-gap: 20px;
 
-    margin: 10px 0;
-    
-    height: 40px;
-
     & input {
         all: unset;
 
-        padding: 0 10px;
+        height: 40px;
 
-        width: 150px;
+        padding: 0 10px;
 
         border-color: #E0E0E0;
         border-width: 1px;
@@ -148,10 +149,6 @@ const InputDiv = styled.div`
         &::placeholder {
             font-size: 0.8rem;
         }
-    }
-
-    & input:nth-child(2) {
-        width: 280px;
     }
 
     & button {
