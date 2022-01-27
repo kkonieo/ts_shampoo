@@ -21,23 +21,18 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
     const handleWindowOpen = (url: string) => {
         window.open(url, '_blank');
     };
-    const data: string =
-        '엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. 엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. 엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다.';
+
     return (
         <DetailContainer>
-            <h2>{props.title}</h2>
             <p>{`개발기간 : ${props.startDate} ~ ${props.endDate}`}</p>
             <GifDiv>
-                <img
-                    src="https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original"
-                    alt="프로젝트 라이브 데모"
-                />
+                <img src={`${props.gifSrc}`} alt="프로젝트 라이브 데모" />
             </GifDiv>
             <ExplainDiv>
                 <b>프로젝트 설명</b>
                 <br />
                 <br />
-                <span>{data}</span>
+                <span>{props.explain}</span>
             </ExplainDiv>
             <ExplainDiv>
                 <b>기술 스택</b>

@@ -9,18 +9,17 @@ const data: ProjectProps.IProjectProps = {
     startDate: '2021.01.30',
     endDate: '2021.02.30',
     techStack: ['Django', 'Flask', 'TypeScript'],
-    animatedImg: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
-    staticImg: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
+    gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+    explain: '프로젝트 설명',
 };
 const DetailPage = () => {
     const [editToggle, setEditToggle] = useState<Boolean>(false);
     const handleChangeToggle = () => {
-        console.log('됨');
         setEditToggle((current) => !current);
     };
     return (
         <>
-            <SubTitle text="📂 Project" onClick={handleChangeToggle} />
+            <SubTitle text={`📂 ${data.title}`} onClick={handleChangeToggle} />
             {!editToggle && <DetailDiv {...data}></DetailDiv>}
             {editToggle && <DetailEditPage />}
         </>

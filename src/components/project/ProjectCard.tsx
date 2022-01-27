@@ -14,7 +14,7 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
     return (
         <ProjectCardDiv>
             <div className="project" onMouseOver={handleGifPlayer} onMouseOut={handleGifPlayer}>
-                <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.animatedImg}` : `${props?.staticImg}`} />
+                <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.gifSrc}` : `${props?.imgSrc}`} />
             </div>
             <div className="explain">
                 <p>
@@ -26,9 +26,9 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
                 */}
                 <p>{`제작기간 :  ${props.startDate + ' ~ ' + props.endDate}`}</p>
                 <p>{`기술스택 :  ${
-                    props.techStack.join(',').length < 38
-                        ? props.techStack.join(',')
-                        : props.techStack.join(',').substring(0, 35) + '...'
+                    props.techStack.join(',').length < 25
+                        ? props.techStack.join(', ')
+                        : props.techStack.join(', ').substring(0, 25) + '...'
                 }`}</p>
             </div>
         </ProjectCardDiv>
