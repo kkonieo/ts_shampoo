@@ -1,44 +1,9 @@
 import { PortfolioListView } from './PortfolioListView';
-import {HomeProps} from 'HomeModule';
+import { HomeProps } from 'HomeModule';
 
 export const PortfolioList = (): JSX.Element => {
-
     // 유저 포트폴리오 임의 생성을 위한 더미 데이터
-    const userInfo: HomeProps.UserInfoProps[] = [
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '프론트엔드 개발자',
-        },
-        {
-            name: '엘리스',
-            job: '백엔드 개발자',
-        },
-    ];
-
+    const userInfo: HomeProps.UserInfoProps[] = [];
     const positions: string[] = [
         '프론트엔드',
         '백엔드',
@@ -71,6 +36,18 @@ export const PortfolioList = (): JSX.Element => {
         'jQuery',
         'Docker',
     ];
+
+    for (let i = 0; i < 60; i++) {
+        let count1 = i % positions.length;
+        let position: string = positions[count1];
+        let count2 = i % stacks.length;
+        let stack: string = stacks[count2];
+        userInfo.push({
+            name: '엘리스' + `${i}`,
+            position: position,
+            stack: stack,
+        });
+    }
 
     return <PortfolioListView userInfo={userInfo} positions={positions} stacks={stacks} />;
 };
