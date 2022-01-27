@@ -9,11 +9,11 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
     const pathname: string = location.pathname;
 
     return (
-        <ContainerDiv>
+        <ContainerArticle>
             <FormDiv pathname={pathname}>
                 { children }
             </FormDiv>
-        </ContainerDiv>
+        </ContainerArticle>
     );
 };
 
@@ -22,7 +22,7 @@ export default LoginContainer;
 // styled-components
 
 // 배경 div
-const ContainerDiv = styled.div`
+const ContainerArticle = styled.article`
     width: 100vw;
     height: 100vh;
 
