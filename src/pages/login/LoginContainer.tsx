@@ -17,12 +17,12 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
     );
 };
 
-export default LoginContainer;
+export { LoginContainer };
 
 // styled-components
 
 // 배경 div
-const ContainerArticle = styled.article`
+export const ContainerArticle = styled.article`
     width: 100vw;
     height: 100vh;
 

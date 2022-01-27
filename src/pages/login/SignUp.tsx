@@ -1,4 +1,4 @@
-import LoginContainer from './LoginContainer';
+import { LoginContainer } from './LoginContainer';
 import { SignUpUser, SignUpCompleted } from './index';
 import { useRecoilValue } from 'recoil';
 import { pageState } from '../../utils/data/atom';
@@ -32,4 +32,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export { SignUp };

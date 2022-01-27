@@ -8,7 +8,7 @@ const SignUpCompleted = () => {
     );
 };
 
-export default SignUpCompleted;
+export { SignUpCompleted };
 
 // styled-components
 

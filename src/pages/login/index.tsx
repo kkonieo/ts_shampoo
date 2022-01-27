@@ -1,4 +1,5 @@
-export { default as Login } from './Login';
-export { default as SignUp } from './SignUp';
-export { default as SignUpUser } from './SignUpUser';
-export { default as SignUpCompleted } from './SignUpCompleted';
+export { Login } from './Login';
+export { SignUp } from './SignUp';
+export { SignUpUser } from './SignUpUser';
+export { SignUpCompleted } from './SignUpCompleted';
+export { Spinner } from './Spinner';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LoginContainer from './LoginContainer';
+import { LoginContainer } from './LoginContainer';
 import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -71,7 +71,7 @@ const Login = () => {
     );
 };
 
-export default Login;
+export { Login };
 
 // styled-components
 

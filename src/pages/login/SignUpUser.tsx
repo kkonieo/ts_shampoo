@@ -78,7 +78,7 @@ const SignUpUser = () => {
     );
 };
 
-export default SignUpUser;
+export { SignUpUser };
 
 // styled-components
 
