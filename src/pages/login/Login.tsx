@@ -20,43 +20,6 @@ const Login = () => {
     const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
     const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${REDIRECT_URI}`
 
-    // // 카카오 로그인 테스트
-    // const handleGetKakao = async () => {
-    //     const REST_API_KEY = process.env.REACT_APP_CLIENT_ID;
-    //     const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
-    //     // console.log('REST_API_KEY', REST_API_KEY);
-    //     // console.log('REDIRECT_URI', REDIRECT_URI);
-    //     const kakaoGet = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-    //     window.open(kakaoGet);
-
-    //     try {    
-    //         const response = axios.get(kakaoGet)
-    //                     .then(() => {
-    //                         const tokenCode = new URL(window.location.href).searchParams.get('code')
-                    
-    //                         const tokenPost = axios({
-    //                             method: "post",
-    //                             url: "https://kauth.kakao.com/oauth/token",
-    //                             data: {
-    //                                 "grant_type": "authorization_code",
-    //                                 "client_id": `${REST_API_KEY}`,
-    //                                 "code": `${tokenCode}`,
-    //                                 "redirect_uri": `${REDIRECT_URI}`,
-    //                             },
-    //                             headers: {
-    //                                 "Content-Type": "application/x-www-form-urlencoded"
-    //                             },
-    //                         })
-    //                             .then((response) => console.log(response))
-
-    //                     })
-    //     }
-    //     catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-    
     function handleClick(e: any) {
         if (e.target.name === "naverIcon") {
             window.open(naverUri);

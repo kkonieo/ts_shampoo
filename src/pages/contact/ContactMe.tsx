@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SubTitle, RowDiv, ColumnDiv } from '../../components';
+import { SubTitle } from '../../components';
 
 const ContactMe = () => {
 
@@ -46,12 +46,17 @@ const ContainerArticle = styled.article`
     padding: 40px;
 `;
 
-const ContentsDiv = styled(ColumnDiv)`
+const ContentsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 `;
 
-const UserDiv = styled(ColumnDiv)`
+const UserDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+
     width: 90%;
 
     margin-top: 20px;
@@ -67,7 +72,15 @@ const UserNameP = styled.p`
     margin: 10px 0 20px 0;
 `;
 
-const KeyDiv = styled(ColumnDiv)`
+const RowDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const KeyDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
 
@@ -78,7 +91,10 @@ const KeyDiv = styled(ColumnDiv)`
     }
 `;
 
-const ValueDiv = styled(ColumnDiv)`
+const ValueDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+
     font-family: 'AppleSDGothicNeo', sans-serif;
 
     margin-left: 20px;
@@ -90,7 +106,7 @@ const ValueDiv = styled(ColumnDiv)`
     }
 `;
 
-const EmailDiv = styled(ColumnDiv)`
+const EmailDiv = styled.div`
     display: grid;
     grid-template-rows: 1fr 1fr 10fr;
 
@@ -135,6 +151,7 @@ const InputDiv = styled.div`
         all: unset;
 
         height: 40px;
+        width: 90%;
 
         padding: 0 10px;
 

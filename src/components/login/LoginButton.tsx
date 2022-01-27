@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { navTheme } from '../../utils/styles/theme';
 import { LoginButtonProps } from 'LoginButton';
 
 
@@ -29,7 +28,7 @@ const Button = styled.button<{className: string}>`
     color: ${ props => props.className === "blue_button" ? "white" : "#757575" };
     font-family: 'AppleSDGothicNeo', 'sans-serif';
 
-    background-color: ${ props => props.className === 'blue_button' ? navTheme.color.main : navTheme.color.background };
+    background-color: ${ props => props.className === 'blue_button' ? props.theme.color.main : props.theme.color.background };
 
     cursor: pointer;
 `;

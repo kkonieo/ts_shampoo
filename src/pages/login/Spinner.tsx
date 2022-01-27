@@ -7,8 +7,8 @@ const Spinner = () => {
     const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
     const NAVER_SECRET_KEY = process.env.REACT_APP_NAVER_SECRET_KEY;
 
-    console.log(NAVER_CLIENT_ID);
-    console.log(NAVER_SECRET_KEY);
+    // console.log(NAVER_CLIENT_ID);
+    // console.log(NAVER_SECRET_KEY);
 
     (async function () {
         const tokenCode = new URL(window.location.href).searchParams.get('code')

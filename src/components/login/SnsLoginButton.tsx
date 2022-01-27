@@ -52,10 +52,6 @@ const SnsButton = styled.button<{ color: string, to: string }>`
 
     cursor: pointer;
 
-    @media screen and (max-width: 340px) {
-    width: 80vw;
-    }
-
     & img {
         position: absolute;
 

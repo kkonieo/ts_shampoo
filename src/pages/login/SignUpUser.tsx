@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { LoginButton, RowDiv, ColumnDiv } from '../../components';
+import { LoginButton } from '../../components';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState  } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import { SignUpProps } from 'SignUp'
+import { SignUpProps } from 'SignUp';
   
 const SignUpUser = () => {
 
@@ -13,7 +13,7 @@ const SignUpUser = () => {
     const onSubmit = handleSubmit(data => {
         console.log(data);
         // 서버로 보내서 가입 시키는 로직 들어가야함
-        setNewUser(current => {
+        setNewUser((current: SignUpProps) => {
             return {
                 ...current,
                 userName: data.userName,
@@ -129,7 +129,9 @@ const Form = styled.form`
     }
 `;
 
-const InformationDiv = styled(RowDiv)`
+const InformationDiv = styled.div`
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
 
     font-family: 'AppleSDGothicNeo', 'sans-serif';
@@ -142,7 +144,10 @@ const InformationDiv = styled(RowDiv)`
     }
 `;
 
-const FormDiv = styled(ColumnDiv)`
+const FormDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+
     margin-bottom: 30px;
 
     align-items: center;

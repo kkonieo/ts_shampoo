@@ -9,7 +9,6 @@ const SignUp = () => {
     const page = useRecoilValue<number>(pageState);
 
     // 페이지에 따라 컴포넌트 렌더링할 함수
-
     function renderHTML() {
         if (page === 0) {
             return (
