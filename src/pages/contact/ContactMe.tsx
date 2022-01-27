@@ -138,6 +138,8 @@ const EmailDiv = styled.div`
 
         border: 1px solid #E0E0E0;
         background-color: white;
+
+        font-family: 'AppleSDGothicNeo', 'sans-serif';
     }
 `;
 
