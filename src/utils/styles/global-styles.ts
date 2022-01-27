@@ -6,7 +6,8 @@ const GlobalStyle = createGlobalStyle`
     ${normalize}
     html,
     body{
-        overflow:hidden;
+        overflow: hidden;
+        word-wrap: break-word;
     }
 
     * {

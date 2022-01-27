@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SubTitle } from '../../components';
+import { SubTitle, RowDiv, ColumnDiv } from '../../components';
 
 const ContactMe = () => {
 
@@ -9,7 +9,7 @@ const ContactMe = () => {
             <SubTitle text="📍 Contact me" />
             <ContentsDiv>
                 <UserDiv>
-                    <UserNameDiv>임미선</UserNameDiv>
+                    <UserNameP>임미선</UserNameP>
                     <RowDiv>
                         <KeyDiv>
                             <p>Emaill</p>
@@ -21,7 +21,15 @@ const ContactMe = () => {
                         </ValueDiv>
                     </RowDiv>
                 </UserDiv>
-                <EmailDiv />
+                <EmailDiv>
+                    <p>📮 ask me </p>
+                    <InputDiv>
+                        <input placeholder="이름" />
+                        <input placeholder="이메일" />
+                        <button>send it</button>
+                    </InputDiv>
+                    <textarea />
+                </EmailDiv>
             </ContentsDiv>
         </ContainerArticle>
     );
@@ -38,63 +46,127 @@ const ContainerArticle = styled.article`
     padding: 40px;
 `;
 
-const ContentsDiv = styled.div`
-    display: flex;
-    flex-direction: column;
+const ContentsDiv = styled(ColumnDiv)`
     justify-content: center;
     align-items: center;
-
-    padding: 20px;
 `;
 
-const UserDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-
+const UserDiv = styled(ColumnDiv)`
     width: 90%;
+
+    margin-top: 10px;
 `;
 
-const UserNameDiv = styled.div`
+const UserNameP = styled.p`
     font-family: 'EliceBold', sans-serif;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     
     line-height: 0;
 
-    margin: 20px 0;
+    margin: 10px 0 20px 0;
 `;
 
-const RowDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
-const KeyDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-
+const KeyDiv = styled(ColumnDiv)`
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
 
-    line-height: 0;
+    line-height: initial;
+
+    & p {
+        margin: 0;
+    }
 `;
 
-const ValueDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-
+const ValueDiv = styled(ColumnDiv)`
     font-family: 'AppleSDGothicNeo', sans-serif;
 
     margin-left: 20px;
 
-    line-height: 0;
+    line-height: initial;
+
+    & p {
+        margin: 0;
+    }
 `;
 
-const EmailDiv = styled.div`
-
-
+const EmailDiv = styled(ColumnDiv)`
     width: 90%;
-    height: 200px;
+    height: 300px;
 
-    background-color: yellow;
+    margin-top: 20px;
+    padding: 30px;
+
+    background-color: #F5F5F5;
+
+    border-radius: 10px;
+
+    & p {
+        margin: 0;
+        
+        font-family: 'Montserrat', 'sans-serif';
+        font-weight: bold;
+
+    }
+
+    & textarea {
+        all: unset;
+
+        height: 60%;
+        padding: 10px;
+
+        border: 1px solid #E0E0E0;
+        background-color: white;
+    }
+`;
+
+const InputDiv = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+
+    column-gap: 20px;
+
+    margin: 10px 0;
+    
+    height: 40px;
+
+    & input {
+        all: unset;
+
+        padding: 0 10px;
+
+        width: 150px;
+
+        border-color: #E0E0E0;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 5px;
+        background-color: white;
+
+        font-family: 'AppleSDGothicNeo', 'sans-serif';
+
+        &::placeholder {
+            font-size: 0.8rem;
+        }
+    }
+
+    & input:nth-child(2) {
+        width: 280px;
+    }
+
+    & button {
+        all: unset;
+
+        height: 20px;
+
+        padding: 10px;
+
+        border-radius: 5px;
+        background-color: #5993F6;
+
+        text-align: center;
+        font-family: 'Montserrat', 'sans-serif';
+        font-weight: bold;
+        color: white;
+    }
 `;

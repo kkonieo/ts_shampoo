@@ -54,6 +54,10 @@ const Login = () => {
     function handleClick(e: any) {
         if (e.target.name === "naverIcon") {
             window.open(naverUri);
+        } else if (e.target.name === "githubIcon") {
+            navigate('/signup');
+        } else {
+            navigate('/signup');
         }
     }
 
