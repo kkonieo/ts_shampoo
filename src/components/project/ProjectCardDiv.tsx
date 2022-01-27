@@ -1,8 +1,11 @@
-import ProjectCard, { IProjectProps } from './ProjectCard';
+import ProjectCard from './ProjectCard';
+
+import { ProjectProps } from 'ProjectPageModule';
+
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const datas: IProjectProps[] = [
+const datas: ProjectProps.IProjectProps[] = [
     {
         id: 0,
         title: '프로젝트 토끼토끼',
