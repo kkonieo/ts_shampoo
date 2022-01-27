@@ -18,7 +18,7 @@ declare module 'AboutMePageModuel' {
                 year: number;
                 detail: {
                     detailTitle: string;
-                    detailDesribition: string | null;
+                    detailDescription: string | null;
                 }[];
             }[];
         }

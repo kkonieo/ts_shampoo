@@ -4,17 +4,36 @@ import ResumeCard from './ResumeCard';
 
 const Resume = () => {
     //타임라인 리스트
+    //year은 선택, 단 year이 없으면 해당 년도에는 추가할 수 없음
+    //year이 존재한다면 해당 년도에 무조건 하나는 detail이 있어야함 (detailDescribtion은 선택)
+    /*
+    [
+        {
+            year: number (선택),
+            detail: [
+                {
+                    detailTitle: '2019 대학교 졸업',
+                    detailDesribtion: '대학교 졸업에 대한 세부 사항입니다', (선택)
+                },
+                {
+                    detailTitle: '2019 엘리스 AI 트랙',
+                    detailDesribtion: null,
+                },
+            ],
+        },
+    ]
+    */
     const tmpTimeLine = [
         {
             year: 2019,
             detail: [
                 {
-                    detailTitle: '대학교 졸업',
-                    detailDesribition: '대학교 졸업에 대한 세부 사항입니다',
+                    detailTitle: '2019 대학교 졸업',
+                    detailDescription: '대학교 졸업에 대한 세부 사항입니다',
                 },
                 {
-                    detailTitle: '엘리스 AI 트랙',
-                    detailDesribition: null,
+                    detailTitle: '2019 엘리스 AI 트랙',
+                    detailDescription: null,
                 },
             ],
         },
@@ -22,12 +41,12 @@ const Resume = () => {
             year: 2020,
             detail: [
                 {
-                    detailTitle: '대학교 졸업',
-                    detailDesribition: '대학교 졸업에 대한 세부 사항',
+                    detailTitle: '2020 대학교 졸업',
+                    detailDescription: '대학교 졸업에 대한 세부 사항',
                 },
                 {
                     detailTitle: '엘리스 AI 트랙',
-                    detailDesribition: '엘리스 AI 트랙에 대한 세부 사항입니다.',
+                    detailDescription: '엘리스 AI 트랙에 대한 세부 사항입니다.',
                 },
             ],
         },
@@ -36,11 +55,11 @@ const Resume = () => {
             detail: [
                 {
                     detailTitle: 'string',
-                    detailDesribition: 'string',
+                    detailDescription: 'string',
                 },
                 {
                     detailTitle: 'string',
-                    detailDesribition: null,
+                    detailDescription: null,
                 },
             ],
         },
