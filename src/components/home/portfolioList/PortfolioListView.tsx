@@ -171,12 +171,17 @@ const FilterDiv = styled.div`
 `;
 const FilterPositionDiv = styled.div`
     position: relative;
+    box-sizing: border-box;
+    width: 50%;
+    padding-right: 20px;
 `;
 const FilterStackDiv = styled.div`
     position: relative;
+    box-sizing: border-box;
+    width: 50%;
 `;
 const FilterButton = styled.button<HomeProps.IFilterProps>`
-    width: 280px;
+    width: 100%;
     height: 44px;
     border: 1px solid #e0e0e0;
     padding: 10px;
@@ -197,8 +202,19 @@ const InputDiv = styled.div`
 `;
 const FilterInput = styled.input`
     margin-right: 8px;
+    cursor: pointer;
+    border: 2px solid blue;
+
+    &:hover {
+        background-color: #5993f6;
+    }
 `;
-const FilterLabel = styled.label``;
+const FilterLabel = styled.label`
+    cursor: pointer;
+    &:hover {
+        color: #5993f6;
+    }
+`;
 const FilterContainerForm = styled.form`
     width: 280px;
     height: 400px;
@@ -210,6 +226,7 @@ const FilterContainerForm = styled.form`
     border: 1px solid #e0e0e0;
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
+    z-index: 2;
 `;
 const FiltersListDiv = styled.div`
     margin-bottom: 20px;
@@ -222,15 +239,16 @@ const FilterItems = styled.div`
     border-radius: 4px;
     padding: 10px;
     margin-top: 8px;
-    margin-left: 8px;
+    margin-left: 12px;
     margin-bottom: 8px;
     color: #757575;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
 `;
 const CloseButton = styled.button`
-    padding-left: 6px;
+    margin-left: 8px;
+    padding-top: 2px;
+    box-sizing: border-box;
 `;
 const UserPortfolioListDiv = styled.div`
     display: flex;
@@ -245,16 +263,19 @@ const PortfolioLink = styled(Link)`
     height: 260px;
     border-radius: 10px;
     margin: 1%;
-    display: flex;
+    display: inline-flex;
     flex-basis: 260px;
     flex-direction: column;
     text-decoration: none;
     color: #3a3a3a;
+    transition-duration: 0.3s;
+    transition-property: transform;
 
     &:hover {
-        box-shadow: 2px 6px 10px rgb(0, 0, 0, 0.1);
+        transform: translateY(-8px);
     }
 `;
+
 const PortfolioTitleDiv = styled.div`
     width: 100%;
     height: 60px;
