@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SubTitle from '../SubTitleEdit';
+import SubTitle from '../SubTitle';
 
 interface Props {
     contents: string[];

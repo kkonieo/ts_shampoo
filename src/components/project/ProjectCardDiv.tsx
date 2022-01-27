@@ -1,5 +1,4 @@
 import ProjectCard from './ProjectCard';
-
 import { ProjectProps } from 'ProjectPageModule';
 
 import styled from 'styled-components';

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { DetailEditPage } from '..';
 import { useParams } from 'react-router-dom';
 
-const DetailPage = () => {
+const ProjectDetailPage = () => {
     const [editToggle, setEditToggle] = useState<Boolean>(false);
     const projectId = useParams();
     const handleChangeToggle = () => {
@@ -38,4 +38,4 @@ const DetailPage = () => {
     );
 };
 
-export default DetailPage;
+export default ProjectDetailPage;

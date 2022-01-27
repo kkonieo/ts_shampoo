@@ -2,7 +2,6 @@ import { SubTitleEdit, ProjectCardDiv } from '../../components';
 import { useState, useMemo } from 'react';
 import { ProjectEditPage } from '..';
 import { ProjectProps } from 'ProjectPageModule';
-import { useParams } from 'react-router-dom';
 
 const datas: ProjectProps.IProjectProps[] = [
     {

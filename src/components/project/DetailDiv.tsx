@@ -1,6 +1,5 @@
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
-import { navTheme } from '../../utils/styles/theme';
 
 interface btnData {
     url: string;
@@ -63,7 +62,7 @@ const GifDiv = styled.div`
     width: 90%;
     margin-top: 2.5%;
     margin-left: 5%;
-    background-color: ${navTheme.color.background};
+    background-color: ${(props) => props.theme.color.background};
     border-radius: 15px;
 
     img {
@@ -83,7 +82,7 @@ const ButtonDiv = styled.div`
         margin: 5% 0;
         margin-right: 5%;
         width: 10em;
-        background-color: ${navTheme.color.background};
+        background-color: ${(props) => props.theme.color.background};
         border-radius: 15px;
         border: none;
         font-weight: bold;
