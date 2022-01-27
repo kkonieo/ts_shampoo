@@ -7,7 +7,12 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    // console.log("user", user);
+    // SNS 아이콘 클릭 시 리다이렉트 될 URL
+    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+
+    // naver
+    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
+    const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${REDIRECT_URI}`
 
     // // 카카오 로그인 테스트
     // const handleGetKakao = async () => {
@@ -45,8 +50,12 @@ const Login = () => {
     //         console.log(error);
     //     }
     // }
-
-
+    
+    function handleClick(e: any) {
+        if (e.target.name === "naverIcon") {
+            window.open(naverUri);
+        }
+    }
 
 
     return (
@@ -56,16 +65,10 @@ const Login = () => {
             <SnsLoginButton text='구글로 로그인' to='google' color="#EA4335" />
             <SnsLoginButton text='네이버로 로그인' to='naver' color="#19CE60" />
             <TextP>회원이 아니신가요?</TextP>
-            <IconDiv>
-                <Link to="/signup" className="githubIcon">
-                    <GithubImg />
-                </Link>
-                <Link to="/signup" className="googleIcon">
-                    <GoogleImg />
-                </Link>
-                <Link to="/signup" className="naverIcon">
-                    <NaverImg />
-                </Link>
+            <IconDiv onClick={e => handleClick(e)}>
+                <GithubImg />
+                <GoogleImg />
+                <NaverImg />
             </IconDiv>
         </LoginContainer>
     );

@@ -1,7 +1,27 @@
 import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
+import axios from 'axios';
 
 const Spinner = () => {
+
+    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
+    const NAVER_SECRET_KEY = process.env.REACT_APP_NAVER_SECRET_KEY;
+
+    console.log(NAVER_CLIENT_ID);
+    console.log(NAVER_SECRET_KEY);
+
+    (async function () {
+        const tokenCode = new URL(window.location.href).searchParams.get('code')
+        
+        try {
+            const tokenPost = axios.get(`http://cors-anywhere.herokuapp.com/https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${NAVER_CLIENT_ID}&client_secret=${NAVER_SECRET_KEY}&code=${tokenCode}&state=1`)
+            .then((response) => console.log(response))
+        }
+        catch (error) {
+            console.log('error', error);
+        }
+    })()
+    
     return (
         <ContainerArticle>
             <FloatingCircles>
