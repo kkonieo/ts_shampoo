@@ -30,12 +30,6 @@ const Skills = () => {
         }
     }, [targetSkill]);
 
-    useEffect(() => {
-        if (targetDescribe !== []) {
-            console.log(targetDescribe);
-        }
-    }, [targetDescribe]);
-
     const onSkillClick = (e: React.SyntheticEvent<HTMLDivElement>) => {
         const value = String(e.currentTarget.dataset.value);
         //스킬 세팅
