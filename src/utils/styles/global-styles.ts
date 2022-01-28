@@ -6,11 +6,34 @@ const GlobalStyle = createGlobalStyle`
     ${normalize}
     * {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        word-wrap: break-word;
+    }
+    button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+    ol,
+    ul,
+    li {
+        list-style: none;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        border: 0;
     }
 
     @font-face {
         font-family: 'Apple SD Gothic Neo','EliceRegular','Montserrat','Helvetica',sans-serif;
-        fontsize : 12px | 0.8em;
+        font-size : 12px | 0.8em;
         font-style: normal;
         font-weight:300;
         font-style:normal;
