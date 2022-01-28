@@ -93,7 +93,7 @@ const ContentDiv = styled.div`
 
 // 사용자 이미지
 const UserPictureDiv = styled.div`
-    margin: 10% auto 0 auto;
+    margin: 10% auto 10% auto;
     background-color: ${(props) => props.theme.color.background};
     border-radius: 50%;
 

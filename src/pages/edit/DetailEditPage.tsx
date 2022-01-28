@@ -3,17 +3,15 @@ import styled from 'styled-components';
 
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import { useParams } from 'react-router-dom';
-import { constSelector } from 'recoil';
 
 const DetailEditPage = () => {
     const gifInput = useRef<HTMLInputElement>(null);
     const pngInput = useRef<HTMLInputElement>(null);
-    const [user, setUser] = useState('나');
-    const [skillStack, setSkillStack] = useState(['Django', 'Flask', 'TypeScript']);
-    const [urlLink, setUrlLink] = useState([
+    const skillStack = ['Django', 'Flask', 'TypeScript'];
+    const urlLink = [
         { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
         { linkName: 'Github', linkURL: 'https://github.com' },
-    ]);
+    ];
     const projectId = useParams();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -49,6 +47,7 @@ const DetailEditPage = () => {
             handleDeletePreview(gifFile, setGifFile);
             handleDeletePreview(imgFile, setImgFile);
         };
+        //eslint-disable-next-line
     }, []);
     return (
         <>

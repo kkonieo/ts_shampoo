@@ -21,7 +21,7 @@ const NavLink = () => {
 export default NavLink;
 
 const NavLinkUl = styled.ul`
-    padding: 0;
+    margin-top: 10%;
     list-style: none;
     width: 100%;
     display: flex;
