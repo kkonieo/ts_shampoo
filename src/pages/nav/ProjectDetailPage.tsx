@@ -25,15 +25,7 @@ const ProjectDetailPage = () => {
         <>
             <SubTitle text={`📂 ${data.title}`} onClick={handleChangeToggle} />
             {!editToggle && <DetailDiv {...data}></DetailDiv>}
-            {editToggle && (
-                <>
-                    <form>
-                        제작 시작일: <input type="text" />
-                        제작 종료일: <input type="text" />
-                    </form>
-                    <DetailEditPage />
-                </>
-            )}
+            {editToggle && <DetailEditPage />}
         </>
     );
 };

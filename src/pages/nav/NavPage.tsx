@@ -7,7 +7,6 @@ const NavPage = () => {
     const outlet = useOutlet();
     const name: string = 'Minyoung Lee';
     // 현재 주소 파악
-
     return (
         <BackgroundDiv>
             <NavContainer>
