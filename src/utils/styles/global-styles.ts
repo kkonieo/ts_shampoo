@@ -4,14 +4,17 @@ import normalize from 'styled-normalize';
 //전역 css
 const GlobalStyle = createGlobalStyle`
     ${normalize}
-    html,
-    body{
-        overflow: hidden;
-        word-wrap: break-word;
-    }
-
     * {
         box-sizing: border-box;
+    }
+
+    @font-face {
+        font-family: 'Apple SD Gothic Neo','EliceRegular','Montserrat','Helvetica',sans-serif;
+        fontsize : 12px | 0.8em;
+        font-style: normal;
+        font-weight:300;
+        font-style:normal;
+        line-height: 20px | 120%;
     }
 
     @font-face {
