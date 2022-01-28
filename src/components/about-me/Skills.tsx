@@ -66,14 +66,12 @@ const Div = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 10px;
 `;
 
 const TagArea = styled.div`
     padding: 10px;
     box-sizing: border-box;
     width: 100%;
-    height: auto;
     display: flex;
     flex-direction: row;
 `;

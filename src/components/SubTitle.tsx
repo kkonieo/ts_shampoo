@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 interface Props {
     text: string;
     onClick?: (...args: any[]) => any;

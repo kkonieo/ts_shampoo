@@ -4,7 +4,7 @@ import { aboutMeProps } from 'AboutMePageModuel';
 const SkillsDetail = ({ skillTitles, skillDescribes }: aboutMeProps.SkillsProps) => {
     return (
         <Div>
-            <DetailTitle>{skillTitles}</DetailTitle>
+            <DetailTitle>{skillTitles === '' ? 'My Skill' : skillTitles}</DetailTitle>
             <DetailContentsArea>
                 {/* 클릭시에 바뀌도록 구현 예정*/}
                 {skillTitles === '' ? (
@@ -21,12 +21,13 @@ export default SkillsDetail;
 
 const Div = styled.div`
     width: 100%;
-    height: 500px; /* TODO : 추후 높이 세부 설정*/
+    height: 200px; /* TODO : 추후 높이 세부 설정*/
     margin: 20px 0px;
 `;
 
 const DetailTitle = styled.div`
     font-size: 18px;
+    height: 30px;
     font-weight: 600;
     border-radius: 8px 8px 0px 0px;
     box-sizing: border-box;
