@@ -77,3 +77,16 @@ declare module 'ProjectPageModule' {
         }
     }
 }
+
+declare module 'HomeModule' {
+    export namespace HomeProps {
+        interface UserInfoProps {
+            name: string;
+            position: string;
+            stack: string;
+        }
+        interface IFilterProps {
+            isActive: boolean;
+        }
+    }
+}

@@ -1,5 +1,13 @@
+import { Header } from '../../components/home/Header';
+import { PortfolioList } from '../../components/home/portfolioList/PortfolioList';
+
 const HomePage = () => {
-    return <div>HomePage</div>;
+    return (
+        <>
+            <Header />
+            <PortfolioList />
+        </>
+    );
 };
 
 export default HomePage;
