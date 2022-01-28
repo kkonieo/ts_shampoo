@@ -1,6 +1,13 @@
 import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+interface Token {
+    access_token: string;
+    refresh_token: string;
+    expires_in: string;
+}
 
 const Spinner = () => {
 
@@ -10,17 +17,42 @@ const Spinner = () => {
     // console.log(NAVER_CLIENT_ID);
     // console.log(NAVER_SECRET_KEY);
 
-    (async function () {
+    // API 호출 결과
+    const [accessToken, setAccessToken] = useState<Token>({
+        access_token: "",
+        refresh_token: "",
+        expires_in: "",
+    });
+
+    async function getSnsApi() {
         const tokenCode = new URL(window.location.href).searchParams.get('code')
         
         try {
-            const tokenPost = axios.get(`http://cors-anywhere.herokuapp.com/https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${NAVER_CLIENT_ID}&client_secret=${NAVER_SECRET_KEY}&code=${tokenCode}&state=1`)
-            .then((response) => console.log(response))
+            await axios.get(`http://cors-anywhere.herokuapp.com/https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${NAVER_CLIENT_ID}&client_secret=${NAVER_SECRET_KEY}&code=${tokenCode}&state=1`)
+                .then(response => {
+                    console.log("인가 코드 response", response);
+                    setAccessToken((current) => {
+                        return {
+                            ...current,
+                            access_token: response.data.access_token,
+                            refresh_token: response.data.refresh_token,
+                            expires_in: response.data.expires_in,
+                        }
+                    })
+                })
+            const userProfile = await axios.get(`https://openapi.naver.com/v1/nid/me`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken.access_token}`
+                }
+            })
+            .then(response => console.log("회원 프로필 response", response))
         }
         catch (error) {
             console.log('error', error);
         }
-    })()
+    }
+
+    useEffect(() => { getSnsApi() })
     
     return (
         <ContainerArticle>
