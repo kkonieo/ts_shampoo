@@ -11,18 +11,18 @@ interface IProps {
 const ProjectCardDiv = ({ data, editMode }: IProps) => {
     return (
         <GridDiv>
-            {data.map((project, idx) => {
-                return (
-                    !editMode && (
+            {!editMode &&
+                data.map((project, idx) => {
+                    return (
                         <Link to={`${idx}`}>
                             <ProjectCard key={project.title + idx} {...project} />
                         </Link>
-                    )
-                );
-            })}
-            {data.map((project, idx) => {
-                return editMode && <ProjectCard key={project.title + idx} {...project} />;
-            })}
+                    );
+                })}
+            {editMode &&
+                data.map((project, idx) => {
+                    return <ProjectCard key={project.title + idx} {...project} />;
+                })}
         </GridDiv>
     );
 };

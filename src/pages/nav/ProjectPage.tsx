@@ -70,7 +70,6 @@ const ProjectPage = () => {
     return (
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-
             {!editToggle && <ProjectCardDiv {...data}></ProjectCardDiv>}
             {editToggle && (
                 <>
