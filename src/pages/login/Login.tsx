@@ -4,12 +4,13 @@ import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { LoginSpace } from 'LoginModule';
 
 const Login = () => {
 
-    // recoil 페이지 세팅
-    const setPage = useSetRecoilState<number>(pageState);
+    // recoil 페이지 초기화
+    const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
     const navigate = useNavigate();
 

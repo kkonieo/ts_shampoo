@@ -3,12 +3,12 @@ import { LoginButton } from '../../components';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState  } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import { loginSpace } from 'loginModule';
+import { LoginSpace } from 'LoginModule';
   
 const SignUpUser = () => {
 
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors} } = useForm<loginSpace.SignUpProps>();
+    const { register, handleSubmit, formState: {errors} } = useForm<LoginSpace.SignUpProps>();
     const onSubmit = handleSubmit(data => {
         console.log(data);
         // 서버로 보내서 가입 시키는 로직 들어가야함
@@ -16,7 +16,7 @@ const SignUpUser = () => {
     });
 
     // recoil 페이지 세팅
-    const setPage = useSetRecoilState<number>(pageState);
+    const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
     // 더미 데이터
     const jobOptions = [
