@@ -3,7 +3,6 @@ import { SubTitle } from '../../components';
 
 const ContactMe = () => {
 
-
     return (
         <ContainerArticle>
             <SubTitle text="📍 Contact me" />
@@ -42,8 +41,6 @@ export { ContactMe };
 const ContainerArticle = styled.article`
     display: flex;
     flex-direction: column;
-
-    padding: 40px;
 `;
 
 const ContentsDiv = styled.div`
@@ -59,7 +56,7 @@ const UserDiv = styled.div`
 
     width: 90%;
 
-    margin-top: 20px;
+    margin-top: 5px;
 `;
 
 const UserNameP = styled.p`
@@ -113,7 +110,7 @@ const EmailDiv = styled.div`
     row-gap: 10px;
 
     width: 90%;
-    height: 42vh;
+    height: 40vh;
 
     margin-top: 20px;
     padding: 30px;
