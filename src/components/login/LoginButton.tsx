@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { LoginButtonProps } from 'LoginButton';
+import { loginSpace } from 'loginModule';
 
 
-const LoginButton = ({ type, text, className }: LoginButtonProps) => {
+const LoginButton = ({ type, text, className }: loginSpace.LoginButtonProps) => {
 
     return (
         <Button type={type} className={className} >{text}</Button>
