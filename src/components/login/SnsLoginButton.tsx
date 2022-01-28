@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { loginSpace } from 'loginModule';
+import { LoginSpace } from 'LoginModule';
 import { GithubImg, GoogleImg, NaverImg } from '../';
 
-const SnsLoginButton: React.FC<loginSpace.SnsLoginButtonProps> = ({ text, to, color }) => {
+const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, color }) => {
 
     // 버튼에 따라 어느 소셜로 보낼지 선택!
     const navigate = useNavigate();

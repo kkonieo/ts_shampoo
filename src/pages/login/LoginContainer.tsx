@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import { loginSpace } from 'loginModule';
+import { LoginSpace } from 'LoginModule';
 
-const LoginContainer: React.FC<loginSpace.LoginContainerProps> = ({ children }) => {
+const LoginContainer: React.FC<LoginSpace.LoginContainerProps> = ({ children }) => {
 
     // 폼 배경 사이즈 조절을 위한 pathname 추출
     const location = useLocation();

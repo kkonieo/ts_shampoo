@@ -25,8 +25,8 @@ declare module 'AboutMePageModuel' {
     }
 }
 
-declare module 'loginModule' {
-    export namespace loginSpace {
+declare module 'LoginModule' {
+    export namespace LoginSpace {
         interface LoginButtonProps {
             type: "submit";
             text: string;
@@ -43,7 +43,7 @@ declare module 'loginModule' {
             children: React.ReactNode;
         };
 
-        interface loginToken {
+        interface LoginToken {
             access_token: string;
             refresh_token: string;
             expires_in: string;

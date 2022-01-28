@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
 import axios, { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
-import { loginSpace } from 'loginModule';
+import { LoginSpace } from 'LoginModule';
 
 const Spinner = () => {
 
@@ -24,7 +24,7 @@ const Spinner = () => {
             )
             // .then(response => console.log('토큰 가져오기', response));
 
-            const accessToken: loginSpace.loginToken = {
+            const accessToken: LoginSpace.LoginToken = {
                 access_token: tokenResponse.data.access_token,
                 refresh_token: tokenResponse.data.refresh_token,
                 expires_in: tokenResponse.data.expires_in,
@@ -57,7 +57,7 @@ const Spinner = () => {
             )
             // .then(response => console.log('유저 프로필', response));
             
-            // const userProfile: loginSpace.SignUpProps = {
+            // const userProfile: LoginSpace.SignUpProps = {
             //     userEmail: userProfileResponse.data.response?.email,
             //     userName: userProfileResponse.data.response?.name,
             //     userJob: "",
