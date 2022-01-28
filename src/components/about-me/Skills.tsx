@@ -8,6 +8,7 @@ const Skills = () => {
     //유저의 스킬
     const tmpSkillTitles: string[] = ['React', 'JavaScript', 'Next.js', 'Python', 'styled-components'];
 
+    //TODO : 타입 세부 수정
     const tmpSkillDescribes: Object[] = [
         { title: 'React', describe: ['React bbb', 'ccc', 'ddd'] },
         { title: 'JavaScript', describe: ['JavaScript bbb', 'ccc', 'ddd'] },
