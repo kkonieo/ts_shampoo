@@ -1,56 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { blueButton, defaultButton } from '../../utils/styles/theme';
-
-const Header = styled.header`
-    height: 80px;
-    position: relative;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    box-shadow: 0 1px 4px rgb(0, 0, 0, 0.1);
-`;
-const LogoLink = styled(Link)`
-    text-decoration: none;
-    color: #3a3a3a;
-`;
-const Logo = styled.h1`
-    font-size: 24px;
-    margin-left: 40px;
-`;
-const Nav = styled.nav`
-    display: flex;
-    align-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 40px;
-`;
-const NavLink = styled(Link)`
-    margin-left: 28px;
-    text-decoration: none;
-    color: ${(props) => (props ? '#222' : undefined)};
-`;
-const ButtonGroupDiv = styled.div`
-    margin-left: 28px;
-`;
-const Button = styled.button`
-    width: 80px;
-    height: 40px;
-    border-radius: 9999px;
-    background-color: ${blueButton.color.background};
-    color: ${blueButton.color.text};
-`;
-const IdSpan = styled.span`
-    margin-left: 20px;
-`;
-const LogoutButton = styled(Button)`
-    margin-left: 16px;
-    width: 96px;
-    background-color: ${defaultButton.color.background};
-    color: ${defaultButton.color.text};
-    border: 1px solid ${defaultButton.color.border};
-`;
 
 export const HeaderView = ({ name }: { name: string }) => {
     const [login, setLogin] = useState<boolean>(false);
@@ -100,3 +50,52 @@ export const HeaderView = ({ name }: { name: string }) => {
         </>
     );
 };
+
+const Header = styled.header`
+    height: 80px;
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    box-shadow: 0 1px 4px rgb(0, 0, 0, 0.1);
+`;
+const LogoLink = styled(Link)`
+    text-decoration: none;
+    color: #3a3a3a;
+`;
+const Logo = styled.h1`
+    font-size: 24px;
+    margin-left: 40px;
+`;
+const Nav = styled.nav`
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 40px;
+`;
+const NavLink = styled(Link)`
+    margin-left: 28px;
+    text-decoration: none;
+    color: ${(props) => (props ? '#222' : undefined)};
+`;
+const ButtonGroupDiv = styled.div`
+    margin-left: 28px;
+`;
+const Button = styled.button`
+    width: 80px;
+    height: 40px;
+    border-radius: 9999px;
+    background-color: ${(props) => props.theme.color.main};
+    color: ${(props) => props.theme.color.text};
+`;
+const IdSpan = styled.span`
+    margin-left: 20px;
+`;
+const LogoutButton = styled(Button)`
+    margin-left: 16px;
+    width: 96px;
+    background-color: ${(props) => props.theme.color.buttonBackground};
+    color: ${(props) => props.theme.color.buttonText};
+    border: 1px solid ${(props) => props.theme.color.background};
+`;

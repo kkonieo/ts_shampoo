@@ -2,6 +2,7 @@ import { useCallback, useRef, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
+import { Portfolio } from './Portfolio';
 
 export const PortfolioListView = ({
     userInfo,
@@ -18,55 +19,22 @@ export const PortfolioListView = ({
     const [selectedFilter, setSelectedFilter] = useState<string[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
 
-    // Portfolio 카드 컴포넌트
-    const Portfolio = ({ name, position }: HomeProps.UserInfoProps): JSX.Element => {
-        return (
-            <PortfolioLink to="#">
-                <PortfolioTitleDiv>
-                    <PortfolioName>{name}</PortfolioName>
-                    <PortfolioJob>{position}</PortfolioJob>
-                </PortfolioTitleDiv>
-            </PortfolioLink>
-        );
-    };
-
     // userInfo = 모든 회원의 포트폴리오 정보가 들어있는 배열
     // filteredUserInfo = 모든 회원 정보에서 필터에 해당하는 회원의 포트폴리오 정보가 들어있는 배열
     // searchUserInfo = 모든 회원 정보에서 검색 결과에 해당하는 회원의 포트폴리오 정보가 들어있는 배열
     // reaultUserInfo = 검색결과와 필터에서 검색결과를 우선시해서 보여주는 로직
     // UserPortfolioList = 모든 회원의 포트폴리오를 보여주는 컴포넌트가 들어있는 배열
-    let filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
+    const filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
         if (selectedFilter.length === 0) return item;
         else if (selectedFilter.indexOf(item.position) >= 0 || selectedFilter.indexOf(item.stack) >= 0) return item;
     });
-    let searchUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
+    const searchUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
         if (searchValue === item.name) return item;
     });
-    let resultUserInfo = searchUserInfo.length > 0 ? searchUserInfo : filteredUserInfo;
-    let UserPortfolioList: JSX.Element[] = resultUserInfo.map((item: HomeProps.UserInfoProps, idx) => {
+    const resultUserInfo = searchUserInfo.length > 0 ? searchUserInfo : filteredUserInfo;
+    const UserPortfolioList: JSX.Element[] = resultUserInfo.map((item: HomeProps.UserInfoProps, idx) => {
         return <Portfolio key={idx} {...item} />;
     });
-
-    // filter form 구현하는 로직
-    const filterBox: any = useRef(null);
-
-    const addFilter = (e: React.SyntheticEvent) => {
-        let target = e.target as HTMLInputElement;
-        let value = target.value;
-        if (selectedFilter.indexOf(value) < 0) {
-            setSelectedFilter((current) => {
-                const newFilterList = [...current, value];
-                return newFilterList;
-            });
-        } else {
-            setSelectedFilter((current) => {
-                let newSelectedFilter = [...current];
-                const idx = newSelectedFilter.indexOf(value);
-                newSelectedFilter.splice(idx, 1);
-                return newSelectedFilter;
-            });
-        }
-    };
 
     // 직군, 기술스택의 checkbox창 만드는 로직
     const Filter = ({ data }: { data: Array<string> }): JSX.Element => {
@@ -90,6 +58,28 @@ export const PortfolioListView = ({
                 </div>
             </FilterContainerForm>
         );
+    };
+
+    // filter form 구현하는 로직
+    const filterBox: any = useRef(null);
+
+    const addFilter = (e: React.SyntheticEvent) => {
+        let target = e.target as HTMLInputElement;
+        let value = target.value;
+        if (selectedFilter.indexOf(value) < 0) {
+            setSelectedFilter((current) => {
+                const newFilterList = [...current, value];
+                return newFilterList;
+            });
+        }
+        if (selectedFilter.indexOf(value) >= 0) {
+            setSelectedFilter((current) => {
+                let newSelectedFilter = [...current];
+                const idx = newSelectedFilter.indexOf(value);
+                newSelectedFilter.splice(idx, 1);
+                return newSelectedFilter;
+            });
+        }
     };
 
     // filter 선택한 항목들 UI 나타내는 컴포넌트
@@ -180,8 +170,8 @@ export const PortfolioListView = ({
                     {UserPortfolioList.length >= portfolioCount && (
                         <MoreButton
                             onClick={() => {
-                                setPortfolioCount((cur) => {
-                                    return cur + 8;
+                                setPortfolioCount((current) => {
+                                    return current + 8;
                                 });
                             }}
                         >
@@ -313,7 +303,7 @@ const UserPortfolioListDiv = styled.div`
     /* HACK: 정렬을 어떤식으로 하면 좋을지 */
     /* justify-content: center; */
 `;
-const PortfolioLink = styled(Link)`
+export const PortfolioLink = styled(Link)`
     border: 1px solid #e0e0e0;
     width: 30%;
     height: 260px;
@@ -332,7 +322,7 @@ const PortfolioLink = styled(Link)`
     }
 `;
 
-const PortfolioTitleDiv = styled.div`
+export const PortfolioTitleDiv = styled.div`
     width: 100%;
     height: 60px;
     background-color: #f5f5f5;
@@ -340,11 +330,11 @@ const PortfolioTitleDiv = styled.div`
     padding: 12px;
     border-radius: 0 0 10px 10px;
 `;
-const PortfolioName = styled.p`
+export const PortfolioName = styled.p`
     font-weight: bold;
     margin-bottom: 2px;
 `;
-const PortfolioJob = styled.p``;
+export const PortfolioJob = styled.p``;
 const MoreDiv = styled.div`
     display: flex;
     justify-content: center;

@@ -49,5 +49,9 @@ export const PortfolioList = (): JSX.Element => {
         });
     }
 
-    return <PortfolioListView userInfo={userInfo} positions={positions} stacks={stacks} />;
+    return (
+        <>
+            <PortfolioListView userInfo={userInfo} positions={positions} stacks={stacks} />
+        </>
+    );
 };
