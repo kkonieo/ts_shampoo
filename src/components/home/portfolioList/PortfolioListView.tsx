@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
@@ -196,7 +195,7 @@ const FilterDiv = styled.div`
     display: flex;
     height: 36px;
     margin-bottom: 12px;
-    padding: 0 36px;
+    /* padding: 0 36px; */
 `;
 const FilterPositionDiv = styled.div`
     width: 33.333%;
@@ -275,8 +274,7 @@ const FilterContainerForm = styled.form`
     z-index: 2;
 `;
 const FiltersListDiv = styled.div`
-    margin-bottom: 20px;
-    padding: 0 36px;
+    margin-bottom: 28px;
 `;
 
 const FilterItems = styled.div`
@@ -286,7 +284,6 @@ const FilterItems = styled.div`
     padding: 10px;
     margin-top: 8px;
     margin-left: 12px;
-    margin-bottom: 8px;
     color: #757575;
     display: inline-flex;
     align-items: center;
@@ -300,47 +297,15 @@ const UserPortfolioListDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    /* HACK: 정렬을 어떤식으로 하면 좋을지 */
-    /* justify-content: center; */
+    justify-content: flex-start;
 `;
-export const PortfolioLink = styled(Link)`
-    border: 1px solid #e0e0e0;
-    width: 30%;
-    height: 260px;
-    border-radius: 10px;
-    margin: 1%;
-    display: inline-flex;
-    flex-basis: 260px;
-    flex-direction: column;
-    text-decoration: none;
-    color: #3a3a3a;
-    transition-duration: 0.3s;
-    transition-property: transform;
-
-    &:hover {
-        transform: translateY(-8px);
-    }
-`;
-
-export const PortfolioTitleDiv = styled.div`
-    width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
-    margin-top: auto;
-    padding: 12px;
-    border-radius: 0 0 10px 10px;
-`;
-export const PortfolioName = styled.p`
-    font-weight: bold;
-    margin-bottom: 2px;
-`;
-export const PortfolioJob = styled.p``;
 const MoreDiv = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 60px;
     margin-bottom: 100px;
 `;
+
 const MoreButton = styled.button`
     width: 120px;
     height: 48px;
