@@ -5,13 +5,13 @@ const NavLink = () => {
     const { pathname } = useLocation();
     return (
         <NavLinkUl>
-            <li className={pathname.includes('/aboutme') ? 'active' : ''}>
+            <li className={pathname.includes('/aboutme') ? 'active' : 'inactive'}>
                 <Link to="aboutme">About me</Link>
             </li>
-            <li className={pathname.includes('/project') ? 'active' : ''}>
+            <li className={pathname.includes('/project') ? 'active' : 'inactive'}>
                 <Link to="project">Project</Link>
             </li>
-            <li className={pathname.includes('/contact') ? 'active' : ''}>
+            <li className={pathname.includes('/contact') ? 'active' : 'inactive'}>
                 <Link to="contact">Contact</Link>
             </li>
         </NavLinkUl>
@@ -33,5 +33,11 @@ const NavLinkUl = styled.ul`
         width: 80%;
         padding: 1vh;
         text-align: center;
+    }
+
+    .inactive {
+        :hover {
+            transform: scale(1.2);
+        }
     }
 `;

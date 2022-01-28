@@ -2,11 +2,6 @@ import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 
-interface btnData {
-    url: string;
-    urlName: string;
-}
-
 const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) => {
     const handleWindowOpen = (url: string) => {
         window.open(url, '_blank');
@@ -51,6 +46,10 @@ const DetailContainer = styled.div`
     padding: 0 5%;
     text-align: left;
     justify-content: center;
+    p {
+        font-size: 1.5em;
+        color: #757575;
+    }
     h2 {
         border-bottom: 1px solid black;
         margin-bottom: 2%;
@@ -69,7 +68,11 @@ const GifDiv = styled.div`
         object-fit: contain;
     }
 `;
-const ExplainDiv = styled.div``;
+const ExplainDiv = styled.div`
+    p {
+        color: #3a3a3a;
+    }
+`;
 const ButtonDiv = styled.div`
     justify-content: start;
     font-family: 'Montserrat';
