@@ -4,8 +4,6 @@ import MDEditor from '@uiw/react-md-editor';
 import { useParams } from 'react-router-dom';
 
 const DetailEditPage = () => {
-    const gifInput = useRef<HTMLInputElement>(null);
-    const pngInput = useRef<HTMLInputElement>(null);
     const skillStack = ['Django', 'Flask', 'TypeScript'];
     const urlLink = [
         { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
@@ -17,24 +15,28 @@ const DetailEditPage = () => {
     const [explain, setExplain] = useState('**Hello world!!!**');
     const [gifFile, setGifFile] = useState('');
     const [imgFile, setImgFile] = useState('');
-
     const handleSubmit = (event: any) => {
         event?.preventDefault();
         const data = {
             projectId: projectId,
             startDate: startDate,
             endDate: endDate,
-            gifFile: gifFile,
-            imgFile: imgFile,
+            gifFile: gifBlob,
+            imgFile: imgBlob,
             explain: explain,
         };
         console.log(data);
     };
+
+    const [gifBlob, setGifBlob] = useState<Blob>();
+    const [imgBlob, setImgBlob] = useState<Blob>();
     const handleShowGifPreview = (event: any) => {
         setGifFile(URL.createObjectURL(event.target.files[0]));
+        setGifBlob(event.target.files[0]);
     };
     const handleShowImgPreview = (event: any) => {
         setImgFile(URL.createObjectURL(event.target.files[0]));
+        setImgBlob(event.target.files[0]);
     };
     const handleDeletePreview = (imgSrc: string, setImgSrc: Function) => {
         URL.revokeObjectURL(imgSrc);
@@ -51,7 +53,7 @@ const DetailEditPage = () => {
     return (
         <>
             <DetailForm onSubmit={handleSubmit}>
-                <div>
+                <DateDiv>
                     <label>
                         제작 시작일:{' '}
                         <input
@@ -70,25 +72,20 @@ const DetailEditPage = () => {
                             onChange={({ target }) => setEndDate(target.value)}
                         />
                     </label>
-                </div>
+                </DateDiv>
                 <div>
                     {gifFile && (
                         <>
                             <img alt="프로젝트 라이브 데모" src={gifFile} />
+
                             <button onClick={() => setGifFile('')}>제거</button>
                         </>
                     )}
                     {!gifFile && (
                         <label>
-                            <b>프로젝트 라이브 데모 GIF</b>
+                            라이브 데모 영상
                             <br />
-                            <input
-                                ref={gifInput}
-                                type="file"
-                                accept="image/*"
-                                onChange={handleShowGifPreview}
-                                name="gifSrc"
-                            />
+                            <input type="file" accept="image/*" onChange={handleShowGifPreview} name="gifSrc" />
                         </label>
                     )}
                 </div>
@@ -96,20 +93,14 @@ const DetailEditPage = () => {
                     {imgFile && (
                         <>
                             <img alt="썸네일 " src={imgFile} />
-                            <button onClick={() => setGifFile('')}>제거</button>
+                            <button onClick={() => setImgFile('')}>제거</button>
                         </>
                     )}
                     {!imgFile && (
                         <label>
-                            <b>프로젝트 이미지</b>
+                            프로젝트 이미지
                             <br />
-                            <input
-                                ref={pngInput}
-                                type="file"
-                                accept="image/*"
-                                onChange={handleShowImgPreview}
-                                name="imgSrc"
-                            />
+                            <input type="file" accept="image/*" onChange={handleShowImgPreview} name="imgSrc" />
                         </label>
                     )}
                 </div>
@@ -142,4 +133,21 @@ const DetailForm = styled.form`
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    label {
+        font-weight: bold;
+    }
+
+    button {
+        border: 1px solid black;
+        margin: auto;
+    }
+`;
+
+const DateDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    label {
+        margin: auto;
+    }
 `;

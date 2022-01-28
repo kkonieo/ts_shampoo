@@ -59,6 +59,11 @@ const datas: ProjectProps.IProjectProps[] = [
 const ProjectPage = () => {
     // 수정모드용 토글
     const [editToggle, setEditToggle] = useState<boolean>(false);
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        handleChangeToggle();
+        console.log('됨');
+    };
     const data = useMemo(() => {
         return { data: datas, editToggle: editToggle };
     }, [editToggle]);
@@ -71,13 +76,7 @@ const ProjectPage = () => {
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
             {!editToggle && <ProjectCardDiv {...data}></ProjectCardDiv>}
-            {editToggle && (
-                <>
-                    <ProjectEditPage />
-                    <button onClick={handleChangeToggle}>수정</button>
-                    <button onClick={handleChangeToggle}>취소</button>
-                </>
-            )}
+            {editToggle && <ProjectEditPage handleChangeToggle={handleChangeToggle} handleSubmit={handleSubmit} />}
         </>
     );
 };
