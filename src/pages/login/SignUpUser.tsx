@@ -1,33 +1,18 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { LoginButton } from '../../components';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState  } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import { SignUpProps } from 'SignUp';
+import { loginSpace } from 'loginModule';
   
 const SignUpUser = () => {
 
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors} } = useForm<SignUpProps>();
+    const { register, handleSubmit, formState: {errors} } = useForm<loginSpace.SignUpProps>();
     const onSubmit = handleSubmit(data => {
         console.log(data);
         // 서버로 보내서 가입 시키는 로직 들어가야함
-        setNewUser((current: SignUpProps) => {
-            return {
-                ...current,
-                userName: data.userName,
-                userJob: data.userJob,
-            }
-        })
         setPage(1);
-    });
-
-    // 새로 가입하는 유저 정보
-    const [newUser, setNewUser] = useState<SignUpProps>({
-        userEmail: "",
-        userName: "",
-        userJob: "",
     });
 
     // recoil 페이지 세팅

@@ -31,26 +31,35 @@ declare module 'loginModule' {
             type: "submit";
             text: string;
             className: "blue_button" | "gray_button"; // 버튼 컬러 바꾸기용
-        }
+        };
 
         interface SnsLoginButtonProps {
             text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인";
             to: "github" | "google" | "naver"; // 네비게이터용
             color: string;
-        }
+        };
 
-            interface LoginContainerProps {
+        interface LoginContainerProps {
             children: React.ReactNode;
-        }
-    }
-}
+        };
 
-declare module 'SignUp' {
-    interface SignUpProps {
-        userEmail?: string;
-        userName: string;
-        userJob: string;
-    };
+        interface loginToken {
+            access_token: string;
+            refresh_token: string;
+            expires_in: string;
+        };
+
+        interface SignUpProps {
+            userEmail?: string;
+            userName: string;
+            userJob: string;
+        };
+
+        interface UserToken {
+            accessToken: string;
+            refreshToken: string;
+        };
+    }
 }
 
 declare module 'ProjectPageModule' {
