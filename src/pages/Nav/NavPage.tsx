@@ -2,12 +2,23 @@ import styled from 'styled-components';
 import { navTheme } from '../../utils/styles/theme';
 import { useOutlet } from 'react-router-dom';
 import { IconDiv, NavLink } from '../../components';
+import { ScrollProgress } from '../../components/scrollProgress';
+import { useEffect } from 'react';
 
 const NavPage = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
     const name: string = 'Minyoung Lee';
     // 현재 주소 파악
+
+    const detectScroll = (e: any) => {
+        const { scrollHeight } = e.target;
+        console.log(e.target);
+        if (scrollHeight === null) {
+            console.log('스크롤 없음');
+        }
+        console.log('onLoad', scrollHeight);
+    };
 
     return (
         <BackgroundDiv>
@@ -20,7 +31,11 @@ const NavPage = () => {
                     <h2>{name}</h2>
                     <NavLink />
                 </NavDiv>
-                <ContentDiv>{outlet}</ContentDiv>
+                <ProgressContentsContainer>
+                    {/*프로그래스바*/}
+                    <ScrollProgress />
+                    <ContentDiv className="content">{outlet}</ContentDiv>
+                </ProgressContentsContainer>
             </NavContainer>
         </BackgroundDiv>
     );
@@ -78,10 +93,21 @@ const NavDiv = styled.div`
 
 // 클릭 시 다른 페이지로 이동하는 링크들
 
-//오른쪽 컨텐츠 영역
-const ContentDiv = styled.div`
+//프로그래스바와 오른쪽 컨텐츠 영역을 담을 컨테이너
+const ProgressContentsContainer = styled.div`
     border-radius: 0 30px 30px 0;
     width: 82%;
+    min-width: 400px;
+    background-color: white;
+    overflow-y: auto;
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+//오른쪽 컨텐츠 영역
+const ContentDiv = styled.div`
     min-width: 400px;
     background-color: white;
     overflow-y: auto;
