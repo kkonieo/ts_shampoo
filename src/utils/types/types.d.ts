@@ -64,6 +64,10 @@ declare module 'ProjectPageModule' {
             explain?: string;
             gifSrc?: string;
             imgSrc?: string;
+            urlLink?: {
+                linkName: string;
+                linkURL: string;
+            }[];
             /*
             아이디 번호
             프로젝트 제목

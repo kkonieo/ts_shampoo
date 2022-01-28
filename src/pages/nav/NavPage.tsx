@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useOutlet } from 'react-router-dom';
-import { IconDiv, NavLink } from '../../components';
-
+import { IconDiv, NavLink, UserPicture } from '../../components';
 const NavPage = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
@@ -12,10 +11,8 @@ const NavPage = () => {
             <NavContainer>
                 <NavDiv>
                     <IconDiv />
-                    <UserPictureDiv>
-                        <img src={`${process.env.PUBLIC_URL}/img/userDefault.png`} alt="사용자 이미지" />
-                    </UserPictureDiv>
-                    <h2>{name}</h2>
+                    <UserPicture src="/img/userDefault.png" />
+                    <UserName>{name}</UserName>
                     <NavLink />
                 </NavDiv>
                 <ContentDiv>{outlet}</ContentDiv>
@@ -75,7 +72,10 @@ const NavDiv = styled.div`
 `;
 
 // 클릭 시 다른 페이지로 이동하는 링크들
-
+const UserName = styled.div`
+    font-size: 1.8em;
+    text-align: center;
+`;
 //오른쪽 컨텐츠 영역
 const ContentDiv = styled.div`
     border-radius: 0 30px 30px 0;
@@ -92,23 +92,3 @@ const ContentDiv = styled.div`
 `;
 
 // 사용자 이미지
-const UserPictureDiv = styled.div`
-    margin: 10% auto 10% auto;
-    background-color: ${(props) => props.theme.color.background};
-    border-radius: 50%;
-
-    width: 150px;
-    min-width: 100px;
-    height: 150px;
-    min-height: 100px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 10px solid ${(props) => props.theme.color.sub};
-    img {
-        padding: 7%;
-        width: 80%;
-    }
-`;

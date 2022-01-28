@@ -1,5 +1,5 @@
 export { DetailDiv } from './detail';
-export { IconDiv, NavLink } from './nav';
+export { IconDiv, NavLink, UserPicture } from './nav';
 export { ProjectCard, ProjectCardDiv } from './project';
 export { Skills, Summary } from './about-me';
 export { default as SubTitle } from './SubTitle';

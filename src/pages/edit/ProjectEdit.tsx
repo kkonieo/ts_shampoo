@@ -5,7 +5,7 @@ interface IProps {
     handleSubmit?: (...args: any[]) => any;
 }
 
-const ProjectEditPage = ({ handleChangeToggle, handleSubmit }: IProps) => {
+const ProjectEdit = ({ handleChangeToggle, handleSubmit }: IProps) => {
     return (
         <form onSubmit={handleSubmit}>
             <button type="submit">수정</button>
@@ -16,4 +16,4 @@ const ProjectEditPage = ({ handleChangeToggle, handleSubmit }: IProps) => {
     );
 };
 
-export default ProjectEditPage;
+export default ProjectEdit;

@@ -1,6 +1,6 @@
 import { SubTitleEdit, ProjectCardDiv } from '../../components';
 import { useState, useMemo } from 'react';
-import { ProjectEditPage } from '..';
+import { ProjectEdit } from '..';
 import { ProjectProps } from 'ProjectPageModule';
 
 const datas: ProjectProps.IProjectProps[] = [
@@ -76,7 +76,7 @@ const ProjectPage = () => {
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
             {!editToggle && <ProjectCardDiv {...data}></ProjectCardDiv>}
-            {editToggle && <ProjectEditPage handleChangeToggle={handleChangeToggle} handleSubmit={handleSubmit} />}
+            {editToggle && <ProjectEdit handleChangeToggle={handleChangeToggle} handleSubmit={handleSubmit} />}
         </>
     );
 };

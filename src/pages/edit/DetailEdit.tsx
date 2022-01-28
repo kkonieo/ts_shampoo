@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import MDEditor from '@uiw/react-md-editor';
 import { useParams } from 'react-router-dom';
 import { ProjectProps } from 'ProjectPageModule';
+import styled from 'styled-components';
+import MDEditor from '@uiw/react-md-editor';
 
 const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
     const skillStack = ['Django', 'Flask', 'TypeScript'];
@@ -20,6 +20,7 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
         event?.preventDefault();
         const data = {
             projectId: projectId,
+            title: '제목',
             startDate: startDate,
             endDate: endDate,
             gifFile: gifBlob,

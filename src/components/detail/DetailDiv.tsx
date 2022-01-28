@@ -8,31 +8,35 @@ interface btnData {
 }
 
 const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) => {
-    const dt: btnData[] = [
-        {
-            url: 'https://youtube.com',
-            urlName: 'Live Demo',
-        },
-        {
-            url: 'https://github.com',
-            urlName: 'github',
-        },
-    ];
     const handleWindowOpen = (url: string) => {
         window.open(url, '_blank');
     };
 
     return (
         <DetailContainer>
-            <p>{`개발기간 : ${props.startDate} ~ ${props.endDate}`}</p>
+            <h1>{props.title}</h1>
+            <p>{`제작 기간 : ${props.startDate} ~ ${props.endDate}`}</p>
             <GifDiv>
-                <img src={`${props.gifSrc}`} alt="프로젝트 라이브 데모" />
+                <img src={`${props.gifSrc}`} alt="라이브 데모" />
             </GifDiv>
-            <MDEditor.Markdown source={'# 프로젝트 설명\n 하하하 \n # 잘부탁해요'} />
+            <ExplainDiv>
+                <h2>프로젝트 설명</h2>
+                <MDEditor.Markdown source={props.explain} />
+            </ExplainDiv>
+            <StackDiv>
+                <h2>기술 스택</h2>
+                <TagDiv>
+                    {props.techStack.map((stack) => (
+                        <Tag>{stack}</Tag>
+                    ))}
+                </TagDiv>
+            </StackDiv>
+
             <ButtonDiv>
-                {dt.map((d) => (
-                    <button onClick={() => handleWindowOpen(d.url)}>{d.urlName}</button>
-                ))}
+                {props.urlLink &&
+                    props.urlLink.map((url) => (
+                        <button onClick={() => handleWindowOpen(url.linkURL)}>{url.linkName}</button>
+                    ))}
             </ButtonDiv>
         </DetailContainer>
     );
@@ -44,24 +48,28 @@ const DetailContainer = styled.div`
     display: flex;
     font-family: 'EliceRegular', 'Montserrat', 'Helvetica', 'sans-serif';
     flex-direction: column;
+    padding: 0 5%;
     text-align: left;
     justify-content: center;
+    h2 {
+        border-bottom: 1px solid black;
+        margin-bottom: 2%;
+    }
 `;
 
 const GifDiv = styled.div`
-    width: 90%;
-    margin-top: 2.5%;
+    margin-top: 3%;
     margin-bottom: 5%;
-    margin-left: 5%;
     background-color: ${(props) => props.theme.color.background};
-    border-radius: 15px;
+    border-radius: 10px;
+    overflow: hidden;
 
     img {
         width: 100%;
         object-fit: contain;
     }
 `;
-
+const ExplainDiv = styled.div``;
 const ButtonDiv = styled.div`
     justify-content: start;
     font-family: 'Montserrat';
@@ -75,4 +83,19 @@ const ButtonDiv = styled.div`
         font-weight: bold;
         height: 3em;
     }
+`;
+
+const StackDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+`;
+const TagDiv = styled.div`
+    display: flex;
+`;
+const Tag = styled.div`
+    margin: 2%;
+    background-color: ${(props) => props.theme.color.main};
+    color: ${(props) => props.theme.color.sub};
+    padding: 2%;
 `;
