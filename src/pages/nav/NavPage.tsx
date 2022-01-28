@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { navTheme } from '../../utils/styles/theme';
 import { useOutlet } from 'react-router-dom';
 import { IconDiv, NavLink } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
@@ -44,7 +43,7 @@ const NavPage = () => {
 export default NavPage;
 
 const BackgroundDiv = styled.div`
-    background-color: #f5f5f5;
+    background-color: ${(props) => props.theme.color.background};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,10 +63,10 @@ const NavContainer = styled.div`
 const NavDiv = styled.div`
     width: 18%;
     min-width: 200px;
-    color: ${navTheme.color.sub};
+    color: ${(props) => props.theme.color.sub};
     font-family: 'Montserrat', 'EliceRegular', 'Heltica';
     font-weight: bold;
-    background: ${navTheme.color.main};
+    background: ${(props) => props.theme.color.main};
     border-radius: 30px 0 0 30px;
     display: flex;
     flex-direction: column;
@@ -76,7 +75,7 @@ const NavDiv = styled.div`
     button {
         background: none;
         border: none;
-        color: ${navTheme.color.sub};
+        color: ${(props) => props.theme.color.sub};
         font-weight: bold;
     }
 
@@ -87,7 +86,7 @@ const NavDiv = styled.div`
 
     a {
         text-decoration: none;
-        color: ${navTheme.color.sub};
+        color: ${(props) => props.theme.color.sub};
     }
 `;
 
@@ -97,10 +96,9 @@ const NavDiv = styled.div`
 const ProgressContentsContainer = styled.div`
     border-radius: 0 30px 30px 0;
     width: 82%;
-    min-width: 400px;
+    min-width: 700px;
     background-color: white;
     overflow-y: auto;
-    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
@@ -113,15 +111,11 @@ const ContentDiv = styled.div`
     overflow-y: auto;
     scrollbar-width: none;
     padding: 2.5%;
-    ::-webkit-scrollbar {
-        display: none;
-    }
 `;
-
 // 사용자 이미지
 const UserPictureDiv = styled.div`
     margin: 10% auto 0 auto;
-    background-color: ${navTheme.color.background};
+    background-color: ${(props) => props.theme.color.background};
     border-radius: 50%;
 
     width: 150px;
@@ -133,10 +127,9 @@ const UserPictureDiv = styled.div`
     justify-content: center;
     align-items: center;
 
-    border: 10px solid ${navTheme.color.sub};
+    border: 10px solid ${(props) => props.theme.color.sub};
     img {
         padding: 7%;
         width: 80%;
-        object-fit: scale-down;
     }
 `;

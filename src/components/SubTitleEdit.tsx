@@ -1,22 +1,24 @@
 import styled from 'styled-components';
-
 interface Props {
     text: string;
     onClick?: (...args: any[]) => any;
+    editMode?: boolean;
 }
 
-const SubTitle = ({ text, onClick }: Props) => {
+const SubTitleEdit = ({ text, onClick, editMode }: Props) => {
     return (
         <SubTitleDiv>
             <TitleDiv>{text}</TitleDiv>
-            <EditButtonDiv onClick={onClick}>
-                <img src={`${process.env.PUBLIC_URL}/img/edit.svg`} alt="수정" />
-            </EditButtonDiv>
+            {!editMode && (
+                <EditButtonDiv onClick={onClick}>
+                    <img src={`${process.env.PUBLIC_URL}/img/edit.svg`} alt="수정" />
+                </EditButtonDiv>
+            )}
         </SubTitleDiv>
     );
 };
 
-export default SubTitle;
+export default SubTitleEdit;
 const SubTitleDiv = styled.div`
     display: flex;
     margin: 10px 0px;

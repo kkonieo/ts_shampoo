@@ -27,9 +27,18 @@ const Skills = () => {
                 if (i.title === targetSkill) {
                     setTargetDescribe(i.describe);
                 }
+                return undefined;
             });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetSkill]);
+
+    useEffect(() => {
+        if (targetDescribe !== []) {
+            console.log(targetDescribe);
+        }
+        return undefined;
+    }, [targetDescribe]);
 
     const onSkillClick = (e: React.SyntheticEvent<HTMLDivElement>) => {
         const value = String(e.currentTarget.dataset.value);

@@ -1,26 +1,10 @@
 import styled from 'styled-components';
 import React, { useRef, useState } from 'react';
+import { ProjectProps } from 'ProjectPageModule';
 
-export interface IProjectProps {
-    /*
-    아이디 번호
-    프로젝트 제목
-    제작시작일자
-    제작종료일자
-    기술스택
-    마우스 올리면 나올 GIF
-    기본 상태의 프로젝트 사진
-    */
-    id: number;
-    title: string;
-    startDate: string;
-    endDate: string;
-    techStack: Array<string>;
-    animatedImg?: string;
-    staticImg?: string;
-}
+interface IProps extends ProjectProps.IProjectProps {}
 
-const ProjectCard: React.FunctionComponent<IProjectProps> = ({ ...props }) => {
+const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
     const [gifToggle, setGifToggle] = useState<boolean>(false);
     const imgRef = useRef<HTMLImageElement>(null);
 
@@ -30,7 +14,7 @@ const ProjectCard: React.FunctionComponent<IProjectProps> = ({ ...props }) => {
     return (
         <ProjectCardDiv>
             <div className="project" onMouseOver={handleGifPlayer} onMouseOut={handleGifPlayer}>
-                <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.animatedImg}` : `${props?.staticImg}`} />
+                <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.gifSrc}` : `${props?.imgSrc}`} />
             </div>
             <div className="explain">
                 <p>
@@ -40,11 +24,11 @@ const ProjectCard: React.FunctionComponent<IProjectProps> = ({ ...props }) => {
                 {/*
                 길이가 일정이상 길면 뒷부분을 ...으로 대체한다
                 */}
-                <p>{`제작기간 :  ${props.startDate + ' ~ ' + props.endDate}`}</p>
+                <p>{`제작기간 :  ${props.startDate} ~ ${props.endDate}`}</p>
                 <p>{`기술스택 :  ${
-                    props.techStack.join(',').length < 38
-                        ? props.techStack.join(',')
-                        : props.techStack.join(',').substring(0, 35) + '...'
+                    props.techStack.join(',').length < 25
+                        ? props.techStack.join(', ')
+                        : props.techStack.join(', ').substring(0, 25) + '...'
                 }`}</p>
             </div>
         </ProjectCardDiv>
