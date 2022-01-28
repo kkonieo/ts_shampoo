@@ -55,10 +55,7 @@ declare module 'LoginModule' {
             userJob: string;
         };
 
-        interface UserToken {
-            accessToken: string;
-            refreshToken: string;
-        };
+        type SignUpPageProps = 0 | 1;
     }
 }
 
