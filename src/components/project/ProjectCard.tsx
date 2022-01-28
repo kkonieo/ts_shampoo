@@ -17,19 +17,19 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
                 <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.gifSrc}` : `${props?.imgSrc}`} />
             </div>
             <div className="explain">
-                <p>
+                <div>
                     <b>{props?.title}</b>
-                </p>
+                </div>
 
                 {/*
                 길이가 일정이상 길면 뒷부분을 ...으로 대체한다
                 */}
-                <p>{`제작기간 :  ${props.startDate} ~ ${props.endDate}`}</p>
-                <p>{`기술스택 :  ${
+                <div>{`제작기간 :  ${props.startDate} ~ ${props.endDate}`}</div>
+                <div>{`기술스택 :  ${
                     props.techStack.join(',').length < 25
                         ? props.techStack.join(', ')
                         : props.techStack.join(', ').substring(0, 25) + '...'
-                }`}</p>
+                }`}</div>
             </div>
         </ProjectCardDiv>
     );
@@ -37,9 +37,9 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
 
 export default ProjectCard;
 const ProjectCardDiv = styled.div`
-    border-radius: 15px;
+    border-radius: 3.5%;
     display: flex;
-    
+    margin:auto;
     flex-direction: column;
     border 1px solid #BDBDBD;
     overflow: hidden;
@@ -59,11 +59,16 @@ const ProjectCardDiv = styled.div`
     }
 
     .explain {
+        display:flex;
+        flex-direction:column;
         padding : 1%;
         padding-left:3%;
         text-align:left;
         background-color:white;
         color:#757575;
+        div{
+            margin:0.5%;
+        }
         b{
             color:black;
         }
