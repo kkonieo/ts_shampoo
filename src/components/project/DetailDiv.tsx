@@ -1,5 +1,6 @@
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
+import MDEditor from '@uiw/react-md-editor';
 
 interface btnData {
     url: string;
@@ -27,18 +28,7 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
             <GifDiv>
                 <img src={`${props.gifSrc}`} alt="프로젝트 라이브 데모" />
             </GifDiv>
-            <ExplainDiv>
-                <b>프로젝트 설명</b>
-                <br />
-                <br />
-                <span>{props.explain}</span>
-            </ExplainDiv>
-            <ExplainDiv>
-                <b>기술 스택</b>
-                <br />
-                <br />
-                {props.techStack.map((tech, idx) => (idx === 0 ? tech : ', ' + tech))}
-            </ExplainDiv>
+            <MDEditor.Markdown source={'# 프로젝트 설명\n 하하하 \n # 잘부탁해요'} />
             <ButtonDiv>
                 {dt.map((d) => (
                     <button onClick={() => handleWindowOpen(d.url)}>{d.urlName}</button>
@@ -61,6 +51,7 @@ const DetailContainer = styled.div`
 const GifDiv = styled.div`
     width: 90%;
     margin-top: 2.5%;
+    margin-bottom: 5%;
     margin-left: 5%;
     background-color: ${(props) => props.theme.color.background};
     border-radius: 15px;

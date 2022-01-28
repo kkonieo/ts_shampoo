@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import MarkdownEditor from '@uiw/react-markdown-editor';
+import MDEditor from '@uiw/react-md-editor';
 import { useParams } from 'react-router-dom';
 
 const DetailEditPage = () => {
@@ -15,7 +14,7 @@ const DetailEditPage = () => {
     const projectId = useParams();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [explain, setExplain] = useState('');
+    const [explain, setExplain] = useState('**Hello world!!!**');
     const [gifFile, setGifFile] = useState('');
     const [imgFile, setImgFile] = useState('');
 
@@ -115,10 +114,12 @@ const DetailEditPage = () => {
                     )}
                 </div>
                 프로젝트 설명
-                <MarkdownEditor
-                    value={'# This is a H1  \n## This is a H2  \n###### This is a H6'}
-                    onChange={(value: any) => setExplain(value.display.maxLine)}
+                <MDEditor
+                    height={window.innerHeight * 0.3}
+                    value={explain}
+                    onChange={(newValue = '') => setExplain(newValue)}
                 />
+                <MDEditor.Markdown source={explain} />
                 <b>기술 스택</b>
                 {skillStack.map((stack, idx) => (idx ? `, ${stack}` : stack))}
                 <b>링크</b>
