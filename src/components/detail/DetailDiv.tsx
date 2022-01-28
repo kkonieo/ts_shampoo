@@ -11,7 +11,7 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
     const dt: btnData[] = [
         {
             url: 'https://youtube.com',
-            urlName: 'youtube',
+            urlName: 'Live Demo',
         },
         {
             url: 'https://github.com',
@@ -62,10 +62,6 @@ const GifDiv = styled.div`
     }
 `;
 
-const ExplainDiv = styled.div`
-    margin-top: 5%;
-    width: 90%;
-`;
 const ButtonDiv = styled.div`
     justify-content: start;
     font-family: 'Montserrat';

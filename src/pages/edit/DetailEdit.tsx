@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import { useParams } from 'react-router-dom';
+import { ProjectProps } from 'ProjectPageModule';
 
-const DetailEditPage = () => {
+const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
     const skillStack = ['Django', 'Flask', 'TypeScript'];
     const urlLink = [
         { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
@@ -104,7 +105,6 @@ const DetailEditPage = () => {
                         </label>
                     )}
                 </div>
-                프로젝트 설명
                 <MDEditor
                     height={window.innerHeight * 0.3}
                     value={explain}
@@ -126,7 +126,7 @@ const DetailEditPage = () => {
     );
 };
 
-export default DetailEditPage;
+export default DetailEdit;
 
 const DetailForm = styled.form`
     font-family: 'Montserrat', 'EliceRegular';

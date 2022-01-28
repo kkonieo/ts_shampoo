@@ -1,13 +1,13 @@
-import ProjectCard from './ProjectCard';
 import { ProjectProps } from 'ProjectPageModule';
-
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import ProjectCard from './ProjectCard';
 
 interface IProps {
     data: ProjectProps.IProjectProps[];
     editMode?: boolean;
 }
+
 const ProjectCardDiv = ({ data, editMode }: IProps) => {
     return (
         <GridDiv>
@@ -26,9 +26,7 @@ const ProjectCardDiv = ({ data, editMode }: IProps) => {
         </GridDiv>
     );
 };
-
 export default ProjectCardDiv;
-
 const GridDiv = styled.div`
     width: 100%;
     display: grid;
@@ -37,4 +35,5 @@ const GridDiv = styled.div`
     a {
         text-decoration: none;
     }
+    margin: 5% 0;
 `;

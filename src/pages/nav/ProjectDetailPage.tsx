@@ -2,7 +2,7 @@ import { DetailDiv } from '../../components';
 import { ProjectProps } from 'ProjectPageModule';
 import SubTitle from '../../components/SubTitle';
 import { useState } from 'react';
-import { DetailEditPage } from '..';
+import { DetailEdit } from '..';
 import { useParams } from 'react-router-dom';
 
 const ProjectDetailPage = () => {
@@ -23,9 +23,9 @@ const ProjectDetailPage = () => {
     };
     return (
         <>
-            <SubTitle text={`📂 ${data.title}`} onClick={handleChangeToggle} />
-            {!editToggle && <DetailDiv {...data}></DetailDiv>}
-            {editToggle && <DetailEditPage />}
+            <SubTitle text={`📂 Project`} onClick={handleChangeToggle} />
+            {!editToggle && <DetailDiv {...data} />}
+            {editToggle && <DetailEdit {...data} />}
         </>
     );
 };
