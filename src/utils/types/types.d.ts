@@ -8,9 +8,14 @@ declare module 'AboutMePageModuel' {
             skillTitles: string | null;
             skillDescribes: string[] | [];
         }
+        interface SkillTagProps {
+            skill: string[];
+            skillDescriptions: { title: string; describe: string[] }[];
+        }
         interface SkillsDetailProps {
             skill: string;
-            onSkillClick: any;
+            //추후 수정이 필요할듯 (any)
+            onSkillChange: any;
         }
         interface ResumeProps {
             title: string;
