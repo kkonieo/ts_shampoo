@@ -22,12 +22,6 @@ export const PortfolioListView = ({
         }),
     );
 
-    // userInfo = 모든 회원의 포트폴리오 정보가 들어있는 배열
-    // filteredUserInfo = 모든 회원 정보에서 필터에 해당하는 회원의 포트폴리오 정보가 들어있는 배열
-    // searchUserInfo = 모든 회원 정보에서 검색 결과에 해당하는 회원의 포트폴리오 정보가 들어있는 배열
-    // reaultUserInfo = 검색결과와 필터에서 검색결과를 우선시해서 보여주는 로직
-    // UserPortfolioList = 모든 회원의 포트폴리오를 보여주는 컴포넌트가 들어있는 배열
-
     const handleSearchSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
@@ -38,26 +32,39 @@ export const PortfolioListView = ({
             if (searchValue === item.name) return item;
             if (stacks.indexOf(searchValue) >= 0) return item;
         });
-        if (selectedFilter.length > 0 && searchValue !== '' && searchUserInfo.length === 0) {
-            setUserPortfolio([]);
-        } else if (searchUserInfo.length === 0) {
-            setUserPortfolio(
-                filteredUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
-                    return <Portfolio key={idx} {...item} />;
-                }),
-            );
-        } else if (selectedFilter.length > 0 && searchUserInfo.length > 0) {
-            setUserPortfolio(
-                searchUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
-                    return <Portfolio key={idx} {...item} />;
-                }),
-            );
-        } else if (selectedFilter.length === 0 && searchUserInfo.length > 0) {
-            setUserPortfolio(
-                searchUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
-                    return <Portfolio key={idx} {...item} />;
-                }),
-            );
+
+        if (selectedFilter.length > 0) {
+            if (searchValue !== '' && searchUserInfo.length === 0) {
+                setUserPortfolio([]);
+            } else if (searchValue !== '' && searchUserInfo.length > 0) {
+                setUserPortfolio(
+                    searchUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            } else if (searchValue === '') {
+                setUserPortfolio(
+                    filteredUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            }
+        } else if (selectedFilter.length === 0) {
+            if (searchValue !== '' && searchUserInfo.length > 0) {
+                setUserPortfolio(
+                    searchUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            } else if (searchValue !== '' && searchUserInfo.length === 0) {
+                setUserPortfolio([]);
+            } else if (searchValue === '') {
+                setUserPortfolio(
+                    filteredUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            }
         }
     };
 
@@ -170,8 +177,7 @@ export const PortfolioListView = ({
                         <SearchButton>검색</SearchButton>
                         <ResetButton
                             onClick={() => {
-                                setSelectedFilter([]);
-                                setSearchValue('');
+                                window.location.replace('/');
                             }}
                         >
                             필터 초기화
