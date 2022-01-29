@@ -14,7 +14,8 @@ declare module 'AboutMePageModuel' {
         }
         interface SkillsDetailProps {
             skill: string;
-            onSkillClick: any;
+            //추후 수정이 필요할듯 (any)
+            onSkillChange: any;
         }
         interface ResumeProps {
             title: string;
