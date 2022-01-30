@@ -62,7 +62,6 @@ const ProjectPage = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         handleChangeToggle();
-        console.log('됨');
     };
     const data = useMemo(() => {
         return { data: datas, editToggle: editToggle };

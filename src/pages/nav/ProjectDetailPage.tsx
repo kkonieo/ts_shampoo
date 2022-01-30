@@ -12,31 +12,25 @@ const ProjectDetailPage = () => {
         setEditToggle((current) => !current);
     };
     const data: ProjectProps.IProjectProps = {
-        id: projectId,
+        id: projectId?.id,
         title: '프로젝트 토끼토끼',
-        startDate: '2021.01.30',
-        endDate: '2021.02.30',
+        startDate: '2021-01-31',
+        endDate: '2021-02-28',
         techStack: ['Django', 'Flask', 'TypeScript'],
-        explain:
-            '엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. 엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. 엘리스 AI트랙에서 진행한 프로젝트로 사람들의 삶을 윤택하기 위해 최신 기술을 이용하여 구현했습니다. 이러한 경우에 타겟은 모든 사람입니다. ',
+        imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
-        //imgSrc:null
+        explain: '프로젝트설명0',
         urlLink: [
-            {
-                linkURL: 'https://youtube.com',
-                linkName: 'Live Demo',
-            },
-            {
-                linkURL: 'https://github.com',
-                linkName: 'GitHub',
-            },
+            { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
+            { linkName: 'Github', linkURL: 'https://github.com' },
         ],
     };
+
     return (
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
             {!editToggle && <DetailDiv {...data} />}
-            {editToggle && <DetailEdit {...data} />}
+            {editToggle && <DetailEdit {...data} handleChangeToggle={handleChangeToggle} />}
         </>
     );
 };

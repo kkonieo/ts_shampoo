@@ -1,45 +1,36 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import TitleEdit from '../../components/edit/TitleEdit';
 
-const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
-    const data = {
-        id: 0,
-        title: '프로젝트 토끼토끼',
-        startDate: '2021-01-31',
-        endDate: '2021-02-28',
-        techStack: ['Django', 'Flask', 'TypeScript'],
-        imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
-        gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
-        explain: '프로젝트설명0',
-        urlLink: [
-            { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
-            { linkName: 'Github', linkURL: 'https://github.com' },
-        ],
-    };
+interface IProps extends ProjectProps.IProjectProps {
+    handleChangeToggle?: (...args: any[]) => any;
+}
 
-    const projectId = useParams();
-    const [title, setTitle] = useState(data.title);
-    const [startDate, setStartDate] = useState<string>(data.startDate);
-    const [endDate, setEndDate] = useState<string>(data.endDate);
-    const [explain, setExplain] = useState<string>(data.explain);
-    const [gifSrc, setGifSrc] = useState(data.gifSrc);
-    const [imgSrc, setImgSrc] = useState(data.imgSrc);
-    const [techStack, setTechStack] = useState(data.techStack);
-    const [urlLink, setUrlLink] = useState(data.urlLink);
+const DetailEdit: React.FunctionComponent<IProps> = (props) => {
+    const [title, setTitle] = useState(props.title);
+    const [startDate, setStartDate] = useState(props.startDate);
+    const [endDate, setEndDate] = useState(props.endDate);
+    const [explain, setExplain] = useState(props.explain);
+    const [gifSrc, setGifSrc] = useState(props.gifSrc);
+    const [imgSrc, setImgSrc] = useState(props.imgSrc);
+    const [techStack, setTechStack] = useState(props.techStack);
+    const [urlLink, setUrlLink] = useState(props.urlLink);
 
     const handleSubmit = (event: any) => {
         event?.preventDefault();
         const data = {
-            projectId: projectId,
+            projectId: props.id,
             title: title,
             startDate: startDate,
             endDate: endDate,
-            gifFile: gifBlob,
-            imgFile: imgBlob,
+            /*
+            gifSrc 와 imgSrc : 이미지 파일이 있으면 이미지 파일 Blob처리해서 보내고, 
+            건들지 않아서 서버에 이미지가 저장된 경로 그대로 보유하고 있다면, 그 경로만 보내준다.
+            */
+            gifSrc: gifBlob ?? gifSrc,
+            imgSrc: imgBlob ?? imgSrc,
             explain: explain,
         };
         console.log(data);
@@ -55,7 +46,7 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
         setImgSrc(URL.createObjectURL(event.target.files[0]));
         setImgBlob(event.target.files[0]);
     };
-    const handleDeletePreview = (imgSrc: string, setImgSrc: Function) => {
+    const handleDeletePreview = (imgSrc: any, setImgSrc: Function) => {
         URL.revokeObjectURL(imgSrc);
         setImgSrc('');
     };
@@ -132,12 +123,12 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
                 <b>기술 스택</b>
                 {techStack.map((stack, idx) => (idx ? `, ${stack}` : stack))}
                 <b>링크</b>
-                {urlLink.map((link) => (
-                    <button type="button">{link.linkName}</button>
-                ))}
+                {urlLink && urlLink.map((link) => <button type="button">{link.linkName}</button>)}
                 <div>
                     <button type="submit">수정</button>
-                    <button>취소</button>
+                    <button type="button" onClick={props?.handleChangeToggle}>
+                        취소
+                    </button>
                 </div>
             </DetailForm>
         </>
