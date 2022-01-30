@@ -9,7 +9,7 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
 
     return (
         <DetailContainer>
-            <h1>{props.title}</h1>
+            <span>{props.title}</span>
             <p>{`제작 기간 : ${props.startDate} ~ ${props.endDate}`}</p>
             <GifDiv>
                 <img src={`${props.gifSrc}`} alt="라이브 데모" />

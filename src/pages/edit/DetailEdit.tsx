@@ -3,24 +3,39 @@ import { useParams } from 'react-router-dom';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
+import TitleEdit from '../../components/edit/TitleEdit';
 
 const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
-    const skillStack = ['Django', 'Flask', 'TypeScript'];
-    const urlLink = [
-        { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
-        { linkName: 'Github', linkURL: 'https://github.com' },
-    ];
+    const data = {
+        id: 0,
+        title: '프로젝트 토끼토끼',
+        startDate: '2021-01-31',
+        endDate: '2021-02-28',
+        techStack: ['Django', 'Flask', 'TypeScript'],
+        imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
+        gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+        explain: '프로젝트설명0',
+        urlLink: [
+            { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
+            { linkName: 'Github', linkURL: 'https://github.com' },
+        ],
+    };
+
     const projectId = useParams();
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [explain, setExplain] = useState('**Hello world!!!**');
-    const [gifFile, setGifFile] = useState('');
-    const [imgFile, setImgFile] = useState('');
+    const [title, setTitle] = useState(data.title);
+    const [startDate, setStartDate] = useState<string>(data.startDate);
+    const [endDate, setEndDate] = useState<string>(data.endDate);
+    const [explain, setExplain] = useState<string>(data.explain);
+    const [gifSrc, setGifSrc] = useState(data.gifSrc);
+    const [imgSrc, setImgSrc] = useState(data.imgSrc);
+    const [techStack, setTechStack] = useState(data.techStack);
+    const [urlLink, setUrlLink] = useState(data.urlLink);
+
     const handleSubmit = (event: any) => {
         event?.preventDefault();
         const data = {
             projectId: projectId,
-            title: '제목',
+            title: title,
             startDate: startDate,
             endDate: endDate,
             gifFile: gifBlob,
@@ -33,11 +48,11 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
     const [gifBlob, setGifBlob] = useState<Blob>();
     const [imgBlob, setImgBlob] = useState<Blob>();
     const handleShowGifPreview = (event: any) => {
-        setGifFile(URL.createObjectURL(event.target.files[0]));
+        setGifSrc(URL.createObjectURL(event.target.files[0]));
         setGifBlob(event.target.files[0]);
     };
     const handleShowImgPreview = (event: any) => {
-        setImgFile(URL.createObjectURL(event.target.files[0]));
+        setImgSrc(URL.createObjectURL(event.target.files[0]));
         setImgBlob(event.target.files[0]);
     };
     const handleDeletePreview = (imgSrc: string, setImgSrc: Function) => {
@@ -47,14 +62,16 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
 
     useEffect(() => {
         return () => {
-            handleDeletePreview(gifFile, setGifFile);
-            handleDeletePreview(imgFile, setImgFile);
+            handleDeletePreview(gifSrc, setGifSrc);
+            handleDeletePreview(imgSrc, setImgSrc);
         };
         //eslint-disable-next-line
     }, []);
+
     return (
         <>
             <DetailForm onSubmit={handleSubmit}>
+                <TitleEdit title={title} setTitle={setTitle} />
                 <DateDiv>
                     <label>
                         제작 시작일:{' '}
@@ -76,14 +93,14 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
                     </label>
                 </DateDiv>
                 <div>
-                    {gifFile && (
+                    {gifSrc && (
                         <>
-                            <img alt="프로젝트 라이브 데모" src={gifFile} />
+                            <img alt="프로젝트 라이브 데모" src={gifSrc} />
 
-                            <button onClick={() => setGifFile('')}>제거</button>
+                            <button onClick={() => setGifSrc('')}>제거</button>
                         </>
                     )}
-                    {!gifFile && (
+                    {!gifSrc && (
                         <label>
                             라이브 데모 영상
                             <br />
@@ -92,13 +109,13 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
                     )}
                 </div>
                 <div>
-                    {imgFile && (
+                    {imgSrc && (
                         <>
-                            <img alt="썸네일 " src={imgFile} />
-                            <button onClick={() => setImgFile('')}>제거</button>
+                            <img alt="썸네일 " src={imgSrc} />
+                            <button onClick={() => setImgSrc('')}>제거</button>
                         </>
                     )}
-                    {!imgFile && (
+                    {!imgSrc && (
                         <label>
                             프로젝트 이미지
                             <br />
@@ -113,7 +130,7 @@ const DetailEdit: React.FunctionComponent<ProjectProps.IProjectProps> = () => {
                 />
                 <MDEditor.Markdown source={explain} />
                 <b>기술 스택</b>
-                {skillStack.map((stack, idx) => (idx ? `, ${stack}` : stack))}
+                {techStack.map((stack, idx) => (idx ? `, ${stack}` : stack))}
                 <b>링크</b>
                 {urlLink.map((link) => (
                     <button type="button">{link.linkName}</button>
@@ -131,6 +148,7 @@ export default DetailEdit;
 
 const DetailForm = styled.form`
     font-family: 'Montserrat', 'EliceRegular';
+    padding: 0 5%;
     display: flex;
     flex-direction: column;
     height: 100%;
