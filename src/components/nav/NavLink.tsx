@@ -3,17 +3,18 @@ import styled from 'styled-components';
 
 const NavLink = () => {
     const { pathname } = useLocation();
+    const links = [
+        { url: 'aboutme', text: 'About me' },
+        { url: 'project', text: 'Project' },
+        { url: 'contact', text: 'Contact' },
+    ];
     return (
         <NavLinkUl>
-            <li className={pathname.includes('/aboutme') ? 'active' : 'inactive'}>
-                <Link to="aboutme">About me</Link>
-            </li>
-            <li className={pathname.includes('/project') ? 'active' : 'inactive'}>
-                <Link to="project">Project</Link>
-            </li>
-            <li className={pathname.includes('/contact') ? 'active' : 'inactive'}>
-                <Link to="contact">Contact</Link>
-            </li>
+            {links.map((link) => (
+                <li className={pathname.includes(link.url) ? 'active' : 'inactive'}>
+                    <Link to="aboutme">{link.text}</Link>
+                </li>
+            ))}
         </NavLinkUl>
     );
 };

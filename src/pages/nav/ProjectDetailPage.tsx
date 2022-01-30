@@ -1,12 +1,12 @@
 import { DetailDiv } from '../../components';
 import { ProjectProps } from 'ProjectPageModule';
-import SubTitle from '../../components/SubTitle';
+import SubTitleEdit from '../../components/SubTitleEdit';
 import { useState } from 'react';
 import { DetailEdit } from '..';
 import { useParams } from 'react-router-dom';
 
 const ProjectDetailPage = () => {
-    const [editToggle, setEditToggle] = useState<Boolean>(false);
+    const [editToggle, setEditToggle] = useState<boolean>(false);
     const projectId = useParams();
     const handleChangeToggle = () => {
         setEditToggle((current) => !current);
@@ -34,7 +34,7 @@ const ProjectDetailPage = () => {
     };
     return (
         <>
-            <SubTitle text={`📂 Project`} onClick={handleChangeToggle} />
+            <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
             {!editToggle && <DetailDiv {...data} />}
             {editToggle && <DetailEdit {...data} />}
         </>
