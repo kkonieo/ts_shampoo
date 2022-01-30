@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useOutlet } from 'react-router-dom';
-import { IconDiv, NavLink } from '../../components';
+import { IconDiv, NavLink, UserPicture } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
 
 const NavPage = () => {
@@ -77,7 +77,9 @@ const NavDiv = styled.div`
     }
 `;
 
-// 클릭 시 다른 페이지로 이동하는 링크들
+const UserName = styled.div`
+    font-size: 1.2em;
+`;
 
 //프로그래스바와 오른쪽 컨텐츠 영역을 담을 컨테이너
 const ProgressContentsContainer = styled.div`

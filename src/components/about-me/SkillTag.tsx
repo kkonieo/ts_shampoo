@@ -42,12 +42,16 @@ const TagNameDiv = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    scrollbar-width: none;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.textColor};
     overflow: auto;
     margin: 0px 2px;
     &:hover {
         background-color: rgba(89, 147, 246, 0.5);
+    }
+    ::-webkit-scrollbar {
+        display: none;
     }
 `;
 
