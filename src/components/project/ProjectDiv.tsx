@@ -8,7 +8,7 @@ interface IProps {
     editMode?: boolean;
 }
 
-const ProjectCardDiv = ({ data, editMode }: IProps) => {
+const ProjectDiv = ({ data, editMode }: IProps) => {
     return (
         <GridDiv>
             {!editMode &&
@@ -26,7 +26,7 @@ const ProjectCardDiv = ({ data, editMode }: IProps) => {
         </GridDiv>
     );
 };
-export default ProjectCardDiv;
+export default ProjectDiv;
 const GridDiv = styled.div`
     width: 100%;
     display: grid;

@@ -1,2 +1,2 @@
 export { default as ProjectCard } from './ProjectCard';
-export { default as ProjectCardDiv } from './ProjectCardDiv';
+export { default as ProjectDiv } from './ProjectDiv';
