@@ -21,6 +21,7 @@ const TitleEdit = ({ title, setTitle }: props) => {
             {!titleEdit && <p onClick={handleChangeEdit}>{title}</p>}
             {titleEdit && (
                 <>
+                    <span>제목 : </span>
                     <input
                         ref={titleRef}
                         type="text"

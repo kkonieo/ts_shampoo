@@ -1,7 +1,7 @@
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
-
+import { LinkDiv } from '../project';
 const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) => {
     const handleWindowOpen = (url: string) => {
         window.open(url, '_blank');
@@ -9,7 +9,7 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
 
     return (
         <DetailContainer>
-            <span>{props.title}</span>
+            <TitleDiv>{props.title}</TitleDiv>
             <p>{`제작 기간 : ${props.startDate} ~ ${props.endDate}`}</p>
             <GifDiv>
                 <img src={`${props.gifSrc}`} alt="라이브 데모" />
@@ -27,12 +27,12 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
                 </TagDiv>
             </StackDiv>
 
-            <ButtonDiv>
+            <LinkDiv>
                 {props.urlLink &&
                     props.urlLink.map((url) => (
                         <button onClick={() => handleWindowOpen(url.linkURL)}>{url.linkName}</button>
                     ))}
-            </ButtonDiv>
+            </LinkDiv>
         </DetailContainer>
     );
 };
@@ -56,6 +56,10 @@ const DetailContainer = styled.div`
     }
 `;
 
+const TitleDiv = styled.div`
+    font-weight: bold;
+    font-size: 2em;
+`;
 const GifDiv = styled.div`
     margin-top: 3%;
     margin-bottom: 5%;
@@ -71,20 +75,6 @@ const GifDiv = styled.div`
 const ExplainDiv = styled.div`
     p {
         color: #3a3a3a;
-    }
-`;
-const ButtonDiv = styled.div`
-    justify-content: start;
-    font-family: 'Montserrat';
-    button {
-        margin: 5% 0;
-        margin-right: 5%;
-        width: 10em;
-        background-color: ${(props) => props.theme.color.background};
-        border-radius: 15px;
-        border: none;
-        font-weight: bold;
-        height: 3em;
     }
 `;
 
