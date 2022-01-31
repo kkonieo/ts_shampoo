@@ -1,61 +1,101 @@
 import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
-import axios, { AxiosResponse } from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
-import { LoginSpace } from 'LoginModule';
+import { naverClient, githubClient } from '../../utils/api/LoginAPI';
 
 const Spinner = () => {
 
     // CORS 에러 해결해주는 주소
     const corsErrorKey: string = "http://cors-anywhere.herokuapp.com/";
 
-    // 네이버 API 변수
-    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
-    const NAVER_SECRET_KEY = process.env.REACT_APP_NAVER_SECRET_KEY;
+    // 인가 코드 받아오기
+    const tokenCode = new URL(window.location.href).searchParams.get('code');
 
+    // SNS 연동 후 리다이렉트될 주소
+    const signupAfterRedirect = "http://localhost:3000/signup"; // 회원가입 시
+    const loginAfterRedirect = "http://localhost:3000/signup"; // 로그인 시
+
+    // // 네이버 API 변수
+    // const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
+    // const naverProfileCheckUri = `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`;
+
+    // 깃허브 API 변수
+    const githubTokenResponseUri = `${corsErrorKey}https://github.com/login/oauth/access_token`; // post만 허용
+    const githubProfileCheckUri = `${corsErrorKey}https://api.github.com/user`; // GET만 허용
+
+    // // // 구글 API 변수
+    // const googleTokenResponseUri = `${corsErrorKey}https://oauth2.googleapis.com/token`; // post만 허용
+
+    // API 호출 함수
     async function getLoginApi() {
-        // 인가 코드 받아오기
-        const tokenCode = new URL(window.location.href).searchParams.get('code');
-        
         try {
             // 액세스 토큰, 리프레쉬 토큰, 유효기간 받아오기
-            const tokenResponse: AxiosResponse = await axios.get(
-                `${corsErrorKey}https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${NAVER_CLIENT_ID}&client_secret=${NAVER_SECRET_KEY}&code=${tokenCode}&state=1`
-            )
-            // .then(response => console.log('토큰 가져오기', response));
+            const tokenResponse = await axios({
+                method: 'post',
+                url: githubTokenResponseUri,
+                params:
+                {
+                    client_id: githubClient.id,
+                    client_secret: githubClient.key,
+                    code: tokenCode,
+                    redirect_uri: signupAfterRedirect,
+                    grant_type: 'authorization_code',
+                    state: "1",
+                },
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            // .then(response => console.log('토큰 가져오기', response.data));
 
-            const accessToken: LoginSpace.LoginToken = {
-                access_token: tokenResponse.data.access_token,
-                refresh_token: tokenResponse.data.refresh_token,
-                expires_in: tokenResponse.data.expires_in,
-            }
+            // 네이버에서 주는 정보
+            // const accessToken: LoginSpace.LoginToken = {
+            //     access_token: tokenResponse.data.access_token,
+            //     refresh_token: tokenResponse.data.refresh_token,
+            //     expires_in: tokenResponse.data.expires_in,
+            // }
+
+            // 깃허브에서 주는 정보
+            const accessToken: string = tokenResponse.data.access_token;
 
             // 유저가 접근 허용한 정보 확인하기
 
             // 네이버
             // profile/id 유저 아이디, profile/naveremail 유저 이메일
             // profile/name 유저 이름, profile/profileimage 유저 프로필사진
-            // const isPermission: AxiosResponse = await axios.get(
-            //     `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`, {
+            // const isPermission = await axios({
+            //     method: 'post',
+            //     url: naverProfileCheckUri,
             //     headers: {
-            //         "Authorization": `Bearer ${encodeURIComponent(accessToken.access_token)}`,
+            //         "Authorization": `bearer ${accessToken}`,
             //     }
-            // }
-            // )
+            // })
             // .then(response => console.log('허용정보', response));
 
             // 유저 프로필 받아오기
 
             // 네이버
             // id 유저 아이디, email 유저 이메일, name 유저 이름, profile_image 유저 프로필사진
-            const userProfileResponse = await axios.get(
-                `${corsErrorKey}https://openapi.naver.com/v1/nid/me`, {
-                headers: {
-                    'Authorization': `Bearer ${encodeURIComponent(accessToken.access_token)}`,
-                }
-            }
-            )
+            // const userProfileResponse = await axios({
+            //     method: 'post',
+            //     url: `${corsErrorKey}https://openapi.naver.com/v1/nid/me`,
+            //     headers: {
+            //         'Authorization': `Bearer ${encodeURIComponent(accessToken)}`,
+            //     }
+            // })
             // .then(response => console.log('유저 프로필', response));
+
+            // 깃허브
+            const userProfileResponse = await axios({
+                method: 'get',
+                url: githubProfileCheckUri,
+                headers: {
+                    'Authorization': `token ${encodeURIComponent(accessToken)}`,
+                }
+            })
+            .then(response => console.log('유저 프로필', response));
             
             // const userProfile: LoginSpace.SignUpProps = {
             //     userEmail: userProfileResponse.data.response?.email,

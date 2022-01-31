@@ -56,6 +56,7 @@ declare module 'LoginModule' {
         };
 
         type SignUpPageProps = 0 | 1;
+          
     }
 }
 

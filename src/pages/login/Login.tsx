@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { LoginContainer } from './LoginContainer';
 import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components';
-import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { useEffect } from 'react';
@@ -12,18 +11,20 @@ const Login = () => {
     // recoil 페이지 초기화
     const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
-    const navigate = useNavigate();
-
     // SNS 아이콘 클릭 시 리다이렉트 될 URL
-    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+    const oauthRedirect = "http://localhost:3000/redirect";
 
     // naver
     const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
-    const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${REDIRECT_URI}`
+    const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${oauthRedirect}`
 
     // github
     const GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
-    const githubUri: string = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=user:email&state=1`
+    const githubUri: string = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${oauthRedirect}&scope=user:email%20read:user&state=1`
+
+    // google
+    const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const googleUri: string = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${oauthRedirect}&scope=openid%20profile%20email&access_type=offline&state=1`
 
     function handleClick(event: any) {
         if (event.target.name === "naverIcon") {
@@ -31,7 +32,7 @@ const Login = () => {
         } else if (event.target.name === "githubIcon") {
             window.open(githubUri, "_self");
         } else {
-            navigate('/signup');
+            window.open(googleUri, "_self");
         }
     }
 
