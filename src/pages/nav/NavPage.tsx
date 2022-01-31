@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { useOutlet } from 'react-router-dom';
+import { useOutlet, useParams } from 'react-router-dom';
 import { IconDiv, NavLink, UserPicture } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
-
 const NavPage = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
     const name: string = 'Minyoung Lee';
+    const navId = useParams();
     // 현재 주소 파악
     return (
         <BackgroundDiv>

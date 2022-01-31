@@ -9,7 +9,7 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
     return (
         <DetailContainer>
             <TitleDiv>{props.title}</TitleDiv>
-            <p>{`제작 기간 : ${props.startDate} ~ ${props.endDate}`}</p>
+            <p>{`제작 기간 : ${props.startDate.replace(/-/gi, '.')} ~ ${props.endDate.replace(/-/gi, '.')}`}</p>
             <GifDiv>
                 <img src={`${props.gifSrc}`} alt="라이브 데모" />
             </GifDiv>
@@ -91,6 +91,7 @@ const Tag = styled.div`
     color: ${(props) => props.theme.color.sub};
     padding: 2%;
 `;
+
 const LinkDiv = styled.div`
     justify-content: start;
     font-family: 'Montserrat';

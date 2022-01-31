@@ -1,13 +1,12 @@
 import { SubTitleEdit, ProjectDiv } from '../../components';
 import { useState, useMemo } from 'react';
-import { ProjectEdit } from '..';
 import { ProjectProps } from 'ProjectPageModule';
 
 const datas: ProjectProps.IProjectProps[] = [
     {
         id: 0,
         title: '프로젝트 토끼토끼',
-        startDate: '2021.01.30',
+        startDate: '2021-01-30',
         endDate: '2021.02.30',
         techStack: ['Django', 'Flask', 'TypeScript'],
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
@@ -17,8 +16,8 @@ const datas: ProjectProps.IProjectProps[] = [
     {
         id: 2,
         title: '프로젝트 까악까악',
-        startDate: '2021.01.30',
-        endDate: '2021.02.30',
+        startDate: '2021-01-30',
+        endDate: '2021-02-30',
         techStack: ['Django', 'TS', 'JavaScript'],
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
@@ -27,8 +26,8 @@ const datas: ProjectProps.IProjectProps[] = [
     {
         id: 3,
         title: '프로젝트 끼룩끼룩',
-        startDate: '2021.01.30',
-        endDate: '2021.02.30',
+        startDate: '2021-01-30',
+        endDate: '2021-02-30',
         techStack: ['Django', 'Flask', 'TypeScript', 'JavaScript'],
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
@@ -37,8 +36,8 @@ const datas: ProjectProps.IProjectProps[] = [
     {
         id: 4,
         title: '프로젝트 끼토끼토',
-        startDate: '2021.01.30',
-        endDate: '2021.02.30',
+        startDate: '2021-01-30',
+        endDate: '2021-02-30',
         techStack: ['Django', 'Flask', 'TypeScript'],
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
@@ -74,8 +73,7 @@ const ProjectPage = () => {
     return (
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            {!editToggle && <ProjectDiv {...data}></ProjectDiv>}
-            {editToggle && <ProjectEdit handleChangeToggle={handleChangeToggle} handleSubmit={handleSubmit} />}
+            <ProjectDiv {...data} editMode={editToggle} />
         </>
     );
 };

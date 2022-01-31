@@ -88,7 +88,7 @@ const DetailEdit: React.FunctionComponent<IProps> = (props) => {
             <StackDiv>
                 <h2>기술 스택</h2>
                 <TagDiv>
-                    {props.techStack.map((stack) => (
+                    {techStack.map((stack) => (
                         <Tag>{stack}</Tag>
                     ))}
                     <Tag onClick={() => console.log('스택 추가')}>+</Tag>

@@ -15,7 +15,11 @@ const DateEdit = ({ startDate, setStartDate, endDate, setEndDate }: props) => {
     };
     return (
         <Div>
-            {!dateEdit && <p onClick={handleChangeEdit}>{`제작 기간 : ${startDate} ~ ${endDate}`}</p>}
+            {!dateEdit && (
+                <p onClick={handleChangeEdit}>
+                    {`제작 기간 : ${startDate.replace(/-/gi, '.')} ~ ${endDate.replace(/-/gi, '.')}`}
+                </p>
+            )}
             {dateEdit && (
                 <>
                     <label>

@@ -24,7 +24,7 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
                 {/*
                 길이가 일정이상 길면 뒷부분을 ...으로 대체한다
                 */}
-                <div>{`제작기간 :  ${props.startDate} ~ ${props.endDate}`}</div>
+                <div>{`제작기간 :  ${props.startDate.replace(/-/gi, '.')} ~ ${props.endDate.replace(/-/gi, '.')}`}</div>
                 <div>{`기술스택 :  ${
                     props.techStack.join(',').length < 25
                         ? props.techStack.join(', ')
