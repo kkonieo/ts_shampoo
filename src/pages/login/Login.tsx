@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { useEffect } from 'react';
 import { LoginSpace } from 'LoginModule';
+import { GoogleLogin } from 'react-google-login';
 
 const Login = () => {
 
@@ -23,7 +24,7 @@ const Login = () => {
     const githubUri: string = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${oauthRedirect}&scope=user:email%20read:user&state=1`
 
     // google
-    const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
     const googleUri: string = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${oauthRedirect}&scope=openid%20profile%20email&access_type=offline&state=1`
 
     function handleClick(event: any) {
@@ -36,6 +37,10 @@ const Login = () => {
         }
     }
 
+    const responseGoogle = (response: any) => {
+        console.log('response', response);
+      }
+
     // 회원가입 페이지 번호 리셋
     useEffect(() => setPage(0));
 
@@ -43,7 +48,22 @@ const Login = () => {
         <LoginContainer>
             <Logo>EliceFolio</Logo>
             <SnsLoginButton text='깃허브로 로그인' to="github" color="black" />
-            <SnsLoginButton text='구글로 로그인' to='google' color="#EA4335" />
+            <GoogleLogin
+                clientId={GOOGLE_CLIENT_ID}
+                uxMode='redirect'
+                redirectUri={oauthRedirect}
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy='single_host_origin'
+                render={ renderProps => (
+                    <GoogleButton
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}>
+                        <GoogleImg />
+                        구글로 로그인
+                    </GoogleButton>
+                )}
+            />
             <SnsLoginButton text='네이버로 로그인' to='naver' color="#19CE60" />
             <TextP>회원이 아니신가요?</TextP>
             <IconDiv onClick={(event: any) => handleClick(event)}>
@@ -70,6 +90,38 @@ const Logo = styled.p`
     @media screen and (max-height: 340px) {
     margin-bottom: 1vh;
 }
+`;
+
+// 구글 버튼
+const GoogleButton = styled.button`
+    all: unset;
+
+    position: relative;
+
+    width: 19.5vw;
+    height: 6.7vh;
+
+    margin: 5px 0;
+
+    border-radius: 10px;
+
+    text-align: center;
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
+    color: white;
+    font-size: 1vw;
+
+    background-color: #EA4335;
+
+    cursor: pointer;
+
+    & img {
+        position: absolute;
+
+        top: 10px;
+        left: 30px;
+
+        filter: invert(96%) sepia(99%) saturate(3%) hue-rotate(335deg) brightness(104%) contrast(100%);
+    }
 `;
 
 // 아이콘 영역

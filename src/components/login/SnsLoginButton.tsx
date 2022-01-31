@@ -19,7 +19,6 @@ const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, co
             to={to}>
             {
                 to === "github" ? <GithubImg />
-                : to === "google" ? <GoogleImg />
                 : to === "naver" && <NaverImg />
             }
             {text}
