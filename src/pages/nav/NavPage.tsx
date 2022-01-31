@@ -88,6 +88,7 @@ const ProgressContentsContainer = styled.div`
     min-width: 700px;
     background-color: white;
     overflow-y: auto;
+
     ::-webkit-scrollbar {
         display: none;
     }

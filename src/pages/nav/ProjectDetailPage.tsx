@@ -11,6 +11,8 @@ const ProjectDetailPage = () => {
     const handleChangeToggle = () => {
         setEditToggle((current) => !current);
     };
+
+    // API로 얻은 데이터
     const data: ProjectProps.IProjectProps = {
         id: projectId?.id,
         title: '프로젝트 토끼토끼',
@@ -29,8 +31,7 @@ const ProjectDetailPage = () => {
     return (
         <>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            {!editToggle && <DetailDiv {...data} />}
-            {editToggle && <DetailEdit {...data} handleChangeToggle={handleChangeToggle} />}
+            {!editToggle ? <DetailDiv {...data} /> : <DetailEdit {...data} handleChangeToggle={handleChangeToggle} />}
         </>
     );
 };

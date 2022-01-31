@@ -61,7 +61,7 @@ declare module 'SignUp' {
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
         interface IProjectProps {
-            id: any;
+            id?: any;
             title: string;
             startDate: string;
             endDate: string;

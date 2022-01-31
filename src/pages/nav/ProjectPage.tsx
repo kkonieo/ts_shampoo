@@ -1,7 +1,7 @@
-import { SubTitleEdit, ProjectDiv } from '../../components';
+import { SubTitleEdit, ProjectDiv, ProjectEdit } from '../../components';
 import { useState, useMemo } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
-
+import styled from 'styled-components';
 const datas: ProjectProps.IProjectProps[] = [
     {
         id: 0,
@@ -70,12 +70,24 @@ const ProjectPage = () => {
     const handleChangeToggle = () => {
         setEditToggle((current) => !current);
     };
+
     return (
-        <>
+        <Div>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            <ProjectDiv {...data} editMode={editToggle} />
-        </>
+            {!editToggle ? (
+                <ProjectDiv {...data} editMode={editToggle} />
+            ) : (
+                <ProjectEdit {...data} editMode={editToggle} handleSubmit={handleSubmit} />
+            )}
+        </Div>
     );
 };
 
 export default ProjectPage;
+
+const Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: auto;
+`;

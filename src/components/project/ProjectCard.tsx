@@ -39,7 +39,6 @@ export default ProjectCard;
 const ProjectCardDiv = styled.div`
     border-radius: 3.5%;
     display: flex;
-    margin:auto;
     flex-direction: column;
     border 1px solid #BDBDBD;
     overflow: hidden;
@@ -47,14 +46,9 @@ const ProjectCardDiv = styled.div`
 
     .project {
         background-color:#F5F5F5;
-        video{
-            width:100%;
-            object-fit:contain;    
-        }
-        height:60%;
+        width:100%;
         img {
-            width:100%;
-            object-fit:scale-down;
+            object-fit:cover;
         }
     }
 
