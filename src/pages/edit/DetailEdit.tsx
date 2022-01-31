@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import TitleEdit from '../../components/edit/TitleEdit';
 import DateEdit from '../../components/edit/DateEdit';
+import { ImgEdit } from '../../components/edit';
 interface IProps extends ProjectProps.IProjectProps {
     handleChangeToggle?: (...args: any[]) => any;
 }
@@ -63,37 +64,20 @@ const DetailEdit: React.FunctionComponent<IProps> = (props) => {
         <DetailForm onSubmit={handleSubmit}>
             <TitleEdit title={title} setTitle={setTitle} />
             <DateEdit startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
-            <div>
-                {gifSrc && (
-                    <>
-                        <img alt="프로젝트 라이브 데모" src={gifSrc} />
-
-                        <button onClick={() => setGifSrc('')}>제거</button>
-                    </>
-                )}
-                {!gifSrc && (
-                    <label>
-                        라이브 데모 영상
-                        <br />
-                        <input type="file" accept="image/*" onChange={handleShowGifPreview} name="gifSrc" />
-                    </label>
-                )}
-            </div>
-            <div>
-                {imgSrc && (
-                    <>
-                        <img alt="썸네일 " src={imgSrc} />
-                        <button onClick={() => setImgSrc('')}>제거</button>
-                    </>
-                )}
-                {!imgSrc && (
-                    <label>
-                        프로젝트 이미지
-                        <br />
-                        <input type="file" accept="image/*" onChange={handleShowImgPreview} name="imgSrc" />
-                    </label>
-                )}
-            </div>
+            <ImgEdit
+                source={gifSrc}
+                alt="라이브 데모 GIF"
+                setSrc={setGifSrc}
+                handleShowPreview={handleShowGifPreview}
+                accept="gif,"
+            />
+            <ImgEdit
+                source={imgSrc}
+                alt="프로젝트 이미지"
+                setSrc={setImgSrc}
+                handleShowPreview={handleShowImgPreview}
+                accept="png, .jpg, .jpeg, .svg"
+            />
             <h2>프로젝트 설명</h2>
             <MDEditor
                 height={window.innerHeight * 0.3}
