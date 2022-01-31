@@ -3,7 +3,6 @@ import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import TitleEdit from '../../components/edit/TitleEdit';
-import { LinkDiv } from '../../components/project';
 import DateEdit from '../../components/edit/DateEdit';
 interface IProps extends ProjectProps.IProjectProps {
     handleChangeToggle?: (...args: any[]) => any;
@@ -95,16 +94,28 @@ const DetailEdit: React.FunctionComponent<IProps> = (props) => {
                     </label>
                 )}
             </div>
+            <h2>프로젝트 설명</h2>
             <MDEditor
                 height={window.innerHeight * 0.3}
                 value={explain}
                 onChange={(newValue = '') => setExplain(newValue)}
             />
             <MDEditor.Markdown source={explain} />
-            <b>기술 스택</b>
-            {techStack.map((stack, idx) => (idx ? `, ${stack}` : stack))}
-            <b>링크</b>
-            <LinkDiv>{urlLink && urlLink.map((link) => <button type="button">{link.linkName}</button>)}</LinkDiv>
+            <StackDiv>
+                <h2>기술 스택</h2>
+                <TagDiv>
+                    {props.techStack.map((stack) => (
+                        <Tag>{stack}</Tag>
+                    ))}
+                    <Tag onClick={() => console.log('스택 추가')}>+</Tag>
+                </TagDiv>
+            </StackDiv>
+            <LinkDiv>
+                {urlLink && urlLink.map((link) => <button type="button">{link.linkName}</button>)}
+                <button type="button" onClick={() => console.log('링크 추가')}>
+                    +
+                </button>
+            </LinkDiv>
             <div>
                 <button type="submit">수정</button>
                 <button type="button" onClick={props?.handleChangeToggle}>
@@ -123,7 +134,6 @@ const DetailForm = styled.form`
     display: flex;
     flex-direction: column;
     height: 100%;
-
     label {
         font-weight: bold;
     }
@@ -131,5 +141,40 @@ const DetailForm = styled.form`
     button {
         border: 1px solid black;
         margin: auto;
+    }
+
+    h2 {
+        border-bottom: 1px solid black;
+        margin: 2% 0;
+    }
+`;
+
+const StackDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+`;
+const TagDiv = styled.div`
+    display: flex;
+`;
+const Tag = styled.div`
+    margin: 2%;
+    background-color: ${(props) => props.theme.color.main};
+    color: ${(props) => props.theme.color.sub};
+    padding: 2%;
+`;
+
+const LinkDiv = styled.div`
+    justify-content: start;
+    font-family: 'Montserrat';
+    button {
+        margin: 5% 0;
+        margin-right: 5%;
+        width: 10em;
+        background-color: ${(props) => props.theme.color.background};
+        border-radius: 15px;
+        border: none;
+        font-weight: bold;
+        height: 3em;
     }
 `;

@@ -1,7 +1,6 @@
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
-import { LinkDiv } from '../project';
 const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) => {
     const handleWindowOpen = (url: string) => {
         window.open(url, '_blank');
@@ -91,4 +90,18 @@ const Tag = styled.div`
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.sub};
     padding: 2%;
+`;
+const LinkDiv = styled.div`
+    justify-content: start;
+    font-family: 'Montserrat';
+    button {
+        margin: 5% 0;
+        margin-right: 5%;
+        width: 10em;
+        background-color: ${(props) => props.theme.color.background};
+        border-radius: 15px;
+        border: none;
+        font-weight: bold;
+        height: 3em;
+    }
 `;

@@ -10,7 +10,6 @@ const ScrollProgress = () => {
     //스크롤 감지 함수
     const handleScroll = useCallback((e): void => {
         const { scrollTop, scrollHeight, clientHeight } = e.target;
-        console.log(scrollTop, scrollHeight, clientHeight);
 
         if (scrollTop === 0) {
             // 스크롤바가 가장 위에있을때는 0으로 처리
