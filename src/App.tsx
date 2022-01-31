@@ -4,6 +4,7 @@ import {
     NavPage,
     PageNotFound,
     ProjectPage,
+    ProjectAddPage,
     ProjectDetailPage,
     AboutMePage,
     Login,
@@ -34,6 +35,7 @@ function App() {
                         <Route path="aboutme" element={<AboutMePage />} />
                         <Route path="project" element={<ProjectPage />} />
                         <Route path="project/:id" element={<ProjectDetailPage />} />
+                        <Route path="project/add" element={<ProjectAddPage />} />
                         <Route path="contact" element={<ContactMe />} />
                         <Route path="mypage" element={<p>mypage</p>} />
                         <Route path="detail" element={<p>settings</p>} />

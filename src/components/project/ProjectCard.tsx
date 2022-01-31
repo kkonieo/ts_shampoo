@@ -43,6 +43,7 @@ const ProjectCardDiv = styled.div`
     border 1px solid #BDBDBD;
     overflow: hidden;
     width:90%;
+    margin:4%;
 
     .project {
         background-color:#F5F5F5;

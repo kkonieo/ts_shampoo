@@ -19,6 +19,11 @@ const ProjectEdit = ({ data, editMode }: IProps) => {
                     </Link>
                 );
             })}
+            <Link to={'add'}>
+                <AddButton>
+                    <img src={`${process.env.PUBLIC_URL}/img/plus.svg`} alt="추가" />
+                </AddButton>
+            </Link>
         </GridDiv>
     );
 };
@@ -27,17 +32,25 @@ const GridDiv = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-row-gap: 2.5%;
     a {
         text-decoration: none;
     }
 `;
 
-const AddCard = styled.div`
-border-radius: 3.5%;
-display: flex;
-flex-direction: column;
-border 1px solid #BDBDBD;
-overflow: hidden;
-background-color:${(props) => props.theme.color.background}
+const AddButton = styled.button`
+    border-radius: 3.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    border 1px solid #BDBDBD;
+    overflow: hidden;
+    width:90%;
+    height:90%;
+    margin:4%;
+    background-color:${(props) => props.theme.color.background};
+
+    img{
+        object-fit:cover;
+    }
 `;

@@ -66,7 +66,7 @@ declare module 'ProjectPageModule' {
             startDate: string;
             endDate: string;
             techStack: Array<string>;
-            explain: string;
+            explain?: string;
             gifSrc?: string;
             imgSrc?: string;
             urlLink?: {

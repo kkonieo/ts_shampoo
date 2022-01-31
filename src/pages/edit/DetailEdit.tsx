@@ -32,6 +32,8 @@ const DetailEdit: React.FunctionComponent<IProps> = (props) => {
             */
             gifSrc: gifBlob ?? gifSrc,
             imgSrc: imgBlob ?? imgSrc,
+            techStack: techStack,
+            urlLink: urlLink,
             explain: explain,
         };
         console.log(data);
