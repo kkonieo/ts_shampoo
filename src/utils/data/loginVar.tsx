@@ -1,5 +1,5 @@
 class LoginApiKeyClass {
-    constructor(readonly id?:string, readonly key?:string) {
+    constructor(readonly id:string, readonly key:string) {
       this.id = id;
       this.key = key;
     }

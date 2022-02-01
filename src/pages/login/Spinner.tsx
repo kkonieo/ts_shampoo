@@ -3,6 +3,8 @@ import { ContainerArticle } from './LoginContainer';
 import axios, { Axios, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { naverClient, githubClient } from '../../utils/data/loginVar';
+import { getSnsLoginToken } from '../../utils/api/auth';
+import { LoginSpace } from 'LoginModule';
 
 const Spinner = () => {
 
@@ -17,7 +19,7 @@ const Spinner = () => {
     // const loginAfterRedirect = "http://localhost:3000/signup"; // 로그인 시
 
     // // 네이버 API 변수
-    // const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
+    const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
     // const naverProfileCheckUri = `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`;
 
     // // 깃허브 API 변수
@@ -31,30 +33,18 @@ const Spinner = () => {
     async function getLoginApi() {
         try {
             // 액세스 토큰, 리프레쉬 토큰, 유효기간 받아오기
-            // const tokenResponse = await axios({
-            //     method: 'post',
-            //     url: githubTokenResponseUri,
-            //     params:
-            //     {
-            //         client_id: githubClient.id,
-            //         client_secret: githubClient.key,
-            //         code: tokenCode,
-            //         redirect_uri: signupAfterRedirect,
-            //         grant_type: 'authorization_code',
-            //         state: "1",
-            //     },
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json',
-            //     },
-            // })
+            const snsToken = await getSnsLoginToken(
+                naverTokenResponseUri,
+                naverClient.id,
+                naverClient.key
+            )
             // .then(response => console.log('토큰 가져오기', response.data));
 
             // 네이버에서 주는 정보
             // const accessToken: LoginSpace.LoginToken = {
-            //     access_token: tokenResponse.data.access_token,
-            //     refresh_token: tokenResponse.data.refresh_token,
-            //     expires_in: tokenResponse.data.expires_in,
+            //     access_token: snsToken.data.access_token,
+            //     refresh_token: snsToken.data.refresh_token,
+            //     expires_in: snsToken.data.expires_in,
             // }
 
             // 깃허브에서 주는 정보
