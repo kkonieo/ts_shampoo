@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
-import { ImgEdit, LinkEdit, TitleEdit, DateEdit, TagEdit } from '../edit';
+import { ImgEdit, LinkEdit, TitleEdit, DateEdit, TagEdit } from './edit';
 import { Link } from 'react-router-dom';
 import { ProjectProps } from 'ProjectPageModule';
 

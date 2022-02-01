@@ -3,13 +3,13 @@ import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import { useParams } from 'react-router-dom';
-import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit } from '../../components/edit';
+import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit } from './edit';
 interface IProps {
     handleChangeToggle?: (...args: any[]) => any;
     editMode?: boolean;
 }
 
-const DetailEdit: React.FunctionComponent<IProps> = ({ handleChangeToggle, editMode }) => {
+const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, editMode }) => {
     const projectId = useParams().id;
     const data: ProjectProps.IProjectProps = {
         projectId: projectId,
@@ -129,7 +129,7 @@ const DetailEdit: React.FunctionComponent<IProps> = ({ handleChangeToggle, editM
     );
 };
 
-export default DetailEdit;
+export default ProjectDetail;
 
 const DetailForm = styled.form`
     font-family: 'Montserrat', 'EliceRegular';
