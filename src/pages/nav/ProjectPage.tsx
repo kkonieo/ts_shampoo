@@ -4,7 +4,7 @@ import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 const datas: ProjectProps.IProjectProps[] = [
     {
-        id: 0,
+        id: '0',
         title: '프로젝트 토끼토끼',
         startDate: '2021-01-30',
         endDate: '2021.02.30',
@@ -12,9 +12,10 @@ const datas: ProjectProps.IProjectProps[] = [
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
         explain: '프로젝트설명0',
+        urlLink: [],
     },
     {
-        id: 2,
+        id: '1',
         title: '프로젝트 까악까악',
         startDate: '2021-01-30',
         endDate: '2021-02-30',
@@ -22,9 +23,10 @@ const datas: ProjectProps.IProjectProps[] = [
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
         explain: '프로젝트설명1',
+        urlLink: [],
     },
     {
-        id: 3,
+        id: '2',
         title: '프로젝트 끼룩끼룩',
         startDate: '2021-01-30',
         endDate: '2021-02-30',
@@ -32,9 +34,10 @@ const datas: ProjectProps.IProjectProps[] = [
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
         explain: '프로젝트설명2',
+        urlLink: [],
     },
     {
-        id: 4,
+        id: '3',
         title: '프로젝트 끼토끼토',
         startDate: '2021-01-30',
         endDate: '2021-02-30',
@@ -42,9 +45,10 @@ const datas: ProjectProps.IProjectProps[] = [
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
         explain: '프로젝트설명3',
+        urlLink: [],
     },
     {
-        id: 5,
+        id: '4',
         title: '프로젝트 어흥어흥',
         startDate: '2021.01.30',
         endDate: '2021.02.30',
@@ -52,6 +56,7 @@ const datas: ProjectProps.IProjectProps[] = [
         imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
         explain: '프로젝트설명4',
+        urlLink: [],
     },
 ];
 

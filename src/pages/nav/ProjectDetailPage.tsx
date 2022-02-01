@@ -23,8 +23,8 @@ const ProjectDetailPage = () => {
         gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
         explain: '프로젝트설명0',
         urlLink: [
-            { linkName: 'Live Demo', linkURL: 'https://youtube.com' },
-            { linkName: 'Github', linkURL: 'https://github.com' },
+            { linkName: 'Live Demo', linkUrl: 'https://youtube.com' },
+            { linkName: 'Github', linkUrl: 'https://github.com' },
         ],
     };
 

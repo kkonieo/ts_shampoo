@@ -29,7 +29,7 @@ const DetailDiv: React.FunctionComponent<ProjectProps.IProjectProps> = (props) =
             <LinkDiv>
                 {props.urlLink &&
                     props.urlLink.map((url) => (
-                        <button onClick={() => handleWindowOpen(url.linkURL)}>{url.linkName}</button>
+                        <button onClick={() => handleWindowOpen(url.linkUrl ?? '')}>{url.linkName}</button>
                     ))}
             </LinkDiv>
         </DetailContainer>

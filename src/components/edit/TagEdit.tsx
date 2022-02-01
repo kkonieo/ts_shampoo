@@ -1,5 +1,12 @@
-const TagEdit = () => {
-    return <div></div>;
+interface Props {
+    closeModal: void;
+}
+const LinkEdit = ({ closeModal }: Props) => {
+    return (
+        <div>
+            <button onClick={() => closeModal} />
+        </div>
+    );
 };
 
-export default TagEdit;
+export default LinkEdit;

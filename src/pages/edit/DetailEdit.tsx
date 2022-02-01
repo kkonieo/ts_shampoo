@@ -10,18 +10,18 @@ interface IProps extends ProjectProps.IProjectProps {
 }
 
 const DetailEdit: React.FunctionComponent<IProps> = (props) => {
-    const [title, setTitle] = useState(props.title);
-    const [startDate, setStartDate] = useState(props.startDate);
-    const [endDate, setEndDate] = useState(props.endDate);
-    const [explain, setExplain] = useState(props.explain);
-    const [gifSrc, setGifSrc] = useState(props.gifSrc);
-    const [imgSrc, setImgSrc] = useState(props.imgSrc);
-    const [techStack, setTechStack] = useState(props.techStack);
-    const [urlLink, setUrlLink] = useState(props.urlLink);
+    const [title, setTitle] = useState<string>(props.title);
+    const [startDate, setStartDate] = useState<string>(props.startDate);
+    const [endDate, setEndDate] = useState<string>(props.endDate);
+    const [explain, setExplain] = useState<string>(props.explain);
+    const [gifSrc, setGifSrc] = useState<string>(props.gifSrc);
+    const [imgSrc, setImgSrc] = useState<string>(props.imgSrc);
+    const [techStack, setTechStack] = useState<string[]>(props.techStack);
+    const [urlLink, setUrlLink] = useState<ProjectProps.IUrl[]>(props.urlLink);
 
     const handleSubmit = (event: any) => {
         event?.preventDefault();
-        const data = {
+        const data: ProjectProps.IProjectProps = {
             projectId: props.id,
             title: title,
             startDate: startDate,
