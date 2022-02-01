@@ -16,11 +16,11 @@ const Login = () => {
     const oauthRedirect = "http://localhost:3000/redirect";
 
     // naver
-    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
+    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID || "";
     const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${oauthRedirect}`
 
     // github
-    const GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
+    const GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID || "";
     const githubUri: string = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${oauthRedirect}&scope=user:email%20read:user&state=1`
 
     // google
@@ -39,6 +39,7 @@ const Login = () => {
 
     const responseGoogle = (response: any) => {
         console.log('response', response);
+        console.log('profile', response.getAuthResponse());
       }
 
     // 회원가입 페이지 번호 리셋
@@ -50,8 +51,6 @@ const Login = () => {
             <SnsLoginButton text='깃허브로 로그인' to="github" color="black" />
             <GoogleLogin
                 clientId={GOOGLE_CLIENT_ID}
-                uxMode='redirect'
-                redirectUri={oauthRedirect}
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy='single_host_origin'

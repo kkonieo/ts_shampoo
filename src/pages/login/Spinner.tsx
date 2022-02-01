@@ -10,19 +10,19 @@ const Spinner = () => {
     const corsErrorKey: string = "http://cors-anywhere.herokuapp.com/";
 
     // 인가 코드 받아오기
-    const tokenCode = new URL(window.location.href).searchParams.get('code');
+    // const tokenCode = new URL(window.location.href).searchParams.get('code');
 
     // SNS 연동 후 리다이렉트될 주소
-    const signupAfterRedirect = "http://localhost:3000/signup"; // 회원가입 시
-    const loginAfterRedirect = "http://localhost:3000/signup"; // 로그인 시
+    // const signupAfterRedirect = "http://localhost:3000/signup"; // 회원가입 시
+    // const loginAfterRedirect = "http://localhost:3000/signup"; // 로그인 시
 
     // // 네이버 API 변수
     // const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
     // const naverProfileCheckUri = `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`;
 
-    // 깃허브 API 변수
-    const githubTokenResponseUri = `${corsErrorKey}https://github.com/login/oauth/access_token`; // post만 허용
-    const githubProfileCheckUri = `${corsErrorKey}https://api.github.com/user`; // GET만 허용
+    // // 깃허브 API 변수
+    // const githubTokenResponseUri = `${corsErrorKey}https://github.com/login/oauth/access_token`; // post만 허용
+    // const githubProfileCheckUri = `${corsErrorKey}https://api.github.com/user`; // GET만 허용
 
     // // // 구글 API 변수
     // const googleTokenResponseUri = `${corsErrorKey}https://oauth2.googleapis.com/token`; // post만 허용
@@ -31,23 +31,23 @@ const Spinner = () => {
     async function getLoginApi() {
         try {
             // 액세스 토큰, 리프레쉬 토큰, 유효기간 받아오기
-            const tokenResponse = await axios({
-                method: 'post',
-                url: githubTokenResponseUri,
-                params:
-                {
-                    client_id: githubClient.id,
-                    client_secret: githubClient.key,
-                    code: tokenCode,
-                    redirect_uri: signupAfterRedirect,
-                    grant_type: 'authorization_code',
-                    state: "1",
-                },
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            })
+            // const tokenResponse = await axios({
+            //     method: 'post',
+            //     url: githubTokenResponseUri,
+            //     params:
+            //     {
+            //         client_id: githubClient.id,
+            //         client_secret: githubClient.key,
+            //         code: tokenCode,
+            //         redirect_uri: signupAfterRedirect,
+            //         grant_type: 'authorization_code',
+            //         state: "1",
+            //     },
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json',
+            //     },
+            // })
             // .then(response => console.log('토큰 가져오기', response.data));
 
             // 네이버에서 주는 정보
@@ -58,7 +58,7 @@ const Spinner = () => {
             // }
 
             // 깃허브에서 주는 정보
-            const accessToken: string = tokenResponse.data.access_token;
+            // const accessToken: string = tokenResponse.data.access_token;
 
             // 유저가 접근 허용한 정보 확인하기
 
@@ -88,14 +88,14 @@ const Spinner = () => {
             // .then(response => console.log('유저 프로필', response));
 
             // 깃허브
-            const userProfileResponse = await axios({
-                method: 'get',
-                url: githubProfileCheckUri,
-                headers: {
-                    'Authorization': `token ${encodeURIComponent(accessToken)}`,
-                }
-            })
-            .then(response => console.log('유저 프로필', response));
+            // const userProfileResponse = await axios({
+            //     method: 'get',
+            //     url: githubProfileCheckUri,
+            //     headers: {
+            //         'Authorization': `token ${encodeURIComponent(accessToken)}`,
+            //     }
+            // })
+            // .then(response => console.log('유저 프로필', response));
             
             // const userProfile: LoginSpace.SignUpProps = {
             //     userEmail: userProfileResponse.data.response?.email,
