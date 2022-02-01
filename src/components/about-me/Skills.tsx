@@ -35,17 +35,9 @@ const Skills = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetSkill]);
 
-    useEffect(() => {
-        if (targetDescribe !== []) {
-            console.log(targetDescribe);
-        }
-        return undefined;
-    }, [targetDescribe]);
-
     const onSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setTargetSkill(value);
-        console.log('hmm', value);
     };
 
     return (
