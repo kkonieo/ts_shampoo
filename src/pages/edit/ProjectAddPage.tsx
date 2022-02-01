@@ -13,14 +13,24 @@ interface IUrl {
 }
 
 const ProjectAddPage = () => {
-    const [title, setTitle] = useState('프로젝트명');
-    const [startDate, setStartDate] = useState('2022-01-01');
-    const [endDate, setEndDate] = useState('2022-12-31');
-    const [explain, setExplain] = useState('');
-    const [gifSrc, setGifSrc] = useState('');
-    const [imgSrc, setImgSrc] = useState('');
-    const [techStack, setTechStack] = useState([]);
+    // 초기 데이터
+    const today = new Date(); // 올해의 첫날과 마지막날을 시작일과 종료일로 자동 지정한다. 이를 위한 Date
+    const [title, setTitle] = useState<string>('프로젝트명');
+    const [startDate, setStartDate] = useState<string>(`${today.getFullYear()}-01-01`);
+    const [endDate, setEndDate] = useState<string>(`${today.getFullYear()}-12-31`);
+    const [explain, setExplain] = useState<string>('');
+    const [gifSrc, setGifSrc] = useState<string>('');
+    const [imgSrc, setImgSrc] = useState<string>('');
+    const [techStack, setTechStack] = useState<string[]>([]);
     const [urlLink, setUrlLink] = useState<IUrl[]>([]);
+
+    // 이미지 파일 저장용 state
+    const [gifBlob, setGifBlob] = useState<Blob>();
+    const [imgBlob, setImgBlob] = useState<Blob>();
+
+    // urlLink 추가용 모달, TechStack추가용 모달
+    const [urlModal, setUrlModal] = useState<boolean>(false);
+    const [techModal, setTechModal] = useState<boolean>(false);
 
     const handleSubmit = (e: any) => {
         e?.preventDefault();
@@ -41,8 +51,7 @@ const ProjectAddPage = () => {
         console.log(data);
     };
 
-    const [gifBlob, setGifBlob] = useState<Blob>();
-    const [imgBlob, setImgBlob] = useState<Blob>();
+    // 이미지 미리보기 기능
     const handleShowGifPreview = (event: any) => {
         setGifSrc(URL.createObjectURL(event.target.files[0]));
         setGifBlob(event.target.files[0]);
@@ -51,11 +60,14 @@ const ProjectAddPage = () => {
         setImgSrc(URL.createObjectURL(event.target.files[0]));
         setImgBlob(event.target.files[0]);
     };
+
+    // 미리보기 제거 기능
     const handleDeletePreview = (imgSrc: any, setImgSrc: Function) => {
         URL.revokeObjectURL(imgSrc);
         setImgSrc('');
     };
 
+    // 미리보기를 통한 리소스 낭비 제거용
     useEffect(() => {
         return () => {
             handleDeletePreview(gifSrc, setGifSrc);
@@ -64,10 +76,9 @@ const ProjectAddPage = () => {
         //eslint-disable-next-line
     }, []);
 
-    // 초기 데이터
     return (
         <>
-            <SubTitleEdit text={`📂 Project`} />
+            <SubTitleEdit text={`📂 Project`} editMode={true} />
             <DetailForm onSubmit={handleSubmit}>
                 <TitleEdit title={title} setTitle={setTitle} />
                 <DateEdit startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
@@ -96,14 +107,21 @@ const ProjectAddPage = () => {
                     <h2>기술 스택</h2>
                     <TagDiv>
                         {techStack.map((stack) => (
-                            <Tag>{stack}</Tag>
+                            <button type="button">{stack}</button>
                         ))}
-                        <Tag onClick={() => console.log('스택 추가')}>+</Tag>
+                        <button type="button" onClick={() => setTechModal(true)}>
+                            +
+                        </button>
                     </TagDiv>
                 </StackDiv>
                 <LinkDiv>
-                    {urlLink && urlLink.map((link) => <button type="button">{link.linkName}</button>)}
-                    <button type="button" onClick={() => console.log('링크 추가')}>
+                    {urlLink &&
+                        urlLink.map((link) => (
+                            <button type="button">
+                                <a href={link.linkUrl}>{link.linkName}</a>
+                            </button>
+                        ))}
+                    <button type="button" onClick={() => setUrlModal(true)}>
                         +
                     </button>
                 </LinkDiv>
@@ -148,12 +166,12 @@ const StackDiv = styled.div`
 `;
 const TagDiv = styled.div`
     display: flex;
-`;
-const Tag = styled.div`
-    margin: 2%;
-    background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.sub};
-    padding: 2%;
+    button {
+        margin: 2%;
+        background-color: ${(props) => props.theme.color.main};
+        color: ${(props) => props.theme.color.sub};
+        padding: 2%;
+    }
 `;
 
 const LinkDiv = styled.div`
@@ -168,5 +186,10 @@ const LinkDiv = styled.div`
         border: none;
         font-weight: bold;
         height: 3em;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
     }
 `;

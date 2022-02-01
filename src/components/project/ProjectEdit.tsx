@@ -21,7 +21,7 @@ const ProjectEdit = ({ data, editMode }: IProps) => {
             })}
             <Link to={'add'}>
                 <AddButton>
-                    <img src={`${process.env.PUBLIC_URL}/img/plus.svg`} alt="추가" />
+                    <img src={`${process.env.PUBLIC_URL}/img/plus.svg`} alt="링크추가" />
                 </AddButton>
             </Link>
         </GridDiv>
