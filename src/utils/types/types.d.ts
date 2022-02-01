@@ -82,3 +82,20 @@ declare module 'ProjectPageModule' {
         }
     }
 }
+
+declare module 'PublicComponentModule' {
+    export namespace PublicComponentProps {
+        interface SubtitleProps {
+            text: string;
+            onCancelClick: () => any;
+        }
+    }
+}
+
+declare module 'MyPageModule' {
+    export namespace MyPageProps {
+        interface MyPageSubTitleProps {
+            text: string;
+        }
+    }
+}
