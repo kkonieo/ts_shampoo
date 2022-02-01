@@ -1,6 +1,6 @@
 import { GoogleLogin } from 'react-google-login';
 import styled from 'styled-components';
-import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components';
+import { GoogleImg } from '../../components';
 
 const responseGoogle = (response: any) => {
     console.log('response', response);
