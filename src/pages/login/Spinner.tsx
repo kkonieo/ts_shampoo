@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
 import axios, { Axios, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
-import { naverClient, githubClient } from '../../utils/api/LoginAPI';
+import { naverClient, githubClient } from '../../utils/data/loginVar';
 
 const Spinner = () => {
 
