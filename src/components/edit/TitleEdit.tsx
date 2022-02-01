@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface props {
     title: string;
     setTitle: (...args: any[]) => any;
+    editMode?: boolean;
 }
 const TitleEdit = ({ title, setTitle }: props) => {
     const [titleEdit, setTitleEdit] = useState<boolean>(false);

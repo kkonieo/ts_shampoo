@@ -1,11 +1,21 @@
+import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
+
 interface Props {
-    closeModal: void;
+    urlLink: ProjectProps.IUrl[];
+    setUrlLink: (args: ProjectProps.IUrl[]) => void;
+    editMode?: boolean;
 }
-const LinkEdit = ({ closeModal }: Props) => {
+const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
     return (
         <Div>
-            <button onClick={() => closeModal} />
+            <h2>참조 사이트</h2>
+            {urlLink && urlLink.map((link) => <button type="button">{link.linkName}</button>)}
+            {editMode && (
+                <button type="button" onClick={() => console.log('링크 추가')}>
+                    +
+                </button>
+            )}
         </Div>
     );
 };
@@ -13,7 +23,18 @@ const LinkEdit = ({ closeModal }: Props) => {
 export default LinkEdit;
 
 const Div = styled.div`
-    width: 500px;
-    height: 500px;
-    position: absolute;
+    justify-content: start;
+    font-family: 'Montserrat';
+    border: none;
+
+    button {
+        margin: 2.5% 5% 5% 0;
+
+        width: 10em;
+        background-color: ${(props) => props.theme.color.background};
+        border-radius: 15px;
+        border: none;
+        font-weight: bold;
+        height: 3em;
+    }
 `;

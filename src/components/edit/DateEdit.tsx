@@ -6,6 +6,7 @@ interface props {
     endDate: string;
     setStartDate: (...args: any[]) => any;
     setEndDate: (...args: any[]) => any;
+    editMode?: boolean;
 }
 const DateEdit = ({ startDate, setStartDate, endDate, setEndDate }: props) => {
     const [dateEdit, setDateEdit] = useState<boolean>(false);

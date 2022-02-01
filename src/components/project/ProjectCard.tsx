@@ -12,7 +12,7 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
         setGifToggle((current) => !current);
     };
     return (
-        <ProjectCardDiv>
+        <Div>
             <div className="project" onMouseOver={handleGifPlayer} onMouseOut={handleGifPlayer}>
                 <img alt={props.title} ref={imgRef} src={gifToggle ? `${props?.gifSrc}` : `${props?.imgSrc}`} />
             </div>
@@ -31,12 +31,12 @@ const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
                         : props.techStack.join(', ').substring(0, 25) + '...'
                 }`}</div>
             </div>
-        </ProjectCardDiv>
+        </Div>
     );
 };
 
 export default ProjectCard;
-const ProjectCardDiv = styled.div`
+const Div = styled.div`
     border-radius: 3.5%;
     display: flex;
     flex-direction: column;

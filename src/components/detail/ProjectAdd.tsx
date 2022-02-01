@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
-import { ImgEdit, LinkEdit, TitleEdit, DateEdit, TagEdit } from '../../components/edit';
-import { SubTitleEdit } from '../../components';
+import { ImgEdit, LinkEdit, TitleEdit, DateEdit, TagEdit } from '../edit';
 import { Link } from 'react-router-dom';
 import { ProjectProps } from 'ProjectPageModule';
 
@@ -104,36 +103,14 @@ const ProjectAdd = () => {
                     onChange={(newValue = '') => setExplain(newValue)}
                 />
                 <MDEditor.Markdown source={explain} />
-                <StackDiv>
-                    <h2>기술 스택</h2>
-                    <TagDiv>
-                        {techStack.map((stack) => (
-                            <button type="button">{stack}</button>
-                        ))}
-                        <button type="button" onClick={() => openModal}>
-                            +
-                        </button>
-                    </TagDiv>
-                </StackDiv>
-                <LinkDiv>
-                    {urlLink &&
-                        urlLink.map((link) => (
-                            <button type="button">
-                                <a href={link.linkUrl}>{link.linkName}</a>
-                            </button>
-                        ))}
-                    <button type="button" onClick={() => openModal}>
-                        +
-                    </button>
-                </LinkDiv>
+                <TagEdit techStack={techStack} setTechStack={setTechStack} />
+                <LinkEdit urlLink={urlLink} setUrlLink={setUrlLink} />
                 <div>
                     <button type="submit">추가</button>
                     <Link to="..">
                         <button type="button">취소</button>
                     </Link>
                 </div>
-                {techModal && <TagEdit closeModal={closeModal()} />}
-                {urlModal && <LinkEdit closeModal={closeModal()} />}
             </DetailForm>
         </>
     );

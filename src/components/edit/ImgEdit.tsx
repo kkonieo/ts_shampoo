@@ -4,15 +4,16 @@ interface EditProps {
     handleShowPreview: (...args: any[]) => any;
     alt: string;
     accept: string;
+    editMode?: boolean;
 }
-const ImgEdit = ({ source, setSrc, handleShowPreview, alt, accept }: EditProps) => {
+const ImgEdit = ({ source, setSrc, handleShowPreview, alt, accept, editMode }: EditProps) => {
     return (
         <div>
             {source && (
                 <>
                     <img alt={alt} src={source} />
 
-                    <button onClick={() => setSrc('')}>제거</button>
+                    {editMode && <button onClick={() => setSrc('')}>제거</button>}
                 </>
             )}
             {!source && (

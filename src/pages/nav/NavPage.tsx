@@ -6,7 +6,7 @@ const NavPage = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
     const name: string = 'Minyoung Lee';
-    const navId = useParams();
+    // const navId = useParams();
     // 현재 주소 파악
     return (
         <BackgroundDiv>
@@ -19,7 +19,6 @@ const NavPage = () => {
                 </NavDiv>
                 <ProgressContentsContainer>
                     {/*프로그래스바*/}
-                    <ScrollProgress />
                     <ContentDiv className="content">{outlet}</ContentDiv>
                 </ProgressContentsContainer>
             </NavContainer>
@@ -78,7 +77,7 @@ const NavDiv = styled.div`
 `;
 
 const UserName = styled.div`
-    font-size: 1.2em;
+    font-size: 1.5em;
 `;
 
 //프로그래스바와 오른쪽 컨텐츠 영역을 담을 컨테이너
