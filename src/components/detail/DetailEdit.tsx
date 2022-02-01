@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
-import TitleEdit from '../../components/edit/TitleEdit';
-import DateEdit from '../../components/edit/DateEdit';
-import { ImgEdit } from '../../components/edit';
+import { ImgEdit, TitleEdit, DateEdit } from '../../components/edit';
 interface IProps extends ProjectProps.IProjectProps {
     handleChangeToggle?: (...args: any[]) => any;
 }
@@ -116,6 +114,7 @@ export default DetailEdit;
 
 const DetailForm = styled.form`
     font-family: 'Montserrat', 'EliceRegular';
+    margin-top: 3%;
     padding: 0 5%;
     display: flex;
     flex-direction: column;

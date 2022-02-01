@@ -1,8 +1,8 @@
-import { DetailDiv } from '../../components';
+import { DetailDiv, DetailEdit } from '../../components';
 import { ProjectProps } from 'ProjectPageModule';
 import SubTitleEdit from '../../components/SubTitleEdit';
 import { useState } from 'react';
-import { DetailEdit } from '..';
+
 import { useParams } from 'react-router-dom';
 
 const ProjectDetailPage = () => {

@@ -45,6 +45,7 @@ const DetailContainer = styled.div`
     padding: 0 5%;
     text-align: left;
     justify-content: center;
+    margin-top: 3%;
     p {
         font-size: 1.5em;
         color: #757575;

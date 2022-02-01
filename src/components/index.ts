@@ -1,4 +1,4 @@
-export { DetailDiv } from './detail';
+export { DetailDiv, DetailEdit } from './detail';
 export { IconDiv, NavLink, UserPicture } from './nav';
 export { ProjectCard, ProjectDiv, ProjectEdit, ProjectAdd } from './project';
 export { Skills, Summary } from './about-me';
