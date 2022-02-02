@@ -50,8 +50,8 @@ const SignUpUser = () => {
                             required: "직군을 선택해주세요.",
                         })} />
                         <datalist id="job">
-                            {jobOptions.map((item) => {
-                                return <option value={item.value} />
+                            {jobOptions.map((item, index) => {
+                                return <option key={index} value={item.value} />
                             })}
                         </datalist>
                     </InformationDiv>
@@ -106,7 +106,6 @@ const LoginInput = styled.input`
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-
     align-items: center;
 
     & div:nth-child(1) {
@@ -118,6 +117,7 @@ const InformationDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     font-family: 'AppleSDGothicNeo', 'sans-serif';
     color: #757575;
@@ -125,7 +125,8 @@ const InformationDiv = styled.div`
     width: 300px;
 
     & p:nth-child(2) {
-        margin-left: 20px;
+        margin-left: 10px;
+        padding: 10px;
     }
 `;
 
