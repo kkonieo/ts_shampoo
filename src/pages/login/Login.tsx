@@ -4,6 +4,7 @@ import { GithubImg, NaverImg, SnsLoginButton, GoogleLoginButton, GoogleSignUpIco
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { useEffect } from 'react';
+import { naverClient, githubClient } from '../../utils/data/loginVar';
 import { LoginSpace } from 'LoginModule';
 
 const Login = () => {
@@ -12,22 +13,30 @@ const Login = () => {
     const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
     // SNS 아이콘 클릭 시 리다이렉트 될 URL
-    const oauthRedirect = "http://localhost:3000/redirect";
+    const signupRedirect = "http://localhost:3000/redirect/signup";
+    const loginRedirect = "http://localhost:3000/redirect/login";
 
-    // naver
-    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID || "";
-    const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${oauthRedirect}`
+    // SNS 아이콘 클릭에 따라 로그인/회원가입 리다이렉트 페이지 리턴하는 함수
+    function setRedirectUri(name: string, to: string): string {
+        const naverUri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=`;
 
-    // github
-    const GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID || "";
-    const githubUri: string = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${oauthRedirect}&scope=user:email%20read:user&state=1`
+        if (to === "naver") {
+            return `${naverUri}${signupRedirect}`;
+        } else if (to === "github") {
+            return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${signupRedirect}&scope=user:email%20read:user&state=1`;
+        } else if (name === "naver") {
+            return `${naverUri}${loginRedirect}`;
+        } else if (name === "github") {
+            return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${loginRedirect}&scope=user:email%20read:user&state=1`;
+        }
+        
+        return "";
+    }
 
     function handleClick(event: any) {
-        if (event.target.name === "naverIcon") {
-            window.open(naverUri, "_self");
-        } else if (event.target.name === "githubIcon") {
-            window.open(githubUri, "_self");
-        }
+        console.log('event.target.to', event.target.to);
+        const redirectUri = setRedirectUri(event.target.name, event.target.to);
+        window.open(redirectUri, "_self");
     }
 
     // 회원가입 페이지 번호 리셋

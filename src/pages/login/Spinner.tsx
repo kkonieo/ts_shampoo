@@ -5,20 +5,16 @@ import { useEffect } from 'react';
 import { naverClient, githubClient } from '../../utils/data/loginVar';
 import { getSnsLoginToken } from '../../utils/api/auth';
 import { LoginSpace } from 'LoginModule';
+import { useLocation } from 'react-router-dom';
 
 const Spinner = () => {
 
     // CORS 에러 해결해주는 주소
     const corsErrorKey: string = "http://cors-anywhere.herokuapp.com/";
 
-    // 인가 코드 받아오기
-    // const tokenCode = new URL(window.location.href).searchParams.get('code');
+    console.log(useLocation().pathname);
 
-    // SNS 연동 후 리다이렉트될 주소
-    // const signupAfterRedirect = "http://localhost:3000/signup"; // 회원가입 시
-    // const loginAfterRedirect = "http://localhost:3000/signup"; // 로그인 시
-
-    // // 네이버 API 변수
+    // 네이버 API 변수
     const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
     // const naverProfileCheckUri = `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`;
 

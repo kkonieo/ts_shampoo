@@ -26,7 +26,7 @@ function App() {
                     {/* <Route path="*" element={<Navigate to="404" />} /> */}
                     <Route path="/" element={<HomePage />}></Route>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/redirect" element={<Spinner />} />
+                    <Route path="/redirect/:id" element={<Spinner />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="intro" element={<p>만든 사람들</p>}></Route>
                     <Route path=":id" element={<NavPage />}>
