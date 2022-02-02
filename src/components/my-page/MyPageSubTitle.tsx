@@ -26,7 +26,7 @@ const MyPageSubTitle = ({ text }: MyPageProps.MyPageSubTitleProps) => {
     };
 
     const confirmAction = () => {
-        navigate('/');
+        navigate('/nav/aboutme');
     };
 
     const cancleAction = () => {
