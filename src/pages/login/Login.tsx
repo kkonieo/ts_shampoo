@@ -12,15 +12,13 @@ const Login = () => {
     // recoil 페이지 초기화
     const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
-    // SNS 아이콘 클릭 시 리다이렉트 될 URL
-    const signupRedirect = "http://localhost:3000/redirect/signup";
-
     // SNS 아이콘 클릭에 따라 로그인/회원가입 리다이렉트 페이지 리턴하는 함수
     function setRedirectUri(name: string): string {
-        const naverUri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=`;
+        // SNS 아이콘 클릭 시 리다이렉트 될 URL
+        const signupRedirect = "http://localhost:3000/redirect/signup";
 
         if (name === "naver") {
-            return `${naverUri}${signupRedirect}`;
+            return `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=${signupRedirect}`;
         } else if (name === "github") {
             return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${signupRedirect}&scope=user:email%20read:user&state=1`;
         }
