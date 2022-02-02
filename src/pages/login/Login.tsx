@@ -27,7 +27,7 @@ const Login = () => {
     }
 
     function handleClick(event: any) {
-        const redirectUri = setRedirectUri(event.target.name);
+        const redirectUri: string = setRedirectUri(event.target.name);
         window.open(redirectUri, "_self");
     }
 

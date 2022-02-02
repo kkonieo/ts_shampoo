@@ -1,13 +1,9 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { LoginSpace } from 'LoginModule';
-import { GithubImg, GoogleImg, NaverImg } from '../';
+import { GithubImg, NaverImg } from '../';
 import { naverClient, githubClient } from '../../utils/data/loginVar';
 
 const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, color }) => {
-
-    // 버튼에 따라 어느 소셜로 보낼지 선택!
-    const navigate = useNavigate();
 
     // SNS 아이콘 클릭에 따라 로그인/회원가입 리다이렉트 페이지 리턴하는 함수
     function setRedirectUri(name: string): string {
@@ -24,7 +20,7 @@ const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, co
     }
 
     function handleClick(event: any) {
-        const redirectUri = setRedirectUri(event.target.name);
+        const redirectUri: string = setRedirectUri(event.target.name);
         window.open(redirectUri, "_self");
     }
 
