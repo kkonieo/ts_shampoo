@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { GoogleImg } from '../../components';
 
 const responseGoogle = (response: any) => {
-    console.log('response', response);
+    console.log(typeof response);
     console.log('profile', response.getAuthResponse().id_token);
-  }
+}
 
 const GoogleLoginButton = () => {
     return (
@@ -14,7 +14,7 @@ const GoogleLoginButton = () => {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy='single_host_origin'
-            render={ renderProps => (
+            render={renderProps => (
                 <GoogleButton
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}>
@@ -33,7 +33,7 @@ const GoogleSignUpIcon = () => {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy='single_host_origin'
-            render={ renderProps => (
+            render={renderProps => (
                 <button
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}>
