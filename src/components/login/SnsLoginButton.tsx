@@ -10,50 +10,46 @@ const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, co
     const navigate = useNavigate();
 
     // SNS 아이콘 클릭 시 리다이렉트 될 URL
-    const signupRedirect = "http://localhost:3000/redirect/signup";
     const loginRedirect = "http://localhost:3000/redirect/login";
 
     // SNS 아이콘 클릭에 따라 로그인/회원가입 리다이렉트 페이지 리턴하는 함수
-    function setRedirectUri(name: string, to: string): string {
+    function setRedirectUri(name: string): string {
         const naverUri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=`;
 
-        if (to === "naver") {
-            return `${naverUri}${signupRedirect}`;
-        } else if (to === "github") {
-            return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${signupRedirect}&scope=user:email%20read:user&state=1`;
-        } else if (name === "naver") {
+        if (name === "naver") {
             return `${naverUri}${loginRedirect}`;
         } else if (name === "github") {
             return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${loginRedirect}&scope=user:email%20read:user&state=1`;
         }
-        
+
         return "";
     }
 
     function handleClick(event: any) {
-        console.log('event.target.to', event.target.to);
-        const redirectUri = setRedirectUri(event.target.name, event.target.to);
+        const redirectUri = setRedirectUri(event.target.name);
         window.open(redirectUri, "_self");
     }
 
     return (
-        <SnsButton
-            onClick={handleClick}
-            color={color}
-            name={to}>
-            {
-                to === "github" ? <GithubImg />
-                : to === "naver" && <NaverImg />
-            }
-            {text}
-        </SnsButton>
+        <div className="hahaha">
+            <SnsButton
+                onClick={handleClick}
+                color={color}
+                name={to}>
+                {
+                    to === "github" ? <GithubImg />
+                        : to === "naver" && <NaverImg />
+                }
+                {text}
+            </SnsButton>
+        </div>
     );
 };
 
 export { SnsLoginButton };
 
 // styled-components
-    
+
 const SnsButton = styled.button<{ color: string }>`
     all: unset;
 
@@ -71,7 +67,7 @@ const SnsButton = styled.button<{ color: string }>`
     color: white;
     font-size: 1vw;
 
-    background-color: ${ props => props.color };
+    background-color: ${props => props.color};
 
     cursor: pointer;
 

@@ -11,9 +11,9 @@ const GithubImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/github.svg`,
     alt: "깃허브 아이콘",
     name: "github",
-    className: "githubIcon"
-}))<Size>`
-width: ${ props => props.size ? props.size : "10%" };
+    className: "github"
+})) <Size>`
+width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;
 `;
 
@@ -21,9 +21,9 @@ const GoogleImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/google.svg`,
     alt: "구글 아이콘",
     name: "google",
-    className: "googleIcon"
-}))<Size>`
-width: ${ props => props.size ? props.size : "10%" };
+    className: "google"
+})) <Size>`
+width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;
 `;
 
@@ -31,9 +31,9 @@ const NaverImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/naver.svg`,
     alt: "네이버 아이콘",
     name: "naver",
-    className: "naverIcon"
-}))<Size>`
-width: ${ props => props.size ? props.size : "10%" };
+    className: "naver"
+})) <Size>`
+width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;
 `;
 
