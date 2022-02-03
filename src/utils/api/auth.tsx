@@ -93,3 +93,10 @@ export async function setSignUpProfile(data: LoginSpace.SignUpProps) {
 
     return response;
 };
+
+// 직군 가져오기
+export async function getPosition() {
+    const response = await axios.get('/user/position');
+    return response;
+};
+
