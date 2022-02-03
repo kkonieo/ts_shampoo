@@ -245,7 +245,7 @@ const SearchForm = styled.form`
 const SearchInput = styled.input`
     width: 70%;
     height: 44px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 4px;
     padding-left: 48px;
 `;
@@ -255,34 +255,43 @@ const SearchImg = styled.img`
     left: 12px;
 `;
 const SearchButton = styled.button`
-    width: 10%;
+    width: 11%;
     height: 44px;
     margin-left: 2%;
     background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.text};
+    color: ${(props) => props.theme.color.sub};
     border-radius: 4px;
+
+    &:hover {
+        opacity: 0.8;
+    }
 `;
 const ResetButton = styled.button`
-    width: 15%;
+    width: 14%;
     height: 44px;
     margin-left: 2%;
-    background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.text};
+    background-color: ${(props) => props.theme.color.sub};
+    color: ${(props) => props.theme.color.main};
+    border: 1px solid ${(props) => props.theme.color.main};
     border-radius: 4px;
+
+    &:hover {
+        opacity: 0.7;
+    }
 `;
 const FilterButton = styled.button<HomeProps.IFilterProps>`
     width: 100%;
     height: 44px;
     border: 1px solid #e0e0e0;
     padding: 10px;
-    color: ${(props) => (props.isActive ? '#3a3a3a' : '#757575')};
+    color: ${(props) => (props.isActive ? props.theme.color.defaultText : props.theme.color.buttonText)};
     border-radius: 4px;
     text-align: left;
-    background-color: ${(props) => (props.isActive ? '#f5f5f5' : '#fff')};
+    background-color: ${(props) => (props.isActive ? props.theme.color.buttonBackground : props.theme.color.sub)};
 
     &:hover {
-        color: #3a3a3a;
-        background-color: #f5f5f5;
+        color: ${(props) => props.theme.color.defaultText};
+        background-color: ${(props) => props.theme.color.buttonBackground};
     }
 `;
 const InputDiv = styled.div`
@@ -293,15 +302,11 @@ const FilterInput = styled.input`
     margin-right: 8px;
     cursor: pointer;
     border: 2px solid blue;
-
-    &:hover {
-        background-color: #5993f6;
-    }
 `;
 const FilterLabel = styled.label`
     cursor: pointer;
     &:hover {
-        color: #5993f6;
+        color: ${(props) => props.theme.color.main};
     }
 `;
 const FilterContainerForm = styled.form`
@@ -311,8 +316,8 @@ const FilterContainerForm = styled.form`
     bottom: -400px;
     left: 0;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
+    background-color: ${(props) => props.theme.color.sub};
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
     z-index: 2;
@@ -323,12 +328,12 @@ const FiltersListDiv = styled.div`
 
 const FilterItems = styled.div`
     height: 36px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 4px;
     padding: 10px;
     margin-top: 8px;
     margin-left: 12px;
-    color: #757575;
+    color: ${(props) => props.theme.color.buttonText};
     display: inline-flex;
     align-items: center;
 `;
@@ -354,8 +359,12 @@ const MoreButton = styled.button`
     width: 120px;
     height: 48px;
     background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.text};
+    color: ${(props) => props.theme.color.sub};
     display: inline-block;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 9999px;
+
+    &:hover {
+        opacity: 0.8;
+    }
 `;

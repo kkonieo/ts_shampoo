@@ -16,14 +16,14 @@ export const Portfolio = ({ name, position, stack }: HomeProps.UserInfoProps): J
 };
 
 const PortfolioLink = styled(Link)`
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     height: 260px;
     border-radius: 10px;
     display: inline-flex;
     flex-basis: 23%;
     flex-direction: column;
     text-decoration: none;
-    color: #3a3a3a;
+    color: ${(props) => props.theme.color.defaultText};
     transition-duration: 0.3s;
     transition-property: transform;
     margin: 0 1%;
@@ -36,8 +36,8 @@ const PortfolioLink = styled(Link)`
 
 const PortfolioTitleDiv = styled.div`
     width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
+    height: 72px;
+    background-color: ${(props) => props.theme.color.buttonBackground};
     margin-top: auto;
     padding: 12px;
     border-radius: 0 0 10px 10px;
