@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { LoginSpace } from 'LoginModule';
 import { GithubImg, NaverImg } from '../';
-import { naverClient, githubClient } from '../../utils/data/loginVar';
+import { naverClient, githubClient } from '../../utils/data/loginApiKey';
 
 const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, color }) => {
 

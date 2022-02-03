@@ -4,7 +4,7 @@ import { GithubImg, NaverImg, SnsLoginButton, GoogleLoginButton, GoogleSignUpIco
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { useEffect } from 'react';
-import { naverClient, githubClient } from '../../utils/data/loginVar';
+import { naverClient, githubClient } from '../../utils/data/loginApiKey';
 import { LoginSpace } from 'LoginModule';
 
 const Login = () => {

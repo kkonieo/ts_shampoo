@@ -1,5 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 import { LoginSpace } from 'LoginModule';
+import Cookies from 'universal-cookie';
+
+const cookies: Cookies = new Cookies();
 
 // 로컬에 access_token이 존재할 경우 헤더에 넣어준다.
 function getAccessToken(): void {
@@ -47,14 +50,23 @@ export const getSnsLoginToken = (
     },
 })
 
-// 로그인 (구글 기준으로 적용)
+// 로그인
 export async function userLogin(props: LoginSpace.LoginToken) {
     try {
         const response = await axiosGetUserConfig({
             url: '/user/login',
             data: props,
         });
-        return response;
+
+        const userProfile: LoginSpace.SignUpProps = {
+            index: response.data.user_idx,
+            email: response.data.email,
+            name: response.data.name,
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+        };
+
+        localStorage.setItem("userProfile", JSON.stringify(userProfile));
     }
     catch (error) {
         console.log('로그인 에러', error)
@@ -77,7 +89,9 @@ export async function registerUser(props: LoginSpace.LoginToken) {
             refreshToken: response.data.refresh_token,
         };
 
-        localStorage.setItem("userProfile", JSON.stringify(userProfile));
+        if (!userProfile.email) throw new Error('이메일이 없습니다.');
+        else localStorage.setItem("userProfile", JSON.stringify(userProfile));
+
     }
     catch (error) {
         console.log('회원가입 에러', error)
