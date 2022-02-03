@@ -8,3 +8,4 @@ export { DetailEditPage, ProjectEditPage } from './edit';
 export { PageNotFound } from './PageNotFound';
 export { Login, SignUp, Spinner } from './login';
 export { ContactMe } from './contact/ContactMe';
+export { Intro } from './intro';

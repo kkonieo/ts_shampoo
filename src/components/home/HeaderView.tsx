@@ -9,7 +9,7 @@ export const HeaderView = ({ name }: { name: string }) => {
         return (
             <>
                 <ButtonGroupDiv>
-                    <Button to="login">로그인</Button>
+                    <Button to="/login">로그인</Button>
                 </ButtonGroupDiv>
             </>
         );
@@ -17,7 +17,7 @@ export const HeaderView = ({ name }: { name: string }) => {
     const Logout = () => {
         return (
             <>
-                <NavLink to="#">나의 포트폴리오</NavLink>
+                <NavLink to="/id">나의 포트폴리오</NavLink>
                 <IdSpan>{name}님</IdSpan>
                 <LogoutButton
                     to="/"
@@ -38,7 +38,7 @@ export const HeaderView = ({ name }: { name: string }) => {
                     <Logo>EliceFolio</Logo>
                 </LogoLink>
                 <Nav>
-                    <NavLink to="#">서비스 소개</NavLink>
+                    <NavLink to="/intro">서비스 소개</NavLink>
                     {login ? <Login /> : <Logout />}
                 </Nav>
             </Header>
