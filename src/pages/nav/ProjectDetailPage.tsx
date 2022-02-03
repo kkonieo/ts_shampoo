@@ -23,7 +23,7 @@ const ProjectDetailPage = () => {
     };
     return (
         <>
-            <SubTitle text={`📂 ${data.title}`} onClick={handleChangeToggle} />
+            <SubTitle text={`📂 ${data.title}`} onClick={handleChangeToggle} section="project" />
             {!editToggle && <DetailDiv {...data}></DetailDiv>}
             {editToggle && (
                 <>
