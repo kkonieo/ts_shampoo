@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // Portfolio 카드 컴포넌트
 export const Portfolio = ({ name, position, stack }: HomeProps.UserInfoProps): JSX.Element => {
     return (
-        <PortfolioLink to="#">
+        <PortfolioLink to="/id">
             <PortfolioTitleDiv>
                 <PortfolioName>{name}</PortfolioName>
                 <PortfolioJob>{position}</PortfolioJob>
