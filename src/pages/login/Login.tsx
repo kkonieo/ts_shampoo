@@ -26,6 +26,7 @@ const Login = () => {
         return "";
     }
 
+    // 네이버와 깃허브는 일시 잠금
     function handleClick(event: any) {
         // const redirectUri: string = setRedirectUri(event.target.name);
         // window.open(redirectUri, "_self");
