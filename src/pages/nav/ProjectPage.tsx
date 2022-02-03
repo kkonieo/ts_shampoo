@@ -2,6 +2,7 @@ import { SubTitleEdit, ProjectDiv, ProjectEdit } from '../../components';
 import { useState, useMemo } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
+
 const datas: ProjectProps.IProjectProps[] = [
     {
         id: '0',

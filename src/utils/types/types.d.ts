@@ -47,6 +47,11 @@ declare module 'loginModule' {
         interface LoginContainerProps {
             children: React.ReactNode;
         }
+
+        class loginApiKey {
+            constructor(id: string, key: string);
+            log();
+        }
     }
 }
 

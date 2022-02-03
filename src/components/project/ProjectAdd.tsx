@@ -107,7 +107,7 @@ const ProjectAdd = () => {
                 <LinkEdit urlLink={urlLink} setUrlLink={setUrlLink} />
                 <div>
                     <button type="submit">추가</button>
-                    <Link to="..">
+                    <Link to="../project">
                         <button type="button">취소</button>
                     </Link>
                 </div>

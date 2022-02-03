@@ -5,7 +5,7 @@ import MDEditor from '@uiw/react-md-editor';
 import { useParams } from 'react-router-dom';
 import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit } from './edit';
 interface IProps {
-    handleChangeToggle?: (...args: any[]) => any;
+    handleChangeToggle: (...args: any[]) => void;
     editMode?: boolean;
 }
 
@@ -120,6 +120,15 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
             {editMode && (
                 <div>
                     <button type="submit">수정</button>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            console.log('삭제');
+                            handleChangeToggle();
+                        }}
+                    >
+                        수정
+                    </button>
                     <button type="button" onClick={handleChangeToggle}>
                         취소
                     </button>
