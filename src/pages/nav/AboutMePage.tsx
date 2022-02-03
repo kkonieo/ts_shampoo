@@ -1,10 +1,25 @@
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { Summary, Skills } from '../../components';
+import { Summary, Skills, EditDetect } from '../../components';
 import { Resume } from '../../components/about-me';
+import { aboutMeEditState } from '../../utils/data/atom';
 
 const AboutMePage = () => {
     //유저의 간단한 자기 소개
-    //TODO : 배열 방식으로 처리할지 다른 방법으로 처리할지 고민
+
+    //TODO : axios를 통해 서버에서 해당 유저의 summary , skills , resume 받아오고 컴포넌트로 뿌려줄 예정
+    /*
+        수정 모드임을 감지할수 있도록 설정
+        수정 로직 각 컴포넌트에서 수정 클릭시 확인 버튼, input 창에 해당 데이터가 떠야함
+    */
+
+    const controlEditMode = useRecoilValue(aboutMeEditState);
+
+    const summaryEditMode = controlEditMode[0].editMode;
+    const skillsEditMode = controlEditMode[1].editMode;
+    const resumeEditMode = controlEditMode[2].editMode;
+
     const tmpContents = [
         '안녕하세요!',
         '프론트엔드 개발자를 꿈꾸는 엘리스입니다!',
@@ -15,9 +30,10 @@ const AboutMePage = () => {
 
     return (
         <Div>
-            <Summary contents={tmpContents} />
-            <Skills />
-            <Resume />
+            {(summaryEditMode || skillsEditMode || resumeEditMode) && <EditDetect />}
+            <Summary contents={tmpContents} isEditMode={summaryEditMode} />
+            <Skills isEditMode={skillsEditMode} />
+            <Resume isEditMode={resumeEditMode} />
         </Div>
     );
 };
