@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useMemo, useEffect } from 'react';
+import { useCallback, useRef, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
@@ -21,7 +21,6 @@ export const PortfolioListView = ({
             return <Portfolio key={idx} {...item} />;
         }),
     );
-
     const handleSearchSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
@@ -30,9 +29,8 @@ export const PortfolioListView = ({
         });
         const searchUserInfo: Array<HomeProps.UserInfoProps> = filteredUserInfo.filter((item) => {
             if (searchValue === item.name) return item;
-            if (stacks.indexOf(searchValue) >= 0) return item;
+            if (item.stack.indexOf(searchValue) >= 0) return item;
         });
-
         if (selectedFilter.length > 0) {
             if (searchValue !== '' && searchUserInfo.length === 0) {
                 setUserPortfolio([]);
@@ -168,16 +166,24 @@ export const PortfolioListView = ({
                         <SearchInput
                             type="text"
                             placeholder="찾고싶은 이름, 기술 스택으로 포트폴리오를 검색해보세요!"
-                            value-={searchValue}
+                            value={searchValue}
                             onChange={(e) => {
                                 setSearchValue(e.target.value);
                             }}
                         ></SearchInput>
                         <SearchImg alt="search button" src={`${process.env.PUBLIC_URL}/img/search.svg`} />
-                        <SearchButton>검색</SearchButton>
+                        <SearchButton type="submit">검색</SearchButton>
                         <ResetButton
+                            type="button"
                             onClick={() => {
-                                window.location.replace('/');
+                                setPortfolioCount(8);
+                                setSearchValue('');
+                                setSelectedFilter([]);
+                                setUserPortfolio(
+                                    userInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                                        return <Portfolio key={idx} {...item} />;
+                                    }),
+                                );
                             }}
                         >
                             필터 초기화
