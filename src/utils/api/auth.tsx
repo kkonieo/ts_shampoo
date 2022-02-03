@@ -54,7 +54,7 @@ export async function userLogin(
             userName: response.data.name,
         };
 
-        localStorage.setItem("userProfile", JSON.stringify(userProfile));
+        sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
         cookies.set('accessToken', response.data.access_token, {
             path: '/',
             expires: new Date(Number(response.data.expires_in)), // 테스트 기준 5분
