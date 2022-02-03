@@ -1,4 +1,4 @@
-import { SubTitleEdit, ProjectDiv, ProjectEdit } from '../../components';
+import { SubTitleEdit, ProjectDiv } from '../../components';
 import { useState, useMemo } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
@@ -80,11 +80,8 @@ const ProjectPage = () => {
     return (
         <Div>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            {!editToggle ? (
-                <ProjectDiv {...data} editMode={editToggle} />
-            ) : (
-                <ProjectEdit {...data} editMode={editToggle} handleSubmit={handleSubmit} />
-            )}
+
+            <ProjectDiv {...data} editMode={editToggle} handleSubmit={handleSubmit} />
         </Div>
     );
 };
