@@ -80,7 +80,6 @@ const ProjectPage = () => {
     return (
         <Div>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-
             <ProjectDiv {...data} editMode={editToggle} handleSubmit={handleSubmit} />
         </Div>
     );

@@ -22,14 +22,15 @@ const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
 
     return (
         <Div>
-            <h2>참조 사이트</h2>
+            <h2>관련 사이트</h2>
             {urlLink &&
                 urlLink.map((link, idx) => (
-                    <button type="button">
+                    <button type="button" onClick={() => window.open(`${link.linkUrl}`, '_blank')}>
                         {link.linkName}
                         {editMode && (
                             <img
-                                onClick={() => {
+                                onClick={(event) => {
+                                    event.stopPropagation();
                                     const newUrlLink = [];
                                     for (let i: number = 0; i < urlLink.length; i++) {
                                         if (i !== idx) {
@@ -103,11 +104,12 @@ const Div = styled.div`
         border: none;
         font-weight: bold;
         height: 3em;
-        img {
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
+    }
+
+    img {
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 `;
 

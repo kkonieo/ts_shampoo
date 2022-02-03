@@ -16,17 +16,18 @@ const TitleEdit = ({ title, setTitle }: props) => {
 
     const handleChangeEdit = () => {
         setTitleEdit((current) => !current);
+        if (!title) setTitle('프로젝트 제목');
     };
     return (
         <Div>
             {!titleEdit && <p onClick={handleChangeEdit}>{title}</p>}
             {titleEdit && (
                 <>
-                    <span>제목 : </span>
                     <input
                         ref={titleRef}
                         type="text"
                         value={title}
+                        placeholder="제목을 입력해주세요"
                         onChange={(e) => setTitle(e.target.value)}
                         onBlur={handleChangeEdit}
                     />
