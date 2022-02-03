@@ -1,10 +1,13 @@
 import { Header } from '../../components/home/Header';
+import { IntroService } from '../../components/intro/IntroService';
+import { IntroTeam } from '../../components/intro/IntroTeam';
 
 const Intro = () => {
     return (
         <>
             <Header />
-            <div>Intro페이지 입니다</div>
+            <IntroService />
+            <IntroTeam />
         </>
     );
 };
