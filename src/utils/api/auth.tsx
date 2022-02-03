@@ -43,46 +43,44 @@ export const getSnsLoginToken = (
     },
 })
 
-// 로그인
-export async function userLogin(props: RequestTokenSpace.GoogleToken) {
+// 로그인 및 회원가입
+//  “register_check”: true일 경우 기가입자 (바로 로그인 시키기) / false일 경우 가입 성공
+export async function userLogin(
+    url: string,
+    props: RequestTokenSpace.GoogleToken | RequestTokenSpace.NaverToken | RequestTokenSpace.GithubToken) {
     try {
         const response = await axiosGetUserConfig({
-            url: '/user/login',
+            url: `/user/register/${url}`,
             data: props,
         });
 
-        const userProfile: LoginSpace.SignUpProps = {
+        const userProfile: LoginSpace.LoginUserProps = {
             index: response.data.user_idx,
             userEmail: response.data.email,
             userName: response.data.name,
         };
 
         localStorage.setItem("userProfile", JSON.stringify(userProfile));
+        cookies.set('accessToken', response.data.access_token, {
+            path: '/',
+            expires: new Date(Number(response.data.expires_in)), // 테스트 기준 5분
+        });
+        cookies.set('refreshToken', response.data.refresh_token, {
+            path: '/',
+            expires: new Date(Date.now() + (60 * 60 * 24 * 1000)), // 테스트 기준 1일
+        });
+
+        // 가입되지 않은 유저라면
+        if (response.data.register_check === "false") {
+            return '/signup';
+        }
+        // 가입된 유저라면
+        else {
+            alert('이미 가입한 유저입니다.');
+            return '/home';
+        }
     }
     catch (error) {
         console.log('로그인 에러', error)
-    }
-}
-
-// 회원가입
-export async function registerUser(props: RequestTokenSpace.GoogleToken) {
-    try {
-        const response = await axiosGetUserConfig({
-            url: '/user/register',
-            data: props,
-        });
-
-        const userProfile: LoginSpace.SignUpProps = {
-            index: response.data.user_idx,
-            userEmail: response.data.email,
-            userName: response.data.name,
-        };
-
-        if (!userProfile.userEmail) throw new Error('이메일이 없습니다.');
-        else localStorage.setItem("userProfile", JSON.stringify(userProfile));
-
-    }
-    catch (error) {
-        console.log('회원가입 에러', error)
     }
 }

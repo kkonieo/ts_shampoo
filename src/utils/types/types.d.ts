@@ -43,11 +43,10 @@ declare module 'LoginModule' {
             children: React.ReactNode;
         };
 
-        interface SignUpProps {
+        interface LoginUserProps {
             index: string;
             userEmail: string;
-            userName?: string;
-            userJob?: string;
+            userName: string;
         };
 
         type SignUpPageProps = 0 | 1;
@@ -55,16 +54,16 @@ declare module 'LoginModule' {
 
     export namespace RequestTokenSpace {
         interface GithubToken {
-            access_token?: string;
+            access_token: string;
         };
 
         interface NaverToken extends GithubToken {
-            refresh_token?: string;
-            expires_in?: string;
+            refresh_token: string;
+            expires_in: string;
         };
 
         interface GoogleToken {
-            id_token?: string;
+            id_token: string;
         }
     }
 }
