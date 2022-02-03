@@ -1,9 +1,11 @@
 import { GoogleLogin } from 'react-google-login';
 import styled from 'styled-components';
 import { GoogleImg } from '../../components';
+import { userLogin } from '../../utils/api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const responseGoogle = (response: any) => {
-    console.log('profile', response.getAuthResponse().id_token);
+    userLogin('google', response.getAuthResponse().id_token);
 }
 
 const GoogleLoginButton = () => {

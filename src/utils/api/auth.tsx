@@ -1,7 +1,44 @@
 import axios, { AxiosInstance } from 'axios';
 import { LoginSpace, RequestTokenSpace } from 'LoginModule';
 import Cookies from 'universal-cookie';
+import MockAdapter from 'axios-mock-adapter';
 
+// request 테스트를 위한 코드
+const mock = new MockAdapter(axios); // 가짜 response 객체 생성
+
+const mockResponse = [ // 상황에 따른 method, url, data 첨부
+    ['POST', '/user/register/google', 200, {
+        user_idx: "1",
+        email: "example@gmail.com",
+        name: "김메롱",
+        access_token: "sdhuweifh21uk378248efhfsjdf",
+        refresh_token: "adlkasmcm91923uhgjd9si8ufh9d2",
+        expires_in: Math.floor(new Date().getTime() + (60 * 5 * 1000)),
+        register_check: true,
+    }],
+    ['PUT', '/user/profile', 200, {
+        result: true,
+    }],
+    ['GET', '/tag/job', 200, [
+        { key: '1', value: '백엔드' },
+        { key: '2', value: '프론트엔드' },
+        { key: '3', value: '풀스택' },
+        { key: '4', value: '보안' },
+        { key: '5', value: '빅데이터' },
+        { key: '6', value: '안드로이드' },
+    ]],
+];
+
+mock.onAny().reply(config => {
+    const [method, url, ...response] = mockResponse.shift() || [];
+
+    if (config.url === url && config.method?.toUpperCase() === method)
+        return response;
+
+    return [500, {}];
+});
+
+// 쿠키 객체 생성
 const cookies: Cookies = new Cookies();
 
 // axios 전역 설정 (서버에서 유저 정보 가져올 때)
@@ -56,7 +93,7 @@ export async function userLogin(
         const response = await axiosGetUserConfig({
             url: `/user/register/${url}`,
             data: props,
-        });
+        })
 
         const userProfile: LoginSpace.LoginUserProps = {
             index: response.data.user_idx,
@@ -67,7 +104,7 @@ export async function userLogin(
         sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
         cookies.set('accessToken', response.data.access_token, {
             path: '/',
-            expires: new Date(Number(response.data.expires_in)), // 테스트 기준 5분
+            expires: new Date(response.data.expires_in), // 테스트 기준 5분
             secure: true,
             httpOnly: true,
         });
@@ -79,12 +116,12 @@ export async function userLogin(
         });
 
         // 가입되지 않은 유저라면
-        if (response.data.register_check === "false") {
-            return '/signup';
+        if (!response.data.register_check) {
+            window.open('/signup', "_self");
         }
         // 가입된 유저라면
         else {
-            return '/home';
+            window.open('/', "_self");
         }
     }
     catch (error) {
@@ -108,4 +145,3 @@ export async function getPosition() {
     const response = await axios.get('/tag/job');
     return response.data;
 };
-
