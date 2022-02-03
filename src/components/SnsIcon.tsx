@@ -11,7 +11,7 @@ const GithubImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/github.svg`,
     alt: "깃허브 아이콘",
     name: "github",
-    className: "github"
+    className: "github",
 })) <Size>`
 width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;

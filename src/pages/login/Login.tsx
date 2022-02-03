@@ -27,8 +27,8 @@ const Login = () => {
     }
 
     function handleClick(event: any) {
-        const redirectUri: string = setRedirectUri(event.target.name);
-        window.open(redirectUri, "_self");
+        // const redirectUri: string = setRedirectUri(event.target.name);
+        // window.open(redirectUri, "_self");
     }
 
     // 회원가입 페이지 번호 리셋
