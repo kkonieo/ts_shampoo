@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
-import axios, { Axios, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { naverClient, githubClient } from '../../utils/data/loginApiKey';
 import { getSnsLoginToken } from '../../utils/api/auth';
@@ -29,65 +28,12 @@ const Spinner = () => {
     async function getLoginApi() {
         try {
             // 액세스 토큰, 리프레쉬 토큰, 유효기간 받아오기
-            const snsToken = await getSnsLoginToken(
+            const snsToken = getSnsLoginToken(
                 naverTokenResponseUri,
                 naverClient.id,
                 naverClient.key
             )
-            // .then(response => console.log('토큰 가져오기', response.data));
 
-            // 네이버에서 주는 정보
-            // const accessToken: LoginSpace.LoginToken = {
-            //     access_token: snsToken.data.access_token,
-            //     refresh_token: snsToken.data.refresh_token,
-            //     expires_in: snsToken.data.expires_in,
-            // }
-
-            // 깃허브에서 주는 정보
-            // const accessToken: string = tokenResponse.data.access_token;
-
-            // 유저가 접근 허용한 정보 확인하기
-
-            // 네이버
-            // profile/id 유저 아이디, profile/naveremail 유저 이메일
-            // profile/name 유저 이름, profile/profileimage 유저 프로필사진
-            // const isPermission = await axios({
-            //     method: 'post',
-            //     url: naverProfileCheckUri,
-            //     headers: {
-            //         "Authorization": `bearer ${accessToken}`,
-            //     }
-            // })
-            // .then(response => console.log('허용정보', response));
-
-            // 유저 프로필 받아오기
-
-            // 네이버
-            // id 유저 아이디, email 유저 이메일, name 유저 이름, profile_image 유저 프로필사진
-            // const userProfileResponse = await axios({
-            //     method: 'post',
-            //     url: `${corsErrorKey}https://openapi.naver.com/v1/nid/me`,
-            //     headers: {
-            //         'Authorization': `Bearer ${encodeURIComponent(accessToken)}`,
-            //     }
-            // })
-            // .then(response => console.log('유저 프로필', response));
-
-            // 깃허브
-            // const userProfileResponse = await axios({
-            //     method: 'get',
-            //     url: githubProfileCheckUri,
-            //     headers: {
-            //         'Authorization': `token ${encodeURIComponent(accessToken)}`,
-            //     }
-            // })
-            // .then(response => console.log('유저 프로필', response));
-
-            // const userProfile: LoginSpace.SignUpProps = {
-            //     userEmail: userProfileResponse.data.response?.email,
-            //     userName: userProfileResponse.data.response?.name,
-            //     userJob: "",
-            // }
 
         }
         catch (error) {
