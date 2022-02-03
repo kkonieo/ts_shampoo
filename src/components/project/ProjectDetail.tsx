@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit } from './edit';
 interface IProps {
     handleChangeToggle: (...args: any[]) => void;
@@ -10,35 +10,37 @@ interface IProps {
 }
 
 const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, editMode }) => {
-    const projectId = useParams().id;
-    const data: ProjectProps.IProjectProps = {
-        projectId: projectId,
-        title: '프로젝트 토끼토끼',
-        startDate: '2021-01-31',
-        endDate: '2021-02-28',
-        techStack: ['Django', 'Flask', 'TypeScript'],
-        imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
-        gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
-        explain: '프로젝트설명0',
-        urlLink: [
-            { linkName: 'Live Demo', linkUrl: 'https://youtube.com' },
-            { linkName: 'Github', linkUrl: 'https://github.com' },
-        ],
+    const today = new Date(); // 올해의 첫날과 마지막날을 시작일과 종료일로 자동 지정한다. 이를 위한 Date
+    const [title, setTitle] = useState<string>('프로젝트명');
+    const [startDate, setStartDate] = useState<string>(`${today.getFullYear()}-01-01`);
+    const [endDate, setEndDate] = useState<string>(`${today.getFullYear()}-12-31`);
+    const [explain, setExplain] = useState<string>('');
+    const [gifSrc, setGifSrc] = useState<string>('');
+    const [imgSrc, setImgSrc] = useState<string>('');
+    const [techStack, setTechStack] = useState<string[]>([]);
+    const [urlLink, setUrlLink] = useState<ProjectProps.IUrl[]>([]);
+
+    // 이미지 파일 저장용 state
+    const [gifBlob, setGifBlob] = useState<Blob>();
+    const [imgBlob, setImgBlob] = useState<Blob>();
+
+    // urlLink 추가용 모달, TechStack추가용 모달
+    const [urlModal, setUrlModal] = useState<boolean>(false);
+    const [techModal, setTechModal] = useState<boolean>(false);
+
+    // project/:id
+    const projectId = useLocation().pathname.slice(-3);
+    const openModal = () => {
+        setTechModal(true);
+        setUrlModal(true);
+    };
+    const closeModal = () => {
+        setUrlModal(false);
     };
 
-    const [title, setTitle] = useState<string>(data.title);
-    const [startDate, setStartDate] = useState<string>(data.startDate);
-    const [endDate, setEndDate] = useState<string>(data.endDate);
-    const [explain, setExplain] = useState<string>(data.explain);
-    const [gifSrc, setGifSrc] = useState<string>(data.gifSrc);
-    const [imgSrc, setImgSrc] = useState<string>(data.imgSrc);
-    const [techStack, setTechStack] = useState<string[]>(data.techStack);
-    const [urlLink, setUrlLink] = useState<ProjectProps.IUrl[]>(data.urlLink);
-
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
+    const handleSubmit = (e: any) => {
+        e?.preventDefault();
         const data: ProjectProps.IProjectProps = {
-            projectId: projectId,
             title: title,
             startDate: startDate,
             endDate: endDate,
@@ -55,8 +57,39 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
         console.log(data);
     };
 
-    const [gifBlob, setGifBlob] = useState<Blob>();
-    const [imgBlob, setImgBlob] = useState<Blob>();
+    // Api
+    useEffect(() => {
+        //API Dat
+        if (projectId === 'add') {
+            handleChangeToggle();
+            return;
+        } else {
+            const data: ProjectProps.IProjectProps = {
+                projectId: projectId,
+                title: '프로젝트 토끼토끼',
+                startDate: '2021-01-31',
+                endDate: '2021-02-28',
+                techStack: ['Django', 'Flask', 'TypeScript'],
+                imgSrc: 'https://t1.daumcdn.net/cfile/tistory/996B5C3F5C2DCE5304?original',
+                gifSrc: 'https://t1.daumcdn.net/cfile/tistory/995040355C2DCE5E2E?original',
+                explain: '프로젝트설명0',
+                urlLink: [
+                    { linkName: 'Live Demo', linkUrl: 'https://youtube.com' },
+                    { linkName: 'Github', linkUrl: 'https://github.com' },
+                ],
+            };
+            setTitle(data.title);
+            setStartDate(data.startDate);
+            setEndDate(data.endDate);
+            setTechStack(data.techStack);
+            setGifSrc(data.gifSrc);
+            setImgSrc(data.imgSrc);
+            setExplain(data.explain);
+            setUrlLink(data.urlLink);
+        }
+    }, []);
+
+    // 이미지 미리보기 기능
     const handleShowGifPreview = (event: any) => {
         setGifSrc(URL.createObjectURL(event.target.files[0]));
         setGifBlob(event.target.files[0]);
@@ -65,11 +98,14 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
         setImgSrc(URL.createObjectURL(event.target.files[0]));
         setImgBlob(event.target.files[0]);
     };
+
+    // 미리보기 제거 기능
     const handleDeletePreview = (imgSrc: any, setImgSrc: Function) => {
         URL.revokeObjectURL(imgSrc);
         setImgSrc('');
     };
 
+    // 미리보기를 통한 리소스 낭비 제거용
     useEffect(() => {
         return () => {
             handleDeletePreview(gifSrc, setGifSrc);
@@ -118,7 +154,7 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
             <TagEdit techStack={techStack} setTechStack={setTechStack} editMode={editMode} />
             <LinkEdit urlLink={urlLink} setUrlLink={setUrlLink} editMode={editMode} />
             {editMode && (
-                <div>
+                <ButtonDiv>
                     <button type="submit">수정</button>
                     <button
                         type="button"
@@ -127,12 +163,12 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
                             handleChangeToggle();
                         }}
                     >
-                        수정
+                        삭제
                     </button>
                     <button type="button" onClick={handleChangeToggle}>
                         취소
                     </button>
-                </div>
+                </ButtonDiv>
             )}
         </DetailForm>
     );
@@ -159,5 +195,18 @@ const DetailForm = styled.form`
     h2 {
         border-bottom: 1px solid black;
         margin: 2% 0;
+    }
+`;
+
+const ButtonDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+    button {
+        width: 30%;
+        height: 3em;
+        border: 1px solid black;
+        margin: 1%;
     }
 `;

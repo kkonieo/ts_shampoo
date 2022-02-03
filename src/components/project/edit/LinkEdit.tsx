@@ -9,8 +9,8 @@ interface Props {
 }
 const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [modalInput, setModalInput] = useState<string>('');
-    const [modalInput2, setModalInput2] = useState<string>('');
+    const [modalUrlInput, setModalUrlInput] = useState<string>('');
+    const [modalNameInput, setModalNameInput] = useState<string>('');
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -52,29 +52,35 @@ const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
             )}
             {isModalOpen && (
                 <ModalDiv>
-                    <div>
-                        <input
-                            type="text"
-                            value={modalInput}
-                            onChange={(e) => setModalInput(e.target.value)}
-                            placeholder="링크 주소를 입력해주세요"
-                        />
-                        <input
-                            type="text"
-                            value={modalInput2}
-                            onChange={(e) => setModalInput2(e.target.value)}
-                            placeholder="링크명을 입력해주세요"
-                        />
+                    <div className="inputDiv">
+                        <label>
+                            링크 주소 :
+                            <input
+                                type="text"
+                                value={modalUrlInput}
+                                onChange={(e) => setModalUrlInput(e.target.value)}
+                                placeholder="링크 주소를 입력해주세요"
+                            />
+                        </label>
+                        <label>
+                            링크 이름 :
+                            <input
+                                type="text"
+                                value={modalNameInput}
+                                onChange={(e) => setModalNameInput(e.target.value)}
+                                placeholder="링크명을 입력해주세요"
+                            />
+                        </label>
                     </div>
 
                     <div className="buttonDiv">
                         <button
                             onClick={() => {
-                                if (modalInput === '') return;
+                                if (modalUrlInput === '') return;
                                 const newUrlLink = [...urlLink];
-                                newUrlLink.push({ linkName: modalInput2, linkUrl: modalInput });
+                                newUrlLink.push({ linkName: modalNameInput, linkUrl: modalUrlInput });
                                 setUrlLink(newUrlLink);
-                                setModalInput2('');
+                                setModalNameInput('');
                                 handleCloseModal();
                             }}
                         >
@@ -118,12 +124,11 @@ const ModalDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     padding: 2%;
     width: 80%;
+    margin: auto;
     input {
-        width: 80%;
-        border: 1px solid black;
+        min-width: 250px;
         margin: 1%;
         padding: 1%;
     }
@@ -131,6 +136,13 @@ const ModalDiv = styled.div`
         border-radius: 0;
         background-color: ${(props) => props.theme.color.main};
         color: ${(props) => props.theme.color.sub};
+    }
+
+    .inputDiv {
+        display: flex;
+        text-align: center;
+        width: 100%;
+        flex-direction: column;
     }
     .buttonDiv {
         display: flex;

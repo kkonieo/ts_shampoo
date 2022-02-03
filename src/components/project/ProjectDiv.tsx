@@ -71,6 +71,7 @@ const ButtonDiv = styled.div`
     display: flex;
     justify-content: center;
     margin: auto;
+    width: 100%;
     button {
         width: 30%;
         height: 3em;
