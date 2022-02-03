@@ -43,23 +43,29 @@ declare module 'LoginModule' {
             children: React.ReactNode;
         };
 
-        interface LoginToken {
-            access_token?: string;
-            refresh_token?: string;
-            expires_in?: string;
-            id_token?: string;
-        };
-
         interface SignUpProps {
             index: string;
-            email: string;
-            name: string;
-            accessToken: string;
-            refreshToken: string;
+            userEmail: string;
+            userName?: string;
+            userJob?: string;
         };
 
         type SignUpPageProps = 0 | 1;
+    }
 
+    export namespace RequestTokenSpace {
+        interface GithubToken {
+            access_token?: string;
+        };
+
+        interface NaverToken extends GithubToken {
+            refresh_token?: string;
+            expires_in?: string;
+        };
+
+        interface GoogleToken {
+            id_token?: string;
+        }
     }
 }
 

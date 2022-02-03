@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
 import axios, { Axios, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
-import { naverClient, githubClient } from '../../utils/data/loginVar';
+import { naverClient, githubClient } from '../../utils/data/loginApiKey';
 import { getSnsLoginToken } from '../../utils/api/auth';
 import { LoginSpace } from 'LoginModule';
 import { useLocation } from 'react-router-dom';
@@ -82,13 +82,13 @@ const Spinner = () => {
             //     }
             // })
             // .then(response => console.log('유저 프로필', response));
-            
+
             // const userProfile: LoginSpace.SignUpProps = {
             //     userEmail: userProfileResponse.data.response?.email,
             //     userName: userProfileResponse.data.response?.name,
             //     userJob: "",
             // }
-            
+
         }
         catch (error) {
             console.log('error', error);
@@ -97,7 +97,7 @@ const Spinner = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => { getLoginApi() }, [])
-    
+
     return (
         <ContainerArticle>
             <FloatingCircles>

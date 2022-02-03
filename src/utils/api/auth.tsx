@@ -1,16 +1,16 @@
 import axios, { AxiosInstance } from 'axios';
-import { LoginSpace } from 'LoginModule';
+import { LoginSpace, RequestTokenSpace } from 'LoginModule';
 import Cookies from 'universal-cookie';
 
 const cookies: Cookies = new Cookies();
 
-// 로컬에 access_token이 존재할 경우 헤더에 넣어준다.
-function getAccessToken(): void {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-    }
-}
+// 로컬에 access_token이 존재할 경우 헤더에 넣어준다. => 자동으로 들어가는지 확인 필요
+// function getAccessToken(): void {
+//     const accessToken = cookies.get('accessToken');
+//     if (accessToken) {
+//         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+//     }
+// }
 
 // axios 전역 설정 (SNS에서 토큰 가져올 때)
 // 네이버가 data를 지원하지 않아서 params로 적용
@@ -51,7 +51,7 @@ export const getSnsLoginToken = (
 })
 
 // 로그인
-export async function userLogin(props: LoginSpace.LoginToken) {
+export async function userLogin(props: RequestTokenSpace.GoogleToken) {
     try {
         const response = await axiosGetUserConfig({
             url: '/user/login',
@@ -60,10 +60,8 @@ export async function userLogin(props: LoginSpace.LoginToken) {
 
         const userProfile: LoginSpace.SignUpProps = {
             index: response.data.user_idx,
-            email: response.data.email,
-            name: response.data.name,
-            accessToken: response.data.access_token,
-            refreshToken: response.data.refresh_token,
+            userEmail: response.data.email,
+            userName: response.data.name,
         };
 
         localStorage.setItem("userProfile", JSON.stringify(userProfile));
@@ -74,7 +72,7 @@ export async function userLogin(props: LoginSpace.LoginToken) {
 }
 
 // 회원가입
-export async function registerUser(props: LoginSpace.LoginToken) {
+export async function registerUser(props: RequestTokenSpace.GoogleToken) {
     try {
         const response = await axiosGetUserConfig({
             url: '/user/register',
@@ -83,13 +81,11 @@ export async function registerUser(props: LoginSpace.LoginToken) {
 
         const userProfile: LoginSpace.SignUpProps = {
             index: response.data.user_idx,
-            email: response.data.email,
-            name: response.data.name,
-            accessToken: response.data.access_token,
-            refreshToken: response.data.refresh_token,
+            userEmail: response.data.email,
+            userName: response.data.name,
         };
 
-        if (!userProfile.email) throw new Error('이메일이 없습니다.');
+        if (!userProfile.userEmail) throw new Error('이메일이 없습니다.');
         else localStorage.setItem("userProfile", JSON.stringify(userProfile));
 
     }
