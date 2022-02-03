@@ -4,14 +4,6 @@ import Cookies from 'universal-cookie';
 
 const cookies: Cookies = new Cookies();
 
-// 로컬에 access_token이 존재할 경우 헤더에 넣어준다. => 자동으로 들어가는지 확인 필요
-// function getAccessToken(): void {
-//     const accessToken = cookies.get('accessToken');
-//     if (accessToken) {
-//         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-//     }
-// }
-
 // axios 전역 설정 (SNS에서 토큰 가져올 때)
 // 네이버가 data를 지원하지 않아서 params로 적용
 export const axiosGetTokenConfig: AxiosInstance = axios.create({
@@ -29,11 +21,12 @@ export const axiosGetTokenConfig: AxiosInstance = axios.create({
 
 // axios 전역 설정 (서버에서 유저 정보 가져올 때)
 export const axiosGetUserConfig: AxiosInstance = axios.create({
-    baseURL: ``, // 기본 서버 주소 입력
+    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력
     method: 'post',
     headers: {
         'Content-Type': "application/json",
         'Accept': "application/json",
+        'Authorization': `Bearer ${cookies.get('accessToken')}`, // 로컬에 access_token이 존재할 경우 헤더에 넣어준다. => 자동으로 들어가는지 확인 필요
     }
 })
 
