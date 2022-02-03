@@ -30,6 +30,13 @@ const GlobalStyle = createGlobalStyle`
         height: auto;
         border: 0;
     }
+    textarea:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    svg:focus {
+    outline: none;
+    }
 
     @font-face {
         font-family: 'Apple SD Gothic Neo','EliceRegular','Montserrat','Helvetica',sans-serif;

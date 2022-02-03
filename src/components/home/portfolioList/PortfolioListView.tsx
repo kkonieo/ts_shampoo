@@ -286,6 +286,7 @@ const FilterButton = styled.button<HomeProps.IFilterProps>`
     padding: 10px;
     color: ${(props) => (props.isActive ? props.theme.color.defaultText : props.theme.color.buttonText)};
     border-radius: 4px;
+    font-size: 16px;
     text-align: left;
     background-color: ${(props) => (props.isActive ? props.theme.color.buttonBackground : props.theme.color.sub)};
 
@@ -296,10 +297,10 @@ const FilterButton = styled.button<HomeProps.IFilterProps>`
 `;
 const InputDiv = styled.div`
     margin: 6px 8px;
-    font-size: 16px;
 `;
 const FilterInput = styled.input`
     margin-right: 8px;
+    margin-bottom: 8px;
     cursor: pointer;
     border: 2px solid blue;
 `;
@@ -321,6 +322,8 @@ const FilterContainerForm = styled.form`
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
     z-index: 2;
+    overflow-y: auto;
+    box-sizing: border-box;
 `;
 const FiltersListDiv = styled.div`
     margin-bottom: 28px;
