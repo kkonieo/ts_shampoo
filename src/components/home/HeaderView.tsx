@@ -9,13 +9,7 @@ export const HeaderView = ({ name }: { name: string }) => {
         return (
             <>
                 <ButtonGroupDiv>
-                    <Button
-                        onClick={() => {
-                            setLogin(false);
-                        }}
-                    >
-                        로그인
-                    </Button>
+                    <Button to="login">로그인</Button>
                 </ButtonGroupDiv>
             </>
         );
@@ -26,6 +20,7 @@ export const HeaderView = ({ name }: { name: string }) => {
                 <NavLink to="#">나의 포트폴리오</NavLink>
                 <IdSpan>{name}님</IdSpan>
                 <LogoutButton
+                    to="/"
                     onClick={() => {
                         setLogin(true);
                     }}
@@ -82,10 +77,14 @@ const NavLink = styled(Link)`
 const ButtonGroupDiv = styled.div`
     margin-left: 28px;
 `;
-const Button = styled.button`
+const Button = styled(Link)`
+    display: inline-flex;
     width: 80px;
     height: 40px;
     border-radius: 9999px;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.text};
 `;
