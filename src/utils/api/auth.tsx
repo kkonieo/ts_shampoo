@@ -49,7 +49,7 @@ export async function getSnsLoginToken(
 // 로그인 및 회원가입
 //  “register_check”: true일 경우 기가입자 (바로 로그인 시키기) / false일 경우 가입 성공
 export async function userLogin(
-    url: string,
+    url: "google" | "naver" | "github",
     props: RequestTokenSpace.GoogleToken | RequestTokenSpace.NaverToken | RequestTokenSpace.GithubToken,
 ) {
     try {
