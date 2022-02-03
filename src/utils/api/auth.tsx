@@ -4,21 +4,6 @@ import Cookies from 'universal-cookie';
 
 const cookies: Cookies = new Cookies();
 
-// axios 전역 설정 (SNS에서 토큰 가져올 때)
-// 네이버가 data를 지원하지 않아서 params로 적용
-export const axiosGetTokenConfig: AxiosInstance = axios.create({
-    method: 'post',
-    params: {
-        code: new URL(window.location.href).searchParams.get('code'),
-        grant_type: 'authorization_code',
-        state: 'test',
-    },
-    headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-    }
-})
-
 // axios 전역 설정 (서버에서 유저 정보 가져올 때)
 export const axiosGetUserConfig: AxiosInstance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력
@@ -30,17 +15,26 @@ export const axiosGetUserConfig: AxiosInstance = axios.create({
     }
 })
 
-// SNS 토큰 가져오기 (유저, 비유저 모두 해당됨)
+// 네이버 및 깃허브 SNS 토큰 가져오기 (유저, 비유저 모두 해당됨)
+// 네이버가 data를 지원하지 않아서 params로 적용
 export const getSnsLoginToken = (
     tokenResponseUri: string,
     clientId: string,
     clientSecretKey: string,
-) => axiosGetTokenConfig({
+) => axios({
+    method: 'post',
     url: tokenResponseUri,
     params: {
         client_id: clientId,
         client_secret: clientSecretKey,
+        code: new URL(window.location.href).searchParams.get('code'),
+        grant_type: 'authorization_code',
+        state: 'test',
     },
+    headers: {
+        'Content-Type': "application/json",
+        'Accept': "application/json",
+    }
 })
 
 // 로그인 및 회원가입
@@ -64,10 +58,14 @@ export async function userLogin(
         cookies.set('accessToken', response.data.access_token, {
             path: '/',
             expires: new Date(Number(response.data.expires_in)), // 테스트 기준 5분
+            secure: true,
+            httpOnly: true,
         });
         cookies.set('refreshToken', response.data.refresh_token, {
             path: '/',
             expires: new Date(Date.now() + (60 * 60 * 24 * 1000)), // 테스트 기준 1일
+            secure: true,
+            httpOnly: true,
         });
 
         // 가입되지 않은 유저라면
@@ -84,3 +82,14 @@ export async function userLogin(
         console.log('로그인 에러', error)
     }
 }
+
+// 회원가입 (추가 정보)
+export async function setSignUpProfile(data: LoginSpace.SignUpProps) {
+    const response = await axios({
+        method: 'put',
+        url: '/user/profile',
+        data: data
+    });
+
+    return response;
+};

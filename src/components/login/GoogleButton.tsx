@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { GoogleImg } from '../../components';
 
 const responseGoogle = (response: any) => {
-    console.log(typeof response);
+    console.log('response', response);
     console.log('profile', response.getAuthResponse().id_token);
 }
 
