@@ -29,7 +29,7 @@ export const PortfolioListView = ({
         });
         const searchUserInfo: Array<HomeProps.UserInfoProps> = filteredUserInfo.filter((item) => {
             if (searchValue === item.name) return item;
-            if (item.stack.indexOf(searchValue) >= 0) return item;
+            if (searchValue.toLowerCase() === item.stack.toLowerCase()) return item;
         });
         if (selectedFilter.length > 0) {
             if (searchValue !== '' && searchUserInfo.length === 0) {
