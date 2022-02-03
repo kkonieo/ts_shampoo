@@ -20,7 +20,8 @@ export const axiosGetUserConfig: AxiosInstance = axios.create({
 export async function getSnsLoginToken(
     tokenResponseUri: string,
     clientId: string,
-    clientSecretKey: string,) {
+    clientSecretKey: string,
+) {
     try {
         const response = await axios({
             method: 'post',
@@ -49,7 +50,8 @@ export async function getSnsLoginToken(
 //  “register_check”: true일 경우 기가입자 (바로 로그인 시키기) / false일 경우 가입 성공
 export async function userLogin(
     url: string,
-    props: RequestTokenSpace.GoogleToken | RequestTokenSpace.NaverToken | RequestTokenSpace.GithubToken) {
+    props: RequestTokenSpace.GoogleToken | RequestTokenSpace.NaverToken | RequestTokenSpace.GithubToken,
+) {
     try {
         const response = await axiosGetUserConfig({
             url: `/user/register/${url}`,
@@ -82,7 +84,6 @@ export async function userLogin(
         }
         // 가입된 유저라면
         else {
-            alert('이미 가입한 유저입니다.');
             return '/home';
         }
     }

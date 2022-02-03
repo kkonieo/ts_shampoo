@@ -25,18 +25,17 @@ const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, co
     }
 
     return (
-        <div className="hahaha">
-            <SnsButton
-                onClick={handleClick}
-                color={color}
-                name={to}>
-                {
-                    to === "github" ? <GithubImg />
-                        : to === "naver" && <NaverImg />
-                }
-                {text}
-            </SnsButton>
-        </div>
+        <SnsButton
+            onClick={handleClick}
+            color={color}
+            name={to}
+            disabled={true}>
+            {
+                to === "github" ? <GithubImg />
+                    : to === "naver" && <NaverImg />
+            }
+            {text}
+        </SnsButton>
     );
 };
 

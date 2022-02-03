@@ -11,8 +11,6 @@ const Spinner = () => {
     // CORS 에러 해결해주는 주소
     const corsErrorKey: string = "http://cors-anywhere.herokuapp.com/";
 
-    console.log(useLocation().pathname);
-
     // 네이버 API 변수
     const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
     // const naverProfileCheckUri = `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`;
@@ -34,10 +32,10 @@ const Spinner = () => {
                 naverClient.key
             )
 
-
+            console.log('결과', snsToken);
         }
         catch (error) {
-            console.log('error', error);
+            console.log('에러', error);
         }
     }
 

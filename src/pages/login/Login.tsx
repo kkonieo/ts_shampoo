@@ -37,9 +37,9 @@ const Login = () => {
     return (
         <LoginContainer>
             <Logo>EliceFolio</Logo>
-            <SnsLoginButton text='깃허브로 로그인' to="github" color="black" />
+            <SnsLoginButton text='Comming Soon' to="github" color="black" />
             <GoogleLoginButton />
-            <SnsLoginButton text='네이버로 로그인' to='naver' color="#19CE60" />
+            <SnsLoginButton text='Comming Soon' to='naver' color="#19CE60" />
             <TextP>회원이 아니신가요?</TextP>
             <IconDiv onClick={(event: any) => handleClick(event)}>
                 <GithubImg size="20%" />
