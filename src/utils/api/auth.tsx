@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { LoginSpace } from 'LoginModule';
 
 // 로컬에 access_token이 존재할 경우 헤더에 넣어준다.
 function getAccessToken(): void {
@@ -9,6 +10,7 @@ function getAccessToken(): void {
 }
 
 // axios 전역 설정 (SNS에서 토큰 가져올 때)
+// 네이버가 data를 지원하지 않아서 params로 적용
 export const axiosGetTokenConfig: AxiosInstance = axios.create({
     method: 'post',
     params: {
@@ -32,7 +34,7 @@ export const axiosGetUserConfig: AxiosInstance = axios.create({
     }
 })
 
-// 로그인으로 SNS 토큰 가져오기 (유저, 비유저 모두 해당됨)
+// SNS 토큰 가져오기 (유저, 비유저 모두 해당됨)
 export const getSnsLoginToken = (
     tokenResponseUri: string,
     clientId: string,
@@ -45,18 +47,39 @@ export const getSnsLoginToken = (
     },
 })
 
-// 로그인
-export const userLogin = (
-    access_token?: string,
-    refresh_token?: string,
-    expires_in?: string,
-    id_token?: string,
-) => axiosGetUserConfig({
-    url: '/user/login',
-    data: {
-        access_token: access_token,
-        refresh_token: refresh_token,
-        expires_in: expires_in,
-        id_token: id_token,
-    },
-})
+// 로그인 (구글 기준으로 적용)
+export async function userLogin(props: LoginSpace.LoginToken) {
+    try {
+        const response = await axiosGetUserConfig({
+            url: '/user/login',
+            data: props,
+        });
+        return response;
+    }
+    catch (error) {
+        console.log('로그인 에러', error)
+    }
+}
+
+// 회원가입
+export async function registerUser(props: LoginSpace.LoginToken) {
+    try {
+        const response = await axiosGetUserConfig({
+            url: '/user/register',
+            data: props,
+        });
+
+        const userProfile: LoginSpace.SignUpProps = {
+            index: response.data.user_idx,
+            email: response.data.email,
+            name: response.data.name,
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+        };
+
+        localStorage.setItem("userProfile", JSON.stringify(userProfile));
+    }
+    catch (error) {
+        console.log('회원가입 에러', error)
+    }
+}

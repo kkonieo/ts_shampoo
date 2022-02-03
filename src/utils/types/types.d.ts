@@ -44,15 +44,18 @@ declare module 'LoginModule' {
         };
 
         interface LoginToken {
-            access_token: string;
-            refresh_token: string;
-            expires_in: string;
+            access_token?: string;
+            refresh_token?: string;
+            expires_in?: string;
+            id_token?: string;
         };
 
         interface SignUpProps {
-            userEmail?: string;
-            userName: string;
-            userJob: string;
+            index: string;
+            email: string;
+            name: string;
+            accessToken: string;
+            refreshToken: string;
         };
 
         type SignUpPageProps = 0 | 1;
