@@ -112,3 +112,12 @@ declare module 'HomeModule' {
         }
     }
 }
+
+declare module 'RecoilModule' {
+    export namespace RecoilProps {
+        interface aboutMeEditProps {
+            id: string;
+            editMode: boolean;
+        }
+    }
+}
