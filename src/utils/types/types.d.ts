@@ -89,6 +89,23 @@ declare module 'ProjectPageModule' {
     }
 }
 
+declare module 'PublicComponentModule' {
+    export namespace PublicComponentProps {
+        interface SubtitleProps {
+            text: string;
+            onCancelClick: () => any;
+        }
+    }
+}
+
+declare module 'MyPageModule' {
+    export namespace MyPageProps {
+        interface MyPageSubTitleProps {
+            text: string;
+        }
+    }
+}
+
 declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
@@ -98,6 +115,15 @@ declare module 'HomeModule' {
         }
         interface IFilterProps {
             isActive: boolean;
+        }
+    }
+}
+
+declare module 'RecoilModule' {
+    export namespace RecoilProps {
+        interface aboutMeEditProps {
+            id: string;
+            editMode: boolean;
         }
     }
 }

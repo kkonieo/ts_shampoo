@@ -1,13 +1,27 @@
 import styled from 'styled-components';
-import { useOutlet, useParams } from 'react-router-dom';
+import { useOutlet ,useParams} from 'react-router-dom';
 import { IconDiv, NavLink, UserPicture } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
+import { useEffect } from 'react';
+
+
 const NavPage = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
     const name: string = 'Minyoung Lee';
     // const navId = useParams();
     // 현재 주소 파악
+
+    const detectScroll = (e: any) => {
+        const { scrollHeight } = e.target;
+        console.log(e.target);
+        if (scrollHeight === null) {
+            console.log('스크롤 없음');
+        }
+        console.log('onLoad', scrollHeight);
+    };
+
+
     return (
         <BackgroundDiv>
             <NavContainer>
@@ -19,6 +33,8 @@ const NavPage = () => {
                 </NavDiv>
                 <ProgressContentsContainer>
                     {/*프로그래스바*/}
+                    <ScrollProgress />
+
                     <ContentDiv className="content">{outlet}</ContentDiv>
                 </ProgressContentsContainer>
             </NavContainer>
@@ -87,7 +103,6 @@ const ProgressContentsContainer = styled.div`
     min-width: 700px;
     background-color: white;
     overflow-y: auto;
-
     ::-webkit-scrollbar {
         display: none;
     }
@@ -100,5 +115,28 @@ const ContentDiv = styled.div`
     overflow-y: auto;
     scrollbar-width: none;
     padding: 2.5%;
+`;
+
+// 사용자 이미지
+const UserPictureDiv = styled.div`
+    margin: 10% auto 0 auto;
+    background-color: ${(props) => props.theme.color.background};
+    border-radius: 50%;
+
+    width: 150px;
+    min-width: 100px;
+    height: 150px;
+    min-height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 10px solid ${(props) => props.theme.color.sub};
+    img {
+        padding: 7%;
+        width: 80%;
+    }
+
 `;
 // 사용자 이미지

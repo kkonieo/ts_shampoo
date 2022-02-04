@@ -4,6 +4,7 @@ interface Props {
     onClick?: (...args: any[]) => any;
     editMode?: boolean;
 }
+//TODO : 이전과 바뀐게 있는지 확인하고 바뀐게 있을때의 알림메시지와 바뀌지 않았을때의 알림 메세지
 
 const SubTitleEdit = ({ text, onClick, editMode }: Props) => {
     return (

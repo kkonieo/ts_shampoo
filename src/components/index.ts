@@ -5,3 +5,5 @@ export { default as SubTitle } from './SubTitle';
 export { default as SubTitleEdit } from './SubTitleEdit';
 export { GithubImg, GoogleImg, NaverImg } from './SnsIcon';
 export { LoginButton, SnsLoginButton } from './login';
+export { default as EditDetect } from './EditDetect';
+

@@ -5,7 +5,11 @@ import SkillsDetail from './SkillsDetail';
 import SkillTag from './SkillTag';
 import { aboutMeProps } from 'AboutMePageModuel';
 
-const Skills = () => {
+interface Props {
+    isEditMode: boolean;
+}
+
+const Skills = ({ isEditMode }: Props) => {
     //유저의 스킬
     const tmpSkillTitles: string[] = ['React', 'JavaScript', 'Next.js', 'Python', 'styled-components'];
 
@@ -35,12 +39,6 @@ const Skills = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetSkill]);
 
-    useEffect(() => {
-        if (targetDescribe !== []) {
-            console.log(targetDescribe);
-        }
-        return undefined;
-    }, [targetDescribe]);
 
     const onSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
@@ -50,7 +48,7 @@ const Skills = () => {
 
     return (
         <Div>
-            <SubTitle text="🔨 Skills" />
+            <SubTitle text="🔨 Skills" section="skills" />
             <TagArea>
                 {tmpSkillTitles.map((item, idx) => (
                     <SkillTag key={idx} skill={item} onSkillChange={onSkillChange} />
