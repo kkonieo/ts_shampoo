@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { LoginSpace } from 'LoginModule';
+import { RecoilProps } from 'RecoilModule';
 
 export const pageState = atom<LoginSpace.SignUpPageProps>({
     key: 'pageState',
