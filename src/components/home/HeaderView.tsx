@@ -86,7 +86,7 @@ const Button = styled(Link)`
     align-items: center;
     justify-content: center;
     background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.text};
+    color: ${(props) => props.theme.color.sub};
 `;
 const IdSpan = styled.span`
     margin-left: 20px;
