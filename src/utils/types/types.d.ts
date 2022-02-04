@@ -67,8 +67,8 @@ declare module 'LoginModule' {
         };
 
         interface GoogleToken {
-            id_token: string;
-        }
+            auth_token: string;
+        };
     }
 }
 

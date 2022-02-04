@@ -2,10 +2,13 @@ import { GoogleLogin } from 'react-google-login';
 import styled from 'styled-components';
 import { GoogleImg } from '../../components';
 import { userLogin } from '../../utils/api/auth';
-import { useNavigate } from 'react-router-dom';
+import { RequestTokenSpace } from 'LoginModule';
 
 const responseGoogle = (response: any) => {
-    userLogin('google', response.getAuthResponse().id_token);
+    const auth_token: RequestTokenSpace.GoogleToken = {
+        auth_token: response.getAuthResponse().id_token
+    };
+    userLogin('google', auth_token);
 }
 
 const GoogleLoginButton = () => {
