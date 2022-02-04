@@ -1,10 +1,7 @@
+import { MyPageProps } from 'MyPageModule';
 import styled from 'styled-components';
 
-interface Props {
-    imgSrc?: string;
-}
-
-const ProfileImage = () => {
+const ProfileImage = ({ imgSrc }: MyPageProps.ProfileImgProps) => {
     return (
         <Div>
             <ImageDiv>
@@ -36,7 +33,7 @@ const ImageDiv = styled.div`
     margin-top: 20px;
 `;
 
-const ImageSrc = styled.img.attrs((props: Props) => ({
+const ImageSrc = styled.img.attrs((props: MyPageProps.ProfileImgProps) => ({
     src: props.imgSrc || `${process.env.PUBLIC_URL}/img/userDefault.png`,
 }))`
     width: 80%;
