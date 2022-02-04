@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit } from './edit';
 interface IProps {
     handleChangeToggle: (...args: any[]) => void;
-    editMode?: boolean;
+    editMode: boolean;
 }
 
 const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, editMode }) => {

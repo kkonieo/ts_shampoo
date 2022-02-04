@@ -6,7 +6,7 @@ interface props {
     setTitle: (...args: any[]) => any;
     editMode?: boolean;
 }
-const TitleEdit = ({ title, setTitle }: props) => {
+const TitleEdit = ({ title, setTitle, editMode }: props) => {
     const [titleEdit, setTitleEdit] = useState<boolean>(false);
     const titleRef = useRef<HTMLInputElement>(null);
 
@@ -15,7 +15,7 @@ const TitleEdit = ({ title, setTitle }: props) => {
     });
 
     const handleChangeEdit = () => {
-        setTitleEdit((current) => !current);
+        if (editMode) setTitleEdit((current) => !current);
         if (!title) setTitle('프로젝트 제목');
     };
     return (

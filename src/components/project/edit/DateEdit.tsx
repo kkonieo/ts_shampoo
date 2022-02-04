@@ -6,13 +6,13 @@ interface props {
     endDate: string;
     setStartDate: (...args: any[]) => any;
     setEndDate: (...args: any[]) => any;
-    editMode?: boolean;
+    editMode: boolean;
 }
-const DateEdit = ({ startDate, setStartDate, endDate, setEndDate }: props) => {
+const DateEdit = ({ startDate, setStartDate, endDate, setEndDate, editMode }: props) => {
     const [dateEdit, setDateEdit] = useState<boolean>(false);
 
     const handleChangeEdit = () => {
-        setDateEdit((current) => !current);
+        if (editMode) setDateEdit((current) => !current);
     };
     return (
         <Div>
