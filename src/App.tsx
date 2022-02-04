@@ -14,7 +14,7 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
 import { RecoilRoot } from 'recoil';
-
+import MyPage from './pages/mypage/MyPage';
 //라우팅 및 전체 css 적용
 
 function App() {
@@ -34,8 +34,9 @@ function App() {
                         <Route path="aboutme" element={<AboutMePage />} />
                         <Route path="project" element={<ProjectPage />} />
                         <Route path="project/:id" element={<ProjectDetailPage />} />
+                        <Route path="project/add" element={<ProjectDetailPage />} />
                         <Route path="contact" element={<ContactMe />} />
-                        <Route path="mypage" element={<p>mypage</p>} />
+                        <Route path="mypage" element={<MyPage />} />
                         <Route path="detail" element={<p>settings</p>} />
                     </Route>
                     <Route path="404" element={<PageNotFound />} />
