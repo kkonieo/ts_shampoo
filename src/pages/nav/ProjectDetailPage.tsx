@@ -9,8 +9,7 @@ const ProjectDetailPage = () => {
     };
     return (
         <>
-
-            <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} section="project"/>
+            <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} section="project" />
             <ProjectDetail handleChangeToggle={handleChangeToggle} editMode={editToggle} />
         </>
     );
