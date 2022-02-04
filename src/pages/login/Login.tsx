@@ -1,33 +1,32 @@
 import styled from 'styled-components';
 import { LoginContainer } from './LoginContainer';
-import { GithubImg, GoogleImg, NaverImg, SnsLoginButton } from '../../components';
-import { useNavigate } from 'react-router-dom';
+import { GithubImg, NaverImg, SnsLoginButton, GoogleLoginButton, GoogleSignUpIcon } from '../../components';
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { useEffect } from 'react';
+import { naverClient, githubClient } from '../../utils/data/loginApiKey';
+import { LoginSpace } from 'LoginModule';
 
 const Login = () => {
 
-    // recoil 페이지 세팅
-    const setPage = useSetRecoilState<number>(pageState);
+    // recoil 페이지 초기화
+    const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
-    const navigate = useNavigate();
+    // SNS 아이콘 클릭에 따라 로그인/회원가입 리다이렉트 페이지 리턴하는 함수
+    function setRedirectUri(name: string): string {
+        // SNS 아이콘 클릭 시 리다이렉트 될 URL
+        const signupRedirect = "http://localhost:3000/redirect/signup";
 
-    // SNS 아이콘 클릭 시 리다이렉트 될 URL
-    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+        if (name === "naver") return `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=${signupRedirect}`;
+        if (name === "github") return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${signupRedirect}&scope=user:email%20read:user&state=1`;
 
-    // naver
-    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
-    const naverUri: string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=1&redirect_uri=${REDIRECT_URI}`
+        return "";
+    }
 
-    function handleClick(e: any) {
-        if (e.target.name === "naverIcon") {
-            window.open(naverUri);
-        } else if (e.target.name === "githubIcon") {
-            navigate('/signup');
-        } else {
-            navigate('/signup');
-        }
+    // 네이버와 깃허브는 일시 잠금
+    function handleClick(event: any) {
+        // const redirectUri: string = setRedirectUri(event.target.name);
+        // window.open(redirectUri, "_self");
     }
 
     // 회원가입 페이지 번호 리셋
@@ -36,13 +35,13 @@ const Login = () => {
     return (
         <LoginContainer>
             <Logo>EliceFolio</Logo>
-            <SnsLoginButton text='깃허브로 로그인' to="github" color="black" />
-            <SnsLoginButton text='구글로 로그인' to='google' color="#EA4335" />
-            <SnsLoginButton text='네이버로 로그인' to='naver' color="#19CE60" />
+            <SnsLoginButton text='Comming Soon' to="github" color="black" />
+            <GoogleLoginButton />
+            <SnsLoginButton text='Comming Soon' to='naver' color="#19CE60" />
             <TextP>회원이 아니신가요?</TextP>
-            <IconDiv onClick={e => handleClick(e)}>
+            <IconDiv onClick={(event: any) => handleClick(event)}>
                 <GithubImg size="20%" />
-                <GoogleImg size="40%" />
+                <GoogleSignUpIcon />
                 <NaverImg size="20%" />
             </IconDiv>
         </LoginContainer>
@@ -73,11 +72,11 @@ const IconDiv = styled.div`
 
     width: 100%;
     
-    & .githubIcon {
+    & .github {
         justify-self: end;
     }
 
-    & .googleIcon {
+    & .google {
         justify-self: center;
     }
 `;

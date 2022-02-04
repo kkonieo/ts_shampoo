@@ -1,26 +1,35 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { loginSpace } from 'loginModule';
-import { GithubImg, GoogleImg, NaverImg } from '../';
+import { LoginSpace } from 'LoginModule';
+import { GithubImg, NaverImg } from '../';
+import { naverClient, githubClient } from '../../utils/data/loginApiKey';
 
-const SnsLoginButton: React.FC<loginSpace.SnsLoginButtonProps> = ({ text, to, color }) => {
+const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, color }) => {
 
-    // 버튼에 따라 어느 소셜로 보낼지 선택!
-    const navigate = useNavigate();
+    // SNS 아이콘 클릭에 따라 로그인/회원가입 리다이렉트 페이지 리턴하는 함수
+    function setRedirectUri(name: string): string {
+        // SNS 아이콘 클릭 시 리다이렉트 될 URL
+        const loginRedirect = "http://localhost:3000/redirect/login";
 
-    function handleClick(): void {
-        navigate(to);
+        if (name === "naver") return `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=${loginRedirect}`;
+        if (name === "github") return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${loginRedirect}&scope=user:email%20read:user&state=1`;
+
+        return "";
+    }
+
+    function handleClick(event: any) {
+        const redirectUri: string = setRedirectUri(event.target.name);
+        window.open(redirectUri, "_self");
     }
 
     return (
         <SnsButton
             onClick={handleClick}
             color={color}
-            to={to}>
+            name={to}
+            disabled={true}>
             {
                 to === "github" ? <GithubImg />
-                : to === "google" ? <GoogleImg />
-                : to === "naver" && <NaverImg />
+                    : to === "naver" && <NaverImg />
             }
             {text}
         </SnsButton>
@@ -30,8 +39,8 @@ const SnsLoginButton: React.FC<loginSpace.SnsLoginButtonProps> = ({ text, to, co
 export { SnsLoginButton };
 
 // styled-components
-    
-const SnsButton = styled.button<{ color: string, to: string }>`
+
+const SnsButton = styled.button<{ color: string }>`
     all: unset;
 
     position: relative;
@@ -48,7 +57,7 @@ const SnsButton = styled.button<{ color: string, to: string }>`
     color: white;
     font-size: 1vw;
 
-    background-color: ${ props => props.color };
+    background-color: ${props => props.color};
 
     cursor: pointer;
 

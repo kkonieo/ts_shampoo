@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import { SubTitle } from '../../components';
 
 const ContactMe = () => {
-
     return (
         <ContainerArticle>
-            <SubTitle text="📍 Contact me" />
+            <SubTitle text="📍 Contact me" section="contact-me" />
             <ContentsDiv>
                 <UserDiv>
                     <UserNameP>임미선</UserNameP>
@@ -63,7 +62,7 @@ const UserNameP = styled.p`
     font-family: 'EliceBold', sans-serif;
     font-weight: bold;
     font-size: 1.3rem;
-    
+
     line-height: 0;
 
     margin: 10px 0 20px 0;
@@ -115,16 +114,15 @@ const EmailDiv = styled.div`
     margin-top: 20px;
     padding: 30px;
 
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 
     border-radius: 10px;
 
     & p {
         margin: 0;
-        
+
         font-family: 'Montserrat', 'sans-serif';
         font-weight: bold;
-
     }
 
     & textarea {
@@ -133,7 +131,7 @@ const EmailDiv = styled.div`
         height: 90%;
         padding: 10px;
 
-        border: 1px solid #E0E0E0;
+        border: 1px solid #e0e0e0;
         background-color: white;
 
         font-family: 'AppleSDGothicNeo', 'sans-serif';
@@ -154,7 +152,7 @@ const InputDiv = styled.div`
 
         padding: 0 10px;
 
-        border-color: #E0E0E0;
+        border-color: #e0e0e0;
         border-width: 1px;
         border-style: solid;
         border-radius: 5px;
@@ -175,7 +173,7 @@ const InputDiv = styled.div`
         padding: 10px;
 
         border-radius: 5px;
-        background-color: #5993F6;
+        background-color: #5993f6;
 
         text-align: center;
         font-family: 'Montserrat', 'sans-serif';
