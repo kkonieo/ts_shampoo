@@ -8,17 +8,18 @@ import { setSignUpProfile } from '../../utils/api/auth';
 
 const SignUpUser = () => {
 
-    // useForm 세팅
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
-    const onSubmit = handleSubmit(data => {
-        addProfile(data);
-    });
-
     // recoil 페이지 세팅
     const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
     // 유저 이메일은 고정
-    const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.name;
+    const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
+
+    // useForm 세팅
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
+    const onSubmit = handleSubmit(data => {
+        console.log('data', { ...data, email: userEmail });
+        addProfile({ ...data, email: userEmail });
+    });
 
     // 유저 추가 정보 업데이트하는 API
     async function addProfile(data: LoginSpace.SignUpProps) {
@@ -30,7 +31,6 @@ const SignUpUser = () => {
         }
         catch (error) { console.log('유저 추가 정보 업데이트 에러', error); };
     };
-
 
     // 더미 데이터
     const jobOptions = [
