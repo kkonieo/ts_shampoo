@@ -9,13 +9,7 @@ export const HeaderView = ({ name }: { name: string }) => {
         return (
             <>
                 <ButtonGroupDiv>
-                    <Button
-                        onClick={() => {
-                            setLogin(false);
-                        }}
-                    >
-                        로그인
-                    </Button>
+                    <Button to="/login">로그인</Button>
                 </ButtonGroupDiv>
             </>
         );
@@ -23,9 +17,10 @@ export const HeaderView = ({ name }: { name: string }) => {
     const Logout = () => {
         return (
             <>
-                <NavLink to="#">나의 포트폴리오</NavLink>
+                <NavLink to="/id">나의 포트폴리오</NavLink>
                 <IdSpan>{name}님</IdSpan>
                 <LogoutButton
+                    to="/"
                     onClick={() => {
                         setLogin(true);
                     }}
@@ -43,7 +38,7 @@ export const HeaderView = ({ name }: { name: string }) => {
                     <Logo>EliceFolio</Logo>
                 </LogoLink>
                 <Nav>
-                    <NavLink to="#">서비스 소개</NavLink>
+                    <NavLink to="/intro">서비스 소개</NavLink>
                     {login ? <Login /> : <Logout />}
                 </Nav>
             </Header>
@@ -82,10 +77,14 @@ const NavLink = styled(Link)`
 const ButtonGroupDiv = styled.div`
     margin-left: 28px;
 `;
-const Button = styled.button`
+const Button = styled(Link)`
+    display: inline-flex;
     width: 80px;
     height: 40px;
     border-radius: 9999px;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.text};
 `;

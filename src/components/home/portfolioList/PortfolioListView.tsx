@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
@@ -14,27 +13,58 @@ export const PortfolioListView = ({
     stacks: Array<string>;
 }) => {
     const [positionActive, setPositionActive] = useState<boolean>(false);
-    const [stackActive, setStackActive] = useState<boolean>(false);
     const [portfolioCount, setPortfolioCount] = useState<number>(8);
     const [selectedFilter, setSelectedFilter] = useState<string[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
-
-    // userInfo = 모든 회원의 포트폴리오 정보가 들어있는 배열
-    // filteredUserInfo = 모든 회원 정보에서 필터에 해당하는 회원의 포트폴리오 정보가 들어있는 배열
-    // searchUserInfo = 모든 회원 정보에서 검색 결과에 해당하는 회원의 포트폴리오 정보가 들어있는 배열
-    // reaultUserInfo = 검색결과와 필터에서 검색결과를 우선시해서 보여주는 로직
-    // UserPortfolioList = 모든 회원의 포트폴리오를 보여주는 컴포넌트가 들어있는 배열
-    const filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
-        if (selectedFilter.length === 0) return item;
-        else if (selectedFilter.indexOf(item.position) >= 0 || selectedFilter.indexOf(item.stack) >= 0) return item;
-    });
-    const searchUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
-        if (searchValue === item.name) return item;
-    });
-    const resultUserInfo = searchUserInfo.length > 0 ? searchUserInfo : filteredUserInfo;
-    const UserPortfolioList: JSX.Element[] = resultUserInfo.map((item: HomeProps.UserInfoProps, idx) => {
-        return <Portfolio key={idx} {...item} />;
-    });
+    const [userPortfolio, setUserPortfolio] = useState<JSX.Element[]>(
+        userInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+            return <Portfolio key={idx} {...item} />;
+        }),
+    );
+    const handleSearchSubmit = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        const filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
+            if (selectedFilter.length === 0) return item;
+            else if (selectedFilter.indexOf(item.position) >= 0) return item;
+        });
+        const searchUserInfo: Array<HomeProps.UserInfoProps> = filteredUserInfo.filter((item) => {
+            if (searchValue === item.name) return item;
+            if (searchValue.toLowerCase() === item.stack.toLowerCase()) return item;
+        });
+        if (selectedFilter.length > 0) {
+            if (searchValue !== '' && searchUserInfo.length === 0) {
+                setUserPortfolio([]);
+            } else if (searchValue !== '' && searchUserInfo.length > 0) {
+                setUserPortfolio(
+                    searchUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            } else if (searchValue === '') {
+                setUserPortfolio(
+                    filteredUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            }
+        } else if (selectedFilter.length === 0) {
+            if (searchValue !== '' && searchUserInfo.length > 0) {
+                setUserPortfolio(
+                    searchUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            } else if (searchValue !== '' && searchUserInfo.length === 0) {
+                setUserPortfolio([]);
+            } else if (searchValue === '') {
+                setUserPortfolio(
+                    filteredUserInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                        return <Portfolio key={idx} {...item} />;
+                    }),
+                );
+            }
+        }
+    };
 
     // 직군, 기술스택의 checkbox창 만드는 로직
     const Filter = ({ data }: { data: Array<string> }): JSX.Element => {
@@ -112,7 +142,6 @@ export const PortfolioListView = ({
         if (!filterBox.current) return;
         if (!filterBox.current.contains(e.target)) {
             setPositionActive(false);
-            setStackActive(false);
         }
     }, []);
 
@@ -133,41 +162,46 @@ export const PortfolioListView = ({
                         </FilterButton>
                         {positionActive && <Filter data={positions} />}
                     </FilterPositionDiv>
-                    {/* Stack */}
-                    <FilterStackDiv>
-                        <FilterButton
-                            onClick={() => {
-                                stackActive ? setStackActive(false) : setStackActive(true);
-                            }}
-                            isActive={stackActive}
-                        >
-                            기술 스택
-                        </FilterButton>
-                        {stackActive && <Filter data={stacks} />}
-                    </FilterStackDiv>
-                    <SearchForm>
+                    <SearchForm onSubmit={handleSearchSubmit}>
                         <SearchInput
                             type="text"
-                            placeholder="궁금한 포트폴리오가 있다면 검색해보세요!"
-                            value-={searchValue}
+                            placeholder="찾고싶은 이름, 기술 스택으로 포트폴리오를 검색해보세요!"
+                            value={searchValue}
                             onChange={(e) => {
                                 setSearchValue(e.target.value);
                             }}
                         ></SearchInput>
                         <SearchImg alt="search button" src={`${process.env.PUBLIC_URL}/img/search.svg`} />
+                        <SearchButton type="submit">검색</SearchButton>
+                        <ResetButton
+                            type="button"
+                            onClick={() => {
+                                setPortfolioCount(8);
+                                setSearchValue('');
+                                setSelectedFilter([]);
+                                setUserPortfolio(
+                                    userInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                                        return <Portfolio key={idx} {...item} />;
+                                    }),
+                                );
+                            }}
+                        >
+                            필터 초기화
+                        </ResetButton>
                     </SearchForm>
                 </FilterDiv>
                 {/* Selected filter list */}
                 <FiltersListDiv>{selectedFilterMemo}</FiltersListDiv>
                 {/* Portfolio List */}
                 <UserPortfolioListDiv>
-                    {UserPortfolioList.filter((item, idx) => {
+                    {userPortfolio.filter((item, idx) => {
                         if (idx < portfolioCount) return item;
                     })}
                 </UserPortfolioListDiv>
+                {userPortfolio.length === 0 && <p>검색결과가 없습니다</p>}
                 {/* MORE Button */}
                 <MoreDiv>
-                    {UserPortfolioList.length >= portfolioCount && (
+                    {userPortfolio.length >= portfolioCount && (
                         <MoreButton
                             onClick={() => {
                                 setPortfolioCount((current) => {
@@ -196,29 +230,22 @@ const FilterDiv = styled.div`
     display: flex;
     height: 36px;
     margin-bottom: 12px;
-    padding: 0 36px;
 `;
 const FilterPositionDiv = styled.div`
-    width: 33.333%;
-    position: relative;
-    box-sizing: border-box;
-    padding-right: 20px;
-`;
-const FilterStackDiv = styled.div`
-    width: 33.333%;
+    width: 30%;
     position: relative;
     box-sizing: border-box;
     padding-right: 20px;
 `;
 const SearchForm = styled.form`
     box-sizing: border-box;
-    width: 33.333%;
+    width: 70%;
     position: relative;
 `;
 const SearchInput = styled.input`
-    width: 100%;
+    width: 70%;
     height: 44px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 4px;
     padding-left: 48px;
 `;
@@ -227,38 +254,60 @@ const SearchImg = styled.img`
     top: 12px;
     left: 12px;
 `;
+const SearchButton = styled.button`
+    width: 11%;
+    height: 44px;
+    margin-left: 2%;
+    background-color: ${(props) => props.theme.color.main};
+    color: ${(props) => props.theme.color.sub};
+    border-radius: 4px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+`;
+const ResetButton = styled.button`
+    width: 14%;
+    height: 44px;
+    margin-left: 2%;
+    background-color: ${(props) => props.theme.color.sub};
+    color: ${(props) => props.theme.color.main};
+    border: 1px solid ${(props) => props.theme.color.main};
+    border-radius: 4px;
+
+    &:hover {
+        opacity: 0.7;
+    }
+`;
 const FilterButton = styled.button<HomeProps.IFilterProps>`
     width: 100%;
     height: 44px;
     border: 1px solid #e0e0e0;
     padding: 10px;
-    color: ${(props) => (props.isActive ? '#3a3a3a' : '#757575')};
+    color: ${(props) => (props.isActive ? props.theme.color.defaultText : props.theme.color.buttonText)};
     border-radius: 4px;
+    font-size: 16px;
     text-align: left;
-    background-color: ${(props) => (props.isActive ? '#f5f5f5' : '#fff')};
+    background-color: ${(props) => (props.isActive ? props.theme.color.buttonBackground : props.theme.color.sub)};
 
     &:hover {
-        color: #3a3a3a;
-        background-color: #f5f5f5;
+        color: ${(props) => props.theme.color.defaultText};
+        background-color: ${(props) => props.theme.color.buttonBackground};
     }
 `;
 const InputDiv = styled.div`
     margin: 6px 8px;
-    font-size: 16px;
 `;
 const FilterInput = styled.input`
     margin-right: 8px;
+    margin-bottom: 8px;
     cursor: pointer;
     border: 2px solid blue;
-
-    &:hover {
-        background-color: #5993f6;
-    }
 `;
 const FilterLabel = styled.label`
     cursor: pointer;
     &:hover {
-        color: #5993f6;
+        color: ${(props) => props.theme.color.main};
     }
 `;
 const FilterContainerForm = styled.form`
@@ -268,26 +317,26 @@ const FilterContainerForm = styled.form`
     bottom: -400px;
     left: 0;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
+    background-color: ${(props) => props.theme.color.sub};
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
     z-index: 2;
+    overflow-y: auto;
+    box-sizing: border-box;
 `;
 const FiltersListDiv = styled.div`
-    margin-bottom: 20px;
-    padding: 0 36px;
+    margin-bottom: 28px;
 `;
 
 const FilterItems = styled.div`
     height: 36px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 4px;
     padding: 10px;
     margin-top: 8px;
     margin-left: 12px;
-    margin-bottom: 8px;
-    color: #757575;
+    color: ${(props) => props.theme.color.buttonText};
     display: inline-flex;
     align-items: center;
 `;
@@ -300,53 +349,25 @@ const UserPortfolioListDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    /* HACK: 정렬을 어떤식으로 하면 좋을지 */
-    /* justify-content: center; */
+    justify-content: flex-start;
 `;
-export const PortfolioLink = styled(Link)`
-    border: 1px solid #e0e0e0;
-    width: 30%;
-    height: 260px;
-    border-radius: 10px;
-    margin: 1%;
-    display: inline-flex;
-    flex-basis: 260px;
-    flex-direction: column;
-    text-decoration: none;
-    color: #3a3a3a;
-    transition-duration: 0.3s;
-    transition-property: transform;
-
-    &:hover {
-        transform: translateY(-8px);
-    }
-`;
-
-export const PortfolioTitleDiv = styled.div`
-    width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
-    margin-top: auto;
-    padding: 12px;
-    border-radius: 0 0 10px 10px;
-`;
-export const PortfolioName = styled.p`
-    font-weight: bold;
-    margin-bottom: 2px;
-`;
-export const PortfolioJob = styled.p``;
 const MoreDiv = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 60px;
     margin-bottom: 100px;
 `;
+
 const MoreButton = styled.button`
     width: 120px;
     height: 48px;
-    color: #fff;
-    background-color: #5993f6;
+    background-color: ${(props) => props.theme.color.main};
+    color: ${(props) => props.theme.color.sub};
     display: inline-block;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${(props) => props.theme.color.background};
     border-radius: 9999px;
+
+    &:hover {
+        opacity: 0.8;
+    }
 `;
