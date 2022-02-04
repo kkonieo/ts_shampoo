@@ -100,16 +100,31 @@ declare module 'PublicComponentModule' {
 
 declare module 'MyPageModule' {
     export namespace MyPageProps {
-        interface MyPageSubTitleProps {
-            text: string;
-        }
         interface MyPageProps {
             imgSrc?: string;
             id: string;
             userName: string;
             //TODO : type을 직군들으로 고정시킬지 고민
-            userJobGroup: string;
+            userJobGroup: { id: string; value: string };
             account?: { social: string; socialId?: string }[];
+        }
+
+        interface SubTitleProps {
+            text: string;
+        }
+
+        interface ProfileImgProps {
+            imgSrc?: string;
+        }
+
+        interface UserInfoBoxProps {
+            userData: {
+                id: string;
+                userName: string;
+                userJobGroup: { id: string; value: string };
+                account?: { social: string; socialId?: string }[];
+            };
+            jobGroup: { id: string; value: string }[];
         }
     }
 }
