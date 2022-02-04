@@ -103,6 +103,14 @@ declare module 'MyPageModule' {
         interface MyPageSubTitleProps {
             text: string;
         }
+        interface MyPageProps {
+            imgSrc?: string;
+            id: string;
+            userName: string;
+            //TODO : type을 직군들으로 고정시킬지 고민
+            userJobGroup: string;
+            account?: { social: string; socialId?: string }[];
+        }
     }
 }
 
