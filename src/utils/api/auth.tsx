@@ -115,7 +115,7 @@ export async function userLogin(
 export async function setSignUpProfile(data: LoginSpace.SignUpProps) {
     const response = await axiosGetUserConfig({
         method: 'patch',
-        url: '/user/profile',
+        url: '/user/profile/',
         data: data
     });
 
