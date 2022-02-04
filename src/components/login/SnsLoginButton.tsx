@@ -10,11 +10,8 @@ const SnsLoginButton: React.FC<LoginSpace.SnsLoginButtonProps> = ({ text, to, co
         // SNS 아이콘 클릭 시 리다이렉트 될 URL
         const loginRedirect = "http://localhost:3000/redirect/login";
 
-        if (name === "naver") {
-            return `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=${loginRedirect}`;
-        } else if (name === "github") {
-            return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${loginRedirect}&scope=user:email%20read:user&state=1`;
-        }
+        if (name === "naver") return `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClient.id}&state=1&redirect_uri=${loginRedirect}`;
+        if (name === "github") return `https://github.com/login/oauth/authorize?client_id=${githubClient.id}&redirect_uri=${loginRedirect}&scope=user:email%20read:user&state=1`;
 
         return "";
     }
