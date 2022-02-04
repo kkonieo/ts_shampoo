@@ -36,6 +36,7 @@ const Summary = ({ contents, isEditMode }: Props) => {
         if (e.currentTarget.value == '\n') {
             console.log('엔터감지');
         }
+        //TODO : 로직 수정해야함
         setEditSummaryText(e.currentTarget.value);
         setEditSummary([...editSummary, editSummaryText]);
         console.log(e.currentTarget.value);
