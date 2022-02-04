@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SubTitle from '../SubTitle';
 import SkillsDetail from './SkillsDetail';
 import SkillTag from './SkillTag';
+import { aboutMeProps } from 'AboutMePageModuel';
 
 const Skills = () => {
     //유저의 스킬
     const tmpSkillTitles: string[] = ['React', 'JavaScript', 'Next.js', 'Python', 'styled-components'];
 
-    const tmpSkillDescribes: Object[] = [
+    //TODO : 타입 세부 수정
+    const tmpSkillDescriptions: { title: string; describe: string[] }[] = [
         { title: 'React', describe: ['React bbb', 'ccc', 'ddd'] },
         { title: 'JavaScript', describe: ['JavaScript bbb', 'ccc', 'ddd'] },
         { title: 'Next.js', describe: ['Next.js bbb', 'ccc', 'ddd'] },
@@ -19,10 +21,11 @@ const Skills = () => {
     //선택되는 스킬을 set 하기 위한
     const [targetSkill, setTargetSkill] = useState<string>('');
     const [targetDescribe, setTargetDescribe] = useState<string[]>([]);
+    const [isChecked, setIsChecked] = useState<string>(''); //스킬 선택 (클릭) 여부
 
     useEffect(() => {
         if (targetSkill !== '') {
-            tmpSkillDescribes.map((i: any) => {
+            tmpSkillDescriptions.map((i: any) => {
                 if (i.title === targetSkill) {
                     setTargetDescribe(i.describe);
                 }
@@ -39,10 +42,10 @@ const Skills = () => {
         return undefined;
     }, [targetDescribe]);
 
-    const onSkillClick = (e: React.SyntheticEvent<HTMLDivElement>) => {
-        const value = String(e.currentTarget.dataset.value);
-        //스킬 세팅
+    const onSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
         setTargetSkill(value);
+        console.log('hmm', value);
     };
 
     return (
@@ -50,7 +53,7 @@ const Skills = () => {
             <SubTitle text="🔨 Skills" />
             <TagArea>
                 {tmpSkillTitles.map((item, idx) => (
-                    <SkillTag key={idx} skill={item} onSkillClick={onSkillClick} />
+                    <SkillTag key={idx} skill={item} onSkillChange={onSkillChange} />
                 ))}
             </TagArea>
             <SkillsDetail skillTitles={targetSkill} skillDescribes={targetDescribe} />
@@ -69,7 +72,7 @@ const Div = styled.div`
 `;
 
 const TagArea = styled.div`
-    padding: 10px;
+    padding: 5px 0px;
     box-sizing: border-box;
     width: 100%;
     display: flex;
