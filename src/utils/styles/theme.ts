@@ -11,6 +11,8 @@ const navTheme: DefaultTheme = {
         defaultText: color.black,
         buttonText: color.darkgray,
         buttonBackground: color.lightgray,
+        buttonColor: color.gray,
+        buttonHoverColor: color.darkgray,
     },
 };
 
