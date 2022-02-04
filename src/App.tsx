@@ -34,6 +34,7 @@ function App() {
                         <Route path="aboutme" element={<AboutMePage />} />
                         <Route path="project" element={<ProjectPage />} />
                         <Route path="project/:id" element={<ProjectDetailPage />} />
+                        <Route path="project/add" element={<ProjectDetailPage />} />
                         <Route path="contact" element={<ContactMe />} />
                         <Route path="mypage" element={<MyPage />} />
                         <Route path="detail" element={<p>settings</p>} />

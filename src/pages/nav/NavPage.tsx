@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { useOutlet } from 'react-router-dom';
-import { IconDiv, NavLink } from '../../components';
+import { useOutlet ,useParams} from 'react-router-dom';
+import { IconDiv, NavLink, UserPicture } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
 import { useEffect } from 'react';
+
 
 const NavPage = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
     const name: string = 'Minyoung Lee';
+    // const navId = useParams();
     // 현재 주소 파악
 
     const detectScroll = (e: any) => {
@@ -19,20 +21,20 @@ const NavPage = () => {
         console.log('onLoad', scrollHeight);
     };
 
+
     return (
         <BackgroundDiv>
             <NavContainer>
                 <NavDiv>
                     <IconDiv />
-                    <UserPictureDiv>
-                        <img src={`${process.env.PUBLIC_URL}/img/userDefault.png`} alt="사용자 이미지" />
-                    </UserPictureDiv>
-                    <h2>{name}</h2>
+                    <UserPicture src="/img/userDefault.png" />
+                    <UserName>{name}</UserName>
                     <NavLink />
                 </NavDiv>
                 <ProgressContentsContainer>
                     {/*프로그래스바*/}
                     <ScrollProgress />
+
                     <ContentDiv className="content">{outlet}</ContentDiv>
                 </ProgressContentsContainer>
             </NavContainer>
@@ -90,7 +92,9 @@ const NavDiv = styled.div`
     }
 `;
 
-// 클릭 시 다른 페이지로 이동하는 링크들
+const UserName = styled.div`
+    font-size: 1.5em;
+`;
 
 //프로그래스바와 오른쪽 컨텐츠 영역을 담을 컨테이너
 const ProgressContentsContainer = styled.div`
@@ -112,6 +116,7 @@ const ContentDiv = styled.div`
     scrollbar-width: none;
     padding: 2.5%;
 `;
+
 // 사용자 이미지
 const UserPictureDiv = styled.div`
     margin: 10% auto 0 auto;
@@ -132,4 +137,6 @@ const UserPictureDiv = styled.div`
         padding: 7%;
         width: 80%;
     }
+
 `;
+// 사용자 이미지

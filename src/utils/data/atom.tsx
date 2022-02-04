@@ -14,3 +14,8 @@ export const aboutMeEditState = atom<RecoilProps.aboutMeEditProps[]>({
         { id: 'resume', editMode: false },
     ],
 });
+
+export const idState = atom<string>({
+    key: 'idState',
+    default: '',
+});

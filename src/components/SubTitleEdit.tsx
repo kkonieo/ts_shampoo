@@ -25,7 +25,6 @@ const SubTitleDiv = styled.div`
     margin: 10px 0px;
     padding-bottom: 5px;
     border-bottom: 1px solid #bdbdbd;
-    margin-bottom: 2%;
 `;
 
 const TitleDiv = styled.div`

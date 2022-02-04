@@ -60,15 +60,21 @@ declare module 'SignUp' {
 
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
+        interface IUrl {
+            linkName?: string;
+            linkUrl?: string;
+        }
         interface IProjectProps {
-            id: any;
+            projectId?: string;
+            id?: string;
             title: string;
             startDate: string;
             endDate: string;
             techStack: Array<string>;
-            explain?: string;
-            gifSrc?: string;
-            imgSrc?: string;
+            explain: string;
+            gifSrc?: blob | string;
+            imgSrc?: blob | string;
+            urlLink: IUrl[];
             /*
             아이디 번호
             프로젝트 제목

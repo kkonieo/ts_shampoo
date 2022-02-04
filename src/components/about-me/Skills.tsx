@@ -39,9 +39,11 @@ const Skills = ({ isEditMode }: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetSkill]);
 
+
     const onSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setTargetSkill(value);
+        console.log('hmm', value);
     };
 
     return (
