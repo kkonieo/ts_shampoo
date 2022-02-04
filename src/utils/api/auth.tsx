@@ -73,44 +73,42 @@ export async function userLogin(
     url: "google" | "naver" | "github",
     props: RequestTokenSpace.GoogleToken | RequestTokenSpace.NaverToken | RequestTokenSpace.GithubToken,
 ) {
-    try {
-        const response = await axiosGetTokenConfig({
-            url: `${process.env.REACT_APP_SERVER_ADDRESS}/user/register/`, // 추후에 파라미터로 url 추가 예정
-            data: props,
-        })
 
-        const userProfile: LoginSpace.LoginUserProps = {
-            index: response.data.user_idx,
-            email: response.data.email,
-            name: response.data.name,
-        };
+    const response = await axiosGetTokenConfig({
+        url: `${process.env.REACT_APP_SERVER_ADDRESS}/user/register/`, // 추후에 파라미터로 url 추가 예정
+        data: props,
+    })
 
-        sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
-        cookies.set('accessToken', response.data.tokens.access, {
-            path: '/',
-            expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
-            secure: true,
-            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
-        });
-        cookies.set('refreshToken', response.data.tokens.refresh, {
-            path: '/',
-            expires: new Date(Date.now() + (60 * 60 * 24 * 1000)), // 테스트 기준 1일
-            secure: true,
-            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
-        });
-
-        // 가입되지 않은 유저라면
-        if (response.data.register_check === "False") {
-            window.open('/signup', "_self");
-        }
-        // 가입된 유저라면
-        else {
-            window.open('/', "_self");
-        }
-    }
-    catch (error) {
-        console.log('로그인 에러', error)
+    const userProfile: LoginSpace.LoginUserProps = {
+        index: response.data.user_idx,
+        email: response.data.email,
+        name: response.data.name,
     };
+
+    sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
+    cookies.set('accessToken', response.data.tokens.access, {
+        path: '/',
+        expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
+        secure: true,
+        // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
+    });
+    cookies.set('refreshToken', response.data.tokens.refresh, {
+        path: '/',
+        expires: new Date(Date.now() + (60 * 60 * 24 * 1000)), // 테스트 기준 1일
+        secure: true,
+        // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
+    });
+
+    return response.data.register_check;
+
+    // // 가입되지 않은 유저라면
+    // if (response.data.register_check === "False") {
+    //     window.open('/signup', "_self");
+    // }
+    // // 가입된 유저라면
+    // else {
+    //     window.open('/', "_self");
+    // }
 };
 
 // 회원가입 (추가 정보)
