@@ -88,8 +88,8 @@ export async function userLogin(
 
         const userProfile: LoginSpace.LoginUserProps = {
             index: response.data.user_idx,
-            userEmail: response.data.email,
-            userName: response.data.name,
+            email: response.data.email,
+            name: response.data.name,
         };
 
         sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
@@ -97,13 +97,13 @@ export async function userLogin(
             path: '/',
             expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
             secure: true,
-            // httpOnly: true,
+            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
         cookies.set('refreshToken', response.data.tokens.refresh, {
             path: '/',
             expires: new Date(Date.now() + (60 * 60 * 24 * 1000)), // 테스트 기준 1일
             secure: true,
-            // httpOnly: true,
+            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
         // 가입되지 않은 유저라면
@@ -123,12 +123,12 @@ export async function userLogin(
 // 회원가입 (추가 정보)
 export async function setSignUpProfile(data: LoginSpace.SignUpProps) {
     const response = await axios({
-        method: 'put',
+        method: 'patch',
         url: '/user/profile',
         data: data
     });
 
-    return response.data;
+    return response;
 };
 
 // 직군 가져오기
