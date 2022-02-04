@@ -1,37 +1,22 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { LoginButton } from '../../components';
 import { useForm } from "react-hook-form";
-import { useSetRecoilState  } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import { SignUpProps } from 'SignUp';
-  
+import { LoginSpace } from 'LoginModule';
+
 const SignUpUser = () => {
 
     // useForm 세팅
-    const { register, handleSubmit, formState: {errors} } = useForm<SignUpProps>();
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
     const onSubmit = handleSubmit(data => {
         console.log(data);
         // 서버로 보내서 가입 시키는 로직 들어가야함
-        setNewUser((current: SignUpProps) => {
-            return {
-                ...current,
-                userName: data.userName,
-                userJob: data.userJob,
-            }
-        })
         setPage(1);
     });
 
-    // 새로 가입하는 유저 정보
-    const [newUser, setNewUser] = useState<SignUpProps>({
-        userEmail: "",
-        userName: "",
-        userJob: "",
-    });
-
     // recoil 페이지 세팅
-    const setPage = useSetRecoilState<number>(pageState);
+    const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
     // 더미 데이터
     const jobOptions = [
@@ -56,7 +41,7 @@ const SignUpUser = () => {
                         <p>이름</p>
                         <LoginInput
                             placeholder='이름'
-                                {...register('userName', { required: "이름을 입력해주세요." })} />
+                            {...register('userName', { required: "이름을 입력해주세요." })} />
                     </InformationDiv>
                     {errors.userName && <ErrorP>{errors.userName.message}</ErrorP>}
                     <InformationDiv>
@@ -65,8 +50,8 @@ const SignUpUser = () => {
                             required: "직군을 선택해주세요.",
                         })} />
                         <datalist id="job">
-                            {jobOptions.map((item) => {
-                                return <option value={item.value} />
+                            {jobOptions.map((item, index) => {
+                                return <option key={index} value={item.value} />
                             })}
                         </datalist>
                     </InformationDiv>
@@ -121,7 +106,6 @@ const LoginInput = styled.input`
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-
     align-items: center;
 
     & div:nth-child(1) {
@@ -133,6 +117,7 @@ const InformationDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     font-family: 'AppleSDGothicNeo', 'sans-serif';
     color: #757575;
@@ -140,7 +125,8 @@ const InformationDiv = styled.div`
     width: 300px;
 
     & p:nth-child(2) {
-        margin-left: 20px;
+        margin-left: 10px;
+        padding: 10px;
     }
 `;
 

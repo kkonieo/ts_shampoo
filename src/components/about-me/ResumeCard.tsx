@@ -6,17 +6,22 @@ const ResumeCard = ({ title, resumeDetail }: aboutMeProps.ResumeProps) => {
         <ResumeCardDiv>
             <CardTitle>{title}</CardTitle>
             <CardDetailArea>
-                {resumeDetail.map((item) => {
+                {/*TODO : Same key 값 가지는 오류 수정 */}
+                {resumeDetail.map((item, idx) => {
                     return (
-                        <DetailRowContainer>
+                        <DetailRowContainer key={idx}>
                             <YearTitle>{item.year}</YearTitle>
                             <YearColumnDiv>
-                                {item.detail.map((i) => (
+                                {item.detail.map((i, idx) => (
                                     <YearRowDiv>
                                         <YearDot />
                                         <div>
-                                            <DetailTitle>{i.detailTitle}</DetailTitle>
-                                            <DetailDescribtion>{i.detailDescription}</DetailDescribtion>
+                                            <DetailTitle key={item.year + '_' + i.detailTitle + '_' + idx}>
+                                                {i.detailTitle}
+                                            </DetailTitle>
+                                            <DetailDescribtion key={item.year + '_' + i.detailDescription + '_' + idx}>
+                                                {i.detailDescription}
+                                            </DetailDescribtion>
                                         </div>
                                     </YearRowDiv>
                                 ))}

@@ -3,17 +3,18 @@ import styled from 'styled-components';
 
 const NavLink = () => {
     const { pathname } = useLocation();
+    const links = [
+        { url: 'aboutme', text: 'About me' },
+        { url: 'project', text: 'Project' },
+        { url: 'contact', text: 'Contact' },
+    ];
     return (
         <NavLinkUl>
-            <li className={pathname.includes('/aboutme') ? 'active' : ''}>
-                <Link to="aboutme">About me</Link>
-            </li>
-            <li className={pathname.includes('/project') ? 'active' : ''}>
-                <Link to="project">Project</Link>
-            </li>
-            <li className={pathname.includes('/contact') ? 'active' : ''}>
-                <Link to="contact">Contact</Link>
-            </li>
+            {links.map((link) => (
+                <li className={pathname.includes(link.url) ? 'active' : 'inactive'}>
+                    <Link to={link.url}>{link.text}</Link>
+                </li>
+            ))}
         </NavLinkUl>
     );
 };
@@ -21,7 +22,7 @@ const NavLink = () => {
 export default NavLink;
 
 const NavLinkUl = styled.ul`
-    padding: 0;
+    margin-top: 10%;
     list-style: none;
     width: 100%;
     display: flex;
@@ -33,5 +34,11 @@ const NavLinkUl = styled.ul`
         width: 80%;
         padding: 1vh;
         text-align: center;
+    }
+
+    .inactive {
+        :hover {
+            transform: scale(1.2);
+        }
     }
 `;

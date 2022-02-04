@@ -10,30 +10,30 @@ interface Size {
 const GithubImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/github.svg`,
     alt: "깃허브 아이콘",
-    name: "githubIcon",
-    className: "githubIcon"
-}))<Size>`
-width: ${ props => props.size ? props.size : "10%" };
+    name: "github",
+    className: "github",
+})) <Size>`
+width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;
 `;
 
 const GoogleImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/google.svg`,
     alt: "구글 아이콘",
-    name: "googleIcon",
-    className: "googleIcon"
-}))<Size>`
-width: ${ props => props.size ? props.size : "10%" };
+    name: "google",
+    className: "google"
+})) <Size>`
+width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;
 `;
 
 const NaverImg = styled.img.attrs(() => ({
     src: `${process.env.PUBLIC_URL}/img/naver.svg`,
     alt: "네이버 아이콘",
-    name: "naverIcon",
-    className: "naverIcon"
-}))<Size>`
-width: ${ props => props.size ? props.size : "10%" };
+    name: "naver",
+    className: "naver"
+})) <Size>`
+width: ${props => props.size ? props.size : "10%"};
 cursor: pointer;
 `;
 
