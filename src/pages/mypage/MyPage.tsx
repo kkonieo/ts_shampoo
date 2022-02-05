@@ -18,11 +18,7 @@ const MyPage = () => {
         id: 'elice@test.com',
         userName: '엘리스',
         userJobGroup: { id: 'front-end', value: '프론트엔드' },
-        account: [
-            { social: 'github', socialId: '토끼토끼' },
-            { social: 'google', socialId: '꼬북꼬북' },
-            { social: 'kakao', socialId: '피카피카' },
-        ],
+        account: { social: 'github', socialId: '토끼토끼' },
     };
 
     const tmpJobGroup = [
@@ -44,7 +40,13 @@ const MyPage = () => {
                     <UserDataArea>
                         <UserInfoBox userData={userData} jobGroup={tmpJobGroup} />
                     </UserDataArea>
-                    <BtnArea></BtnArea>
+                    <BtnArea>
+                        <DeleteUserBtn>회원 탈퇴</DeleteUserBtn>
+                        <BtnRowDiv>
+                            <EditBtn>수정하기</EditBtn>
+                            <SubmitBtn>저장하기</SubmitBtn>
+                        </BtnRowDiv>
+                    </BtnArea>
                 </ContentsArea>
             </RowDiv>
         </Div>
@@ -90,3 +92,28 @@ const UserDataArea = styled.div`
 const BtnArea = styled.div`
     flex-grow: 1;
 `;
+
+const Button = styled.button`
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: ${(props) => props.theme.color.buttonColor};
+    &:hover {
+        background-color: ${(props) => props.theme.color.buttonHoverColor};
+    }
+`;
+
+const DeleteUserBtn = styled(Button)``;
+
+const BtnRowDiv = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-between;
+`;
+
+const EditBtn = styled(Button)``;
+
+const SubmitBtn = styled(Button)``;
