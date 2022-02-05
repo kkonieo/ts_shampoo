@@ -46,6 +46,14 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
                     ))}
                 </Select>
             </UserRowDiv>
+            <AccountTitle>계정 관리</AccountTitle>
+
+            <AccountRowDiv>
+                <AccountImageContainer>
+                    <AccountImage />
+                </AccountImageContainer>
+                <AccountId>{userData.account?.socialId}</AccountId>
+            </AccountRowDiv>
         </Div>
     );
 };
@@ -73,3 +81,29 @@ const Select = styled.select`
 `;
 
 const DataOption = styled.option``;
+
+const AccountTitle = styled.div`
+    font-weight: 500;
+    font-size: 17px;
+    margin-top: 30px;
+`;
+
+const AccountRowDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const AccountImageContainer = styled.div`
+    flex-grow: 1;
+`;
+
+//TODO : userData.account.id에 따라서 src가 변경되도록, github ,google,kakao
+const AccountImage = styled.img`
+    src: ${process.env.PUBLIC_URL}+ '/img/github.svg';
+`;
+
+const AccountId = styled.div`
+    flex-grow: 2;
+    font-size: 16px;
+    font-weight: 500;
+`;
