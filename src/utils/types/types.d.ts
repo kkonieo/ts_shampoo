@@ -106,7 +106,7 @@ declare module 'MyPageModule' {
             userName: string;
             //TODO : type을 직군들으로 고정시킬지 고민
             userJobGroup: { id: string; value: string };
-            account?: { social: string; socialId?: string }[];
+            account?: { social: string; socialId?: string };
         }
 
         interface SubTitleProps {
@@ -122,7 +122,7 @@ declare module 'MyPageModule' {
                 id: string;
                 userName: string;
                 userJobGroup: { id: string; value: string };
-                account?: { social: string; socialId?: string }[];
+                account?: { social: string; socialId?: string };
             };
             jobGroup: { id: string; value: string }[];
         }
