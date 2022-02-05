@@ -7,6 +7,13 @@ import { useEffect } from 'react';
 import { naverClient, githubClient } from '../../utils/data/loginApiKey';
 import { LoginSpace } from 'LoginModule';
 
+function isLogin(): void {
+    if (sessionStorage?.getItem('userProfile')) {
+        alert('이미 로그인 중입니다. 홈으로 이동합니다.');
+        window.open('/', '_self');
+    };
+};
+
 const Login = () => {
 
     // recoil 페이지 초기화
@@ -25,12 +32,15 @@ const Login = () => {
 
     // 네이버와 깃허브는 일시 잠금
     function handleClick(event: any) {
-        // const redirectUri: string = setRedirectUri(event.target.name);
+        // const redirectUri: strigit ng = setRedirectUri(event.target.name);
         // window.open(redirectUri, "_self");
     }
 
     // 회원가입 페이지 번호 리셋
-    useEffect(() => setPage(0));
+    useEffect(() => {
+        setPage(0);
+        isLogin();
+    });
 
     return (
         <LoginContainer>

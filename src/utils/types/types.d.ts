@@ -59,7 +59,7 @@ declare module 'LoginModule' {
         };
 
         type SignUpPageProps = 0 | 1;
-    }
+    };
 
     export namespace RequestTokenSpace {
         interface GithubToken {

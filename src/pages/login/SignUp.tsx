@@ -3,6 +3,7 @@ import { SignUpUser, SignUpCompleted } from './index';
 import { useRecoilValue } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
+import { useEffect } from 'react';
 
 const SignUp = () => {
 
@@ -21,9 +22,8 @@ const SignUp = () => {
             )
         }
     }
-    
-    const renderPage = renderHTML();
 
+    const renderPage = renderHTML();
 
     return (
         <LoginContainer>
