@@ -33,9 +33,11 @@ declare module 'AboutMePageModuel' {
 declare module 'LoginModule' {
     export namespace LoginSpace {
         interface LoginButtonProps {
-            type: 'submit';
+            type: 'submit' | 'button';
             text: string;
-            className: "blue_button" | "gray_button"; // 버튼 컬러 바꾸기용
+            className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+            width?: string;
+            height?: string;
         };
 
         interface SnsLoginButtonProps {
