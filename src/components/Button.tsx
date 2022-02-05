@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { LoginSpace } from 'LoginModule';
+import { ButtonProps } from 'ButtonModule';
 
 
-const Button = ({ type, text, className, width, height }: LoginSpace.LoginButtonProps): JSX.Element => {
+const Button = ({ type, text, className, width, height }: ButtonProps): JSX.Element => {
 
     return (
         <StyledButton

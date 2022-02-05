@@ -32,13 +32,6 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-        interface LoginButtonProps {
-            type: 'submit' | 'button';
-            text: string;
-            className: "blue" | "gray"; // 버튼 컬러 바꾸기용
-            width?: string;
-            height?: string;
-        };
 
         interface SnsLoginButtonProps {
             text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
@@ -149,3 +142,13 @@ declare module 'RecoilModule' {
         }
     }
 }
+
+declare module 'ButtonModule' {
+    interface ButtonProps {
+        type: 'submit' | 'button';
+        text: string;
+        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        width?: string;
+        height?: string;
+    };
+};
