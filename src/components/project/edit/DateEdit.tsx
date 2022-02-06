@@ -23,34 +23,39 @@ const DateEdit = ({ startDate, setStartDate, endDate, setEndDate, editMode }: pr
             )}
             {dateEdit && (
                 <>
-                    <label>
-                        제작 시작일:{' '}
-                        <input
-                            type="date"
-                            name="startDate"
-                            value={startDate}
-                            onChange={({ target }) => setStartDate(target.value)}
-                        />
-                    </label>
-                    <label>
-                        제작 종료일:{' '}
-                        <input
-                            type="date"
-                            name="endDate"
-                            value={endDate}
-                            onChange={({ target }) => setEndDate(target.value)}
-                        />
-                    </label>
-                    <button
-                        onClick={() => {
-                            if (startDate > endDate) alert('종료일이 시작일보다 빠릅니다!');
-                            else handleChangeEdit();
-                        }}
-                    >
-                        확인
-                    </button>
+                    <div className="inputDiv">
+                        <label className="start">
+                            제작 시작일:{' '}
+                            <input
+                                type="date"
+                                name="startDate"
+                                value={startDate}
+                                onChange={({ target }) => setStartDate(target.value)}
+                            />
+                        </label>
+                        <label className="end">
+                            제작 종료일:{' '}
+                            <input
+                                type="date"
+                                name="endDate"
+                                value={endDate}
+                                onChange={({ target }) => setEndDate(target.value)}
+                            />
+                        </label>
+                    </div>
+                    <div className="buttonDiv">
+                        <button
+                            onClick={() => {
+                                if (startDate > endDate) alert('종료일이 시작일보다 빠릅니다!');
+                                else handleChangeEdit();
+                            }}
+                        >
+                            확인
+                        </button>
+                    </div>
                 </>
             )}
+            <hr />
         </Div>
     );
 };
@@ -60,7 +65,33 @@ const Div = styled.div`
     font-size: 1.5em;
     color: #757575;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 70%;
 
-    margin-right: auto;
+    input {
+        margin-left: auto;
+    }
+
+    .inputDiv {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    label {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .buttonDiv {
+        display: flex;
+        width: 50%;
+        button {
+            width: 5em;
+            height: 3em;
+        }
+    }
+
+    margin-bottom: 2%;
 `;

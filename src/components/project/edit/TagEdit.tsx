@@ -78,17 +78,17 @@ const StackDiv = styled.div`
 `;
 const TagDiv = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 `;
 const Tag = styled.div`
     position: relative;
-    min-width: 20%;
     text-align: center;
     margin: 2%;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.sub};
     padding: 3%;
+    border-radius: 5px;
     img {
         position: absolute;
         right: 0;

@@ -7,7 +7,6 @@ interface props {
     editMode?: boolean;
 }
 const TitleEdit = ({ title, setTitle, editMode }: props) => {
-    const [titleEdit, setTitleEdit] = useState<boolean>(false);
     const titleRef = useRef<HTMLInputElement>(null);
 
     useLayoutEffect(() => {
@@ -15,22 +14,21 @@ const TitleEdit = ({ title, setTitle, editMode }: props) => {
     });
 
     const handleChangeEdit = () => {
-        if (editMode) setTitleEdit((current) => !current);
-        if (!title) setTitle('프로젝트 제목');
+        if (!title) setTitle('제목');
     };
     return (
         <Div>
-            {!titleEdit && <p onClick={handleChangeEdit}>{title}</p>}
-            {titleEdit && (
+            {!editMode && <p onClick={handleChangeEdit}>{title}</p>}
+            {editMode && (
                 <>
                     <input
                         ref={titleRef}
                         type="text"
                         value={title}
-                        placeholder="제목을 입력해주세요"
+                        placeholder="제목"
                         onChange={(e) => setTitle(e.target.value)}
-                        onBlur={handleChangeEdit}
                     />
+                    <hr />
                 </>
             )}
         </Div>
@@ -41,4 +39,8 @@ export default TitleEdit;
 const Div = styled.div`
     font-weight: bold;
     font-size: 2em;
+
+    input {
+        width: 100%;
+    }
 `;

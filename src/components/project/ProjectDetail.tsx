@@ -150,7 +150,7 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
                     onChange={(newValue = '') => setExplain(newValue)}
                 />
             )}
-            <MDEditor.Markdown source={explain} />
+            {!editMode && <MDEditor.Markdown source={explain} />}
             <TagEdit techStack={techStack} setTechStack={setTechStack} editMode={editMode} />
             <LinkEdit urlLink={urlLink} setUrlLink={setUrlLink} editMode={editMode} />
             {editMode && (

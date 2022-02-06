@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 interface EditProps {
     source?: string;
     setSrc: (...args: any[]) => any;
@@ -8,21 +9,29 @@ interface EditProps {
 }
 const ImgEdit = ({ source, setSrc, handleShowPreview, alt, accept, editMode }: EditProps) => {
     return (
-        <div>
-            {source && (
+        <Div>
+            {!editMode && (
                 <>
-                    <img alt={alt} src={source} />
-
+                    <img alt={alt} src={source ?? `${process.env.PUBLIC_URL}/img/default.png}`} />
                     {editMode && <button onClick={() => setSrc('')}>제거</button>}
                 </>
             )}
-            {!source && (
+            {editMode && (
                 <label>
                     <input type="file" accept={`image/${accept}`} onChange={handleShowPreview} name="source" />
                 </label>
             )}
-        </div>
+        </Div>
     );
 };
 
 export default ImgEdit;
+
+const Div = styled.div`
+    display: flex;
+    justify-content: center;
+
+    img {
+        border-radius: 15px;
+    }
+`;
