@@ -10,11 +10,21 @@ interface EditProps {
 const ImgEdit = ({ source, setSrc, handleShowPreview, alt, accept, editMode }: EditProps) => {
     return (
         <Div>
-            {!editMode && (
-                <>
+            {source && (
+                <ImgDiv>
                     <img alt={alt} src={source ?? `${process.env.PUBLIC_URL}/img/default.png}`} />
-                    {editMode && <button onClick={() => setSrc('')}>제거</button>}
-                </>
+                    {editMode && (
+                        <button>
+                            <img
+                                onClick={() => {
+                                    setSrc('');
+                                }}
+                                src={`${process.env.PUBLIC_URL}/img/close.svg`}
+                                alt="닫기"
+                            />
+                        </button>
+                    )}
+                </ImgDiv>
             )}
             {editMode && (
                 <label>
@@ -29,9 +39,24 @@ export default ImgEdit;
 
 const Div = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
 
     img {
         border-radius: 15px;
+    }
+`;
+
+const ImgDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1.5%;
+    button {
+        position: absolute;
+
+        right: 0px;
+        top: 0px;
+        border: none;
     }
 `;

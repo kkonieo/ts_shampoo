@@ -84,10 +84,15 @@ const TagDiv = styled.div`
 const Tag = styled.div`
     position: relative;
     text-align: center;
-    margin: 2%;
+    margin: 1%;
+    padding: 1%;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.sub};
-    padding: 3%;
+
     border-radius: 5px;
     img {
         position: absolute;

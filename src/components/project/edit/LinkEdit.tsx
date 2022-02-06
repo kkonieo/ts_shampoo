@@ -23,33 +23,35 @@ const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
     return (
         <Div>
             <h2>관련 사이트</h2>
-            {urlLink &&
-                urlLink.map((link, idx) => (
-                    <button type="button" onClick={() => window.open(`${link.linkUrl}`, '_blank')}>
-                        {link.linkName}
-                        {editMode && (
-                            <img
-                                onClick={(event) => {
-                                    event.stopPropagation();
-                                    const newUrlLink = [];
-                                    for (let i: number = 0; i < urlLink.length; i++) {
-                                        if (i !== idx) {
-                                            newUrlLink.push(urlLink[i]);
+            <ButtonDiv>
+                {urlLink &&
+                    urlLink.map((link, idx) => (
+                        <button type="button" onClick={() => window.open(`${link.linkUrl}`, '_blank')}>
+                            {link.linkName}
+                            {editMode && (
+                                <img
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        const newUrlLink = [];
+                                        for (let i: number = 0; i < urlLink.length; i++) {
+                                            if (i !== idx) {
+                                                newUrlLink.push(urlLink[i]);
+                                            }
                                         }
-                                    }
-                                    setUrlLink(newUrlLink);
-                                }}
-                                src={`${process.env.PUBLIC_URL}/img/close.svg`}
-                                alt="닫기"
-                            />
-                        )}
+                                        setUrlLink(newUrlLink);
+                                    }}
+                                    src={`${process.env.PUBLIC_URL}/img/close.svg`}
+                                    alt="닫기"
+                                />
+                            )}
+                        </button>
+                    ))}
+                {editMode && (
+                    <button type="button" onClick={handleOpenModal}>
+                        +
                     </button>
-                ))}
-            {editMode && (
-                <button type="button" onClick={handleOpenModal}>
-                    +
-                </button>
-            )}
+                )}
+            </ButtonDiv>
             {isModalOpen && (
                 <ModalDiv>
                     <div className="inputDiv">
@@ -98,27 +100,27 @@ export default LinkEdit;
 
 const Div = styled.div`
     justify-content: start;
-    font-family: 'Montserrat';
-    border: none;
-
-    button {
-        margin: 2.5% 5% 5% 0;
-        position: relative;
-        width: 10em;
-        background-color: ${(props) => props.theme.color.background};
-        border-radius: 15px;
-        border: none;
-        font-weight: bold;
-        height: 3em;
-    }
-
+    font-family: 'Montserrat', 'EliceRegular', 'sans-serif';
+    display: flex;
+    flex-direction: column;
     img {
         position: absolute;
         right: 0;
         top: 0;
     }
-`;
 
+    button {
+        border: 0px solid black;
+        margin-right: 3%;
+        position: relative;
+        width: 10em;
+        height: 3em;
+        background-color: ${(props) => props.theme.color.background};
+        font-weight: bold;
+        border-radius: 15px;
+    }
+`;
+const ButtonDiv = styled.div``;
 const ModalDiv = styled.div`
     display: flex;
     flex-direction: column;
