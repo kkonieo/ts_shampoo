@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Button } from '../Button';
 
 export const HeaderView = ({ name }: { name: string }) => {
     const [login, setLogin] = useState<boolean>(false);
@@ -9,7 +10,14 @@ export const HeaderView = ({ name }: { name: string }) => {
         return (
             <>
                 <ButtonGroupDiv>
-                    <Button to="/login">로그인</Button>
+                    <NavLink
+                        to="/login"
+                        onClick={() => {
+                            setLogin(false);
+                        }}
+                    >
+                        <Button type="button" className="blue" width="80px" height="40px" text="로그인" />
+                    </NavLink>
                 </ButtonGroupDiv>
             </>
         );
@@ -19,14 +27,14 @@ export const HeaderView = ({ name }: { name: string }) => {
             <>
                 <NavLink to="/id">나의 포트폴리오</NavLink>
                 <IdSpan>{name}님</IdSpan>
-                <LogoutButton
+                <NavLink
                     to="/"
                     onClick={() => {
                         setLogin(true);
                     }}
                 >
-                    로그아웃
-                </LogoutButton>
+                    <Button type="button" className="gray" width="96px" height="40px" text="로그아웃" />
+                </NavLink>
             </>
         );
     };
@@ -77,24 +85,6 @@ const NavLink = styled(Link)`
 const ButtonGroupDiv = styled.div`
     margin-left: 28px;
 `;
-const Button = styled(Link)`
-    display: inline-flex;
-    width: 80px;
-    height: 40px;
-    border-radius: 9999px;
-    text-decoration: none;
-    align-items: center;
-    justify-content: center;
-    background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.sub};
-`;
 const IdSpan = styled.span`
     margin-left: 20px;
-`;
-const LogoutButton = styled(Button)`
-    margin-left: 16px;
-    width: 96px;
-    background-color: ${(props) => props.theme.color.buttonBackground};
-    color: ${(props) => props.theme.color.buttonText};
-    border: 1px solid ${(props) => props.theme.color.background};
 `;
