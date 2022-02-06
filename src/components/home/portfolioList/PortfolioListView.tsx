@@ -209,7 +209,7 @@ export const PortfolioListView = ({
                     }}
                 >
                     {userPortfolio.length >= portfolioCount && (
-                        <Button className="blue" width="120ㅔㅌ" height="48px" text="더보기" type="button" />
+                        <Button className="blue" width="120px" height="48px" text="더보기" type="button" />
                     )}
                 </MoreDiv>
             </PortfolioListContainerDiv>
