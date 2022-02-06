@@ -2,6 +2,7 @@ import { useCallback, useRef, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
+import { Button } from '../..';
 
 export const PortfolioListView = ({
     userInfo,
@@ -200,17 +201,15 @@ export const PortfolioListView = ({
                 </UserPortfolioListDiv>
                 {userPortfolio.length === 0 && <p>검색결과가 없습니다</p>}
                 {/* MORE Button */}
-                <MoreDiv>
+                <MoreDiv
+                    onClick={() => {
+                        setPortfolioCount((current) => {
+                            return current + 8;
+                        });
+                    }}
+                >
                     {userPortfolio.length >= portfolioCount && (
-                        <MoreButton
-                            onClick={() => {
-                                setPortfolioCount((current) => {
-                                    return current + 8;
-                                });
-                            }}
-                        >
-                            더보기
-                        </MoreButton>
+                        <Button className="blue" width="120ㅔㅌ" height="48px" text="더보기" type="button" />
                     )}
                 </MoreDiv>
             </PortfolioListContainerDiv>
@@ -356,17 +355,6 @@ const MoreDiv = styled.div`
     justify-content: center;
     margin-top: 60px;
     margin-bottom: 100px;
-`;
-
-const MoreButton = styled.button`
-    width: 120px;
-    height: 48px;
-    background-color: ${(props) => props.theme.color.main};
-    color: ${(props) => props.theme.color.sub};
-    display: inline-block;
-    border: 1px solid ${(props) => props.theme.color.background};
-    border-radius: 9999px;
-
     &:hover {
         opacity: 0.8;
     }
