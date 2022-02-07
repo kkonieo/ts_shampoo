@@ -1,7 +1,7 @@
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import { useState } from 'react';
-
+import LinkModal from './LinkModal';
 interface Props {
     urlLink: ProjectProps.IUrl[];
     setUrlLink: (args: ProjectProps.IUrl[]) => void;
@@ -9,21 +9,15 @@ interface Props {
 }
 const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [modalUrlInput, setModalUrlInput] = useState<string>('');
-    const [modalNameInput, setModalNameInput] = useState<string>('');
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleCloseModal = () => {
-        if (isModalOpen === true) return setIsModalOpen(false);
-    };
-
     return (
         <Div>
             <h2>관련 사이트</h2>
-            <ButtonDiv>
+            <div>
                 {urlLink &&
                     urlLink.map((link, idx) => (
                         <button type="button" onClick={() => window.open(`${link.linkUrl}`, '_blank')}>
@@ -51,47 +45,13 @@ const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
                         +
                     </button>
                 )}
-            </ButtonDiv>
-            {isModalOpen && (
-                <ModalDiv>
-                    <div className="inputDiv">
-                        <label>
-                            링크 주소 :
-                            <input
-                                type="text"
-                                value={modalUrlInput}
-                                onChange={(e) => setModalUrlInput(e.target.value)}
-                                placeholder="링크 주소를 입력해주세요"
-                            />
-                        </label>
-                        <label>
-                            링크 이름 :
-                            <input
-                                type="text"
-                                value={modalNameInput}
-                                onChange={(e) => setModalNameInput(e.target.value)}
-                                placeholder="링크명을 입력해주세요"
-                            />
-                        </label>
-                    </div>
-
-                    <div className="buttonDiv">
-                        <button
-                            onClick={() => {
-                                if (modalUrlInput === '') return;
-                                const newUrlLink = [...urlLink];
-                                newUrlLink.push({ linkName: modalNameInput, linkUrl: modalUrlInput });
-                                setUrlLink(newUrlLink);
-                                setModalNameInput('');
-                                handleCloseModal();
-                            }}
-                        >
-                            입력
-                        </button>
-                        <button onClick={handleCloseModal}>닫기</button>
-                    </div>
-                </ModalDiv>
-            )}
+            </div>
+            <LinkModal
+                isModalOpen={isModalOpen}
+                urlLink={urlLink}
+                setUrlLink={setUrlLink}
+                setIsModalOpen={setIsModalOpen}
+            />
         </Div>
     );
 };
@@ -103,6 +63,7 @@ const Div = styled.div`
     font-family: 'Montserrat', 'EliceRegular', 'sans-serif';
     display: flex;
     flex-direction: column;
+    margin: 5% 0;
     img {
         position: absolute;
         right: 0;
@@ -118,36 +79,5 @@ const Div = styled.div`
         background-color: ${(props) => props.theme.color.background};
         font-weight: bold;
         border-radius: 15px;
-    }
-`;
-const ButtonDiv = styled.div``;
-const ModalDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2%;
-    width: 80%;
-    margin: auto;
-    input {
-        min-width: 250px;
-        margin: 1%;
-        padding: 1%;
-    }
-    button {
-        border-radius: 0;
-        background-color: ${(props) => props.theme.color.main};
-        color: ${(props) => props.theme.color.sub};
-    }
-
-    .inputDiv {
-        display: flex;
-        text-align: center;
-        width: 100%;
-        flex-direction: column;
-    }
-    .buttonDiv {
-        display: flex;
-        flex-direction: row;
     }
 `;

@@ -54,7 +54,7 @@ const ImgDiv = styled.div`
     padding: 1.5%;
     button {
         position: absolute;
-
+        border: 0px;
         right: 0px;
         top: 0px;
         border: none;

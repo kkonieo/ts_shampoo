@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 
 interface props {
@@ -8,10 +8,6 @@ interface props {
 }
 const TitleEdit = ({ title, setTitle, editMode }: props) => {
     const titleRef = useRef<HTMLInputElement>(null);
-
-    useLayoutEffect(() => {
-        if (titleRef.current != null) titleRef.current.focus();
-    });
 
     const handleChangeEdit = () => {
         if (!title) setTitle('제목');
