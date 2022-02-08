@@ -1,20 +1,31 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export const IntroService = () => {
+    AOS.init();
     return (
         <>
             <section>
                 <ServiceContainerDiv>
-                    <h1>
-                        개발자들의 포트폴리오 사이트
-                        <br />
-                        EliceFolio에 오신 것을 환영합니다.
-                    </h1>
-                    <p>자신만의 포트폴리오를 올리고 개발자로써의 역량을 보여주세요!</p>
+                    <IntroductionDiv data-aos="fade-up" data-aos-duration="2000">
+                        <h1>
+                            개발자들의 포트폴리오 사이트
+                            <br />
+                            EliceFolio에 오신 것을 환영합니다.
+                        </h1>
+                        <p>자신만의 포트폴리오를 올리고 개발자로써의 역량을 보여주세요!</p>
+                    </IntroductionDiv>
                     <FirstSection>
                         <div>
-                            <img src={`${process.env.PUBLIC_URL}/img/intro/new.png`} alt="new" width={'172px'} />
+                            <img
+                                src={`${process.env.PUBLIC_URL}/img/intro/new.png`}
+                                alt="new"
+                                width={'172px'}
+                                data-aos="fade-up"
+                                data-aos-duration="2000"
+                            />
                             <img src={`${process.env.PUBLIC_URL}/img/intro/web.png`} alt="web" width={'367px'} />
                         </div>
                         <div>
@@ -26,7 +37,7 @@ export const IntroService = () => {
                             <h2>
                                 다른사람의 포트폴리오를 보고
                                 <br />
-                                인사이트를 얻을수 있습니다.
+                                인사이트를 얻을수도 있습니다!
                             </h2>
                         </div>
                     </FirstSection>
@@ -43,7 +54,13 @@ export const IntroService = () => {
                                 alt="HR people"
                                 width={'151px'}
                             />
-                            <img src={`${process.env.PUBLIC_URL}/img/intro/talk.png`} alt="talk" width={'298px'} />
+                            <img
+                                src={`${process.env.PUBLIC_URL}/img/intro/talk.png`}
+                                alt="talk"
+                                width={'298px'}
+                                data-aos="fade-up"
+                                data-aos-duration="2000"
+                            />
                         </div>
                         <GoServiceLink to="/">
                             <h3>지금 바로 개발자들의 포트폴리오 살펴보기</h3>
@@ -69,9 +86,12 @@ const ServiceContainerDiv = styled.div`
         margin-bottom: 120px;
     }
 `;
+const IntroductionDiv = styled.div`
+    padding: 200px 0;
+`;
 const FirstSection = styled.div`
     display: flex;
-    padding: 100px 0;
+    padding: 200px 0;
 
     & div:first-child {
         width: 50%;
@@ -93,7 +113,7 @@ const FirstSection = styled.div`
     }
 `;
 const SecondSection = styled.div`
-    padding: 100px 0;
+    padding: 300px 0;
     position: relative;
 
     & h2 {
@@ -105,7 +125,7 @@ const SecondSection = styled.div`
     }
     & img:nth-child(3) {
         position: absolute;
-        top: 20px;
+        top: 200px;
         right: 160px;
     }
 `;
