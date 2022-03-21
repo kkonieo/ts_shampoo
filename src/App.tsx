@@ -9,6 +9,7 @@ import {
     Login,
     SignUp,
     ContactMe,
+    Intro,
     Spinner,
 } from './pages';
 import { BrowserRouter } from 'react-router-dom';
@@ -28,7 +29,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/redirect/:id" element={<Spinner />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="intro" element={<p>만든 사람들</p>}></Route>
+                    <Route path="/intro" element={<Intro />}></Route>
                     <Route path=":id" element={<NavPage />}>
                         <Route path="" element={<Navigate to="aboutme" />} />
                         <Route path="aboutme" element={<AboutMePage />} />

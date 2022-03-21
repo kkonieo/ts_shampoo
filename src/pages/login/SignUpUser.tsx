@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LoginButton } from '../../components';
+import { Button } from '../../components';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
@@ -79,7 +79,10 @@ const SignUpUser = () => {
                     </InformationDiv>
                     {errors.job && <ErrorP>{errors.job.message}</ErrorP>}
                 </FormDiv>
-                <LoginButton type='submit' text='가입하기' className="blue_button" />
+                <Button
+                    type='submit'
+                    text='가입하기'
+                    className="blue" />
             </Form>
         </>
     );

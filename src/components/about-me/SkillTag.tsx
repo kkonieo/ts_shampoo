@@ -32,8 +32,8 @@ const TagDiv = styled.div`
 `;
 
 const TagNameDiv = styled.div`
-    font-size: 18px;
-    width: 100px;
+    font-size: 15px;
+    width: auto;
     height: 30px;
     background: #e6e6e6;
     border-radius: 30px;
@@ -42,7 +42,8 @@ const TagNameDiv = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
+    box-sizing: border-box;
+    padding: 10px;
     scrollbar-width: none;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.textColor};

@@ -7,3 +7,4 @@ export { NavPage, ProjectPage, ProjectDetailPage, AboutMePage } from './nav';
 export { PageNotFound } from './PageNotFound';
 export { Login, SignUp, Spinner } from './login';
 export { ContactMe } from './contact/ContactMe';
+export { Intro } from './intro';
