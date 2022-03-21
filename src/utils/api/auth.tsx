@@ -122,6 +122,18 @@ export async function setSignUpProfile(data: LoginSpace.SignUpProps) {
     return response;
 };
 
+// 회원삭제
+export async function setDeleteUser(data: LoginSpace.SignUpProps) {
+    const response = await axiosGetUserConfig({
+        method: 'delete',
+        url: '/user/profile/',
+        data: data
+    });
+
+    return response;
+};
+
+
 // 직군 가져오기
 export async function getPosition() {
     const response = await axios.get('/tag/job');

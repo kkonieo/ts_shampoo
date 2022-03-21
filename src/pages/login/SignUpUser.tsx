@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
 import { setSignUpProfile } from '../../utils/api/auth';
+import { useEffect, useState } from 'react';
 
 const SignUpUser = () => {
 
@@ -13,6 +14,9 @@ const SignUpUser = () => {
 
     // 유저 이메일은 고정
     const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
+
+    // 회원가입을 정상적으로 완료 했는가?
+    const [isSignUp, setIsSignUp] = useState<boolean>(false);
 
     // useForm 세팅
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
@@ -26,11 +30,15 @@ const SignUpUser = () => {
         try {
             const response = await setSignUpProfile(data);
 
-            if (response.data.success) setPage(1);
-            if (!response.data.success) alert('유저 정보 업데이트에 실패했습니다.');
+            if (response.data.success) {
+                setIsSignUp(true);
+                setPage(1);
+            } else alert('유저 정보 업데이트에 실패했습니다.');
         }
         catch (error) { console.log('유저 추가 정보 업데이트 에러', error); };
     };
+
+    // 회원가입을 정상적으로 하지 않았다면, 회원정보 삭제하는 함수
 
     // 더미 데이터
     const jobOptions = [
