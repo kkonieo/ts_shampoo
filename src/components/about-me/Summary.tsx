@@ -1,45 +1,74 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { RecoilProps } from 'RecoilModule';
 import styled from 'styled-components';
-import { aboutMeEditState } from '../../utils/data/atom';
+import { aboutMeData, aboutMeEditState } from '../../utils/data/atom';
 import SubTitle from '../SubTitle';
 
 interface Props {
-    contents: string[];
     isEditMode: boolean;
 }
 
-const Summary = ({ contents, isEditMode }: Props) => {
-    const [summaryState, setSummaryState] = useState(contents);
+const Summary = ({ isEditMode }: Props) => {
+    const [contents, setContents] = useRecoilState(aboutMeData);
+    const [summaryState, setSummaryState] = useState(contents.summary.split('\n'));
     const [editSummary, setEditSummary] = useState(summaryState);
-    const [editSummaryText, setEditSummaryText] = useState<string>('');
+    const [editSummaryText, setEditSummaryText] = useState<string>(contents.summary);
 
-    const textRef = useRef<HTMLTextAreaElement>(null);
+    const [controlEditMode, setControlEditMode] = useRecoilState<RecoilProps.aboutMeEditProps[]>(aboutMeEditState);
+    const editTextRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
-        if (textRef === null || textRef.current === null) {
+        console.log(contents.summary);
+        setSummaryState(contents.summary.split('\n'));
+    }, [contents]);
+
+    /*
+        수정할때 (onChange) : setEditSummary
+        수정 완료시 (onSubmit) : 
+     */
+
+    useEffect(() => {
+        if (editTextRef === null || editTextRef.current === null) {
             return;
         }
-        textRef.current.style.height = '100px';
-        textRef.current.style.height = textRef.current.scrollHeight + 'px';
-    }, []);
+        handleResizeTextAreaHeight();
+    }, [isEditMode]);
 
     const handleResizeTextAreaHeight = useCallback(() => {
-        if (textRef === null || textRef.current === null) {
+        if (editTextRef === null || editTextRef.current === null) {
             return;
         }
-        textRef.current.style.height = '100px';
-        textRef.current.style.height = textRef.current.scrollHeight + 'px';
+        editTextRef.current.style.height = '100px';
+        editTextRef.current.style.height = editTextRef.current.scrollHeight + 'px';
     }, []);
 
     const onEditTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (e.currentTarget.value == '\n') {
+        if (e.currentTarget.value === '\n') {
             console.log('엔터감지');
         }
         //TODO : 로직 수정해야함
         setEditSummaryText(e.currentTarget.value);
-        setEditSummary([...editSummary, editSummaryText]);
+        //setEditSummary([...editSummary, editSummaryText]);
         console.log(e.currentTarget.value);
+    };
+
+    const onChangeSummaryEditMode = () => {
+        setControlEditMode(
+            controlEditMode.map((item) =>
+                item.id === 'summary' ? { ...item, editMode: !item.editMode } : { ...item, editMode: false },
+            ),
+        );
+    };
+
+    const onEditTextSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (window.confirm('수정하시겠습니까?')) {
+            setContents({ summary: editSummaryText });
+            onChangeSummaryEditMode();
+        } else {
+            alert('취소를 눌렀습니다');
+        }
     };
 
     return (
@@ -53,16 +82,19 @@ const Summary = ({ contents, isEditMode }: Props) => {
                 </ContentsArea>
             )}
             {isEditMode && (
-                <EditArea>
-                    <EditForm>
-                        <TextArea
-                            ref={textRef}
-                            value={editSummary.map((item, idx) => item + '\n').join('')}
-                            onInput={handleResizeTextAreaHeight}
-                            onChange={onEditTextChange}
-                        />
-                    </EditForm>
-                </EditArea>
+                <ContentsArea>
+                    <EditArea>
+                        <EditForm onSubmit={onEditTextSubmit}>
+                            <TextArea
+                                ref={editTextRef}
+                                value={editSummaryText}
+                                onInput={handleResizeTextAreaHeight}
+                                onChange={onEditTextChange}
+                            />
+                            <button>제출</button>
+                        </EditForm>
+                    </EditArea>
+                </ContentsArea>
             )}
         </Div>
     );
@@ -93,13 +125,12 @@ const UserIntroduce = styled.div`
 //editElement
 
 const EditArea = styled.div`
-    width: 100%;
-    height: 100%;
     margin-top: 15px;
 `;
 
 const EditForm = styled.form`
     width: 100%;
+    height: 100%;
     padding: 0;
 `;
 
@@ -108,8 +139,9 @@ const TextArea = styled.textarea`
     font-size: 17px;
     font-weight: 400;
     resize: none;
-    overflow: visible;
     box-sizing: border-box;
     padding: 10px;
     background-color: ${(props) => props.theme.color.background};
 `;
+
+const EditSubmitBtn = styled.button``;

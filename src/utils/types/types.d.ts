@@ -148,5 +148,8 @@ declare module 'RecoilModule' {
             id: string;
             editMode: boolean;
         }
+        interface aboutMeSummaryProps {
+            summary: string;
+        }
     }
 }
