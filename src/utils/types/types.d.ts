@@ -32,26 +32,25 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-
         interface SnsLoginButtonProps {
-            text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
-            to: "github" | "google" | "naver"; // 네비게이터용
+            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인' | 'Comming Soon';
+            to: 'github' | 'google' | 'naver'; // 네비게이터용
             color: string;
-        };
+        }
 
         interface LoginContainerProps {
             children: React.ReactNode;
-        };
+        }
 
         interface LoginUserProps {
             index: string;
             userEmail: string;
             userName: string;
-        };
+        }
 
         interface SignUpProps extends LoginUserProps {
             userJob: string;
-        };
+        }
 
         type SignUpPageProps = 0 | 1;
     }
@@ -59,16 +58,16 @@ declare module 'LoginModule' {
     export namespace RequestTokenSpace {
         interface GithubToken {
             access_token: string;
-        };
+        }
 
         interface NaverToken extends GithubToken {
             refresh_token: string;
             expires_in: string;
-        };
+        }
 
         interface GoogleToken {
             auth_token: string;
-        };
+        }
     }
 }
 
@@ -133,6 +132,17 @@ declare module 'HomeModule' {
     }
 }
 
+declare module 'TeamIntroModule' {
+    export namespace TeamIntroProps {
+        interface MemberDataProps {
+            name: string;
+            github: string | null;
+            portfolio: string | null;
+            introduction: string | null;
+        }
+    }
+}
+
 declare module 'aos';
 declare module 'RecoilModule' {
     export namespace RecoilProps {
@@ -147,8 +157,8 @@ declare module 'ButtonModule' {
     interface ButtonProps {
         type: 'submit' | 'button';
         text: string;
-        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    };
-};
+    }
+}
