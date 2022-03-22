@@ -3,6 +3,9 @@
 ### 1. ts_shampoo-server 레포지토리 clone 후 develop 브랜치로 checkout
 
 ### 2. 최상단 경로에 env 파일 추가
+    1. 백엔드 폴더에는 DB 관련 정보가 담긴 env 파일
+    2. 클라이언트 폴더에는 구글 클라이언트 키와 base URL 정보가 담긴 env 파일
+    3. (이미 DB 서버나 Node 서버가 켜진 상태라면) env 파일 수정 후에는 서버 껐다 키기
 
 ### 3. VSCODE 확장 프로그램 MySQL 설치 (화려한 아이콘!)
 
@@ -32,7 +35,7 @@
         - 스웨거에서도 안되면 DB 연결 과정에서 문제가 생겼을 가능성이 큼
         - 스웨거는 되는데 리액트에서 안되면 CORS 에러일 가능성이 큼
 
-### 6. (만약 CORS 에러가 뜬다면) 크롬 확장 프로그램 설치
+### 7. (만약 CORS 에러가 뜬다면) 크롬 확장 프로그램 설치
 
     1. 설치 주소 : https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=ko
     2. 확장 > ... 아이콘 클릭 > 옵션 > 전체 체크 (4번 옵션은 * 체크)
