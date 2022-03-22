@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { RecoilProps } from 'RecoilModule';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { aboutMeData, aboutMeEditState } from '../../utils/data/atom';
 import SubTitle from '../SubTitle';
 
@@ -91,7 +91,7 @@ const Summary = ({ isEditMode }: Props) => {
                                 onInput={handleResizeTextAreaHeight}
                                 onChange={onEditTextChange}
                             />
-                            <button>제출</button>
+                            <EditSubmitBtn>제출</EditSubmitBtn>
                         </EditForm>
                     </EditArea>
                 </ContentsArea>
@@ -144,4 +144,12 @@ const TextArea = styled.textarea`
     background-color: ${(props) => props.theme.color.background};
 `;
 
-const EditSubmitBtn = styled.button``;
+const EditSubmitBtn = styled.button`
+    background-color: rgb(89, 147, 246);
+    text-align: center;
+    padding: 7px;
+    border-radius: 20%;
+    &:hover {
+        background-color: rgba(89, 147, 246, 0.5);
+    }
+`;
