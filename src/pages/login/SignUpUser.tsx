@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
-import { setSignUpProfile } from '../../utils/api/auth';
+import { setSignUpProfile, getPosition } from '../../utils/api/auth';
 import { useEffect, useState } from 'react';
 
 const SignUpUser = () => {
@@ -49,6 +49,15 @@ const SignUpUser = () => {
         { key: '5', value: '빅데이터' },
         { key: '6', value: '안드로이드' },
     ]
+
+    const [job, SetJob] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await getPosition();
+            SetJob(response);
+        })();
+    }, [])
 
     return (
         <>

@@ -57,15 +57,6 @@ declare module 'LoginModule' {
     };
 
     export namespace RequestTokenSpace {
-        interface GithubToken {
-            access_token: string;
-        };
-
-        interface NaverToken extends GithubToken {
-            refresh_token: string;
-            expires_in: string;
-        };
-
         interface GoogleToken {
             auth_token: string;
         };

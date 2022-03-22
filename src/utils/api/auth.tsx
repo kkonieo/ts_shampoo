@@ -41,37 +41,10 @@ const axiosGetUserConfig: AxiosInstance = axios.create({
     }
 })
 
-// 네이버 및 깃허브 SNS 토큰 가져오기 (유저, 비유저 모두 해당됨)
-// 네이버가 data를 지원하지 않아서 params로 적용
-export async function getSnsLoginToken(
-    tokenResponseUri: string,
-    clientId: string,
-    clientSecretKey: string,
-) {
-    try {
-        const response = await axiosGetTokenConfig({
-            url: tokenResponseUri,
-            params: {
-                client_id: clientId,
-                client_secret: clientSecretKey,
-                code: new URL(window.location.href).searchParams.get('code'),
-                grant_type: 'authorization_code',
-                state: 'test',
-            },
-        })
-
-        return response;
-    }
-    catch (error) {
-        console.log('Authorization Token 에러');
-    };
-};
-
 // 로그인 및 회원가입
 //  “register_check”: true일 경우 기가입자 (바로 로그인 시키기) / false일 경우 가입 성공
 export async function userLogin(
-    url: "google" | "naver" | "github",
-    props: RequestTokenSpace.GoogleToken | RequestTokenSpace.NaverToken | RequestTokenSpace.GithubToken,
+    props: RequestTokenSpace.GoogleToken,
 ) {
 
     const response = await axiosGetTokenConfig({
@@ -89,26 +62,17 @@ export async function userLogin(
     cookies.set('accessToken', response.data.tokens.access, {
         path: '/',
         expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
-        secure: true,
+        // secure: true,
         // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
     });
     cookies.set('refreshToken', response.data.tokens.refresh, {
         path: '/',
         expires: new Date(Date.now() + (60 * 60 * 24 * 1000)), // 테스트 기준 1일
-        secure: true,
+        // secure: true,
         // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
     });
 
     return response.data.register_check;
-
-    // // 가입되지 않은 유저라면
-    // if (response.data.register_check === "False") {
-    //     window.open('/signup', "_self");
-    // }
-    // // 가입된 유저라면
-    // else {
-    //     window.open('/', "_self");
-    // }
 };
 
 // 회원가입 (추가 정보)
@@ -133,9 +97,8 @@ export async function setDeleteUser(data: LoginSpace.SignUpProps) {
     return response;
 };
 
-
 // 직군 가져오기
 export async function getPosition() {
-    const response = await axios.get('/tag/job');
+    const response = await axios.get('/job/');
     return response.data;
 };

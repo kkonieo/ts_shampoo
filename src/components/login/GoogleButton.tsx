@@ -23,7 +23,7 @@ const handleSignUpSuccess = (response: any) => {
 // 로그인 시 기가입자 여부 확인
 async function isLoginRegistered(token: RequestTokenSpace.GoogleToken) {
     try {
-        const response = await userLogin('google', token);
+        const response = await userLogin(token);
 
         if (response === "False") { // 가입되지 않은 유저라면
             alert('가입되지 않은 회원입니다. 회원가입 페이지로 이동합니다.');
@@ -38,7 +38,7 @@ async function isLoginRegistered(token: RequestTokenSpace.GoogleToken) {
 // 회원가입 시 기가입자 여부 확인
 async function isSignUpRegistered(token: RequestTokenSpace.GoogleToken) {
     try {
-        const response = await userLogin('google', token);
+        const response = await userLogin(token);
 
         if (response === "False") { // 가입되지 않은 유저라면
             window.open('/signup', "_self");
