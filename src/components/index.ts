@@ -7,3 +7,4 @@ export { Button } from './Button';
 export { GithubImg, GoogleImg, NaverImg } from './SnsIcon';
 export { SnsLoginButton, GoogleLoginButton, GoogleSignUpIcon } from './login';
 export { default as EditDetect } from './EditDetect';
+export { Logo } from './Logo';

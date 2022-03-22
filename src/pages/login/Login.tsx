@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { LoginContainer } from './LoginContainer';
-import { GithubImg, NaverImg, SnsLoginButton, GoogleLoginButton, GoogleSignUpIcon } from '../../components';
+import { GithubImg, NaverImg, SnsLoginButton, GoogleLoginButton, GoogleSignUpIcon, Logo } from '../../components';
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { useEffect } from 'react';
@@ -44,7 +44,7 @@ const Login = () => {
 
     return (
         <LoginContainer>
-            <Logo>EliceFolio</Logo>
+            <Logo />
             <SnsLoginButton text='Comming Soon' to="github" color="black" />
             <GoogleLoginButton />
             <SnsLoginButton text='Comming Soon' to='naver' color="#19CE60" />
@@ -61,19 +61,6 @@ const Login = () => {
 export { Login };
 
 // styled-components
-
-// 로고 (완성되면 삭제 예정)
-const Logo = styled.p`
-    background-color: #5993F6;
-    width: 13vw;
-    height: 10.6vh;
-
-    margin-bottom: 30px;
-
-    @media screen and (max-height: 340px) {
-    margin-bottom: 1vh;
-}
-`;
 
 // 아이콘 영역
 const IconDiv = styled.div`
