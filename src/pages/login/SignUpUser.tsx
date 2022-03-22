@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../components';
+import { Button, Logo } from '../../components';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
@@ -52,7 +52,7 @@ const SignUpUser = () => {
 
     return (
         <>
-            <Logo>EliceFolio</Logo>
+            <Logo />
             <Form onSubmit={onSubmit}>
                 <FormDiv>
                     <InformationDiv>
@@ -92,17 +92,16 @@ export { SignUpUser };
 
 // styled-components
 
-// 로고 (완성되면 삭제 예정)
-const Logo = styled.p`
-    background-color: #5993F6;
-    width: 200px;
-    height: 80px;
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    margin-bottom: 30px;
+    margin-top: 5vh;
 
-    @media screen and (max-height: 340px) {
-    margin-bottom: 1vh;
-}
+    & div:nth-child(1) {
+        justify-content: initial;
+    }
 `;
 
 // 이름, 직군 입력창
@@ -125,16 +124,6 @@ const LoginInput = styled.input`
 
     &::placeholder {
         font-size: 0.8rem;
-    }
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & div:nth-child(1) {
-        justify-content: initial;
     }
 `;
 

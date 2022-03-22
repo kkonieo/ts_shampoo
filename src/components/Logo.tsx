@@ -14,6 +14,6 @@ export { Logo };
 const LogoP = styled.p`
     color: ${({ theme }) => theme.color.defaultText};
     font-family: 'AppleSDGothicNeo', 'sans-serif';
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
 `;
