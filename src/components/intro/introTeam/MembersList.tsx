@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { Members } from './Members';
 import { dummydata } from '../../../utils/data/teamIntroData';
-import { MembersDiv } from '../IntroTeam';
 
 export const MembersList = ({ handleModal }: { handleModal: ({ index }: { index: number }) => void }) => {
     return (
@@ -22,3 +22,12 @@ export const MembersList = ({ handleModal }: { handleModal: ({ index }: { index:
         </MembersDiv>
     );
 };
+
+const MembersDiv = styled.div`
+    width: 1030px;
+    margin: 0 auto;
+    margin-top: 100px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+`;
