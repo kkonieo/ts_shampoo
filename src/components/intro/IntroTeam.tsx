@@ -1,9 +1,28 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Members } from './introTeam/Members';
+import { MemberModal } from './introTeam/MemberModal';
+import { dummydata } from '../../utils/data/teamIntroData';
 
 export const IntroTeam = () => {
+    const [modal, setModal] = useState(false);
+    const [clickedIndex, setClickedIndex] = useState(0);
+
+    const handleModal = ({ index }: { index: number }) => {
+        setModal((modal) => !modal);
+        setClickedIndex(index);
+    };
+
     return (
         <>
+            {modal && (
+                <MemberModal
+                    handleModal={() => {
+                        handleModal({ index: clickedIndex });
+                    }}
+                    data={dummydata[clickedIndex]}
+                />
+            )}
             <IntroTeamSection>
                 <IntroTeamContainerDiv>
                     <h2>EliceFolio의 개발팀을 소개합니다 </h2>
@@ -16,13 +35,20 @@ export const IntroTeam = () => {
                         </p>
                     </div>
                     <MembersDiv>
-                        <div>멤버1</div>
-                        <div>멤버2</div>
-                        <div>멤버3</div>
-                        <div>멤버4</div>
-                        <div>멤버5</div>
-                        <div>멤버6</div>
-                        <div>멤버7</div>
+                        {dummydata.map((item, index) => {
+                            return (
+                                <>
+                                    <div
+                                        key={'members' + index}
+                                        onClick={() => {
+                                            handleModal({ index: index });
+                                        }}
+                                    >
+                                        <Members text={item.name} />
+                                    </div>
+                                </>
+                            );
+                        })}
                     </MembersDiv>
                 </IntroTeamContainerDiv>
             </IntroTeamSection>
@@ -63,16 +89,4 @@ const MembersDiv = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-
-    & div {
-        width: 235px;
-        height: 235px;
-        border: 1px solid;
-        border-radius: 9999px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 12px 11px;
-        cursor: pointer;
-    }
 `;
