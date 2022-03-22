@@ -136,9 +136,10 @@ declare module 'TeamIntroModule' {
     export namespace TeamIntroProps {
         interface MemberDataProps {
             name: string;
-            github: string | null;
-            portfolio: string | null;
-            introduction: string | null;
+            img: string | undefined;
+            github: string | undefined;
+            portfolio: string | undefined;
+            introduction: string | undefined;
         }
     }
 }
