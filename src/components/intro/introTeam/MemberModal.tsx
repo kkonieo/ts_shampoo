@@ -16,9 +16,9 @@ export const MemberModal = ({
                 </CloseIcon>
                 <MemberInfoBox>
                     <div className="leftSide">
-                        <div className="image">
+                        <MemberImage isData={data.img === '' || data.img === undefined ? true : false}>
                             <img src={data.img} alt="member" />
-                        </div>
+                        </MemberImage>
                     </div>
                     <div className="rightSide">
                         <div className="name bold">{data.name}</div>
@@ -78,21 +78,27 @@ const MemberInfoBox = styled.div`
         margin-left: 20px;
         margin-top: 28px;
     }
-    .image {
-        width: 200px;
-        height: 300px;
-        border: 1px solid #f5f5f5;
-    }
     .name {
         font-size: 20px;
         margin-bottom: 12px;
-        margin-top: 12px;
+        margin-top: 28px;
+    }
+`;
+
+const MemberImage = styled.div`
+    width: 200px;
+    height: 300px;
+    border: 1px solid #f5f5f5;
+    background-color: ${(props: TeamIntroProps.MemberImageProps) => props.isData && '#f5f5f5'};
+    img {
+        display: ${(props: TeamIntroProps.MemberImageProps) => props.isData && 'none'};
     }
 `;
 
 const MemberCommentBox = styled.div`
-    padding: 20px;
+    padding: 24px;
     margin-top: 8px;
+    word-break: keep-all;
     .comment {
         margin-top: 8px;
         line-height: 1.3;

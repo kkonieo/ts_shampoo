@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Members } from './introTeam/Members';
 import { MemberModal } from './introTeam/MemberModal';
 import { dummydata } from '../../utils/data/teamIntroData';
+import { MembersList } from './introTeam/MembersList';
 
 export const IntroTeam = () => {
     const [modal, setModal] = useState(false);
@@ -25,31 +25,18 @@ export const IntroTeam = () => {
             )}
             <IntroTeamSection>
                 <IntroTeamContainerDiv>
-                    <h2>EliceFolio의 개발팀을 소개합니다 </h2>
-                    <div>
-                        <h3>만든 사람들</h3>
-                        <p>
-                            빛나는 미래의 인재들
-                            <br />
-                            EliceFolio를 함께 만든 사람들입니다.
-                        </p>
-                    </div>
-                    <MembersDiv>
-                        {dummydata.map((item, index) => {
-                            return (
-                                <>
-                                    <div
-                                        key={'members' + index}
-                                        onClick={() => {
-                                            handleModal({ index: index });
-                                        }}
-                                    >
-                                        <Members text={item.name} />
-                                    </div>
-                                </>
-                            );
-                        })}
-                    </MembersDiv>
+                    <IntroTeamText>
+                        <h2>EliceFolio의 개발팀을 소개합니다 </h2>
+                        <div>
+                            <h3>만든 사람들</h3>
+                            <p>
+                                빛나는 미래의 인재들
+                                <br />
+                                EliceFolio를 함께 만든 사람들입니다.
+                            </p>
+                        </div>
+                    </IntroTeamText>
+                    <MembersList handleModal={handleModal} />
                 </IntroTeamContainerDiv>
             </IntroTeamSection>
         </>
@@ -66,8 +53,9 @@ const IntroTeamContainerDiv = styled.div`
     margin: 0 auto;
     padding-top: 200px;
     padding-bottom: 200px;
-
-    & h2 {
+`;
+const IntroTeamText = styled.div`
+    h2 {
         font-size: 32px;
         margin-bottom: 160px;
     }
@@ -82,7 +70,7 @@ const IntroTeamContainerDiv = styled.div`
         }
     }
 `;
-const MembersDiv = styled.div`
+export const MembersDiv = styled.div`
     width: 1030px;
     margin: 0 auto;
     margin-top: 100px;

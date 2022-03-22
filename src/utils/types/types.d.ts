@@ -141,6 +141,9 @@ declare module 'TeamIntroModule' {
             portfolio: string | undefined;
             introduction: string | undefined;
         }
+        interface MemberImageProps {
+            isData: boolean;
+        }
     }
 }
 
