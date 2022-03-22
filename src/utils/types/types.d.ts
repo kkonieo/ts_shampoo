@@ -16,6 +16,8 @@ declare module 'AboutMePageModuel' {
             skill: string;
             //추후 수정이 필요할듯 (any)
             onSkillChange: any;
+            isEditMode: boolean;
+            onDeleteSkill: (e: React.SyntheticEvent<HTMLSpanElement>) => void;
         }
         interface ResumeProps {
             title: string;
