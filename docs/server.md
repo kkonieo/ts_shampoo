@@ -24,6 +24,13 @@
     3. poetry shell : 가상환경 접근
     4. python manage.py makemigrations  : ORM 모델 생성
     5. python manage.py migrate : 생성한 ORM 모델로 테이블 생성
+    
+### 6. python manage.py runserver 입력해서 서버 실행
+    1. 터미널에 http://127.0.0.1:8000/ 주소가 잘 뜨는지 확인
+    2. 1번 주소를 ctrl + 클릭해서 스웨거 잘 뜨는지 확인
+    3. 리액트로 API 관련 작업 해보고, 에러 뜨면 스웨거에서 테스트 해보기
+        - 스웨거에서도 안되면 DB 연결 과정에서 문제가 생겼을 가능성이 큼
+        - 스웨거는 되는데 리액트에서 안되면 CORS 에러일 가능성이 큼
 
 ### 6. (만약 CORS 에러가 뜬다면) 크롬 확장 프로그램 설치
 
