@@ -45,14 +45,12 @@ const Login = () => {
     return (
         <LoginContainer>
             <Logo />
-            <SnsLoginButton text='Comming Soon' to="github" color="black" />
+            <TextP>예비 개발자들이 만든 ElicePolio에서 <br />여러분의 포트폴리오를 멋지게 준비해보세요.
+            </TextP>
             <GoogleLoginButton />
-            <SnsLoginButton text='Comming Soon' to='naver' color="#19CE60" />
-            <TextP>회원이 아니신가요?</TextP>
+            <SignUpP>회원이 아니신가요?</SignUpP>
             <IconDiv onClick={(event: any) => handleClick(event)}>
-                <GithubImg size="20%" />
                 <GoogleSignUpIcon />
-                <NaverImg size="20%" />
             </IconDiv>
         </LoginContainer>
     );
@@ -64,25 +62,30 @@ export { Login };
 
 // 아이콘 영역
 const IconDiv = styled.div`
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
+    display: flex;
+    justify-content: center;
+    align-items :center;
 
-    width: 100%;
-    
-    & .github {
-        justify-self: end;
-    }
-
-    & .google {
-        justify-self: center;
-    }
+    height: 10%;
 `;
 
 const TextP = styled.p`
-    color: #757575;
+    color: ${({ theme }) => theme.color.buttonText};
     font-family: 'AppleSDGothicNeo', 'sans-serif';
-    font-size: 1vw;
+    font-size: 0.8rem;
+    
+    text-align: center;
+    line-height: 1rem;
 
     margin: 3vh 0;
+`;
+
+const SignUpP = styled.p`
+    color: ${({ theme }) => theme.color.defaultText};
+    font-family: 'AppleSDGothicNeo', 'sans-serif';
     
+    text-align: center;
+    line-height: 1rem;
+
+    margin: 5vh 0 1vh 0;
 `;

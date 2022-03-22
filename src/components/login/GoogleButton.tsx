@@ -61,7 +61,7 @@ const GoogleLoginButton = () => {
                 <GoogleButton
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}>
-                    <GoogleImg />
+                    <GoogleImg size="15%" />
                     구글로 로그인
                 </GoogleButton>
             )}
@@ -80,7 +80,7 @@ const GoogleSignUpIcon = () => {
                 <button
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}>
-                    <GoogleImg size="40%" />
+                    <GoogleImg size="100%" />
                 </button>
             )}
         />
@@ -98,7 +98,7 @@ const GoogleButton = styled.button`
     position: relative;
 
     width: 19.5vw;
-    height: 6.7vh;
+    height: 10vh;
 
     margin: 5px 0;
 
@@ -107,7 +107,7 @@ const GoogleButton = styled.button`
     text-align: center;
     font-family: 'AppleSDGothicNeo', 'sans-serif';
     color: white;
-    font-size: 1vw;
+    font-size: 1rem;
 
     background-color: #EA4335;
 
@@ -116,8 +116,9 @@ const GoogleButton = styled.button`
     & img {
         position: absolute;
 
-        top: 10px;
-        left: 30px;
+        top: 50%;
+        left: 15%;
+        transform: translate(-50%, -50%);
 
         filter: invert(96%) sepia(99%) saturate(3%) hue-rotate(335deg) brightness(104%) contrast(100%);
     }
