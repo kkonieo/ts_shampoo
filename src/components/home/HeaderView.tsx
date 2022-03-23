@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../Button';
 
-export const HeaderView = ({ name }: { name: string }) => {
+export const HeaderView = ({ name }: { name: string | undefined }) => {
     const [login, setLogin] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (typeof name === 'string') {
+            setLogin(true);
+        } else {
+            setLogin(false);
+        }
+    }, [name]);
 
     const Login = () => {
         return (
             <>
                 <ButtonGroupDiv>
-                    <NavLink
-                        to="/login"
-                        onClick={() => {
-                            setLogin(false);
-                        }}
-                    >
+                    <NavLink to="/login">
                         <Button type="button" className="blue" width="80px" height="40px" text="로그인" />
                     </NavLink>
                 </ButtonGroupDiv>
@@ -30,7 +33,8 @@ export const HeaderView = ({ name }: { name: string }) => {
                 <NavLink
                     to="/"
                     onClick={() => {
-                        setLogin(true);
+                        setLogin(false);
+                        sessionStorage.clear();
                     }}
                 >
                     <Button type="button" className="gray" width="96px" height="40px" text="로그아웃" />
@@ -47,7 +51,7 @@ export const HeaderView = ({ name }: { name: string }) => {
                 </LogoLink>
                 <Nav>
                     <NavLink to="/intro">서비스 소개</NavLink>
-                    {login ? <Login /> : <Logout />}
+                    {login ? <Logout /> : <Login />}
                 </Nav>
             </Header>
         </>

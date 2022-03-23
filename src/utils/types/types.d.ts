@@ -44,8 +44,8 @@ declare module 'LoginModule' {
 
         interface LoginUserProps {
             index: string;
-            userEmail: string;
-            userName: string;
+            email: string;
+            name: string;
         }
 
         interface SignUpProps extends LoginUserProps {
