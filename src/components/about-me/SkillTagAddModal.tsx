@@ -36,7 +36,6 @@ const SkillTagAddModal = ({ onAddSkill, onChangeSkillModalState }: Props) => {
     return (
         <ModalDim className="modalDim" onClick={onChangeSkillModalState}>
             <ModalContainer className="modalContainer">
-                <div>콘텐츠영역</div>
                 <Form>
                     <FormRowDiv>
                         <label>기술 이름</label>
@@ -46,6 +45,7 @@ const SkillTagAddModal = ({ onAddSkill, onChangeSkillModalState }: Props) => {
                         <label>기술 설명</label>
                         <Input placeholder="기술" />
                     </FormRowDiv>
+                    <SkillDescriptionContainer>{}</SkillDescriptionContainer>
                     <EditSubmitBtn onClick={onSubmitAddSkill}>완료</EditSubmitBtn>
                 </Form>
             </ModalContainer>
@@ -109,3 +109,7 @@ const EditSubmitBtn = styled.button`
         background-color: rgba(89, 147, 246, 0.5);
     }
 `;
+
+const SkillDescriptionContainer = styled.div``;
+
+const SkillDescription = styled.div``;
