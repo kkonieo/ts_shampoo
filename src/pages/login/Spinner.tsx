@@ -1,27 +1,47 @@
 import styled, { keyframes } from 'styled-components';
 import { ContainerArticle } from './LoginContainer';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { naverClient, githubClient } from '../../utils/data/loginApiKey';
+import { getSnsLoginToken } from '../../utils/api/auth';
+import { LoginSpace } from 'LoginModule';
+import { useLocation } from 'react-router-dom';
 
 const Spinner = () => {
 
-    const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
-    const NAVER_SECRET_KEY = process.env.REACT_APP_NAVER_SECRET_KEY;
+    // CORS 에러 해결해주는 주소
+    const corsErrorKey: string = "http://cors-anywhere.herokuapp.com/";
 
-    // console.log(NAVER_CLIENT_ID);
-    // console.log(NAVER_SECRET_KEY);
+    // 네이버 API 변수
+    const naverTokenResponseUri = `${corsErrorKey}https://nid.naver.com/oauth2.0/token`; // get, post 모두 허용
+    // const naverProfileCheckUri = `${corsErrorKey}https://openapi.naver.com/v1/nid/verify?info=true`;
 
-    (async function () {
-        const tokenCode = new URL(window.location.href).searchParams.get('code')
-        
+    // // 깃허브 API 변수
+    // const githubTokenResponseUri = `${corsErrorKey}https://github.com/login/oauth/access_token`; // post만 허용
+    // const githubProfileCheckUri = `${corsErrorKey}https://api.github.com/user`; // GET만 허용
+
+    // // // 구글 API 변수
+    // const googleTokenResponseUri = `${corsErrorKey}https://oauth2.googleapis.com/token`; // post만 허용
+
+    // API 호출 함수
+    async function getLoginApi() {
         try {
-            const tokenPost = axios.get(`http://cors-anywhere.herokuapp.com/https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${NAVER_CLIENT_ID}&client_secret=${NAVER_SECRET_KEY}&code=${tokenCode}&state=1`)
-            .then((response) => console.log(response))
+            // 액세스 토큰, 리프레쉬 토큰, 유효기간 받아오기
+            const snsToken = getSnsLoginToken(
+                naverTokenResponseUri,
+                naverClient.id,
+                naverClient.key
+            )
+
+            console.log('결과', snsToken);
         }
         catch (error) {
-            console.log('error', error);
+            console.log('에러', error);
         }
-    })()
-    
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => { getLoginApi() }, [])
+
     return (
         <ContainerArticle>
             <FloatingCircles>

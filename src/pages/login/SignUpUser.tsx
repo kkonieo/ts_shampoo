@@ -1,37 +1,36 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import { LoginButton } from '../../components';
+import { Button } from '../../components';
 import { useForm } from "react-hook-form";
-import { useSetRecoilState  } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
-import { SignUpProps } from 'SignUp';
-  
+import { LoginSpace } from 'LoginModule';
+import { setSignUpProfile } from '../../utils/api/auth';
+
 const SignUpUser = () => {
 
-    // useForm 세팅
-    const { register, handleSubmit, formState: {errors} } = useForm<SignUpProps>();
-    const onSubmit = handleSubmit(data => {
-        console.log(data);
-        // 서버로 보내서 가입 시키는 로직 들어가야함
-        setNewUser((current: SignUpProps) => {
-            return {
-                ...current,
-                userName: data.userName,
-                userJob: data.userJob,
-            }
-        })
-        setPage(1);
-    });
-
-    // 새로 가입하는 유저 정보
-    const [newUser, setNewUser] = useState<SignUpProps>({
-        userEmail: "",
-        userName: "",
-        userJob: "",
-    });
-
     // recoil 페이지 세팅
-    const setPage = useSetRecoilState<number>(pageState);
+    const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
+
+    // 유저 이메일은 고정
+    const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
+
+    // useForm 세팅
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
+    const onSubmit = handleSubmit(data => {
+        console.log('data', { ...data, email: userEmail });
+        addProfile({ ...data, email: userEmail });
+    });
+
+    // 유저 추가 정보 업데이트하는 API
+    async function addProfile(data: LoginSpace.SignUpProps) {
+        try {
+            const response = await setSignUpProfile(data);
+
+            if (response.data.success) setPage(1);
+            if (!response.data.success) alert('유저 정보 업데이트에 실패했습니다.');
+        }
+        catch (error) { console.log('유저 추가 정보 업데이트 에러', error); };
+    };
 
     // 더미 데이터
     const jobOptions = [
@@ -50,29 +49,32 @@ const SignUpUser = () => {
                 <FormDiv>
                     <InformationDiv>
                         <p>이메일</p>
-                        <p>example@naver.com</p>
+                        <p>{userEmail}</p>
                     </InformationDiv>
                     <InformationDiv>
                         <p>이름</p>
                         <LoginInput
                             placeholder='이름'
-                                {...register('userName', { required: "이름을 입력해주세요." })} />
+                            {...register('name', { required: "이름을 입력해주세요." })} />
                     </InformationDiv>
-                    {errors.userName && <ErrorP>{errors.userName.message}</ErrorP>}
+                    {errors.name && <ErrorP>{errors.name.message}</ErrorP>}
                     <InformationDiv>
                         <p>직군</p>
-                        <LoginInput list="job" placeholder="직군을 선택해주세요." {...register('userJob', {
+                        <LoginInput list="job" placeholder="직군을 선택해주세요." {...register('job', {
                             required: "직군을 선택해주세요.",
                         })} />
                         <datalist id="job">
-                            {jobOptions.map((item) => {
-                                return <option value={item.value} />
+                            {jobOptions.map((item, index) => {
+                                return <option key={index} value={item.value} />
                             })}
                         </datalist>
                     </InformationDiv>
-                    {errors.userJob && <ErrorP>{errors.userJob.message}</ErrorP>}
+                    {errors.job && <ErrorP>{errors.job.message}</ErrorP>}
                 </FormDiv>
-                <LoginButton type='submit' text='가입하기' className="blue_button" />
+                <Button
+                    type='submit'
+                    text='가입하기'
+                    className="blue" />
             </Form>
         </>
     );
@@ -121,7 +123,6 @@ const LoginInput = styled.input`
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-
     align-items: center;
 
     & div:nth-child(1) {
@@ -133,6 +134,7 @@ const InformationDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     font-family: 'AppleSDGothicNeo', 'sans-serif';
     color: #757575;
@@ -140,7 +142,8 @@ const InformationDiv = styled.div`
     width: 300px;
 
     & p:nth-child(2) {
-        margin-left: 20px;
+        margin-left: 10px;
+        padding: 10px;
     }
 `;
 

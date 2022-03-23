@@ -32,31 +32,45 @@ declare module 'AboutMePageModuel' {
     }
 }
 
-declare module 'loginModule' {
-    export namespace loginSpace {
-        interface LoginButtonProps {
-            type: 'submit';
-            text: string;
-            className: 'blue_button' | 'gray_button'; // 버튼 컬러 바꾸기용
-        }
+declare module 'LoginModule' {
+    export namespace LoginSpace {
 
         interface SnsLoginButtonProps {
-            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인';
-            to: 'github' | 'google' | 'naver'; // 네비게이터용
+            text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
+            to: "github" | "google" | "naver"; // 네비게이터용
             color: string;
-        }
+        };
 
         interface LoginContainerProps {
             children: React.ReactNode;
-        }
-    }
-}
+        };
 
-declare module 'SignUp' {
-    interface SignUpProps {
-        userEmail?: string;
-        userName: string;
-        userJob: string;
+        interface LoginUserProps {
+            index: string;
+            email: string;
+            name: string;
+        };
+
+        interface SignUpProps extends LoginUserProps {
+            job: string;
+        };
+
+        type SignUpPageProps = 0 | 1;
+    };
+
+    export namespace RequestTokenSpace {
+        interface GithubToken {
+            access_token: string;
+        };
+
+        interface NaverToken extends GithubToken {
+            refresh_token: string;
+            expires_in: string;
+        };
+
+        interface GoogleToken {
+            auth_token: string;
+        };
     }
 }
 
@@ -144,6 +158,7 @@ declare module 'HomeModule' {
     }
 }
 
+declare module 'aos';
 declare module 'RecoilModule' {
     export namespace RecoilProps {
         interface aboutMeEditProps {
@@ -155,3 +170,13 @@ declare module 'RecoilModule' {
         }
     }
 }
+
+declare module 'ButtonModule' {
+    interface ButtonProps {
+        type: 'submit' | 'button';
+        text: string;
+        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        width?: string;
+        height?: string;
+    };
+};

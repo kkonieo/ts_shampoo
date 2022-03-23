@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 interface EditProps {
     source?: string;
     setSrc: (...args: any[]) => any;
@@ -8,21 +9,54 @@ interface EditProps {
 }
 const ImgEdit = ({ source, setSrc, handleShowPreview, alt, accept, editMode }: EditProps) => {
     return (
-        <div>
+        <Div>
             {source && (
-                <>
-                    <img alt={alt} src={source} />
-
-                    {editMode && <button onClick={() => setSrc('')}>제거</button>}
-                </>
+                <ImgDiv>
+                    <img alt={alt} src={source ?? `${process.env.PUBLIC_URL}/img/default.png}`} />
+                    {editMode && (
+                        <button>
+                            <img
+                                onClick={() => {
+                                    setSrc('');
+                                }}
+                                src={`${process.env.PUBLIC_URL}/img/close.svg`}
+                                alt="닫기"
+                            />
+                        </button>
+                    )}
+                </ImgDiv>
             )}
-            {!source && (
+            {editMode && (
                 <label>
                     <input type="file" accept={`image/${accept}`} onChange={handleShowPreview} name="source" />
                 </label>
             )}
-        </div>
+        </Div>
     );
 };
 
 export default ImgEdit;
+
+const Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    img {
+        border-radius: 15px;
+    }
+`;
+
+const ImgDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1.5%;
+    button {
+        position: absolute;
+        border: 0px;
+        right: 0px;
+        top: 0px;
+        border: none;
+    }
+`;
