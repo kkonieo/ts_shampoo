@@ -2,19 +2,6 @@ import axios, { AxiosInstance } from 'axios';
 import { LoginSpace, RequestTokenSpace } from 'LoginModule';
 import Cookies from 'universal-cookie';
 import MockAdapter from 'axios-mock-adapter';
-import {jobList} from './job';
-
-// request 테스트를 위한 코드
-// const mock = new MockAdapter(axios); // 가짜 response 객체 생성
-
-// mock.onGet('/tag/job').reply(200, [
-//     { key: '1', value: '백엔드' },
-//     { key: '2', value: '프론트엔드' },
-//     { key: '3', value: '풀스택' },
-//     { key: '4', value: '보안' },
-//     { key: '5', value: '빅데이터' },
-//     { key: '6', value: '안드로이드' },
-// ]);
 
 // headers 인터페이스
 interface Headers {
@@ -30,6 +17,10 @@ const cookies: Cookies = new Cookies();
 const axiosConfig: AxiosInstance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`
 });
+
+// // request 테스트를 위한 코드
+// const mock = new MockAdapter(axiosConfig); // 가짜 response 객체 생성
+// mock.onGet('/job/').reply(200, [...jobList]);
 
 // axios 모듈 생산하는 함수
 export const api = (withToken: boolean) => {

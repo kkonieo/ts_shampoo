@@ -6,6 +6,13 @@ import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
 import { api } from '../../utils/api/auth';
 import { useEffect, useState } from 'react';
+import { jobList } from '../../utils/api/job';
+
+// job 인터페이스
+interface Job {
+    id: number,
+    name: string,
+};
 
 const SignUpUser = () => {
 
@@ -14,6 +21,9 @@ const SignUpUser = () => {
 
     // 유저 이메일은 고정
     const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
+
+    // 직군
+    const [job, setJob] = useState<Job[]>([]);
 
     // 회원가입을 정상적으로 완료 했는가?
     const [isSignUp, setIsSignUp] = useState<boolean>(false);
@@ -39,23 +49,19 @@ const SignUpUser = () => {
 
     // 회원가입을 정상적으로 하지 않았다면, 회원정보 삭제하는 함수
 
-    // 더미 데이터
-    const jobOptions = [
-        { key: '1', value: '백엔드' },
-        { key: '2', value: '프론트엔드' },
-        { key: '3', value: '풀스택' },
-        { key: '4', value: '보안' },
-        { key: '5', value: '빅데이터' },
-        { key: '6', value: '안드로이드' },
-    ]
 
-    const [job, SetJob] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const response = await api(false).getPosition();
-            SetJob(response);
+            // const response = await api(false).getPosition();
+            // setJob(response);
+            setJob(jobList);
         })();
+        return () => {
+            if (!isSignUp) {
+                console.log("회원가입 도중에 나가버림. 회원삭제");
+            }
+        }
     }, [])
 
     return (
@@ -80,8 +86,8 @@ const SignUpUser = () => {
                             required: "직군을 선택해주세요.",
                         })} />
                         <datalist id="job">
-                            {jobOptions.map((item, index) => {
-                                return <option key={index} value={item.value} />
+                            {job.map((item: Job) => {
+                                return <option key={item.id} value={item.name} />
                             })}
                         </datalist>
                     </InformationDiv>
