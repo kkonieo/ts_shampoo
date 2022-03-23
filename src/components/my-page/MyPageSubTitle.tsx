@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MyPageProps } from 'MyPageModule';
 import { useNavigate } from 'react-router-dom';
 
-const MyPageSubTitle = ({ text }: MyPageProps.MyPageSubTitleProps) => {
+const MyPageSubTitle = ({ text }: MyPageProps.SubTitleProps) => {
     const navigate = useNavigate();
 
-    const useConfirm = (message: string, onConfirm: () => void, onCancel: () => void) => {
+    const checkConfirm = (message: string, onConfirm: () => void, onCancel: () => void) => {
         if (!onConfirm) {
             return;
         }
@@ -33,7 +33,7 @@ const MyPageSubTitle = ({ text }: MyPageProps.MyPageSubTitleProps) => {
         console.log('취소했습니다.');
     };
 
-    const onCancelClick = useConfirm('취소하시겠습니까?', confirmAction, cancleAction);
+    const onCancelClick = checkConfirm('취소하시겠습니까?', confirmAction, cancleAction);
 
     return (
         <SubTitleDiv>

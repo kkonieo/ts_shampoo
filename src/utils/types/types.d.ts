@@ -32,11 +32,6 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-        interface LoginButtonProps {
-            type: 'submit';
-            text: string;
-            className: "blue_button" | "gray_button"; // 버튼 컬러 바꾸기용
-        };
 
         interface SnsLoginButtonProps {
             text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
@@ -50,16 +45,16 @@ declare module 'LoginModule' {
 
         interface LoginUserProps {
             index: string;
-            userEmail: string;
-            userName: string;
+            email: string;
+            name: string;
         };
 
         interface SignUpProps extends LoginUserProps {
-            userJob: string;
+            job: string;
         };
 
         type SignUpPageProps = 0 | 1;
-    }
+    };
 
     export namespace RequestTokenSpace {
         interface GithubToken {
@@ -119,8 +114,31 @@ declare module 'PublicComponentModule' {
 
 declare module 'MyPageModule' {
     export namespace MyPageProps {
-        interface MyPageSubTitleProps {
+        interface MyPageProps {
+            imgSrc?: string;
+            id: string;
+            userName: string;
+            //TODO : type을 직군들으로 고정시킬지 고민
+            userJobGroup: { id: string; value: string };
+            account?: { social: string; socialId?: string };
+        }
+
+        interface SubTitleProps {
             text: string;
+        }
+
+        interface ProfileImgProps {
+            imgSrc?: string;
+        }
+
+        interface UserInfoBoxProps {
+            userData: {
+                id: string;
+                userName: string;
+                userJobGroup: { id: string; value: string };
+                account?: { social: string; socialId?: string };
+            };
+            jobGroup: { id: string; value: string }[];
         }
     }
 }
@@ -138,6 +156,7 @@ declare module 'HomeModule' {
     }
 }
 
+declare module 'aos';
 declare module 'RecoilModule' {
     export namespace RecoilProps {
         interface aboutMeEditProps {
@@ -146,3 +165,13 @@ declare module 'RecoilModule' {
         }
     }
 }
+
+declare module 'ButtonModule' {
+    interface ButtonProps {
+        type: 'submit' | 'button';
+        text: string;
+        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        width?: string;
+        height?: string;
+    };
+};

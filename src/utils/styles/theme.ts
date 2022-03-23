@@ -7,10 +7,11 @@ const navTheme: DefaultTheme = {
         background: color.gray,
         main: color.lightBlue,
         sub: color.white,
-        text: color.white,
         defaultText: color.black,
         buttonText: color.darkgray,
         buttonBackground: color.lightgray,
+        buttonColor: color.gray,
+        buttonHoverColor: color.darkgray,
     },
 };
 
