@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
-import { setSignUpProfile, getPosition } from '../../utils/api/auth';
+import { api } from '../../utils/api/auth';
 import { useEffect, useState } from 'react';
 
 const SignUpUser = () => {
@@ -21,14 +21,13 @@ const SignUpUser = () => {
     // useForm 세팅
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
     const onSubmit = handleSubmit(data => {
-        console.log('data', { ...data, email: userEmail });
         addProfile({ ...data, email: userEmail });
     });
 
     // 유저 추가 정보 업데이트하는 API
     async function addProfile(data: LoginSpace.SignUpProps) {
         try {
-            const response = await setSignUpProfile(data);
+            const response = await api(true).setSignUpProfile(data);
 
             if (response.data.success) {
                 setIsSignUp(true);
@@ -54,7 +53,7 @@ const SignUpUser = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await getPosition();
+            const response = await api(false).getPosition();
             SetJob(response);
         })();
     }, [])
