@@ -3,10 +3,10 @@ import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import { useLocation } from 'react-router-dom';
-import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit } from './edit';
+import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit, EditButton } from './edit';
 interface IProps {
     handleChangeToggle: (...args: any[]) => void;
-    editMode?: boolean;
+    editMode: boolean;
 }
 
 const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, editMode }) => {
@@ -30,14 +30,6 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
 
     // project/:id
     const projectId = useLocation().pathname.slice(-3);
-    const openModal = () => {
-        setTechModal(true);
-        setUrlModal(true);
-    };
-    const closeModal = () => {
-        setUrlModal(false);
-    };
-
     const handleSubmit = (e: any) => {
         e?.preventDefault();
         const data: ProjectProps.IProjectProps = {
@@ -150,26 +142,10 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
                     onChange={(newValue = '') => setExplain(newValue)}
                 />
             )}
-            <MDEditor.Markdown source={explain} />
+            {!editMode && <MDEditor.Markdown source={explain} />}
             <TagEdit techStack={techStack} setTechStack={setTechStack} editMode={editMode} />
             <LinkEdit urlLink={urlLink} setUrlLink={setUrlLink} editMode={editMode} />
-            {editMode && (
-                <ButtonDiv>
-                    <button type="submit">수정</button>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            console.log('삭제');
-                            handleChangeToggle();
-                        }}
-                    >
-                        삭제
-                    </button>
-                    <button type="button" onClick={handleChangeToggle}>
-                        취소
-                    </button>
-                </ButtonDiv>
-            )}
+            <EditButton editMode={editMode} />
         </DetailForm>
     );
 };

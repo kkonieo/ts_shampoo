@@ -6,6 +6,7 @@ const SignUpCompleted = () => {
 
     const navigate = useNavigate();
 
+    // 가입 완료 후 2초 후에 홈으로 이동
     useEffect(() => { 
         const timer = setTimeout(() => { navigate('/', { replace: true }); }, 2000);
         return (() => {

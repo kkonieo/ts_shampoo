@@ -49,22 +49,15 @@ declare module 'LoginModule' {
         }
 
         interface SignUpProps extends LoginUserProps {
-            userJob: string;
+            job: string;
+            email: string;
+            name: string;
         }
 
         type SignUpPageProps = 0 | 1;
     }
 
     export namespace RequestTokenSpace {
-        interface GithubToken {
-            access_token: string;
-        }
-
-        interface NaverToken extends GithubToken {
-            refresh_token: string;
-            expires_in: string;
-        }
-
         interface GoogleToken {
             auth_token: string;
         }
@@ -113,8 +106,31 @@ declare module 'PublicComponentModule' {
 
 declare module 'MyPageModule' {
     export namespace MyPageProps {
-        interface MyPageSubTitleProps {
+        interface MyPageProps {
+            imgSrc?: string;
+            id: string;
+            userName: string;
+            //TODO : type을 직군들으로 고정시킬지 고민
+            userJobGroup: { id: string; value: string };
+            account?: { social: string; socialId?: string };
+        }
+
+        interface SubTitleProps {
             text: string;
+        }
+
+        interface ProfileImgProps {
+            imgSrc?: string;
+        }
+
+        interface UserInfoBoxProps {
+            userData: {
+                id: string;
+                userName: string;
+                userJobGroup: { id: string; value: string };
+                account?: { social: string; socialId?: string };
+            };
+            jobGroup: { id: string; value: string }[];
         }
     }
 }

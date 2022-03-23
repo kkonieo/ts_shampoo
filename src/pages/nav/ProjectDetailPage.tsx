@@ -3,14 +3,14 @@ import SubTitleEdit from '../../components/SubTitleEdit';
 import { useState } from 'react';
 
 const ProjectDetailPage = () => {
-    const [editToggle, setEditToggle] = useState<boolean>(false);
+    const [editMode, setEditMode] = useState<boolean>(false);
     const handleChangeToggle = () => {
-        setEditToggle((current) => !current);
+        setEditMode((current) => !current);
     };
     return (
         <>
-            <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            <ProjectDetail handleChangeToggle={handleChangeToggle} editMode={editToggle} />
+            <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editMode} />
+            <ProjectDetail handleChangeToggle={handleChangeToggle} editMode={editMode} />
         </>
     );
 };
