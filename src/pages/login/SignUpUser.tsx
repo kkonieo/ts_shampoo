@@ -53,15 +53,9 @@ const SignUpUser = () => {
 
     useEffect(() => {
         (async () => {
-            // const response = await api(false).getPosition();
-            // setJob(response);
-            setJob(jobList);
+            const response = await api(false).getPosition();
+            setJob(response);
         })();
-        return () => {
-            if (!isSignUp) {
-                console.log("회원가입 도중에 나가버림. 회원삭제");
-            }
-        }
     }, [])
 
     return (
