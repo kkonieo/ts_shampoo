@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Cookies from 'universal-cookie';
 import { Button } from '../Button';
+
+const cookies: Cookies = new Cookies();
 
 export const HeaderView = ({ name }: { name: string | undefined }) => {
     const [login, setLogin] = useState<boolean>(false);
@@ -35,6 +38,10 @@ export const HeaderView = ({ name }: { name: string | undefined }) => {
                     onClick={() => {
                         setLogin(false);
                         sessionStorage.clear();
+                        cookies.remove('accessToken');
+                        cookies.remove('refreshToken');
+                        cookies.remove('session');
+                        cookies.remove('G_AUTHUSER_H');
                     }}
                 >
                     <Button type="button" className="gray" width="96px" height="40px" text="로그아웃" />
