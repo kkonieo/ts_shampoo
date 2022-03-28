@@ -33,11 +33,11 @@ const Resume = ({ isEditMode }: Props) => {
             detail: [
                 {
                     detailTitle: '2019 대학교 졸업',
-                    detailDescription: '대학교 졸업에 대한 세부 사항입니다',
+                    detailDescriptions: '대학교 졸업에 대한 세부 사항입니다',
                 },
                 {
                     detailTitle: '2019 엘리스 AI 트랙',
-                    detailDescription: null,
+                    detailDescriptions: null,
                 },
             ],
         },
@@ -46,11 +46,11 @@ const Resume = ({ isEditMode }: Props) => {
             detail: [
                 {
                     detailTitle: '2020 대학교 졸업',
-                    detailDescription: '대학교 졸업에 대한 세부 사항',
+                    detailDescriptions: '대학교 졸업에 대한 세부 사항',
                 },
                 {
                     detailTitle: '엘리스 AI 트랙',
-                    detailDescription: '엘리스 AI 트랙에 대한 세부 사항입니다.',
+                    detailDescriptions: '엘리스 AI 트랙에 대한 세부 사항입니다.',
                 },
             ],
         },
@@ -59,11 +59,11 @@ const Resume = ({ isEditMode }: Props) => {
             detail: [
                 {
                     detailTitle: 'string',
-                    detailDescription: 'string',
+                    detailDescriptions: 'string',
                 },
                 {
                     detailTitle: 'string',
-                    detailDescription: null,
+                    detailDescriptions: null,
                 },
             ],
         },

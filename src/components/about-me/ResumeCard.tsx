@@ -19,8 +19,8 @@ const ResumeCard = ({ title, resumeDetail }: aboutMeProps.ResumeProps) => {
                                             <DetailTitle key={item.year + '_' + i.detailTitle + '_' + idx}>
                                                 {i.detailTitle}
                                             </DetailTitle>
-                                            <DetailDescribtion key={item.year + '_' + i.detailDescription + '_' + idx}>
-                                                {i.detailDescription}
+                                            <DetailDescribtion key={item.year + '_' + i.detailDescriptions + '_' + idx}>
+                                                {i.detailDescriptions}
                                             </DetailDescribtion>
                                         </div>
                                     </YearRowDiv>

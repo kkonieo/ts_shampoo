@@ -5,15 +5,18 @@ declare module 'AboutMePageModuel' {
             userContents: string[];
         }
         interface SkillsProps {
-            skillTitles: string | null;
-            skillDescribes: string[] | [];
+            skillTitles: string | undefined;
+            skillDescriptions: string[] | [];
+            isEditMode: boolean;
+            skillTagData: { title: string; description: string[] }[];
         }
         interface SkillTagProps {
             skill: string[];
-            skillDescriptions: { title: string; describe: string[] }[];
+            skillDescriptions: { title: string; description: string[] }[];
         }
         interface SkillsDetailProps {
-            skill: string;
+            skill: string | undefined;
+            targetSkill: string | undefined;
             //추후 수정이 필요할듯 (any)
             onSkillChange: any;
             isEditMode: boolean;
@@ -25,7 +28,7 @@ declare module 'AboutMePageModuel' {
                 year: number;
                 detail: {
                     detailTitle: string;
-                    detailDescription: string | null;
+                    detailDescriptions: string | null;
                 }[];
             }[];
         }
@@ -34,43 +37,42 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-
         interface SnsLoginButtonProps {
-            text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
-            to: "github" | "google" | "naver"; // 네비게이터용
+            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인' | 'Comming Soon';
+            to: 'github' | 'google' | 'naver'; // 네비게이터용
             color: string;
-        };
+        }
 
         interface LoginContainerProps {
             children: React.ReactNode;
-        };
+        }
 
         interface LoginUserProps {
             index: string;
             email: string;
             name: string;
-        };
+        }
 
         interface SignUpProps extends LoginUserProps {
             job: string;
-        };
+        }
 
         type SignUpPageProps = 0 | 1;
-    };
+    }
 
     export namespace RequestTokenSpace {
         interface GithubToken {
             access_token: string;
-        };
+        }
 
         interface NaverToken extends GithubToken {
             refresh_token: string;
             expires_in: string;
-        };
+        }
 
         interface GoogleToken {
             auth_token: string;
-        };
+        }
     }
 }
 
@@ -175,8 +177,8 @@ declare module 'ButtonModule' {
     interface ButtonProps {
         type: 'submit' | 'button';
         text: string;
-        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    };
-};
+    }
+}
