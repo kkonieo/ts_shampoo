@@ -1,16 +1,17 @@
 import { PortfolioListView } from './PortfolioListView';
 import { HomeProps } from 'HomeModule';
-import { jobList } from '../../../utils/api/job';
+import { UserSpace } from 'InformationModule';
 import { useRecoilState } from 'recoil';
 import { allSkillData } from '../../../utils/data/atom';
 import { useEffect, useState } from 'react';
 import { skillApi } from '../../../utils/api/skill';
-import { HomeApi } from '../../../utils/api/home';
+import { homeApi } from '../../../utils/api/home';
+import { positionsApi } from '../../../utils/api/positions';
 
 export const PortfolioList = (): JSX.Element => {
     // 유저 포트폴리오 임의 생성을 위한 더미 데이터
-    const positions: string[] = jobList.map((item) => item.name);
     const [userInfo, setUserInfo] = useState<HomeProps.UserInfoProps[]>([]);
+    const [positions, setPositions] = useState<Array<UserSpace.Job>>([]);
     //api통신으로 받아온 skill stacks
     const [skillStacks, setSkillStacks] = useRecoilState(allSkillData);
 
@@ -18,6 +19,7 @@ export const PortfolioList = (): JSX.Element => {
     useEffect(() => {
         getSkillStacks();
         getUserPortfolioList();
+        getPositions();
     }, []);
 
     //서버에 저장되어있는 모든 스킬 스택 가져오는 메소드
@@ -35,8 +37,18 @@ export const PortfolioList = (): JSX.Element => {
     // UserPosrtfolioList 가져오는 메소드
     const getUserPortfolioList = async () => {
         try {
-            await HomeApi.getUserPortfolioList().then((response: any) => {
+            await homeApi.getUserPortfolioList().then((response: any) => {
                 setUserInfo(response.data);
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const getPositions = async () => {
+        try {
+            await positionsApi.getPositions().then((response: any) => {
+                setPositions(response.data);
             });
         } catch (e) {
             console.error(e);

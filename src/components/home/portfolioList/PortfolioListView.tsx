@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
+import { UserSpace } from 'InformationModule';
 import { Portfolio } from './Portfolio';
 import { Button } from '../..';
 
@@ -9,7 +10,7 @@ export const PortfolioListView = ({
     positions,
 }: {
     userInfo: Array<HomeProps.UserInfoProps>;
-    positions: Array<string>;
+    positions: Array<UserSpace.Job>;
     stacks: Array<string>;
 }) => {
     const [positionActive, setPositionActive] = useState<boolean>(false);
@@ -73,7 +74,7 @@ export const PortfolioListView = ({
     };
 
     // 직군, 기술스택의 checkbox창 만드는 로직
-    const Filter = ({ data }: { data: Array<string> }): JSX.Element => {
+    const Filter = ({ data }: { data: Array<UserSpace.Job> }): JSX.Element => {
         return (
             <FilterContainerForm ref={filterBox}>
                 <div>
@@ -82,12 +83,12 @@ export const PortfolioListView = ({
                             <InputDiv key={idx}>
                                 <FilterInput
                                     type="checkbox"
-                                    value={item}
-                                    id={item}
+                                    value={item.name}
+                                    id={item.name}
                                     onChange={addFilter}
-                                    checked={selectedFilter.indexOf(item) >= 0}
+                                    checked={selectedFilter.indexOf(item.name) >= 0}
                                 />
-                                <FilterLabel htmlFor={item}>{item}</FilterLabel>
+                                <FilterLabel htmlFor={item.name}>{item.name}</FilterLabel>
                             </InputDiv>
                         );
                     })}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_END_POINT } from '../constants/standard';
 
-const SKILL_END_POINT = `${API_END_POINT}/home/`;
+const SKILL_END_POINT = `${API_END_POINT}/job/`;
 
 const getApi = async (url: string) => {
     const result = await axios.get(url);
@@ -19,8 +19,8 @@ const getApi = async (url: string) => {
     }
 };
 
-export const homeApi = {
-    getUserPortfolioList: async () => {
+export const positionsApi = {
+    getPositions: async () => {
         return await getApi(SKILL_END_POINT);
     },
 };
