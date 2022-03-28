@@ -4,15 +4,9 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
+import { UserSpace } from 'InformationModule';
 import { api } from '../../utils/api/auth';
 import { useEffect, useState } from 'react';
-import { jobList } from '../../utils/api/job';
-
-// job 인터페이스
-interface Job {
-    id: number,
-    name: string,
-};
 
 const SignUpUser = () => {
 
@@ -23,7 +17,7 @@ const SignUpUser = () => {
     const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
 
     // 직군
-    const [job, setJob] = useState<Job[]>([]);
+    const [job, setJob] = useState<UserSpace.Job[]>([]);
 
     // 회원가입을 정상적으로 완료 했는가?
     const [isSignUp, setIsSignUp] = useState<boolean>(false);
@@ -80,7 +74,7 @@ const SignUpUser = () => {
                             required: "직군을 선택해주세요.",
                         })} />
                         <datalist id="job">
-                            {job.map((item: Job) => {
+                            {job.map((item: UserSpace.Job) => {
                                 return <option key={item.id} value={item.name} />
                             })}
                         </datalist>

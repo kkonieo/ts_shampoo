@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { LoginSpace, RequestTokenSpace } from 'LoginModule';
+import { UserSpace } from 'InformationModule';
 import Cookies from 'universal-cookie';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -112,19 +113,16 @@ export const api = (withToken: boolean) => {
             return response;
         },
 
-        // 회원삭제
-        setDeleteUser: async (data: LoginSpace.SignUpProps) => {
-            const response = await axiosConfig({
+        // 회원탈퇴
+        setDeleteUser: async (): Promise<void> => {
+            await axiosConfig({
                 method: 'delete',
-                url: '/user/profile/',
-                data: data
+                url: '/user/delete/',
             });
-
-            return response;
         },
 
         // 직군 가져오기
-        getPosition: async (): Promise<[{id: number; name: string;}]> => {
+        getPosition: async (): Promise<UserSpace.Job[]> => {
             const response = await axiosConfig({
                 method: 'get',
                 url: '/job/'

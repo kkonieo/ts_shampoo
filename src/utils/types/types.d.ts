@@ -63,6 +63,15 @@ declare module 'LoginModule' {
     }
 }
 
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number,
+            name: string,
+        };
+    }
+}
+
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
         interface IUrl {
