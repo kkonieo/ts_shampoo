@@ -141,8 +141,8 @@ declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
             name: string;
-            position: string;
-            stack: string;
+            job: string;
+            user_skill: string;
         }
         interface IFilterProps {
             isActive: boolean;

@@ -28,3 +28,8 @@ export const idState = atom<string>({
     key: 'idState',
     default: '',
 });
+
+export const allSkillData = atom<Array<string>>({
+    key: 'allSkillData',
+    default: [],
+});

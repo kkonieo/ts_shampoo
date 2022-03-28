@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Portfolio 카드 컴포넌트
-export const Portfolio = ({ name, position, stack }: HomeProps.UserInfoProps): JSX.Element => {
+export const Portfolio = ({ name, job, user_skill }: HomeProps.UserInfoProps): JSX.Element => {
     return (
         <PortfolioLink to="/id">
             <PortfolioTitleDiv>
                 <PortfolioName>{name}</PortfolioName>
-                <PortfolioJob>{position}</PortfolioJob>
-                <PortfolioJob>{stack}</PortfolioJob>
+                <PortfolioJob>{job}</PortfolioJob>
+                <PortfolioJob>{user_skill}</PortfolioJob>
             </PortfolioTitleDiv>
         </PortfolioLink>
     );

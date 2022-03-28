@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useMemo } from 'react';
+import { useCallback, useRef, useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
@@ -17,20 +17,26 @@ export const PortfolioListView = ({
     const [portfolioCount, setPortfolioCount] = useState<number>(8);
     const [selectedFilter, setSelectedFilter] = useState<string[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
-    const [userPortfolio, setUserPortfolio] = useState<JSX.Element[]>(
-        userInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
-            return <Portfolio key={idx} {...item} />;
-        }),
-    );
+    const [userPortfolio, setUserPortfolio] = useState<JSX.Element[]>([]);
+
+    useEffect(() => {
+        userInfo.length > 0 &&
+            setUserPortfolio(
+                userInfo.map((item: HomeProps.UserInfoProps, idx: number) => {
+                    return <Portfolio key={idx} {...item} />;
+                }),
+            );
+    }, [userInfo]);
+
     const handleSearchSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const filteredUserInfo: Array<HomeProps.UserInfoProps> = userInfo.filter((item) => {
             if (selectedFilter.length === 0) return item;
-            else if (selectedFilter.indexOf(item.position) >= 0) return item;
+            else if (selectedFilter.indexOf(item.job) >= 0) return item;
         });
         const searchUserInfo: Array<HomeProps.UserInfoProps> = filteredUserInfo.filter((item) => {
             if (searchValue === item.name) return item;
-            if (searchValue.toLowerCase() === item.stack.toLowerCase()) return item;
+            if (searchValue.toLowerCase() === item.user_skill.toLowerCase()) return item;
         });
         if (selectedFilter.length > 0) {
             if (searchValue !== '' && searchUserInfo.length === 0) {
