@@ -22,6 +22,24 @@ const axiosConfig: AxiosInstance = axios.create({
 // const mock = new MockAdapter(axiosConfig); // 가짜 response 객체 생성
 // mock.onGet('/job/').reply(200, [...jobList]);
 
+// refresh 재발급 함수
+const getTokenRefresh = async (): Promise<void> => {
+    const response = await axiosConfig({
+        method: 'post',
+        url: '/user/refresh/',
+        data: {
+            refresh: cookies.get('refreshToken')
+        },
+    });
+
+    cookies.set('accessToken', response.data.access, {
+        path: '/',
+        expires: new Date(Date.now() + (1000 * 60 * 5)), // 테스트 기준 5분 (초 단위로 응답)
+        // secure: true,
+        // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
+    });
+}
+
 // axios 모듈 생산하는 함수
 export const api = (withToken: boolean) => {
     const headers: Headers = {
@@ -30,12 +48,27 @@ export const api = (withToken: boolean) => {
     };
 
     if (withToken) {
-        headers.Authorization = `Bearer ${cookies.get('accessToken')}`
+        const accessToken: string = cookies.get('accessToken');
+        const refreshToken: string = cookies.get('refreshToken');
+
+        // 리프레쉬 토큰이 없으면
+        if (!refreshToken) {
+            sessionStorage.clear();
+        // 리프레쉬 토큰이 있으면
+        } else {
+            // 엑세스 토큰이 있으면
+            if (accessToken) {
+                headers.Authorization = `Bearer ${accessToken}`
+            // 액세스 토큰이 없으면
+            } else {
+                getTokenRefresh();
+            }
+        }
     }
 
     return {
         // 로그인 및 회원가입
-        userLogin: async (props: RequestTokenSpace.GoogleToken) => {
+        userLogin: async (props: RequestTokenSpace.GoogleToken): Promise<string> => {
         
             const response = await axiosConfig({
                 method: 'post',
@@ -48,7 +81,7 @@ export const api = (withToken: boolean) => {
                 email: response.data.email,
                 name: response.data.name,
             };
-        
+
             sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
 
             cookies.set('accessToken', response.data.tokens.access, {
@@ -69,7 +102,7 @@ export const api = (withToken: boolean) => {
         },
 
         // 회원가입 (추가 정보)
-        setSignUpProfile: async (data: LoginSpace.SignUpProps) => {
+        setSignUpProfile: async (data: LoginSpace.SignUpProps): Promise<any> => {
             const response = await axiosConfig({
                 method: 'patch',
                 url: '/user/profile/',
@@ -91,13 +124,13 @@ export const api = (withToken: boolean) => {
         },
 
         // 직군 가져오기
-        getPosition: async () => {
+        getPosition: async (): Promise<[{id: number; name: string;}]> => {
             const response = await axiosConfig({
                 method: 'get',
                 url: '/job/'
             });
 
             return response.data;
-        }
-            }
+        },
+    }
 }
