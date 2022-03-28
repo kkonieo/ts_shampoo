@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Portfolio 카드 컴포넌트
-export const Portfolio = ({ name, job, user_skill }: HomeProps.UserInfoProps): JSX.Element => {
+export const Portfolio = ({ name, job, user_skill, img }: HomeProps.UserInfoProps): JSX.Element => {
     return (
         <PortfolioLink to="/id">
+            <PortfolioImage src={img ? img : `${process.env.PUBLIC_URL}/img/profile.png`} alt="profile" image={img} />
             <PortfolioTitleDiv>
                 <PortfolioName>{name}</PortfolioName>
                 <PortfolioJob>{job}</PortfolioJob>
@@ -17,10 +18,10 @@ export const Portfolio = ({ name, job, user_skill }: HomeProps.UserInfoProps): J
 
 const PortfolioLink = styled(Link)`
     border: 1px solid ${(props) => props.theme.color.background};
-    height: 260px;
+    height: 277px;
     border-radius: 10px;
     display: inline-flex;
-    flex-basis: 23%;
+    flex-basis: 18%;
     flex-direction: column;
     text-decoration: none;
     color: ${(props) => props.theme.color.defaultText};
@@ -33,7 +34,12 @@ const PortfolioLink = styled(Link)`
         transform: translateY(-8px);
     }
 `;
-
+const PortfolioImage = styled.img`
+    width: 100%;
+    height: 100%;
+    padding: ${(props: HomeProps.ImageProps) => (props.image === '' ? undefined : '40px')};
+    opacity: ${(props: HomeProps.ImageProps) => (props.image === '' ? undefined : '0.9')};
+`;
 const PortfolioTitleDiv = styled.div`
     width: 100%;
     height: 72px;

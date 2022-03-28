@@ -37,7 +37,6 @@ export const PortfolioList = (): JSX.Element => {
         try {
             await HomeApi.getUserPortfolioList().then((response: any) => {
                 setUserInfo(response.data);
-                console.log(response.data);
             });
         } catch (e) {
             console.error(e);

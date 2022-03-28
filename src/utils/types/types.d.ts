@@ -143,9 +143,13 @@ declare module 'HomeModule' {
             name: string;
             job: string;
             user_skill: string;
+            img: string;
         }
         interface IFilterProps {
             isActive: boolean;
+        }
+        interface ImageProps {
+            image: string;
         }
     }
 }
