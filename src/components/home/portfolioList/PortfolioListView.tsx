@@ -7,14 +7,13 @@ import { Button } from '../..';
 export const PortfolioListView = ({
     userInfo,
     positions,
-    stacks,
 }: {
     userInfo: Array<HomeProps.UserInfoProps>;
     positions: Array<string>;
     stacks: Array<string>;
 }) => {
     const [positionActive, setPositionActive] = useState<boolean>(false);
-    const [portfolioCount, setPortfolioCount] = useState<number>(8);
+    const [portfolioCount, setPortfolioCount] = useState<number>(10);
     const [selectedFilter, setSelectedFilter] = useState<string[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
     const [userPortfolio, setUserPortfolio] = useState<JSX.Element[]>([]);
@@ -183,7 +182,7 @@ export const PortfolioListView = ({
                         <ResetButton
                             type="button"
                             onClick={() => {
-                                setPortfolioCount(8);
+                                setPortfolioCount(10);
                                 setSearchValue('');
                                 setSelectedFilter([]);
                                 setUserPortfolio(
@@ -210,7 +209,7 @@ export const PortfolioListView = ({
                 <MoreDiv
                     onClick={() => {
                         setPortfolioCount((current) => {
-                            return current + 8;
+                            return current + 10;
                         });
                     }}
                 >
