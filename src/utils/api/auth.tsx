@@ -1,15 +1,8 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosError } from 'axios';
 import { LoginSpace, RequestTokenSpace } from 'LoginModule';
 import { UserSpace } from 'InformationModule';
 import Cookies from 'universal-cookie';
 import MockAdapter from 'axios-mock-adapter';
-
-// headers 인터페이스
-interface Headers {
-    'Content-Type': "application/json",
-    'Accept': "application/json",
-    Authorization?: string,
-};
 
 // 쿠키 객체 생성
 const cookies: Cookies = new Cookies();
@@ -19,12 +12,34 @@ const axiosConfig: AxiosInstance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`
 });
 
+// axios 인터셉터 생성
+axiosConfig.interceptors.response.use(
+    async config => {
+        return config;
+    },
+    (error: AxiosError) => {
+        if (error?.response?.status === 401) {
+            return tokenRefresh(error);
+        }
+        
+        return Promise.reject(error);
+    },
+);
+
 // // request 테스트를 위한 코드
 // const mock = new MockAdapter(axiosConfig); // 가짜 response 객체 생성
 // mock.onGet('/job/').reply(200, [...jobList]);
 
 // refresh 재발급 함수
-const getTokenRefresh = async (): Promise<void> => {
+const tokenRefresh = async (error: AxiosError) => {
+    const refreshToken: string = cookies.get('refreshToken');
+
+        // 리프레쉬 토큰이 없으면
+        if (!refreshToken) {
+            sessionStorage.clear();
+            window.location.href = '/login';
+        }
+
     const response = await axiosConfig({
         method: 'post',
         url: '/user/refresh/',
@@ -39,33 +54,25 @@ const getTokenRefresh = async (): Promise<void> => {
         // secure: true,
         // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
     });
+
+    if (error?.config?.headers) {
+        error.config.headers.Authorization = `Bearer ${response.data.access}`;
+    }
+
+    return axiosConfig(error.config);
 }
 
 // axios 모듈 생산하는 함수
 export const api = (withToken: boolean) => {
-    const headers: Headers = {
+    const headers: any = {
         'Content-Type': "application/json",
         'Accept': "application/json",
     };
 
+    // token이 필요한 api이면 headers에 Authorization 추가
     if (withToken) {
-        const accessToken: string = cookies.get('accessToken');
-        const refreshToken: string = cookies.get('refreshToken');
-
-        // 리프레쉬 토큰이 없으면
-        if (!refreshToken) {
-            sessionStorage.clear();
-        // 리프레쉬 토큰이 있으면
-        } else {
-            // 엑세스 토큰이 있으면
-            if (accessToken) {
-                headers.Authorization = `Bearer ${accessToken}`
-            // 액세스 토큰이 없으면
-            } else {
-                getTokenRefresh();
-            }
-        }
-    }
+        headers.Authorization = `Bearer ${cookies.get('accessToken')}`;
+    };
 
     return {
         // 로그인 및 회원가입
@@ -75,6 +82,7 @@ export const api = (withToken: boolean) => {
                 method: 'post',
                 url: "/user/register/", // 추후에 파라미터로 url 추가 예정
                 data: props,
+                headers,
             })
         
             const userProfile: LoginSpace.LoginUserProps = {
@@ -107,25 +115,30 @@ export const api = (withToken: boolean) => {
             const response = await axiosConfig({
                 method: 'patch',
                 url: '/user/profile/',
-                data: data
+                data: data,
+                headers,
             });
 
             return response;
         },
 
         // 회원탈퇴
-        setDeleteUser: async (): Promise<void> => {
-            await axiosConfig({
+        setDeleteUser: async (): Promise<string> => {
+            const response = await axiosConfig({
                 method: 'delete',
                 url: '/user/delete/',
+                headers,
             });
+
+            return response.data;
         },
 
         // 직군 가져오기
         getPosition: async (): Promise<UserSpace.Job[]> => {
             const response = await axiosConfig({
                 method: 'get',
-                url: '/job/'
+                url: '/job/',
+                headers,
             });
 
             return response.data;
