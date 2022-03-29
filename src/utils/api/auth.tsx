@@ -86,7 +86,7 @@ export const api = (withToken: boolean) => {
             })
         
             const userProfile: LoginSpace.LoginUserProps = {
-                index: response.data.user_idx,
+                index: response.data.user_id,
                 email: response.data.email,
                 name: response.data.name,
             };
