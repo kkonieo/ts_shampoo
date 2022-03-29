@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { HomeProps } from 'HomeModule';
-import { UserSpace } from 'InformationModule';
 import { Portfolio } from './Portfolio';
 import { useRecoilValue } from 'recoil';
 import { userInfoData, positionsData } from '../../../../utils/data/atom';
+import { Filter } from './Filter';
 
 export const SearchBar = ({
     filterBox,
@@ -73,50 +73,6 @@ export const SearchBar = ({
         }
     };
 
-    const addFilter = (e: React.SyntheticEvent) => {
-        let target = e.target as HTMLInputElement;
-        let value = target.value;
-        if (selectedFilter.indexOf(value) < 0) {
-            setSelectedFilter((current) => {
-                const newFilterList = [...current, value];
-                return newFilterList;
-            });
-        }
-        if (selectedFilter.indexOf(value) >= 0) {
-            setSelectedFilter((current) => {
-                let newSelectedFilter = [...current];
-                const idx = newSelectedFilter.indexOf(value);
-                newSelectedFilter.splice(idx, 1);
-                return newSelectedFilter;
-            });
-        }
-    };
-
-    // 직군, 기술스택의 checkbox창 만드는 로직
-    const Filter = ({ data }: { data: Array<UserSpace.Job> }): JSX.Element => {
-        return (
-            <FilterContainerForm ref={filterBox}>
-                <div>
-                    {data.length > 0 &&
-                        data.map((item, idx) => {
-                            return (
-                                <InputDiv key={idx}>
-                                    <FilterInput
-                                        type="checkbox"
-                                        value={item.name}
-                                        id={item.name}
-                                        onChange={addFilter}
-                                        checked={selectedFilter.indexOf(item.name) >= 0}
-                                    />
-                                    <FilterLabel htmlFor={item.name}>{item.name}</FilterLabel>
-                                </InputDiv>
-                            );
-                        })}
-                </div>
-            </FilterContainerForm>
-        );
-    };
-
     return (
         <SearchDiv>
             {/* Position */}
@@ -129,7 +85,14 @@ export const SearchBar = ({
                 >
                     직군
                 </FilterButton>
-                {positionActive && <Filter data={positions} />}
+                {positionActive && (
+                    <Filter
+                        data={positions}
+                        filterBox={filterBox}
+                        selectedFilter={selectedFilter}
+                        setSelectedFilter={setSelectedFilter}
+                    />
+                )}
             </FilterPositionDiv>
             <SearchForm onSubmit={handleSearchSubmit}>
                 <SearchInput
@@ -230,34 +193,4 @@ const FilterButton = styled.button<HomeProps.IFilterProps>`
         color: ${(props) => props.theme.color.defaultText};
         background-color: ${(props) => props.theme.color.buttonBackground};
     }
-`;
-const InputDiv = styled.div`
-    margin: 6px 8px;
-`;
-const FilterInput = styled.input`
-    margin-right: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    border: 2px solid blue;
-`;
-const FilterLabel = styled.label`
-    cursor: pointer;
-    &:hover {
-        color: ${(props) => props.theme.color.main};
-    }
-`;
-const FilterContainerForm = styled.form`
-    width: 95%;
-    height: 400px;
-    position: absolute;
-    bottom: -400px;
-    left: 0;
-    padding: 10px;
-    background-color: ${(props) => props.theme.color.sub};
-    border: 1px solid ${(props) => props.theme.color.background};
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
-    z-index: 2;
-    overflow-y: auto;
-    box-sizing: border-box;
 `;
