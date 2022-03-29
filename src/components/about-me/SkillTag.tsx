@@ -5,11 +5,11 @@ interface Props {
     editMode: boolean;
 }
 
-const SkillTag = ({ skill, targetSkill, isEditMode, onSkillChange, onDeleteSkill }: aboutMeProps.SkillsDetailProps) => {
+const SkillTag = ({ skill, targetSkill, isEditMode, onSkillChange, onDeleteSkill }: aboutMeProps.SkillTagProps) => {
     return (
         <TagDiv data-value={skill}>
             <Label>
-                <FormCheckLeft name="skillBtn" value={skill} checked={skill === targetSkill ? true : false} />
+                <FormCheckLeft name="skillBtn" value={skill} checked={skill === targetSkill ? true : false} readOnly />
                 <TagNameDiv data-value={skill} onClick={onSkillChange} editMode={isEditMode}>
                     {isEditMode && (
                         <TagDelete data-value={skill} onClick={onDeleteSkill} editMode={isEditMode}>
