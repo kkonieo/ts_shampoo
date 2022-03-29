@@ -44,7 +44,7 @@ declare module 'LoginModule' {
         };
 
         interface LoginUserProps {
-            index: string;
+            id: string;
             email: string;
             name: string;
         };
@@ -173,5 +173,14 @@ declare module 'ButtonModule' {
         className: "blue" | "gray"; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
+    };
+};
+
+declare module 'ContactModule' {
+    export namespace ContactSpace {
+        interface ContactInformation {
+            email: string;
+            name: string;
+        };
     };
 };

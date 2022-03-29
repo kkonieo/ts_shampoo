@@ -86,7 +86,7 @@ export const api = (withToken: boolean) => {
             })
         
             const userProfile: LoginSpace.LoginUserProps = {
-                index: response.data.user_id,
+                id: response.data.user_id,
                 email: response.data.email,
                 name: response.data.name,
             };
@@ -140,6 +140,19 @@ export const api = (withToken: boolean) => {
                 url: '/job/',
                 headers,
             });
+
+            return response.data;
+        },
+
+        // Contact 페이지 정보 불러오기
+        getContact: async (id: string) => {
+            const response = await axiosConfig({
+                method: 'get',
+                url: `/gmail/${id}`,
+                headers,
+            });
+
+            console.log('response', response);
 
             return response.data;
         },

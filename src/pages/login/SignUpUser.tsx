@@ -7,14 +7,16 @@ import { LoginSpace } from 'LoginModule';
 import { UserSpace } from 'InformationModule';
 import { api } from '../../utils/api/auth';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpUser = () => {
+    const navigate = useNavigate();
 
     // recoil 페이지 세팅
     const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
     // 유저 이메일은 고정
-    const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
+    const userEmail: string = JSON.parse(sessionStorage.getItem('userProfile') || "")?.email || "";
 
     // 직군
     const [job, setJob] = useState<UserSpace.Job[]>([]);
@@ -41,10 +43,13 @@ const SignUpUser = () => {
         catch (error) { console.log('유저 추가 정보 업데이트 에러', error); };
     };
 
-    // 회원가입을 정상적으로 하지 않았다면, 회원정보 삭제하는 함수
+    // 구글 로그인을 통해 들어오지 않았다면(userEmail이 없다면) 홈으로 보내기
+    // JSON.parse 에러로 다운되서 아예 안먹힘...
+    useEffect(() => {
+        if (!sessionStorage?.getItem('userProfile')) navigate('/');
+    })
 
-
-
+    // 직군 API 요청
     useEffect(() => {
         (async () => {
             const response = await api(false).getPosition();
