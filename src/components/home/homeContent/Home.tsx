@@ -9,7 +9,7 @@ import { positionsApi } from '../../../utils/api/positions';
 export const Home = (): JSX.Element => {
     const setUserInfo = useSetRecoilState(userInfoData);
     const setPositions = useSetRecoilState(positionsData);
-    const [skillStacks, setSkillStacks] = useRecoilState(allSkillData);
+    const setSkillStacks = useSetRecoilState(allSkillData);
 
     //초기 랜더링 시 Home에 필요한 데이터 요청
     useEffect(() => {

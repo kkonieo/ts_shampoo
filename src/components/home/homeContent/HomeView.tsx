@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useMemo, useEffect } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './homeView/Portfolio';
@@ -6,6 +6,8 @@ import { MoreButton } from './homeView/MoreButton';
 import { SearchBar } from './homeView/SearchBar';
 import { useRecoilValue } from 'recoil';
 import { userInfoData } from '../../../utils/data/atom';
+import { FilterList } from './FilterList';
+import { UserPortfolioList } from './UserPortfolioList';
 
 export const HomeView = () => {
     const [positionActive, setPositionActive] = useState<boolean>(false);
@@ -27,31 +29,6 @@ export const HomeView = () => {
     // filter form 구현하는 로직
     const filterBox: any = useRef(null);
 
-    // filter 선택한 항목들 UI 나타내는 컴포넌트
-    const selectedFilterMemo = useMemo(() => {
-        return selectedFilter.map((item, idx): JSX.Element => {
-            return (
-                <FilterItems key={idx}>
-                    {item}
-                    <CloseButton>
-                        <img
-                            alt="close button"
-                            src={`${process.env.PUBLIC_URL}/img/close.svg`}
-                            onClick={() => {
-                                setSelectedFilter((current) => {
-                                    let newSelectedFilter = [...current];
-                                    const idx = newSelectedFilter.indexOf(item);
-                                    newSelectedFilter.splice(idx, 1);
-                                    return newSelectedFilter;
-                                });
-                            }}
-                        />
-                    </CloseButton>
-                </FilterItems>
-            );
-        });
-    }, [selectedFilter]);
-
     // filter 에서 외부를 클릭했을시, filter form이 사라지게 하는 로직
     const onLeaveFocusFilter = useCallback((e) => {
         if (!filterBox.current) return;
@@ -63,7 +40,6 @@ export const HomeView = () => {
     return (
         <HomeSection onClick={onLeaveFocusFilter}>
             <HomeContainerDiv>
-                {/* searchBar */}
                 <SearchBar
                     filterBox={filterBox}
                     positionActive={positionActive}
@@ -73,16 +49,8 @@ export const HomeView = () => {
                     setUserPortfolio={setUserPortfolio}
                     setPortfolioCount={setPortfolioCount}
                 />
-                {/* Selected filter list */}
-                <FiltersListDiv>{selectedFilterMemo}</FiltersListDiv>
-                {/* Portfolio List */}
-                <UserPortfolioListDiv>
-                    {userPortfolio.filter((item, idx) => {
-                        if (idx < portfolioCount) return item;
-                    })}
-                </UserPortfolioListDiv>
-                {userPortfolio.length === 0 && <p>검색결과가 없습니다</p>}
-                {/* More button */}
+                <FilterList selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+                <UserPortfolioList userPortfolio={userPortfolio} portfolioCount={portfolioCount} />
                 <MoreButton
                     portfolioCount={portfolioCount}
                     setPortfolioCount={setPortfolioCount}
@@ -100,30 +68,4 @@ const HomeContainerDiv = styled.div`
     width: 1200px;
     margin: 0 auto;
     margin-top: 24px;
-`;
-const FiltersListDiv = styled.div`
-    margin-bottom: 28px;
-`;
-
-const FilterItems = styled.div`
-    height: 36px;
-    border: 1px solid ${(props) => props.theme.color.background};
-    border-radius: 4px;
-    padding: 10px;
-    margin-top: 8px;
-    margin-left: 12px;
-    color: ${(props) => props.theme.color.buttonText};
-    display: inline-flex;
-    align-items: center;
-`;
-const CloseButton = styled.button`
-    margin-left: 8px;
-    padding-top: 2px;
-    box-sizing: border-box;
-`;
-const UserPortfolioListDiv = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    justify-content: flex-start;
 `;
