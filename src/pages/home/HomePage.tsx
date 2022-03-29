@@ -1,11 +1,11 @@
 import { Header } from '../../components/home/Header';
-import { PortfolioList } from '../../components/home/portfolioList/PortfolioList';
+import { Home } from '../../components/home/portfolioList/Home';
 
 const HomePage = () => {
     return (
         <>
             <Header />
-            <PortfolioList />
+            <Home />
         </>
     );
 };

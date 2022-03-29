@@ -1,18 +1,14 @@
-import { PortfolioListView } from './PortfolioListView';
-import { HomeProps } from 'HomeModule';
-import { UserSpace } from 'InformationModule';
-import { useRecoilState } from 'recoil';
-import { allSkillData } from '../../../utils/data/atom';
-import { useEffect, useState } from 'react';
+import { HomeView } from './HomeView';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { allSkillData, positionsData, userInfoData } from '../../../utils/data/atom';
+import { useEffect } from 'react';
 import { skillApi } from '../../../utils/api/skill';
 import { homeApi } from '../../../utils/api/home';
 import { positionsApi } from '../../../utils/api/positions';
 
-export const PortfolioList = (): JSX.Element => {
-    // 유저 포트폴리오 임의 생성을 위한 더미 데이터
-    const [userInfo, setUserInfo] = useState<HomeProps.UserInfoProps[]>([]);
-    const [positions, setPositions] = useState<Array<UserSpace.Job>>([]);
-    //api통신으로 받아온 skill stacks
+export const Home = (): JSX.Element => {
+    const setUserInfo = useSetRecoilState(userInfoData);
+    const setPositions = useSetRecoilState(positionsData);
     const [skillStacks, setSkillStacks] = useRecoilState(allSkillData);
 
     //초기 랜더링 시 Home에 필요한 데이터 요청
@@ -33,8 +29,6 @@ export const PortfolioList = (): JSX.Element => {
             console.error(e);
         }
     };
-
-    // UserPosrtfolioList 가져오는 메소드
     const getUserPortfolioList = async () => {
         try {
             await homeApi.getUserPortfolioList().then((response: any) => {
@@ -57,7 +51,7 @@ export const PortfolioList = (): JSX.Element => {
 
     return (
         <>
-            <PortfolioListView userInfo={userInfo} positions={positions} stacks={skillStacks} />
+            <HomeView />
         </>
     );
 };
