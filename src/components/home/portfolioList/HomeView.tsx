@@ -61,8 +61,8 @@ export const HomeView = () => {
     }, []);
 
     return (
-        <PortfolioListSection onClick={onLeaveFocusFilter}>
-            <PortfolioListContainerDiv>
+        <HomeSection onClick={onLeaveFocusFilter}>
+            <HomeContainerDiv>
                 {/* searchBar */}
                 <SearchBar
                     filterBox={filterBox}
@@ -88,15 +88,15 @@ export const HomeView = () => {
                     setPortfolioCount={setPortfolioCount}
                     userPortfolio={userPortfolio}
                 />
-            </PortfolioListContainerDiv>
-        </PortfolioListSection>
+            </HomeContainerDiv>
+        </HomeSection>
     );
 };
 
-const PortfolioListSection = styled.section`
+const HomeSection = styled.section`
     position: relative;
 `;
-const PortfolioListContainerDiv = styled.div`
+const HomeContainerDiv = styled.div`
     width: 1200px;
     margin: 0 auto;
     margin-top: 24px;
