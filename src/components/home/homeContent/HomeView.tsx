@@ -1,9 +1,9 @@
 import { useCallback, useRef, useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import { HomeProps } from 'HomeModule';
-import { Portfolio } from './HomeView/Portfolio';
-import { MoreButton } from './HomeView/MoreButton';
-import { SearchBar } from './HomeView/SearchBar';
+import { Portfolio } from './homeView/Portfolio';
+import { MoreButton } from './homeView/MoreButton';
+import { SearchBar } from './homeView/SearchBar';
 import { useRecoilValue } from 'recoil';
 import { userInfoData } from '../../../utils/data/atom';
 
