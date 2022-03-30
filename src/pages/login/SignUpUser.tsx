@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { Button } from '../../components';
+import { Button, Logo } from '../../components';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
 import { pageState } from '../../utils/data/atom';
 import { LoginSpace } from 'LoginModule';
-import { setSignUpProfile } from '../../utils/api/auth';
+import { api } from '../../utils/api/auth';
+import { useEffect, useState } from 'react';
 
 const SignUpUser = () => {
 
@@ -14,23 +15,29 @@ const SignUpUser = () => {
     // 유저 이메일은 고정
     const userEmail: string = JSON.parse(sessionStorage?.getItem('userProfile') || "")?.email;
 
+    // 회원가입을 정상적으로 완료 했는가?
+    const [isSignUp, setIsSignUp] = useState<boolean>(false);
+
     // useForm 세팅
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
     const onSubmit = handleSubmit(data => {
-        console.log('data', { ...data, email: userEmail });
         addProfile({ ...data, email: userEmail });
     });
 
     // 유저 추가 정보 업데이트하는 API
     async function addProfile(data: LoginSpace.SignUpProps) {
         try {
-            const response = await setSignUpProfile(data);
+            const response = await api(true).setSignUpProfile(data);
 
-            if (response.data.success) setPage(1);
-            if (!response.data.success) alert('유저 정보 업데이트에 실패했습니다.');
+            if (response.data.success) {
+                setIsSignUp(true);
+                setPage(1);
+            } else alert('유저 정보 업데이트에 실패했습니다.');
         }
         catch (error) { console.log('유저 추가 정보 업데이트 에러', error); };
     };
+
+    // 회원가입을 정상적으로 하지 않았다면, 회원정보 삭제하는 함수
 
     // 더미 데이터
     const jobOptions = [
@@ -42,9 +49,18 @@ const SignUpUser = () => {
         { key: '6', value: '안드로이드' },
     ]
 
+    const [job, SetJob] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await api(false).getPosition();
+            SetJob(response);
+        })();
+    }, [])
+
     return (
         <>
-            <Logo>EliceFolio</Logo>
+            <Logo />
             <Form onSubmit={onSubmit}>
                 <FormDiv>
                     <InformationDiv>
@@ -84,17 +100,16 @@ export { SignUpUser };
 
 // styled-components
 
-// 로고 (완성되면 삭제 예정)
-const Logo = styled.p`
-    background-color: #5993F6;
-    width: 200px;
-    height: 80px;
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    margin-bottom: 30px;
+    margin-top: 5vh;
 
-    @media screen and (max-height: 340px) {
-    margin-bottom: 1vh;
-}
+    & div:nth-child(1) {
+        justify-content: initial;
+    }
 `;
 
 // 이름, 직군 입력창
@@ -117,16 +132,6 @@ const LoginInput = styled.input`
 
     &::placeholder {
         font-size: 0.8rem;
-    }
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & div:nth-child(1) {
-        justify-content: initial;
     }
 `;
 

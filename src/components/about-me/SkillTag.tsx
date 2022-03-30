@@ -1,12 +1,21 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { aboutMeProps } from 'AboutMePageModuel';
 
-const SkillTag = ({ skill, onSkillChange }: aboutMeProps.SkillsDetailProps) => {
+interface Props {
+    editMode: boolean;
+}
+
+const SkillTag = ({ skill, isEditMode, onSkillChange, onDeleteSkill }: aboutMeProps.SkillsDetailProps) => {
     return (
         <TagDiv data-value={skill} onChange={onSkillChange}>
             <label>
+                {isEditMode && (
+                    <TagDelete onClick={onDeleteSkill} editMode={isEditMode}>
+                        x
+                    </TagDelete>
+                )}
                 <FormCheckLeft name="skillBtn" value={skill} />
-                <TagNameDiv>{skill}</TagNameDiv>
+                <TagNameDiv editMode={isEditMode}>{skill}</TagNameDiv>
             </label>
         </TagDiv>
     );
@@ -31,11 +40,32 @@ const TagDiv = styled.div`
     } */
 `;
 
-const TagNameDiv = styled.div`
+const TagDelete = styled.span<Props>`
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+    height: auto;
+    border-radius: 50%;
+    z-index: 10;
+    border: 1px solid;
+    position: relative;
+    left: 75%;
+    top: 10px;
+    background-color: #fff;
+    :hover {
+        background-color: rgba(188, 188, 188, 0.8);
+    }
+    ${(props) =>
+        props.editMode &&
+        css`
+            animation: ${shakeIcon} 1s infinite;
+        `}
+`;
+
+const TagNameDiv = styled.div<Props>`
     font-size: 15px;
     width: auto;
     height: 30px;
-    background: #e6e6e6;
     border-radius: 30px;
     border: none;
     display: flex;
@@ -56,6 +86,11 @@ const TagNameDiv = styled.div`
     ::-webkit-scrollbar {
         display: none;
     }
+    ${(props) =>
+        props.editMode &&
+        css`
+            animation: ${shakeIcon} 1s infinite;
+        `}
 `;
 
 const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
@@ -64,6 +99,7 @@ const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
         background: none;
         padding: 0px 10px;
         text-align: center;
+        width: auto;
         height: 30px;
         line-height: 33px;
         font-weight: 500;
@@ -74,4 +110,40 @@ const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
         color: #fff;
     }
     display: none;
+`;
+
+const shakeIcon = keyframes`
+	0%{
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	10%{
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+	20%{
+		transform: translate(-2px, 1px) rotate(-1deg);
+	}
+	30%{
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	40%{
+		transform: translate(-1px, 1px) rotate(1deg);
+	}
+	50%{
+		transform: translate(1px, -1px) rotate(-2deg);
+	}
+	60%{
+		transform: translate(1px, 1px) rotate(1deg);
+	}
+	70%{
+		transform: translate(-1px, 1px) rotate(2deg);
+	}
+	80%{
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+	90%{
+		transform: translate(-1px, 1px) rotate(0deg);
+	}
+	100%{
+		transform: translate(1px, 1px) rotate(-1deg);
+	}
 `;

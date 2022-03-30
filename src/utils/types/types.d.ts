@@ -16,6 +16,8 @@ declare module 'AboutMePageModuel' {
             skill: string;
             //추후 수정이 필요할듯 (any)
             onSkillChange: any;
+            isEditMode: boolean;
+            onDeleteSkill: (e: React.SyntheticEvent<HTMLSpanElement>) => void;
         }
         interface ResumeProps {
             title: string;
@@ -32,43 +34,44 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-
         interface SnsLoginButtonProps {
-            text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
-            to: "github" | "google" | "naver"; // 네비게이터용
+            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인' | 'Comming Soon';
+            to: 'github' | 'google' | 'naver'; // 네비게이터용
             color: string;
-        };
+        }
 
         interface LoginContainerProps {
             children: React.ReactNode;
-        };
+        }
 
         interface LoginUserProps {
             index: string;
             email: string;
             name: string;
-        };
+        }
 
         interface SignUpProps extends LoginUserProps {
             job: string;
-        };
+            email: string;
+            name: string;
+        }
 
         type SignUpPageProps = 0 | 1;
-    };
+    }
 
     export namespace RequestTokenSpace {
-        interface GithubToken {
-            access_token: string;
-        };
-
-        interface NaverToken extends GithubToken {
-            refresh_token: string;
-            expires_in: string;
-        };
-
         interface GoogleToken {
             auth_token: string;
-        };
+        }
+    }
+}
+
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number;
+            name: string;
+        }
     }
 }
 
@@ -147,11 +150,30 @@ declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
             name: string;
-            position: string;
-            stack: string;
+            job: string;
+            user_skill: string;
+            img: string;
         }
         interface IFilterProps {
             isActive: boolean;
+        }
+        interface ImageProps {
+            image: string;
+        }
+    }
+}
+
+declare module 'TeamIntroModule' {
+    export namespace TeamIntroProps {
+        interface MemberDataProps {
+            name: string;
+            img: string | undefined;
+            github: string | undefined;
+            portfolio: string | undefined;
+            introduction: string | undefined;
+        }
+        interface MemberImageProps {
+            isData: boolean;
         }
     }
 }
@@ -163,6 +185,9 @@ declare module 'RecoilModule' {
             id: string;
             editMode: boolean;
         }
+        interface aboutMeSummaryProps {
+            summary: string;
+        }
     }
 }
 
@@ -170,8 +195,8 @@ declare module 'ButtonModule' {
     interface ButtonProps {
         type: 'submit' | 'button';
         text: string;
-        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    };
-};
+    }
+}
