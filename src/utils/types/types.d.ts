@@ -246,7 +246,7 @@ declare module 'ContactModule' {
 declare module 'AutoCompleteModule' {
     export namespace AutoCompleteSpace {
         interface autoCompleteProps {
-            data: { id: string; name: string }[];
+            data: { id: number; name: string }[];
             searchWord: string;
         }
     }
