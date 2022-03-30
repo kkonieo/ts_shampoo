@@ -36,11 +36,6 @@ export const allSkillData = atom<{ id: number | null; name: string | null }[]>({
     default: [],
 });
 
-export const allSkillData = atom<Array<string>>({
-    key: 'allSkillData',
-    default: [],
-});
-
 export const positionsData = atom<UserSpace.Job[]>({
     key: 'positionsData',
     default: [],
