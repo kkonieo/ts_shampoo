@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SignUpCompleted = () => {
 
     const navigate = useNavigate();
 
+    // 가입 완료 후 2초 후에 홈으로 이동
     useEffect(() => { 
         const timer = setTimeout(() => { navigate('/', { replace: true }); }, 2000);
         return (() => {

@@ -16,6 +16,8 @@ declare module 'AboutMePageModuel' {
             skill: string;
             //추후 수정이 필요할듯 (any)
             onSkillChange: any;
+            isEditMode: boolean;
+            onDeleteSkill: (e: React.SyntheticEvent<HTMLSpanElement>) => void;
         }
         interface ResumeProps {
             title: string;
@@ -43,13 +45,15 @@ declare module 'LoginModule' {
         }
 
         interface LoginUserProps {
-            index: string;
+            id: string;
             email: string;
             name: string;
         }
 
         interface SignUpProps extends LoginUserProps {
             job: string;
+            email: string;
+            name: string;
         }
 
         type SignUpPageProps = 0 | 1;
@@ -68,6 +72,28 @@ declare module 'LoginModule' {
         interface GoogleToken {
             auth_token: string;
         }
+      
+        interface GoogleToken {
+            auth_token: string;
+        }
+    }
+}
+
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number;
+            name: string;
+        }
+    }
+}
+
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number,
+            name: string,
+        };
     }
 }
 
@@ -145,11 +171,30 @@ declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
             name: string;
-            position: string;
-            stack: string;
+            job: string;
+            user_skill: string;
+            img: string;
         }
         interface IFilterProps {
             isActive: boolean;
+        }
+        interface ImageProps {
+            image: string;
+        }
+    }
+}
+
+declare module 'TeamIntroModule' {
+    export namespace TeamIntroProps {
+        interface MemberDataProps {
+            name: string;
+            img: string | undefined;
+            github: string | undefined;
+            portfolio: string | undefined;
+            introduction: string | undefined;
+        }
+        interface MemberImageProps {
+            isData: boolean;
         }
     }
 }
@@ -161,6 +206,9 @@ declare module 'RecoilModule' {
             id: string;
             editMode: boolean;
         }
+        interface aboutMeSummaryProps {
+            summary: string;
+        }
     }
 }
 
@@ -171,5 +219,14 @@ declare module 'ButtonModule' {
         className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    }
-}
+    };
+};
+
+declare module 'ContactModule' {
+    export namespace ContactSpace {
+        interface ContactInformation {
+            email: string;
+            name: string;
+        };
+    };
+};

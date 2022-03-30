@@ -10,7 +10,6 @@ import {
     SignUp,
     ContactMe,
     Intro,
-    Spinner,
 } from './pages';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
@@ -27,7 +26,6 @@ function App() {
                     {/* <Route path="*" element={<Navigate to="404" />} /> */}
                     <Route path="/" element={<HomePage />}></Route>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/redirect/:id" element={<Spinner />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/intro" element={<Intro />}></Route>
                     <Route path=":id" element={<NavPage />}>
