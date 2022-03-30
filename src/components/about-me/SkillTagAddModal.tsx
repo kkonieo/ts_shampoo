@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { skillApi } from '../../utils/api/skill';
 import { allSkillData } from '../../utils/data/atom';
+import { AutoComplete } from '../autoComplete';
 
 interface Props {
     skillModalOpen: boolean;
@@ -107,6 +108,7 @@ const SkillTagAddModal = ({ onAddSkill, onChangeSkillModalState, completeSkillMo
                     <SkillTitleContainer>
                         <div>기술 이름</div>
                         <Input placeholder="기술" onChange={onChangeSkillTitle} value={newSkillTitle} />
+                        {newSkillTitle !== '' && <AutoComplete data={skillStacks} searchWord={newSkillTitle} />}
                     </SkillTitleContainer>
 
                     <SkillDescriptionContainer>

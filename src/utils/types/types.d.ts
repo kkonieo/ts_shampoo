@@ -231,6 +231,7 @@ declare module 'ButtonModule' {
         className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
+<<<<<<< Updated upstream
     };
 };
 
@@ -242,3 +243,16 @@ declare module 'ContactModule' {
         };
     };
 };
+=======
+    }
+}
+
+declare module 'AutoCompleteModule' {
+    export namespace AutoCompleteProps {
+        interface autoCompleteProps {
+            data: any[];
+            searchWord: string;
+        }
+    }
+}
+>>>>>>> Stashed changes
