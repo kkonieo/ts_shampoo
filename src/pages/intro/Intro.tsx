@@ -1,6 +1,5 @@
 import { Header } from '../../components/home/Header';
-import { IntroService } from '../../components/intro/IntroService';
-import { IntroTeam } from '../../components/intro/IntroTeam';
+import { IntroService, IntroTeam } from '../../components/intro';
 
 const Intro = () => {
     return (
