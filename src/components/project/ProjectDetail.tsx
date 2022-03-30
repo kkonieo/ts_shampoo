@@ -3,7 +3,8 @@ import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 import { useLocation } from 'react-router-dom';
-import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit, EditButton } from './edit';
+import { ImgEdit, TitleEdit, DateEdit, LinkEdit, TagEdit, EditButton, AddButton } from './edit';
+import { ProjectApi } from '../../utils/api/ProjectApi';
 interface IProps {
     handleChangeToggle: (...args: any[]) => void;
     editMode: boolean;
@@ -18,7 +19,7 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
     const [gifSrc, setGifSrc] = useState<string>('');
     const [imgSrc, setImgSrc] = useState<string>('');
     const [techStack, setTechStack] = useState<string[]>([]);
-    const [urlLink, setUrlLink] = useState<ProjectProps.IUrl[]>([]);
+    const [urlLink, setUrlLink] = useState<ProjectProps.UrlLink[]>([]);
 
     // 이미지 파일 저장용 state
     const [gifBlob, setGifBlob] = useState<Blob>();
@@ -29,10 +30,10 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
     const [techModal, setTechModal] = useState<boolean>(false);
 
     // project/:id
-    const projectId = useLocation().pathname.slice(-3);
+    const [author, projectId] = useLocation().pathname.substring(1).split('/project/');
     const handleSubmit = (e: any) => {
         e?.preventDefault();
-        const data: ProjectProps.IProjectProps = {
+        const data: ProjectProps.ProjectDetail = {
             title: title,
             startDate: startDate,
             endDate: endDate,
@@ -46,18 +47,29 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
             urlLink: urlLink,
             explain: explain,
         };
-        console.log(data);
+        async function PostProject() {
+            const project = ProjectApi();
+            // await project.postProjectDetail(author, data);
+        }
     };
-
     // Api
     useEffect(() => {
+        console.log(author, projectId);
+        const project = ProjectApi();
+        async function getProjectDetail() {
+            await project
+                .getProjectDetail(author, parseInt(projectId))
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        }
         //API Dat
         if (projectId === 'add') {
             handleChangeToggle();
             return;
         } else {
-            const data: ProjectProps.IProjectProps = {
-                projectId: projectId,
+            getProjectDetail();
+
+            const data: ProjectProps.ProjectDetail = {
                 title: '프로젝트 토끼토끼',
                 startDate: '2021-01-31',
                 endDate: '2021-02-28',
@@ -145,7 +157,7 @@ const ProjectDetail: React.FunctionComponent<IProps> = ({ handleChangeToggle, ed
             {!editMode && <MDEditor.Markdown source={explain} />}
             <TagEdit techStack={techStack} setTechStack={setTechStack} editMode={editMode} />
             <LinkEdit urlLink={urlLink} setUrlLink={setUrlLink} editMode={editMode} />
-            <EditButton editMode={editMode} />
+            {projectId === 'add' ? <AddButton /> : <EditButton editMode={editMode} />}
         </DetailForm>
     );
 };

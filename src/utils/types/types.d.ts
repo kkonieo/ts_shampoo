@@ -60,6 +60,19 @@ declare module 'LoginModule' {
     }
 
     export namespace RequestTokenSpace {
+        interface GithubToken {
+            access_token: string;
+        }
+
+        interface NaverToken extends GithubToken {
+            refresh_token: string;
+            expires_in: string;
+        }
+
+        interface GoogleToken {
+            auth_token: string;
+        }
+      
         interface GoogleToken {
             auth_token: string;
         }
@@ -86,12 +99,11 @@ declare module 'InformationModule' {
 
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
-        interface IUrl {
+        interface UrlLink {
             linkName?: string;
             linkUrl?: string;
         }
-        interface IProjectProps {
-            projectId?: string;
+        interface ProjectDetail {
             id?: string;
             title: string;
             startDate: string;
@@ -100,7 +112,7 @@ declare module 'ProjectPageModule' {
             explain: string;
             gifSrc?: blob | string;
             imgSrc?: blob | string;
-            urlLink: IUrl[];
+            urlLink: UrlLink[];
             /*
             아이디 번호
             프로젝트 제목
