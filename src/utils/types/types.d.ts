@@ -234,6 +234,7 @@ declare module 'ButtonModule' {
     }
 }
 
+<<<<<<< Updated upstream
 declare module 'ContactModule' {
     export namespace ContactSpace {
         interface ContactInformation {
@@ -247,6 +248,12 @@ declare module 'AutoCompleteModule' {
     export namespace AutoCompleteSpace {
         interface autoCompleteProps {
             data: { id: number; name: string }[];
+=======
+declare module 'AutoCompleteModule' {
+    export namespace AutoCompleteProps {
+        interface autoCompleteProps {
+            data: any[];
+>>>>>>> Stashed changes
             searchWord: string;
         }
     }
