@@ -32,13 +32,6 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-
-        interface SnsLoginButtonProps {
-            text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
-            to: "github" | "google" | "naver"; // 네비게이터용
-            color: string;
-        };
-
         interface LoginContainerProps {
             children: React.ReactNode;
         };
