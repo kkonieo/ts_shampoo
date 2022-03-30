@@ -57,13 +57,15 @@ declare module 'LoginModule' {
         }
 
         interface LoginUserProps {
-            index: string;
+            id: string;
             email: string;
             name: string;
         }
 
         interface SignUpProps extends LoginUserProps {
             job: string;
+            email: string;
+            name: string;
         }
 
         type SignUpPageProps = 0 | 1;
@@ -82,17 +84,38 @@ declare module 'LoginModule' {
         interface GoogleToken {
             auth_token: string;
         }
+
+        interface GoogleToken {
+            auth_token: string;
+        }
+    }
+}
+
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number;
+            name: string;
+        }
+    }
+}
+
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number,
+            name: string,
+        };
     }
 }
 
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
-        interface IUrl {
+        interface UrlLink {
             linkName?: string;
             linkUrl?: string;
         }
-        interface IProjectProps {
-            projectId?: string;
+        interface ProjectDetail {
             id?: string;
             title: string;
             startDate: string;
@@ -101,7 +124,7 @@ declare module 'ProjectPageModule' {
             explain: string;
             gifSrc?: blob | string;
             imgSrc?: blob | string;
-            urlLink: IUrl[];
+            urlLink: UrlLink[];
             /*
             아이디 번호
             프로젝트 제목
@@ -160,11 +183,30 @@ declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
             name: string;
-            position: string;
-            stack: string;
+            job: string;
+            user_skill: string;
+            img: string;
         }
         interface IFilterProps {
             isActive: boolean;
+        }
+        interface ImageProps {
+            image: string;
+        }
+    }
+}
+
+declare module 'TeamIntroModule' {
+    export namespace TeamIntroProps {
+        interface MemberDataProps {
+            name: string;
+            img: string | undefined;
+            github: string | undefined;
+            portfolio: string | undefined;
+            introduction: string | undefined;
+        }
+        interface MemberImageProps {
+            isData: boolean;
         }
     }
 }
@@ -189,5 +231,14 @@ declare module 'ButtonModule' {
         className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    }
-}
+    };
+};
+
+declare module 'ContactModule' {
+    export namespace ContactSpace {
+        interface ContactInformation {
+            email: string;
+            name: string;
+        };
+    };
+};

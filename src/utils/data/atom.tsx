@@ -1,6 +1,8 @@
 import { atom } from 'recoil';
 import { LoginSpace } from 'LoginModule';
 import { RecoilProps } from 'RecoilModule';
+import { HomeProps } from 'HomeModule';
+import { UserSpace } from 'InformationModule';
 
 export const pageState = atom<LoginSpace.SignUpPageProps>({
     key: 'pageState',
@@ -31,5 +33,20 @@ export const idState = atom<string>({
 
 export const allSkillData = atom<{ id: number | null; name: string | null }[]>({
     key: 'allSkillData',
+    default: [],
+});
+
+export const allSkillData = atom<Array<string>>({
+    key: 'allSkillData',
+    default: [],
+});
+
+export const positionsData = atom<UserSpace.Job[]>({
+    key: 'positionsData',
+    default: [],
+});
+
+export const userInfoData = atom<HomeProps.UserInfoProps[]>({
+    key: 'userInfoData',
     default: [],
 });

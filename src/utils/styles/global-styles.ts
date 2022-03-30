@@ -49,12 +49,12 @@ const GlobalStyle = createGlobalStyle`
 
     @font-face {
         font-family: 'AppleSDGothicNeo';
-        src: url(${process.env.PUBLIC}/font/AppleSDGothicNeoR.woff2);
+        src: local(${process.env.PUBLIC}/font/AppleSDGothicNeoR.woff2);
     }
 
     @font-face {
         font-family : 'Montserrat';
-        src: url(${process.env.PUBLIC}/font/Montserrat.ttf);
+        src: local(${process.env.PUBLIC}/font/Montserrat.ttf);
         unicode-range: U+0041-005A,U+0061-007A;
     }
 
