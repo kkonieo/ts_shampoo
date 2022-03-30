@@ -5,18 +5,20 @@ interface Props {
     editMode: boolean;
 }
 
-const SkillTag = ({ skill, isEditMode, onSkillChange, onDeleteSkill }: aboutMeProps.SkillsDetailProps) => {
+const SkillTag = ({ skill, targetSkill, isEditMode, onSkillChange, onDeleteSkill }: aboutMeProps.SkillTagProps) => {
     return (
-        <TagDiv data-value={skill} onChange={onSkillChange}>
-            <label>
-                {isEditMode && (
-                    <TagDelete onClick={onDeleteSkill} editMode={isEditMode}>
-                        x
-                    </TagDelete>
-                )}
-                <FormCheckLeft name="skillBtn" value={skill} />
-                <TagNameDiv editMode={isEditMode}>{skill}</TagNameDiv>
-            </label>
+        <TagDiv data-value={skill}>
+            <Label>
+                <FormCheckLeft name="skillBtn" value={skill} checked={skill === targetSkill ? true : false} readOnly />
+                <TagNameDiv data-value={skill} onClick={onSkillChange} editMode={isEditMode}>
+                    {isEditMode && (
+                        <TagDelete data-value={skill} onClick={onDeleteSkill} editMode={isEditMode}>
+                            x
+                        </TagDelete>
+                    )}
+                    <TagNameTitle>{skill}</TagNameTitle>
+                </TagNameDiv>
+            </Label>
         </TagDiv>
     );
 };
@@ -24,33 +26,25 @@ const SkillTag = ({ skill, isEditMode, onSkillChange, onDeleteSkill }: aboutMePr
 export default SkillTag;
 
 //TODO : 글자 길이에 따라서 폰트 사이즈 조정
-const TagDiv = styled.div`
-    /* width: 100px;
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    background-color: rgb(89, 147, 246);
-    color: ${(props) => props.theme.color.textColor};
-    margin: 0px 2px;
-    &:hover {
-        background-color: rgba(89, 147, 246, 0.5);
-    } */
+const TagDiv = styled.div``;
+
+const Label = styled.label`
+    box-sizing: border-box;
 `;
 
-const TagDelete = styled.span<Props>`
+//TODO : UI 수정 !
+const TagDelete = styled.div<Props>`
     display: inline-block;
     text-align: center;
     width: 20px;
     height: auto;
+    position: absolute;
     border-radius: 50%;
-    z-index: 10;
+    z-index: 20;
     border: 1px solid;
-    position: relative;
-    left: 75%;
-    top: 10px;
+    color: black;
+    top: -9px;
+    right: -1px;
     background-color: #fff;
     :hover {
         background-color: rgba(188, 188, 188, 0.8);
@@ -63,21 +57,19 @@ const TagDelete = styled.span<Props>`
 `;
 
 const TagNameDiv = styled.div<Props>`
+    position: relative;
     font-size: 15px;
     width: auto;
     height: 30px;
     border-radius: 30px;
     border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     box-sizing: border-box;
     padding: 10px;
     scrollbar-width: none;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.textColor};
-    overflow: auto;
+    overflow: visible;
     margin: 0px 2px;
     &:hover {
         background-color: rgba(89, 147, 246, 0.5);
@@ -92,6 +84,8 @@ const TagNameDiv = styled.div<Props>`
             animation: ${shakeIcon} 1s infinite;
         `}
 `;
+
+const TagNameTitle = styled.div``;
 
 const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
     &:checked {

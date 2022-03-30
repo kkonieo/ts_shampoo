@@ -5,19 +5,31 @@ declare module 'AboutMePageModuel' {
             userContents: string[];
         }
         interface SkillsProps {
-            skillTitles: string | null;
-            skillDescribes: string[] | [];
+            skillTitles: string | undefined;
+            skillDescriptions: string[] | [];
+            isEditMode: boolean;
+            skillTagData: { title: string; description: string[] }[];
         }
         interface SkillTagProps {
-            skill: string[];
-            skillDescriptions: { title: string; describe: string[] }[];
-        }
-        interface SkillsDetailProps {
-            skill: string;
+            // skill: string[];
+            // skillDescriptions: { title: string; description: string[] }[];
+            skill: string | undefined;
+            targetSkill: string | undefined;
             //추후 수정이 필요할듯 (any)
             onSkillChange: any;
             isEditMode: boolean;
             onDeleteSkill: (e: React.SyntheticEvent<HTMLSpanElement>) => void;
+        }
+        interface SkillsDetailProps {
+            skillTitles: string | undefined;
+            skillDescriptions: string[] | [];
+            isEditMode: boolean;
+            skillTagData: { title: string; description: string[] }[];
+            updateSkillTagData: (
+                target: 'title' | 'description',
+                targetSkill: string | undefined,
+                newDescription: string[] | undefined,
+            ) => void;
         }
         interface ResumeProps {
             title: string;
@@ -25,7 +37,7 @@ declare module 'AboutMePageModuel' {
                 year: number;
                 detail: {
                     detailTitle: string;
-                    detailDescription: string | null;
+                    detailDescriptions: string | null;
                 }[];
             }[];
         }
@@ -72,7 +84,7 @@ declare module 'LoginModule' {
         interface GoogleToken {
             auth_token: string;
         }
-      
+
         interface GoogleToken {
             auth_token: string;
         }
