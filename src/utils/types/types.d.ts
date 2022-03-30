@@ -103,9 +103,9 @@ declare module 'InformationModule' {
 declare module 'InformationModule' {
     export namespace UserSpace {
         interface Job {
-            id: number,
-            name: string,
-        };
+            id: number;
+            name: string;
+        }
     }
 }
 
@@ -231,28 +231,23 @@ declare module 'ButtonModule' {
         className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-<<<<<<< Updated upstream
-    };
-};
+    }
+}
 
 declare module 'ContactModule' {
     export namespace ContactSpace {
         interface ContactInformation {
             email: string;
             name: string;
-        };
-    };
-};
-=======
+        }
     }
 }
 
 declare module 'AutoCompleteModule' {
-    export namespace AutoCompleteProps {
+    export namespace AutoCompleteSpace {
         interface autoCompleteProps {
-            data: any[];
+            data: { id: string; name: string }[];
             searchWord: string;
         }
     }
 }
->>>>>>> Stashed changes
