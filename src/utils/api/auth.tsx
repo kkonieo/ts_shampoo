@@ -76,7 +76,7 @@ export const api = (withToken: boolean) => {
 
     return {
         // 로그인 및 회원가입
-        userLogin: async (props: RequestTokenSpace.GoogleToken): Promise<string> => {
+        userLogin: async (props: RequestTokenSpace.GoogleToken): Promise<any> => {
         
             const response = await axiosConfig({
                 method: 'post',
@@ -107,7 +107,7 @@ export const api = (withToken: boolean) => {
                 // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
             });
         
-            return response.data.register_check;
+            return response.data;
         },
 
         // 회원가입 (추가 정보)

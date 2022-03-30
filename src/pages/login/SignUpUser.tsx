@@ -7,11 +7,8 @@ import { LoginSpace } from 'LoginModule';
 import { UserSpace } from 'InformationModule';
 import { api } from '../../utils/api/auth';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const SignUpUser = () => {
-    const navigate = useNavigate();
-
     // recoil 페이지 세팅
     const setPage = useSetRecoilState<LoginSpace.SignUpPageProps>(pageState);
 
@@ -20,9 +17,6 @@ const SignUpUser = () => {
 
     // 직군
     const [job, setJob] = useState<UserSpace.Job[]>([]);
-
-    // 회원가입을 정상적으로 완료 했는가?
-    const [isSignUp, setIsSignUp] = useState<boolean>(false);
 
     // useForm 세팅
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSpace.SignUpProps>();
@@ -36,7 +30,6 @@ const SignUpUser = () => {
             const response = await api(true).setSignUpProfile(data);
 
             if (response.data.success) {
-                setIsSignUp(true);
                 setPage(1);
             } else alert('유저 정보 업데이트에 실패했습니다.');
         }
@@ -45,9 +38,23 @@ const SignUpUser = () => {
 
     // 구글 로그인을 통해 들어오지 않았다면(userEmail이 없다면) 홈으로 보내기
     // JSON.parse 에러로 다운되서 아예 안먹힘...
+    // useEffect(() => {
+    //     if (!sessionStorage?.getItem('userProfile')) navigate('/');
+    // })
+
+    // 윈도우 종료 감지
+    const windowObserve = (event: any) => {
+        event.preventDefault();
+        sessionStorage.clear();
+    };
+
+    // 뒤로가기, 다른 페이지로 이동 등 회원가입 도중에 나가면
     useEffect(() => {
-        if (!sessionStorage?.getItem('userProfile')) navigate('/');
-    })
+        window.addEventListener('unload', windowObserve);
+        return () => {
+            window.removeEventListener('unload', windowObserve);
+        }
+    }, []);
 
     // 직군 API 요청
     useEffect(() => {
