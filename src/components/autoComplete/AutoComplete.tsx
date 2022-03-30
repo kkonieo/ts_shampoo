@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import AutoCompleteTag from './AutoCompleteTag';
 
 const AutoComplete = ({ data, searchWord }: AutoCompleteSpace.autoCompleteProps) => {
-    const [searchArr, setSearchArr] = useState<{ id: string; name: string }[]>(
-        data.filter((item) => item.name.includes(searchWord)),
+    const [searchArr, setSearchArr] = useState<{ id: number; name: string }[]>(
+        data.filter((item) => item?.name.includes(searchWord)),
     );
 
     useEffect(() => {
