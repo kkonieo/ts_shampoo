@@ -11,7 +11,7 @@ const NavLink = () => {
     return (
         <NavLinkUl>
             {links.map((link) => (
-                <li className={pathname.includes(link.url) ? 'active' : 'inactive'}>
+                <li key={link.text} className={pathname.includes(link.url) ? 'active' : 'inactive'}>
                     <Link to={link.url}>{link.text}</Link>
                 </li>
             ))}

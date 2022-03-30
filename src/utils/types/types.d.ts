@@ -32,54 +32,52 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-
         interface SnsLoginButtonProps {
-            text: "깃허브로 로그인" | "구글로 로그인" | "네이버로 로그인" | "Comming Soon";
-            to: "github" | "google" | "naver"; // 네비게이터용
+            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인' | 'Comming Soon';
+            to: 'github' | 'google' | 'naver'; // 네비게이터용
             color: string;
-        };
+        }
 
         interface LoginContainerProps {
             children: React.ReactNode;
-        };
+        }
 
         interface LoginUserProps {
             index: string;
             email: string;
             name: string;
-        };
+        }
 
         interface SignUpProps extends LoginUserProps {
             job: string;
-        };
+        }
 
         type SignUpPageProps = 0 | 1;
-    };
+    }
 
     export namespace RequestTokenSpace {
         interface GithubToken {
             access_token: string;
-        };
+        }
 
         interface NaverToken extends GithubToken {
             refresh_token: string;
             expires_in: string;
-        };
+        }
 
         interface GoogleToken {
             auth_token: string;
-        };
+        }
     }
 }
 
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
-        interface IUrl {
+        interface UrlLink {
             linkName?: string;
             linkUrl?: string;
         }
-        interface IProjectProps {
-            projectId?: string;
+        interface ProjectDetail {
             id?: string;
             title: string;
             startDate: string;
@@ -88,7 +86,7 @@ declare module 'ProjectPageModule' {
             explain: string;
             gifSrc?: blob | string;
             imgSrc?: blob | string;
-            urlLink: IUrl[];
+            urlLink: UrlLink[];
             /*
             아이디 번호
             프로젝트 제목
@@ -170,8 +168,8 @@ declare module 'ButtonModule' {
     interface ButtonProps {
         type: 'submit' | 'button';
         text: string;
-        className: "blue" | "gray"; // 버튼 컬러 바꾸기용
+        className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    };
-};
+    }
+}
