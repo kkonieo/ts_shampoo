@@ -1,7 +1,9 @@
 import { SubTitleEdit, ProjectDiv } from '../../components';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
+import { ProjectApi } from '../../utils/api/ProjectApi';
+import { useParams } from 'react-router-dom';
 
 const datas: ProjectProps.IProjectProps[] = [
     {
@@ -64,6 +66,18 @@ const datas: ProjectProps.IProjectProps[] = [
 const ProjectPage = () => {
     // 수정모드용 토글
     const [editToggle, setEditToggle] = useState<boolean>(false);
+    const { id } = useParams();
+
+    useEffect(() => {
+        const project = ProjectApi();
+        async function getProject() {
+            await project
+                .getProject('3')
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        }
+        getProject();
+    }, []);
     const handleSubmit = (e: any) => {
         e.preventDefault();
         handleChangeToggle();

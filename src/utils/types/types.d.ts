@@ -5,19 +5,31 @@ declare module 'AboutMePageModuel' {
             userContents: string[];
         }
         interface SkillsProps {
-            skillTitles: string | null;
-            skillDescribes: string[] | [];
+            skillTitles: string | undefined;
+            skillDescriptions: string[] | [];
+            isEditMode: boolean;
+            skillTagData: { title: string; description: string[] }[];
         }
         interface SkillTagProps {
-            skill: string[];
-            skillDescriptions: { title: string; describe: string[] }[];
-        }
-        interface SkillsDetailProps {
-            skill: string;
+            // skill: string[];
+            // skillDescriptions: { title: string; description: string[] }[];
+            skill: string | undefined;
+            targetSkill: string | undefined;
             //추후 수정이 필요할듯 (any)
             onSkillChange: any;
             isEditMode: boolean;
             onDeleteSkill: (e: React.SyntheticEvent<HTMLSpanElement>) => void;
+        }
+        interface SkillsDetailProps {
+            skillTitles: string | undefined;
+            skillDescriptions: string[] | [];
+            isEditMode: boolean;
+            skillTagData: { title: string; description: string[] }[];
+            updateSkillTagData: (
+                target: 'title' | 'description',
+                targetSkill: string | undefined,
+                newDescription: string[] | undefined,
+            ) => void;
         }
         interface ResumeProps {
             title: string;
@@ -25,7 +37,7 @@ declare module 'AboutMePageModuel' {
                 year: number;
                 detail: {
                     detailTitle: string;
-                    detailDescription: string | null;
+                    detailDescriptions: string | null;
                 }[];
             }[];
         }
@@ -34,18 +46,12 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-        interface SnsLoginButtonProps {
-            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인' | 'Comming Soon';
-            to: 'github' | 'google' | 'naver'; // 네비게이터용
-            color: string;
-        }
-
         interface LoginContainerProps {
             children: React.ReactNode;
         }
 
         interface LoginUserProps {
-            index: string;
+            id: string;
             email: string;
             name: string;
         }
@@ -75,14 +81,22 @@ declare module 'InformationModule' {
     }
 }
 
+declare module 'InformationModule' {
+    export namespace UserSpace {
+        interface Job {
+            id: number,
+            name: string,
+        };
+    }
+}
+
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
-        interface IUrl {
+        interface UrlLink {
             linkName?: string;
             linkUrl?: string;
         }
-        interface IProjectProps {
-            projectId?: string;
+        interface ProjectDetail {
             id?: string;
             title: string;
             startDate: string;
@@ -91,7 +105,7 @@ declare module 'ProjectPageModule' {
             explain: string;
             gifSrc?: blob | string;
             imgSrc?: blob | string;
-            urlLink: IUrl[];
+            urlLink: UrlLink[];
             /*
             아이디 번호
             프로젝트 제목
@@ -202,5 +216,14 @@ declare module 'ButtonModule' {
         className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    }
-}
+    };
+};
+
+declare module 'ContactModule' {
+    export namespace ContactSpace {
+        interface ContactInformation {
+            email: string;
+            name: string;
+        };
+    };
+};
