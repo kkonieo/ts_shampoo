@@ -188,6 +188,10 @@ declare module 'RecoilModule' {
         interface aboutMeSummaryProps {
             summary: string;
         }
+        interface skills {
+            id: number;
+            name: string;
+        }
     }
 }
 
