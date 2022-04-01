@@ -46,12 +46,6 @@ declare module 'AboutMePageModuel' {
 
 declare module 'LoginModule' {
     export namespace LoginSpace {
-        interface SnsLoginButtonProps {
-            text: '깃허브로 로그인' | '구글로 로그인' | '네이버로 로그인' | 'Comming Soon';
-            to: 'github' | 'google' | 'naver'; // 네비게이터용
-            color: string;
-        }
-
         interface LoginContainerProps {
             children: React.ReactNode;
         }
@@ -72,19 +66,6 @@ declare module 'LoginModule' {
     }
 
     export namespace RequestTokenSpace {
-        interface GithubToken {
-            access_token: string;
-        }
-
-        interface NaverToken extends GithubToken {
-            refresh_token: string;
-            expires_in: string;
-        }
-
-        interface GoogleToken {
-            auth_token: string;
-        }
-
         interface GoogleToken {
             auth_token: string;
         }
@@ -220,6 +201,10 @@ declare module 'RecoilModule' {
         }
         interface aboutMeSummaryProps {
             summary: string;
+        }
+        interface skills {
+            id: number;
+            name: string;
         }
     }
 }

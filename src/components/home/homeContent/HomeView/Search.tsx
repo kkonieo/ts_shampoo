@@ -4,6 +4,7 @@ import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
 import { useRecoilValue } from 'recoil';
 import { userInfoData } from '../../../../utils/data/atom';
+import { RelatedResultBox } from './RelatedResultBox';
 
 export const Search = ({
     selectedFilter,
@@ -17,6 +18,8 @@ export const Search = ({
     setPortfolioCount: React.Dispatch<React.SetStateAction<number>>;
 }) => {
     const [searchValue, setSearchValue] = useState<string>('');
+    const [isRelatedResult, setIsRelatedResult] = useState(false);
+
     const userInfo = useRecoilValue(userInfoData);
 
     // 검색 로직
@@ -85,7 +88,13 @@ export const Search = ({
                 onChange={(e) => {
                     setSearchValue(e.target.value);
                 }}
-            ></SearchInput>
+            />
+            <RelatedResultBox
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                isRelatedResult={isRelatedResult}
+                setIsRelatedResult={setIsRelatedResult}
+            />
             <SearchImg alt="search button" src={`${process.env.PUBLIC_URL}/img/search.svg`} />
             <SearchButton type="submit">검색</SearchButton>
             <ResetButton
