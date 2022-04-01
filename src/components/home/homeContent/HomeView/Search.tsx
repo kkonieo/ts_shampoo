@@ -4,7 +4,7 @@ import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
 import { useRecoilValue } from 'recoil';
 import { userInfoData } from '../../../../utils/data/atom';
-import { RelatedResultBox } from './RelatedResultBox';
+// import { RelatedResultBox } from './RelatedResultBox';
 
 export const Search = ({
     selectedFilter,
@@ -89,12 +89,12 @@ export const Search = ({
                     setSearchValue(e.target.value);
                 }}
             />
-            <RelatedResultBox
+            {/* <RelatedResultBox
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 isRelatedResult={isRelatedResult}
                 setIsRelatedResult={setIsRelatedResult}
-            />
+            /> */}
             <SearchImg alt="search button" src={`${process.env.PUBLIC_URL}/img/search.svg`} />
             <SearchButton type="submit">검색</SearchButton>
             <ResetButton
