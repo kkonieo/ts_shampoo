@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ProjectApi } from '../../utils/api/ProjectApi';
 import { useParams } from 'react-router-dom';
 
-const datas: ProjectProps.IProjectProps[] = [
+const datas: any[] /*ProjectProps.IProjectProps[]*/ = [
     {
         id: '0',
         title: '프로젝트 토끼토끼',

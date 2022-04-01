@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ProjectCard from './ProjectCard';
 
 interface IProps {
-    data: ProjectProps.IProjectProps[];
+    data: any[] /*ProjectProps.IProjectProps[]*/;
     editMode?: boolean;
     handleSubmit?: (...args: any[]) => any;
 }
@@ -53,17 +53,17 @@ const AddButton = styled.button`
     border-radius: 3.5%;
     display: flex;
     flex-direction: column;
-    justify-content:center;
-    align-items:center;
-    border 1px solid #BDBDBD;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #bdbdbd;
     overflow: hidden;
-    width:90%;
-    height:90%;
-    margin:4%;
-    background-color:${(props) => props.theme.color.background};
+    width: 90%;
+    height: 90%;
+    margin: 4%;
+    background-color: ${(props) => props.theme.color.background};
 
-    img{
-        object-fit:cover;
+    img {
+        object-fit: cover;
     }
 `;
 
