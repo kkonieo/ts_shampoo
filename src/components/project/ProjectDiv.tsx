@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ProjectCard from './ProjectCard';
 
 interface IProps {
-    data: ProjectProps.IProjectProps[];
+    data: ProjectProps.ProjectDetail[];
     editMode?: boolean;
     handleSubmit?: (...args: any[]) => any;
 }
