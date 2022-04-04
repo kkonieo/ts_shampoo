@@ -1,13 +1,24 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { aboutMeProps } from 'AboutMePageModuel';
 
-const SkillTag = ({ skill, onSkillChange }: aboutMeProps.SkillsDetailProps) => {
+interface Props {
+    editMode: boolean;
+}
+
+const SkillTag = ({ skill, targetSkill, isEditMode, onSkillChange, onDeleteSkill }: aboutMeProps.SkillTagProps) => {
     return (
-        <TagDiv data-value={skill} onChange={onSkillChange}>
-            <label>
-                <FormCheckLeft name="skillBtn" value={skill} />
-                <TagNameDiv>{skill}</TagNameDiv>
-            </label>
+        <TagDiv data-value={skill}>
+            <Label>
+                <FormCheckLeft name="skillBtn" value={skill} checked={skill === targetSkill ? true : false} readOnly />
+                <TagNameDiv data-value={skill} onClick={onSkillChange} editMode={isEditMode}>
+                    {isEditMode && (
+                        <TagDelete data-value={skill} onClick={onDeleteSkill} editMode={isEditMode}>
+                            x
+                        </TagDelete>
+                    )}
+                    <TagNameTitle>{skill}</TagNameTitle>
+                </TagNameDiv>
+            </Label>
         </TagDiv>
     );
 };
@@ -15,39 +26,50 @@ const SkillTag = ({ skill, onSkillChange }: aboutMeProps.SkillsDetailProps) => {
 export default SkillTag;
 
 //TODO : 글자 길이에 따라서 폰트 사이즈 조정
-const TagDiv = styled.div`
-    /* width: 100px;
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    background-color: rgb(89, 147, 246);
-    color: ${(props) => props.theme.color.textColor};
-    margin: 0px 2px;
-    &:hover {
-        background-color: rgba(89, 147, 246, 0.5);
-    } */
+const TagDiv = styled.div``;
+
+const Label = styled.label`
+    box-sizing: border-box;
 `;
 
-const TagNameDiv = styled.div`
+//TODO : UI 수정 !
+const TagDelete = styled.div<Props>`
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+    height: auto;
+    position: absolute;
+    border-radius: 50%;
+    z-index: 20;
+    border: 1px solid;
+    color: black;
+    top: -9px;
+    right: -1px;
+    background-color: #fff;
+    :hover {
+        background-color: rgba(188, 188, 188, 0.8);
+    }
+    ${(props) =>
+        props.editMode &&
+        css`
+            animation: ${shakeIcon} 1s infinite;
+        `}
+`;
+
+const TagNameDiv = styled.div<Props>`
+    position: relative;
     font-size: 15px;
     width: auto;
     height: 30px;
-    background: #e6e6e6;
     border-radius: 30px;
     border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     box-sizing: border-box;
     padding: 10px;
     scrollbar-width: none;
     background-color: ${(props) => props.theme.color.main};
     color: ${(props) => props.theme.color.textColor};
-    overflow: auto;
+    overflow: visible;
     margin: 0px 2px;
     &:hover {
         background-color: rgba(89, 147, 246, 0.5);
@@ -56,7 +78,14 @@ const TagNameDiv = styled.div`
     ::-webkit-scrollbar {
         display: none;
     }
+    ${(props) =>
+        props.editMode &&
+        css`
+            animation: ${shakeIcon} 1s infinite;
+        `}
 `;
+
+const TagNameTitle = styled.div``;
 
 const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
     &:checked {
@@ -64,6 +93,7 @@ const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
         background: none;
         padding: 0px 10px;
         text-align: center;
+        width: auto;
         height: 30px;
         line-height: 33px;
         font-weight: 500;
@@ -74,4 +104,40 @@ const FormCheckLeft = styled.input.attrs({ type: 'radio' })`
         color: #fff;
     }
     display: none;
+`;
+
+const shakeIcon = keyframes`
+	0%{
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	10%{
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+	20%{
+		transform: translate(-2px, 1px) rotate(-1deg);
+	}
+	30%{
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	40%{
+		transform: translate(-1px, 1px) rotate(1deg);
+	}
+	50%{
+		transform: translate(1px, -1px) rotate(-2deg);
+	}
+	60%{
+		transform: translate(1px, 1px) rotate(1deg);
+	}
+	70%{
+		transform: translate(-1px, 1px) rotate(2deg);
+	}
+	80%{
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+	90%{
+		transform: translate(-1px, 1px) rotate(0deg);
+	}
+	100%{
+		transform: translate(1px, 1px) rotate(-1deg);
+	}
 `;

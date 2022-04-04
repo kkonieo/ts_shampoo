@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ProjectCard from './ProjectCard';
 
 interface IProps {
-    data: ProjectProps.IProjectProps[];
+    data: ProjectProps.ProjectDetail[];
     editMode?: boolean;
     handleSubmit?: (...args: any[]) => any;
 }
@@ -15,8 +15,8 @@ const ProjectDiv = ({ data, editMode, handleSubmit }: IProps) => {
             <GridDiv>
                 {data.map((project, idx) => {
                     return (
-                        <Link to={`${idx}`}>
-                            <ProjectCard key={project.title + idx} {...project} />
+                        <Link to={`${idx}`} key={project.title + idx}>
+                            <ProjectCard {...project} />
                         </Link>
                     );
                 })}

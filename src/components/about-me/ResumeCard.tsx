@@ -13,15 +13,11 @@ const ResumeCard = ({ title, resumeDetail }: aboutMeProps.ResumeProps) => {
                             <YearTitle>{item.year}</YearTitle>
                             <YearColumnDiv>
                                 {item.detail.map((i, idx) => (
-                                    <YearRowDiv>
+                                    <YearRowDiv key={idx}>
                                         <YearDot />
                                         <div>
-                                            <DetailTitle key={item.year + '_' + i.detailTitle + '_' + idx}>
-                                                {i.detailTitle}
-                                            </DetailTitle>
-                                            <DetailDescribtion key={item.year + '_' + i.detailDescription + '_' + idx}>
-                                                {i.detailDescription}
-                                            </DetailDescribtion>
+                                            <DetailTitle>{i.detailTitle}</DetailTitle>
+                                            <DetailDescribtion>{i.detailDescriptions}</DetailDescribtion>
                                         </div>
                                     </YearRowDiv>
                                 ))}

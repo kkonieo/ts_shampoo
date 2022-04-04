@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useRef, useState } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 
-interface IProps extends ProjectProps.IProjectProps {}
+interface IProps extends ProjectProps.ProjectDetail {}
 
 const ProjectCard: React.FunctionComponent<IProps> = ({ ...props }) => {
     const [gifToggle, setGifToggle] = useState<boolean>(false);

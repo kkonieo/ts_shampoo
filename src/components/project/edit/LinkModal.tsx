@@ -5,8 +5,8 @@ import { useState } from 'react';
 interface IProps {
     isModalOpen: boolean;
     setIsModalOpen: (arg: boolean) => void;
-    urlLink: ProjectProps.IUrl[];
-    setUrlLink: (arg: ProjectProps.IUrl[]) => void;
+    urlLink: ProjectProps.UrlLink[];
+    setUrlLink: (arg: ProjectProps.UrlLink[]) => void;
 }
 const LinkModal = ({ urlLink, setUrlLink, isModalOpen, setIsModalOpen }: IProps) => {
     const [modalUrlInput, setModalUrlInput] = useState<string>('');

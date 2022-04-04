@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import LinkModal from './LinkModal';
 interface Props {
-    urlLink: ProjectProps.IUrl[];
-    setUrlLink: (args: ProjectProps.IUrl[]) => void;
+    urlLink: ProjectProps.UrlLink[];
+    setUrlLink: (args: ProjectProps.UrlLink[]) => void;
     editMode?: boolean;
 }
 const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
@@ -20,7 +20,11 @@ const LinkEdit = ({ urlLink, setUrlLink, editMode }: Props) => {
             <div>
                 {urlLink &&
                     urlLink.map((link, idx) => (
-                        <button type="button" onClick={() => window.open(`${link.linkUrl}`, '_blank')}>
+                        <button
+                            type="button"
+                            key={`button` + idx}
+                            onClick={() => window.open(`${link.linkUrl}`, '_blank')}
+                        >
                             {link.linkName}
                             {editMode && (
                                 <img
