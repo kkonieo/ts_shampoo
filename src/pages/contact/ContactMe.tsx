@@ -15,36 +15,31 @@ const ContactMe = () => {
     const { pathname } = location;
     const contactId: string = pathname.split("/")[1];
 
-    // 로그인 유저와 포트폴리오 id가 일치하는지 확인
-    const flag: boolean = userProfile.id === contactId;
-
     // 현재 보고있는 포트폴리오의 정보
     const [information, setInformation] = useState<ContactSpace.ContactInformation>();
 
-    // 로그인 유저와 포트폴리오 id가 일치하지 않으면 API 요청
+    // API 요청
     useEffect(() => {
-        if (!flag) {
-            (async () => {
-                const response = await api(false).getContact(contactId);
-                setInformation(response);
-            })()
-        }
-    }, [userProfile, contactId]);
+        (async () => {
+            const response = await api(false).getContact(contactId);
+            setInformation(response);
+        })()
+    }, []);
 
     return (
         <ContainerArticle>
             <SubTitle text="📍 Contact me" section="contact-me" />
             <ContentsDiv>
                 <UserDiv>
-                    <UserNameP>{flag ? userProfile?.name : information?.name}</UserNameP>
+                    <UserNameP>{information?.name}</UserNameP>
                     <RowDiv>
                         <KeyDiv>
                             <p>Emaill</p>
                             <p>Github</p>
                         </KeyDiv>
                         <ValueDiv>
-                            <p>{flag ? userProfile?.email : information?.email}</p>
-                            <p>12345678</p>
+                            <p>{information?.email}</p>
+                            <p>{information?.github}</p>
                         </ValueDiv>
                     </RowDiv>
                 </UserDiv>

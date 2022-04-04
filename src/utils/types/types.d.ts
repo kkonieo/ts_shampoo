@@ -174,6 +174,7 @@ declare module 'ContactModule' {
         interface ContactInformation {
             email: string;
             name: string;
+            github: string;
         };
     };
 };
