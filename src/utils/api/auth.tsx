@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { LoginSpace, RequestTokenSpace } from 'LoginModule';
 import { UserSpace } from 'InformationModule';
+import { ContactSpace } from 'ContactModule';
 import Cookies from 'universal-cookie';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -149,6 +150,18 @@ export const api = (withToken: boolean) => {
             const response = await axiosConfig({
                 method: 'get',
                 url: `/gmail/670fAc4O`, // 유저 id 값을 slug로 바꾸면 => url: `/gmail/${id}`,
+                headers,
+            });
+            
+            return response.data;
+        },
+
+        // Contact 페이지에서 이메일 보내기
+        sendContact: async (data: ContactSpace.ContactSend) => {
+            const response = await axiosConfig({
+                method: 'post',
+                url: `/gmail/`,
+                data,
                 headers,
             });
             

@@ -8,15 +8,30 @@ import { ContactSpace } from 'ContactModule';
 const ContactMe = () => {
     const location = useLocation();
 
-    // 현재 로그인한 정보 가져오기
-    const userProfile = JSON.parse(sessionStorage.getItem('userProfile') || "");
-
     // 현재 보고있는 포트폴리오 id 값 가져오기
     const { pathname } = location;
     const contactId: string = pathname.split("/")[1];
 
     // 현재 보고있는 포트폴리오의 정보
     const [information, setInformation] = useState<ContactSpace.ContactInformation>();
+
+    // send it 버튼 눌렀을 때
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const {from_name, from_email, from_text} = event.currentTarget;
+        const sendData: ContactSpace.ContactSend = {
+            from_email: from_email.value,
+            from_name: from_name.value,
+            email_text: from_text.value,
+            to_email: information?.email || "",
+            to_name: information?.name || "",
+        };
+
+        (async () => {
+            const response = await api(false).sendContact(sendData);
+            alert(`${response.message === "true" ? "메일 발송에 성공했습니다" : "메일 발송에 실패했습니다"}`);
+        })();
+    };
 
     // API 요청
     useEffect(() => {
@@ -43,15 +58,15 @@ const ContactMe = () => {
                         </ValueDiv>
                     </RowDiv>
                 </UserDiv>
-                <EmailDiv>
+                <EmailForm onSubmit={handleSubmit}>
                     <p>📮 ask me </p>
                     <InputDiv>
-                        <input placeholder="이름" />
-                        <input placeholder="이메일" />
-                        <button>send it</button>
+                        <input type="text" name="from_name" placeholder="이름" />
+                        <input type="text" name="from_email" placeholder="이메일" />
+                        <button type="submit">send it</button>
                     </InputDiv>
-                    <textarea />
-                </EmailDiv>
+                    <textarea name="from_text" />
+                </EmailForm>
             </ContentsDiv>
         </ContainerArticle>
     );
@@ -126,7 +141,7 @@ const ValueDiv = styled.div`
     }
 `;
 
-const EmailDiv = styled.div`
+const EmailForm = styled.form`
     display: grid;
     grid-template-rows: 1fr 1fr 10fr;
 

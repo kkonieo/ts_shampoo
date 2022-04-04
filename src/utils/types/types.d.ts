@@ -81,15 +81,6 @@ declare module 'InformationModule' {
     }
 }
 
-declare module 'InformationModule' {
-    export namespace UserSpace {
-        interface Job {
-            id: number,
-            name: string,
-        };
-    }
-}
-
 declare module 'ProjectPageModule' {
     export namespace ProjectProps {
         interface UrlLink {
@@ -225,6 +216,14 @@ declare module 'ContactModule' {
             email: string;
             name: string;
             github: string;
+        };
+
+        interface ContactSend {
+            from_email: string,
+            from_name: string,
+            email_text: string,
+            to_email: string,
+            to_name: string,
         };
     };
 };
