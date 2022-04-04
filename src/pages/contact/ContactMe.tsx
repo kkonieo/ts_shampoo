@@ -39,7 +39,7 @@ const ContactMe = () => {
                         </KeyDiv>
                         <ValueDiv>
                             <p>{information?.email}</p>
-                            <p>{information?.github}</p>
+                            <p>{information?.github === "None" ? "없음" : information?.github}</p>
                         </ValueDiv>
                     </RowDiv>
                 </UserDiv>

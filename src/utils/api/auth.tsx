@@ -148,12 +148,10 @@ export const api = (withToken: boolean) => {
         getContact: async (id: string) => {
             const response = await axiosConfig({
                 method: 'get',
-                url: `/gmail/${id}`,
+                url: `/gmail/670fAc4O`, // 유저 id 값을 slug로 바꾸면 => url: `/gmail/${id}`,
                 headers,
             });
-
-            console.log('response', response);
-
+            
             return response.data;
         },
     }
