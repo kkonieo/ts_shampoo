@@ -8,7 +8,6 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
     const [userId, setUserId] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
     const [userJobGroup, setUserJobGroup] = useState<string>("");
-    //const [userAccount, setUserAccount] = useState(userData.account);
 
     const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserId(e.currentTarget.value);
@@ -51,13 +50,17 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
                     ))}
                 </Select> */}
             </UserRowDiv>
+            <UserRowDiv>
+                <Label>GitHub</Label>
+                <p>{userData?.account || "없음"}</p>
+            </UserRowDiv>
             <AccountTitle>계정 관리</AccountTitle>
 
             <AccountRowDiv>
                 <AccountImageContainer>
                     <AccountImage />
                 </AccountImageContainer>
-                <AccountId>{userData.account}</AccountId>
+                <AccountId>{userData?.account || "없음"}</AccountId>
             </AccountRowDiv>
         </Div>
     );
@@ -75,7 +78,7 @@ const UserRowDiv = styled.div`
 `;
 
 const Label = styled.div`
-    font-weight: 500;
+    font-weight: bold;
     margin-right: 20px;
 `;
 
