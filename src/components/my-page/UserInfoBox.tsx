@@ -54,14 +54,6 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
                 <Label>GitHub</Label>
                 <p>{userData?.account || "없음"}</p>
             </UserRowDiv>
-            <AccountTitle>계정 관리</AccountTitle>
-
-            <AccountRowDiv>
-                <AccountImageContainer>
-                    <AccountImage />
-                </AccountImageContainer>
-                <AccountId>{userData?.account || "없음"}</AccountId>
-            </AccountRowDiv>
         </Div>
     );
 };
