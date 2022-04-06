@@ -156,5 +156,21 @@ export const api = (withToken: boolean) => {
 
             return response.data;
         },
+
+        // Settings 페이지 정보 불러오기
+        getSettings: async () => {
+            try {
+                const response = await axiosConfig({
+                    method: 'get',
+                    url: `/user/info/`,
+                    headers,
+                });
+
+                return response;
+            }
+            catch (error: any) {
+                return error?.response;
+            }
+        },
     }
 }

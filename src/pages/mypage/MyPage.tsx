@@ -1,8 +1,10 @@
 import { MyPageProps } from 'MyPageModule';
 import styled from 'styled-components';
-import { SubTitle } from '../../components';
+import { LoginSpace } from 'LoginModule';
 import { MyPageSubTitle, ProfileImage } from '../../components/my-page';
 import UserInfoBox from '../../components/my-page/UserInfoBox';
+import { useEffect, useState } from 'react';
+import { api } from '../../utils/api/auth';
 
 const MyPage = () => {
     /*
@@ -14,12 +16,11 @@ const MyPage = () => {
         연동된 계정 정보
     */
 
-    const userData: MyPageProps.MyPageProps = {
-        id: 'elice@test.com',
-        userName: '엘리스',
-        userJobGroup: { id: 'front-end', value: '프론트엔드' },
-        account: { social: 'github', socialId: '토끼토끼' },
-    };
+    const [userData, setUserData] = useState<MyPageProps.MyPageProps>({
+        id: "",
+        userName: "",
+        userJobGroup: "",
+    });
 
     const tmpJobGroup = [
         { id: 'front-end', value: '프론트엔드' },
@@ -27,6 +28,23 @@ const MyPage = () => {
         { id: 'AI', value: '인공지능' },
         { id: 'data-analyst', value: '데이터 분석가' },
     ];
+
+    // 페이지 접근 시 정보 요청
+    useEffect(() => {
+        (async () => {
+            const response = await api(true).getSettings();
+            response?.status === 200 && 
+            setUserData(() => {
+                return {
+                    id: response.data[0].email,
+                    userName: response.data[0].name,
+                    userJobGroup: response.data[0].job,
+                    account: response.data[0]?.github,
+                    imgSrc: response.data[0]?.img,
+                }
+            })
+        })();
+    }, []);
 
     return (
         <Div>
