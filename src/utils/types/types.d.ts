@@ -217,13 +217,5 @@ declare module 'ContactModule' {
             name: string;
             github: string;
         };
-
-        interface ContactSend {
-            from_email: string,
-            from_name: string,
-            email_text: string,
-            to_email: string,
-            to_name: string,
-        };
     };
 };

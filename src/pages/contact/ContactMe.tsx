@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../../utils/api/auth';
 import { ContactSpace } from 'ContactModule';
+import emailjs from '@emailjs/browser';
 
 const ContactMe = () => {
     const location = useLocation();
@@ -18,19 +19,10 @@ const ContactMe = () => {
     // send it 버튼 눌렀을 때
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const {from_name, from_email, from_text} = event.currentTarget;
-        const sendData: ContactSpace.ContactSend = {
-            from_email: from_email.value,
-            from_name: from_name.value,
-            email_text: from_text.value,
-            to_email: information?.email || "",
-            to_name: information?.name || "",
-        };
 
-        (async () => {
-            const response = await api(false).sendContact(sendData);
-            alert(`${response.message === "true" ? "메일 발송에 성공했습니다" : "메일 발송에 실패했습니다"}`);
-        })();
+        emailjs.sendForm(process.env.REACT_APP_SERVICE_ID || "", process.env.REACT_APP_TEMPLATE_ID || "", event.currentTarget, process.env.REACT_APP_USER_ID)
+        .then(result => console.log(result.text))
+        .catch(error => console.log(error.text));
     };
 
     // API 요청
@@ -59,13 +51,15 @@ const ContactMe = () => {
                     </RowDiv>
                 </UserDiv>
                 <EmailForm onSubmit={handleSubmit}>
-                    <p>📮 ask me </p>
+                    <p data-name="to_name">📮 ask me </p>
                     <InputDiv>
+                        <input type="hidden" name="to_name" value={information?.name} />
+                        <input type="hidden" name="to_email" value={information?.email} />
                         <input type="text" name="from_name" placeholder="이름" />
                         <input type="text" name="from_email" placeholder="이메일" />
                         <button type="submit">send it</button>
                     </InputDiv>
-                    <textarea name="from_text" />
+                    <textarea name="message" />
                 </EmailForm>
             </ContentsDiv>
         </ContainerArticle>

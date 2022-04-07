@@ -149,19 +149,7 @@ export const api = (withToken: boolean) => {
         getContact: async (id: string) => {
             const response = await axiosConfig({
                 method: 'get',
-                url: `/gmail/670fAc4O`, // 유저 id 값을 slug로 바꾸면 => url: `/gmail/${id}`,
-                headers,
-            });
-            
-            return response.data;
-        },
-
-        // Contact 페이지에서 이메일 보내기
-        sendContact: async (data: ContactSpace.ContactSend) => {
-            const response = await axiosConfig({
-                method: 'post',
-                url: `/gmail/`,
-                data,
+                url: `/gmail/0HGJLeXy`, // 유저 id 값을 slug로 바꾸면 => url: `/gmail/${id}`,
                 headers,
             });
             
