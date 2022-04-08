@@ -233,6 +233,7 @@ declare module 'AutoCompleteModule' {
         interface autoCompleteProps {
             data: { id: number; name: string }[];
             searchWord: string;
+            autoTagClickSkill: (e: React.MouseEvent<HTMLDivElement>) => void;
         }
     }
 }
