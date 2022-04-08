@@ -5,11 +5,11 @@ import AutoCompleteTag from './AutoCompleteTag';
 
 const AutoComplete = ({ data, searchWord }: AutoCompleteSpace.autoCompleteProps) => {
     const [searchArr, setSearchArr] = useState<{ id: number; name: string }[]>(
-        data.filter((item) => item?.name.includes(searchWord)),
+        data.filter((item) => item?.name.toLowerCase().includes(searchWord.toLowerCase())),
     );
 
     useEffect(() => {
-        const tmpArr = data.filter((item) => item.name.includes(searchWord));
+        const tmpArr = data.filter((item) => item?.name.toLowerCase().includes(searchWord.toLowerCase()));
         setSearchArr(tmpArr);
     }, [searchWord]);
 
