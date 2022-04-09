@@ -75,6 +75,7 @@ const Div = styled.div`
     position: sticky;
     top: 0;
     margin-bottom: 4px;
+    z-index: 10;
 `;
 
 //props도 타입 지정
