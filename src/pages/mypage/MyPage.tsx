@@ -32,17 +32,22 @@ const MyPage = () => {
     // 페이지 접근 시 정보 요청
     useEffect(() => {
         (async () => {
-            const response = await api(true).getSettings();
-            response?.status === 200 && 
-            setUserData(() => {
-                return {
-                    id: response.data[0].email,
-                    userName: response.data[0].name,
-                    userJobGroup: response.data[0].job,
-                    account: response.data[0]?.github,
-                    imgSrc: response.data[0]?.img,
-                }
-            })
+            try {
+                const response = await api(true).getSettings();
+                response?.status === 200 && 
+                setUserData(() => {
+                    return {
+                        id: response.data[0].email,
+                        userName: response.data[0].name,
+                        userJobGroup: response.data[0].job,
+                        account: response.data[0]?.github,
+                        imgSrc: response.data[0]?.img,
+                    }
+                })
+            }
+            catch (error: any) {
+                console.log('정보 불러오기 오류', error.response);
+            }
         })();
     }, []);
 
