@@ -58,8 +58,6 @@ declare module 'LoginModule' {
 
         interface SignUpProps extends LoginUserProps {
             job: string;
-            email: string;
-            name: string;
         }
 
         type SignUpPageProps = 0 | 1;

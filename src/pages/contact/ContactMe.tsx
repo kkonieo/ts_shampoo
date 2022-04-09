@@ -51,7 +51,7 @@ const ContactMe = () => {
                     </RowDiv>
                 </UserDiv>
                 <EmailForm onSubmit={handleSubmit}>
-                    <p data-name="to_name">📮 ask me </p>
+                    <p>📮 ask me </p>
                     <InputDiv>
                         <input type="hidden" name="to_name" value={information?.name} />
                         <input type="hidden" name="to_email" value={information?.email} />
