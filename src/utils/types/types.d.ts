@@ -40,6 +40,7 @@ declare module 'AboutMePageModuel' {
                     detailDescriptions: string | null;
                 }[];
             }[];
+            isEditMode: boolean;
         }
     }
 }
