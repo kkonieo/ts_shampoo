@@ -80,10 +80,13 @@ export default MyPage;
 
 const Div = styled.div`
     padding: 20px;
+    height: 100%;
     box-sizing: border-box;
+    overflow: hidden;
 `;
 
 const RowDiv = styled.div`
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -109,7 +112,7 @@ const ContentsArea = styled.div`
 `;
 
 const UserDataArea = styled.div`
-    flex-grow: 1;
+    flex-grow: 0;
 `;
 
 const BtnArea = styled.div`
@@ -130,11 +133,12 @@ const Button = styled.button`
 const DeleteUserBtn = styled(Button)``;
 
 const BtnRowDiv = styled.div`
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    justify-content: space-between;
+    position: absolute;
+    bottom: 20%;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 20px;
 `;
 
 const EditBtn = styled(Button)``;

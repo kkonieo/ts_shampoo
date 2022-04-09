@@ -69,12 +69,11 @@ export default ScrollProgress;
 
 const Div = styled.div`
     width: 100%;
-    height: 10px;
+    height: 2%;
     background-color: gray;
     /* 상단 영역에 고정되도록 (fixed 사용시 브라우저 최상단으로 고정됨) */
     position: sticky;
     top: 0;
-    margin-bottom: 4px;
 `;
 
 //props도 타입 지정
