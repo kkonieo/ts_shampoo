@@ -29,7 +29,7 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
     }, [userData]);
 
     return (
-        <Div>
+        <div>
             <UserRowDiv>
                 <Label>아이디</Label>
                 <p>{userId}</p>
@@ -54,19 +54,16 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
                 <Label>GitHub</Label>
                 <p>{userData?.account || "없음"}</p>
             </UserRowDiv>
-        </Div>
+        </div>
     );
 };
 
 export default UserInfoBox;
 
-const Div = styled.div``;
-
 const UserRowDiv = styled.div`
     display: flex;
     flex-direction: row;
-    margin: 10px 2px;
-    align-items: baseline;
+    margin-bottom: 20px;
 `;
 
 const Label = styled.div`
