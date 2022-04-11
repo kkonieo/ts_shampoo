@@ -56,7 +56,7 @@ const MyPage = () => {
             <MyPageSubTitle text="🛠 Setting" />
             <RowDiv>
                 <ImageArea>
-                    <ImageTitle>사진 변경하기</ImageTitle>
+                    <ImageTitle>프로필 사진</ImageTitle>
                     <ProfileImage />
                 </ImageArea>
                 <ContentsArea>
@@ -93,6 +93,12 @@ const RowDiv = styled.div`
     height: 100%;
     box-sizing: border-box;
     padding: 1%;
+
+    button {
+        padding: 15px;
+
+        background-color: ${({ theme }) => theme.color.buttonBackground};
+    }
 `;
 
 const ImageArea = styled.div`
@@ -101,8 +107,8 @@ const ImageArea = styled.div`
 `;
 
 const ImageTitle = styled.div`
-    width: 150px;
-    justify-self: left;
+    font-weight: bold;
+    font-size: 1.3rem;
 `;
 
 const ContentsArea = styled.div`
@@ -121,8 +127,6 @@ const BtnArea = styled.div`
 
 const Button = styled.button`
     border-radius: 5px;
-    width: 80px;
-    height: 30px;
     box-sizing: border-box;
     background-color: ${(props) => props.theme.color.buttonColor};
     &:hover {

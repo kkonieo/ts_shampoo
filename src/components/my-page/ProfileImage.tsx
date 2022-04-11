@@ -51,8 +51,6 @@ const BtnContainer = styled.div`
 `;
 
 const ChangeImgBtn = styled.button`
-    width: 80px;
-    height: 30px;
     margin-top: 30px;
     justify-self: center;
     align-self: center;
