@@ -64,10 +64,10 @@ const MyPage = () => {
                         <UserInfoBox userData={userData} jobGroup={tmpJobGroup} />
                     </UserDataArea>
                     <BtnArea>
-                        <DeleteUserBtn>회원 탈퇴</DeleteUserBtn>
+                        <button>회원 탈퇴</button>
                         <BtnRowDiv>
-                            <EditBtn>수정하기</EditBtn>
-                            <SubmitBtn>저장하기</SubmitBtn>
+                            <button>수정하기</button>
+                            <button>저장하기</button>
                         </BtnRowDiv>
                     </BtnArea>
                 </ContentsArea>
@@ -98,6 +98,12 @@ const RowDiv = styled.div`
         padding: 15px;
 
         background-color: ${({ theme }) => theme.color.buttonBackground};
+
+        border-radius: 5px;
+
+        :hover {
+            background-color: ${(props) => props.theme.color.buttonHoverColor};
+        }
     }
 `;
 
@@ -128,17 +134,6 @@ const BtnArea = styled.div`
     flex-grow: 1;
 `;
 
-const Button = styled.button`
-    border-radius: 5px;
-    box-sizing: border-box;
-    background-color: ${(props) => props.theme.color.buttonColor};
-    &:hover {
-        background-color: ${(props) => props.theme.color.buttonHoverColor};
-    }
-`;
-
-const DeleteUserBtn = styled(Button)``;
-
 const BtnRowDiv = styled.div`
     position: absolute;
     bottom: 20%;
@@ -147,7 +142,3 @@ const BtnRowDiv = styled.div`
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 20px;
 `;
-
-const EditBtn = styled(Button)``;
-
-const SubmitBtn = styled(Button)``;
