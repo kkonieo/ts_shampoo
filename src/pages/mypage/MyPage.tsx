@@ -57,7 +57,7 @@ const MyPage = () => {
             <RowDiv>
                 <ImageArea>
                     <ImageTitle>프로필 사진</ImageTitle>
-                    <ProfileImage />
+                    <ProfileImage imgSrc={userData?.imgSrc} />
                 </ImageArea>
                 <ContentsArea>
                     <UserDataArea>
@@ -102,6 +102,8 @@ const RowDiv = styled.div`
 `;
 
 const ImageArea = styled.div`
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     font-weight: 500;
 `;
@@ -109,6 +111,7 @@ const ImageArea = styled.div`
 const ImageTitle = styled.div`
     font-weight: bold;
     font-size: 1.3rem;
+    align-self: start;
 `;
 
 const ContentsArea = styled.div`
