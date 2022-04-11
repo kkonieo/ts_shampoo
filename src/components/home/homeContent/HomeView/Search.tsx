@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { HomeProps } from 'HomeModule';
 import { Portfolio } from './Portfolio';
 import { useRecoilValue } from 'recoil';
-import { userInfoData } from '../../../../utils/data/atom';
-// import { RelatedResultBox } from './RelatedResultBox';
+import { userInfoData, allSkillData } from '../../../../utils/data/atom';
+import { RelatedResultBox } from './RelatedResultBox';
+// import { AutoComplete } from '../../../autoComplete';
 
 export const Search = ({
     selectedFilter,
@@ -18,9 +19,16 @@ export const Search = ({
     setPortfolioCount: React.Dispatch<React.SetStateAction<number>>;
 }) => {
     const [searchValue, setSearchValue] = useState<string>('');
-    const [isRelatedResult, setIsRelatedResult] = useState(false);
 
     const userInfo = useRecoilValue(userInfoData);
+    const skills = useRecoilValue(allSkillData);
+
+    //자동완성에 넘겨줄 함수
+    const autoTagClickSkill = (e: React.MouseEvent<HTMLDivElement>) => {
+        console.log(e.currentTarget.dataset.title);
+        const targetSkill = String(e.currentTarget.dataset.title);
+        setSearchValue(targetSkill);
+    };
 
     // 검색 로직
     const handleSearchSubmit = (e: React.SyntheticEvent) => {
@@ -89,12 +97,8 @@ export const Search = ({
                     setSearchValue(e.target.value);
                 }}
             />
-            {/* <RelatedResultBox
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-                isRelatedResult={isRelatedResult}
-                setIsRelatedResult={setIsRelatedResult}
-            /> */}
+            <RelatedResultBox searchValue={searchValue} setSearchValue={setSearchValue} />
+            {/* <AutoComplete data={skills} searchWord={searchValue} autoTagClickSkill={autoTagClickSkill} /> */}
             <SearchImg alt="search button" src={`${process.env.PUBLIC_URL}/img/search.svg`} />
             <SearchButton type="submit">검색</SearchButton>
             <ResetButton
