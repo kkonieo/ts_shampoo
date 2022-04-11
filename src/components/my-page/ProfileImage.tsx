@@ -7,9 +7,7 @@ const ProfileImage = ({ imgSrc }: MyPageProps.ProfileImgProps) => {
             <ImageDiv>
                 <ImageSrc imgSrc={imgSrc} />
             </ImageDiv>
-            <BtnContainer>
-                <ChangeImgBtn>사진 변경</ChangeImgBtn>
-            </BtnContainer>
+            <ChangeImgBtn>사진 변경</ChangeImgBtn>
         </Div>
     );
 };
@@ -17,7 +15,10 @@ const ProfileImage = ({ imgSrc }: MyPageProps.ProfileImgProps) => {
 export default ProfileImage;
 
 const Div = styled.div`
-    margin-left: 2vw;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const ImageDiv = styled.div`
@@ -43,18 +44,8 @@ const ImageSrc = styled.img.attrs(({imgSrc}: MyPageProps.ProfileImgProps) => ({
     z-index: 1;
 `;
 
-const BtnContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
 const ChangeImgBtn = styled.button`
     margin-top: 30px;
-    justify-self: center;
-    align-self: center;
     border-radius: 3px;
     background-color: ${(props) => props.theme.color.buttonColor};
     &:hover {

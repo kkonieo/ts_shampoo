@@ -142,7 +142,7 @@ const DeleteUserBtn = styled(Button)``;
 const BtnRowDiv = styled.div`
     position: absolute;
     bottom: 20%;
-    right: 0;
+    right: 10%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 20px;
