@@ -28,6 +28,10 @@ const MyPage = () => {
         alert('이미지를 변경했습니다');
     };
 
+    const changeEditMode = (): void => {
+        setEditMode(!editMode);
+    };
+
     // 페이지 접근 시 정보 요청
     useEffect(() => {
         (async () => {
@@ -65,7 +69,7 @@ const MyPage = () => {
                     <BtnArea>
                         <button>회원 탈퇴</button>
                         <BtnRowDiv>
-                            <button>수정하기</button>
+                            <button onClick={changeEditMode}>{editMode ? "취소하기" : "수정하기"}</button>
                             <button>저장하기</button>
                         </BtnRowDiv>
                     </BtnArea>
