@@ -97,12 +97,15 @@ const RowDiv = styled.div`
     box-sizing: border-box;
     padding: 1%;
 
-    button {
+    button,
+    .input_file {
         padding: 15px;
 
         background-color: ${({ theme }) => theme.color.buttonBackground};
 
         border-radius: 5px;
+
+        cursor: pointer;
 
         :hover {
             background-color: ${(props) => props.theme.color.buttonHoverColor};

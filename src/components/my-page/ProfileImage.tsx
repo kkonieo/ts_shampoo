@@ -7,7 +7,7 @@ const ProfileImage = ({ imgSrc, changeImg }: MyPageProps.ProfileImgChangeProps) 
             <ImageDiv>
                 <ImageSrc imgSrc={imgSrc} />
             </ImageDiv>
-            <ChangeImgLabel><input type="file" onClick={changeImg} />사진 변경</ChangeImgLabel>
+            <ChangeImgLabel className="input_file"><input type="file" onClick={changeImg} accept=".jpg, .jpeg, .png" />사진 변경</ChangeImgLabel>
 
         </Div>
     );
@@ -50,6 +50,6 @@ const ChangeImgLabel = styled.label`
     border-radius: 3px;
 
     input {
-        all: unset;
+        display: none;
     }
 `;
