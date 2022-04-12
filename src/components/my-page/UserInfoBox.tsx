@@ -30,27 +30,22 @@ const UserInfoBox = ({ userData, editMode }: MyPageProps.UserInfoBoxProps) => {
         <div>
             <UserRowDiv>
                 <Label>아이디</Label>
-                <p>{userId}</p>
-                {/* <Input value={userId} onChange={onChangeId} /> */}
+                {editMode ? <Input value={userId} onChange={onChangeId} /> : <p>{userId}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>이름</Label>
-                <p>{userName}</p>
-                {/* <Input value={userName} onChange={onChangeUserName} /> */}
+                {editMode ? <Input value={userName} onChange={onChangeUserName} /> : <p>{userName}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>직군</Label>
-                <p>{userJobGroup}</p>
-                {/* <Select id="userJobGroup" onChange={onChangeUserJobGroup}>
+                {editMode ? 
+                <Select id="userJobGroup" onChange={onChangeUserJobGroup}>
                     <DataOption value={userJobGroup}>{userData.userJobGroup}</DataOption>
-                    {otherJobGroup.map((item) => (
-                        <DataOption value={item.id}>{item.value}</DataOption>
-                    ))}
-                </Select> */}
+                </Select> : <p>{userJobGroup}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>GitHub</Label>
-                <p>{userData?.account || "없음"}</p>
+                {editMode ? <Input value={userData?.account || "없음"} onChange={onChangeUserName} /> : <p>{userData?.account || "없음"}</p>}
             </UserRowDiv>
         </div>
     );
@@ -69,7 +64,9 @@ const Label = styled.div`
     margin-right: 20px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+    border: 1px solid black;
+`;
 
 const Select = styled.select`
     width: auto;
