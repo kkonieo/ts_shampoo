@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { LoginSpace, RequestTokenSpace } from 'LoginModule';
 import { UserSpace } from 'InformationModule';
+import { ContactSpace } from 'ContactModule';
 import Cookies from 'universal-cookie';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -76,7 +77,7 @@ export const api = (withToken: boolean) => {
 
     return {
         // 로그인 및 회원가입
-        userLogin: async (props: RequestTokenSpace.GoogleToken): Promise<string> => {
+        userLogin: async (props: RequestTokenSpace.GoogleToken): Promise<any> => {
         
             const response = await axiosConfig({
                 method: 'post',
@@ -107,7 +108,7 @@ export const api = (withToken: boolean) => {
                 // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
             });
         
-            return response.data.register_check;
+            return response.data;
         },
 
         // 회원가입 (추가 정보)
@@ -151,10 +152,19 @@ export const api = (withToken: boolean) => {
                 url: `/gmail/${id}`,
                 headers,
             });
-
-            console.log('response', response);
-
+            
             return response.data;
+        },
+
+        // Settings 페이지 정보 불러오기
+        getSettings: async () => {
+            const response = await axiosConfig({
+                method: 'get',
+                url: `/user/info/`,
+                headers,
+            });
+
+            return response;
         },
     }
 }

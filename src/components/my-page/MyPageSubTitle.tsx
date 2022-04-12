@@ -8,10 +8,7 @@ const MyPageSubTitle = ({ text }: MyPageProps.SubTitleProps) => {
     const navigate = useNavigate();
 
     const checkConfirm = (message: string, onConfirm: () => void, onCancel: () => void) => {
-        if (!onConfirm) {
-            return;
-        }
-        if (!onCancel) {
+        if (!onConfirm || !onCancel) {
             return;
         }
 
@@ -26,7 +23,7 @@ const MyPageSubTitle = ({ text }: MyPageProps.SubTitleProps) => {
     };
 
     const confirmAction = () => {
-        navigate('/nav/aboutme');
+        navigate(-1);
     };
 
     const cancleAction = () => {
@@ -68,6 +65,7 @@ const CancelBtn = styled(FontAwesomeIcon)`
     color: black;
     font-size: 32px;
     border-radius: 25px;
+    cursor: pointer;
     &:hover {
         color: aliceblue;
     }

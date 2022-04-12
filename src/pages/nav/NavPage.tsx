@@ -101,6 +101,7 @@ const ProgressContentsContainer = styled.div`
     border-radius: 0 30px 30px 0;
     width: 82%;
     min-width: 700px;
+    height: 100%;
     background-color: white;
     overflow-y: auto;
     ::-webkit-scrollbar {
@@ -111,6 +112,7 @@ const ProgressContentsContainer = styled.div`
 //오른쪽 컨텐츠 영역
 const ContentDiv = styled.div`
     min-width: 400px;
+    height: 98%;
     background-color: white;
     overflow-y: auto;
     scrollbar-width: none;

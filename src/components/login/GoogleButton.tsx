@@ -6,51 +6,30 @@ import { RequestTokenSpace } from 'LoginModule';
 
 const handleFailed = (response: any) => { console.log('로그인 에러', response); };
 
-const handleLoginSuccess = (response: any) => {
-    const auth_token: RequestTokenSpace.GoogleToken = {
-        auth_token: response.getAuthResponse().id_token
-    };
-    isLoginRegistered(auth_token);
-}
-
-const handleSignUpSuccess = (response: any) => {
-    const auth_token: RequestTokenSpace.GoogleToken = {
-        auth_token: response.getAuthResponse().id_token
-    };
-    isSignUpRegistered(auth_token);
-}
-
-// 로그인 시 기가입자 여부 확인
-async function isLoginRegistered(token: RequestTokenSpace.GoogleToken) {
-    try {
-        const response = await api(false).userLogin(token);
-
-        if (response === "False") { // 가입되지 않은 유저라면
-            alert('가입되지 않은 회원입니다. 회원가입 페이지로 이동합니다.');
-            window.open('/signup', "_self");
-        } else { // 가입된 유저라면
-            window.open('/', "_self");
-        }
-    }
-    catch (error) { console.log('구글 로그인 에러', error); };
-};
-
-// 회원가입 시 기가입자 여부 확인
-async function isSignUpRegistered(token: RequestTokenSpace.GoogleToken) {
-    try {
-        const response = await api(false).userLogin(token);
-
-        if (response === "False") { // 가입되지 않은 유저라면
-            window.open('/signup', "_self");
-        } else { // 가입된 유저라면
-            alert('이미 가입된 유저입니다. 자동 로그인합니다.');
-            window.open('/', "_self");
-        }
-    }
-    catch (error) { console.log('구글 로그인 에러', error); };
-};
-
 const GoogleLoginButton = () => {
+    
+    // 로그인 시 기가입자 여부 확인
+    async function isLoginRegistered(token: RequestTokenSpace.GoogleToken) {
+        try {
+            const response = await api(false).userLogin(token);
+
+            if (!response.job || response.register_check === "False") {
+                alert('가입되지 않은 회원입니다. 회원가입 페이지로 이동합니다.');
+                window.location.href = ('/signup');
+            } else { // 가입된 유저라면
+                window.location.href = ('/');
+            }
+        }
+        catch (error) { console.log('구글 로그인 에러', error); };
+    };
+
+    const handleLoginSuccess = (response: any) => {
+        const auth_token: RequestTokenSpace.GoogleToken = {
+            auth_token: response.getAuthResponse().id_token
+        };
+        isLoginRegistered(auth_token);
+    }
+
     return (
         <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || ""}
@@ -70,6 +49,29 @@ const GoogleLoginButton = () => {
 }
 
 const GoogleSignUpIcon = () => {
+
+    // 회원가입 시 기가입자 여부 확인
+    async function isSignUpRegistered(token: RequestTokenSpace.GoogleToken) {
+        try {
+            const response = await api(false).userLogin(token);
+
+            if (!response.job || response.register_check === "False") { // 가입되지 않은 유저라면
+                window.location.href = '/signup';
+            } else { // 가입된 유저라면
+                alert('이미 가입된 유저입니다. 자동 로그인합니다.');
+                window.location.href = '/';
+            }
+        }
+        catch (error) { console.log('구글 로그인 에러', error); };
+    };
+
+    const handleSignUpSuccess = (response: any) => {
+        const auth_token: RequestTokenSpace.GoogleToken = {
+            auth_token: response.getAuthResponse().id_token
+        };
+        isSignUpRegistered(auth_token);
+    }
+
     return (
         <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || ""}
