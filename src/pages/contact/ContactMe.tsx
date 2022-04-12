@@ -4,59 +4,63 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../../utils/api/auth';
 import { ContactSpace } from 'ContactModule';
+import emailjs from '@emailjs/browser';
 
 const ContactMe = () => {
     const location = useLocation();
-
-    // 현재 로그인한 정보 가져오기
-    const userProfile = JSON.parse(sessionStorage.getItem('userProfile') || "");
 
     // 현재 보고있는 포트폴리오 id 값 가져오기
     const { pathname } = location;
     const contactId: string = pathname.split("/")[1];
 
-    // 로그인 유저와 포트폴리오 id가 일치하는지 확인
-    const flag: boolean = userProfile.id === contactId;
-
     // 현재 보고있는 포트폴리오의 정보
     const [information, setInformation] = useState<ContactSpace.ContactInformation>();
 
-    // 로그인 유저와 포트폴리오 id가 일치하지 않으면 API 요청
+    // send it 버튼 눌렀을 때
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        emailjs.sendForm(process.env.REACT_APP_SERVICE_ID || "", process.env.REACT_APP_TEMPLATE_ID || "", event.currentTarget, process.env.REACT_APP_USER_ID)
+        .then(result => console.log(result.text))
+        .catch(error => console.log(error.text));
+    };
+
+    // API 요청
     useEffect(() => {
-        if (!flag) {
-            (async () => {
-                const response = await api(false).getContact(contactId);
-                setInformation(response);
-            })()
-        }
-    }, [userProfile, contactId]);
+        (async () => {
+            const response = await api(false).getContact(contactId);
+            setInformation(response);
+        })()
+    }, []);
 
     return (
         <ContainerArticle>
             <SubTitle text="📍 Contact me" section="contact-me" />
             <ContentsDiv>
                 <UserDiv>
-                    <UserNameP>{flag ? userProfile?.name : information?.name}</UserNameP>
+                    <UserNameP>{information?.name}</UserNameP>
                     <RowDiv>
                         <KeyDiv>
                             <p>Emaill</p>
                             <p>Github</p>
                         </KeyDiv>
                         <ValueDiv>
-                            <p>{flag ? userProfile?.email : information?.email}</p>
-                            <p>12345678</p>
+                            <p>{information?.email}</p>
+                            <p>{information?.github === "None" ? "없음" : information?.github}</p>
                         </ValueDiv>
                     </RowDiv>
                 </UserDiv>
-                <EmailDiv>
+                <EmailForm onSubmit={handleSubmit}>
                     <p>📮 ask me </p>
                     <InputDiv>
-                        <input placeholder="이름" />
-                        <input placeholder="이메일" />
-                        <button>send it</button>
+                        <input type="hidden" name="to_name" defaultValue={information?.name} />
+                        <input type="hidden" name="to_email" defaultValue={information?.email} />
+                        <input type="text" name="from_name" placeholder="이름" />
+                        <input type="text" name="from_email" placeholder="이메일" />
+                        <button type="submit">send it</button>
                     </InputDiv>
-                    <textarea />
-                </EmailDiv>
+                    <textarea name="message" />
+                </EmailForm>
             </ContentsDiv>
         </ContainerArticle>
     );
@@ -131,7 +135,7 @@ const ValueDiv = styled.div`
     }
 `;
 
-const EmailDiv = styled.div`
+const EmailForm = styled.form`
     display: grid;
     grid-template-rows: 1fr 1fr 10fr;
 

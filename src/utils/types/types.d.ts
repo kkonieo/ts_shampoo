@@ -58,8 +58,6 @@ declare module 'LoginModule' {
 
         interface SignUpProps extends LoginUserProps {
             job: string;
-            email: string;
-            name: string;
         }
 
         type SignUpPageProps = 0 | 1;
@@ -78,15 +76,6 @@ declare module 'InformationModule' {
             id: number;
             name: string;
         }
-    }
-}
-
-declare module 'InformationModule' {
-    export namespace UserSpace {
-        interface Job {
-            id: number,
-            name: string,
-        };
     }
 }
 
@@ -224,6 +213,7 @@ declare module 'ContactModule' {
         interface ContactInformation {
             email: string;
             name: string;
+            github: string;
         };
     };
 };
