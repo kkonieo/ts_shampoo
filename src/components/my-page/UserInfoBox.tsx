@@ -3,12 +3,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
-    const otherJobGroup = jobGroup.filter((item) => item.id !== userData.userJobGroup.id);
+    const otherJobGroup = jobGroup.filter((item) => item.id !== userData.userJobGroup);
 
-    const [userId, setUserId] = useState<string>(userData.id);
-    const [userName, setUserName] = useState<string>(userData.userName);
-    const [userJobGroup, setUserJobGroup] = useState<string>(userData.userJobGroup.id);
-    //const [userAccount, setUserAccount] = useState(userData.account);
+    const [userId, setUserId] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
+    const [userJobGroup, setUserJobGroup] = useState<string>("");
 
     const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserId(e.currentTarget.value);
@@ -24,53 +23,51 @@ const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
     };
 
     useEffect(() => {
-        console.log(userId, userName, userJobGroup);
-    }, [userId, userName, userJobGroup]);
+        setUserId(userData.id);
+        setUserName(userData.userName);
+        setUserJobGroup(userData.userJobGroup);
+    }, [userData]);
 
     return (
-        <Div>
+        <div>
             <UserRowDiv>
                 <Label>아이디</Label>
-                <Input value={userId} onChange={onChangeId} />
+                <p>{userId}</p>
+                {/* <Input value={userId} onChange={onChangeId} /> */}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>이름</Label>
-                <Input value={userName} onChange={onChangeUserName} />
+                <p>{userName}</p>
+                {/* <Input value={userName} onChange={onChangeUserName} /> */}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>직군</Label>
-                <Select id="userJobGroup" onChange={onChangeUserJobGroup}>
-                    <DataOption value={userJobGroup}>{userData.userJobGroup.value}</DataOption>
+                <p>{userJobGroup}</p>
+                {/* <Select id="userJobGroup" onChange={onChangeUserJobGroup}>
+                    <DataOption value={userJobGroup}>{userData.userJobGroup}</DataOption>
                     {otherJobGroup.map((item) => (
                         <DataOption value={item.id}>{item.value}</DataOption>
                     ))}
-                </Select>
+                </Select> */}
             </UserRowDiv>
-            <AccountTitle>계정 관리</AccountTitle>
-
-            <AccountRowDiv>
-                <AccountImageContainer>
-                    <AccountImage />
-                </AccountImageContainer>
-                <AccountId>{userData.account?.socialId}</AccountId>
-            </AccountRowDiv>
-        </Div>
+            <UserRowDiv>
+                <Label>GitHub</Label>
+                <p>{userData?.account || "없음"}</p>
+            </UserRowDiv>
+        </div>
     );
 };
 
 export default UserInfoBox;
 
-const Div = styled.div``;
-
 const UserRowDiv = styled.div`
     display: flex;
     flex-direction: row;
-    margin: 10px 2px;
-    align-items: baseline;
+    margin-bottom: 20px;
 `;
 
 const Label = styled.div`
-    font-weight: 500;
+    font-weight: bold;
     margin-right: 20px;
 `;
 

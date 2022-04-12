@@ -5,26 +5,27 @@ const ProfileImage = ({ imgSrc }: MyPageProps.ProfileImgProps) => {
     return (
         <Div>
             <ImageDiv>
-                <ImageSrc />
+                <ImageSrc imgSrc={imgSrc} />
             </ImageDiv>
-            <BtnContainer>
-                <ChangeImgBtn>사진 변경</ChangeImgBtn>
-            </BtnContainer>
+            <ChangeImgBtn>사진 변경</ChangeImgBtn>
         </Div>
     );
 };
 
 export default ProfileImage;
 
-const Div = styled.div``;
+const Div = styled.div`
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 const ImageDiv = styled.div`
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 100px;
-    box-sizing: border-box;
     background-color: gray;
-    padding: 20px;
     z-index: 999;
     display: flex;
     flex-direction: column;
@@ -33,29 +34,18 @@ const ImageDiv = styled.div`
     margin-top: 20px;
 `;
 
-const ImageSrc = styled.img.attrs((props: MyPageProps.ProfileImgProps) => ({
-    src: props.imgSrc || `${process.env.PUBLIC_URL}/img/userDefault.png`,
-}))`
-    width: 80%;
-    height: 80%;
+const ImageSrc = styled.img.attrs(({imgSrc}: MyPageProps.ProfileImgProps) => ({
+    src: imgSrc || `${process.env.PUBLIC_URL}/img/userDefault.png`,
+    alt: '사용자 이미지'
+}))<MyPageProps.ProfileImgProps>`
+    width: ${imgSrc => imgSrc ? '100%' : '60%'};
+    height: ${imgSrc => imgSrc ? '100%' : '60%'};
+    border-radius: ${imgSrc => imgSrc ? '100px' : ''};
     z-index: 1;
-    alt: '사용자 이미지';
-`;
-
-const BtnContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 `;
 
 const ChangeImgBtn = styled.button`
-    width: 80px;
-    height: 30px;
     margin-top: 30px;
-    justify-self: center;
-    align-self: center;
     border-radius: 3px;
     background-color: ${(props) => props.theme.color.buttonColor};
     &:hover {
