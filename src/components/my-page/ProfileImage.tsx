@@ -1,7 +1,7 @@
 import { MyPageProps } from 'MyPageModule';
 import styled from 'styled-components';
 
-const ProfileImage = ({ imgSrc, changeImg }: MyPageProps.ProfileImgChangeProps) => {
+const ProfileImage = ({ imgSrc, changeImg, editMode }: MyPageProps.ProfileImgChangeProps) => {
     return (
         <Div>
             <ImageDiv>

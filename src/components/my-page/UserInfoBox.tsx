@@ -2,9 +2,7 @@ import { MyPageProps } from 'MyPageModule';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
-    const otherJobGroup = jobGroup.filter((item) => item.id !== userData.userJobGroup);
-
+const UserInfoBox = ({ userData, editMode }: MyPageProps.UserInfoBoxProps) => {
     const [userId, setUserId] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
     const [userJobGroup, setUserJobGroup] = useState<string>("");

@@ -21,12 +21,8 @@ const MyPage = () => {
         userJobGroup: "",
     });
 
-    const tmpJobGroup = [
-        { id: 'front-end', value: '프론트엔드' },
-        { id: 'back-end', value: '백엔드' },
-        { id: 'AI', value: '인공지능' },
-        { id: 'data-analyst', value: '데이터 분석가' },
-    ];
+    // 수정 모드
+    const [editMode, setEditMode] = useState<boolean>(false);
 
     const changeImg = (): void => {
         alert('이미지를 변경했습니다');
@@ -60,11 +56,11 @@ const MyPage = () => {
             <RowDiv>
                 <ImageArea>
                     <ImageTitle>프로필 사진</ImageTitle>
-                    <ProfileImage imgSrc={userData?.imgSrc} changeImg={changeImg} />
+                    <ProfileImage imgSrc={userData?.imgSrc} editMode={editMode} changeImg={changeImg} />
                 </ImageArea>
                 <ContentsArea>
                     <UserDataArea>
-                        <UserInfoBox userData={userData} jobGroup={tmpJobGroup} />
+                        <UserInfoBox userData={userData} editMode={editMode} />
                     </UserDataArea>
                     <BtnArea>
                         <button>회원 탈퇴</button>

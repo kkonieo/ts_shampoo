@@ -147,6 +147,7 @@ declare module 'MyPageModule' {
 
         interface ProfileImgChangeProps extends ProfileImgProps {
             changeImg(): void;
+            editMode: boolean;
         }
 
         interface UserInfoBoxProps {
@@ -157,7 +158,7 @@ declare module 'MyPageModule' {
                 account?: string;
                 img?: string,
             };
-            jobGroup: { id: string; value: string }[];
+            editMode: boolean;
         }
     }
 }
