@@ -1,13 +1,14 @@
 import { MyPageProps } from 'MyPageModule';
 import styled from 'styled-components';
 
-const ProfileImage = ({ imgSrc }: MyPageProps.ProfileImgProps) => {
+const ProfileImage = ({ imgSrc, changeImg }: MyPageProps.ProfileImgChangeProps) => {
     return (
         <Div>
             <ImageDiv>
                 <ImageSrc imgSrc={imgSrc} />
             </ImageDiv>
-            <ChangeImgBtn>사진 변경</ChangeImgBtn>
+            <ChangeImgLabel><input type="file" onClick={changeImg} />사진 변경</ChangeImgLabel>
+
         </Div>
     );
 };
@@ -44,11 +45,11 @@ const ImageSrc = styled.img.attrs(({imgSrc}: MyPageProps.ProfileImgProps) => ({
     z-index: 1;
 `;
 
-const ChangeImgBtn = styled.button`
+const ChangeImgLabel = styled.label`
     margin-top: 30px;
     border-radius: 3px;
-    background-color: ${(props) => props.theme.color.buttonColor};
-    &:hover {
-        background-color: ${(props) => props.theme.color.buttonHoverColor};
+
+    input {
+        all: unset;
     }
 `;

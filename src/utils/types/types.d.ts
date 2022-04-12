@@ -145,6 +145,10 @@ declare module 'MyPageModule' {
             imgSrc?: string;
         }
 
+        interface ProfileImgChangeProps extends ProfileImgProps {
+            changeImg(): void;
+        }
+
         interface UserInfoBoxProps {
             userData: {
                 id: string;

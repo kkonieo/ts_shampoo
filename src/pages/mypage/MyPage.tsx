@@ -1,6 +1,5 @@
 import { MyPageProps } from 'MyPageModule';
 import styled from 'styled-components';
-import { LoginSpace } from 'LoginModule';
 import { MyPageSubTitle, ProfileImage } from '../../components/my-page';
 import UserInfoBox from '../../components/my-page/UserInfoBox';
 import { useEffect, useState } from 'react';
@@ -28,6 +27,10 @@ const MyPage = () => {
         { id: 'AI', value: '인공지능' },
         { id: 'data-analyst', value: '데이터 분석가' },
     ];
+
+    const changeImg = (): void => {
+        alert('이미지를 변경했습니다');
+    };
 
     // 페이지 접근 시 정보 요청
     useEffect(() => {
@@ -57,7 +60,7 @@ const MyPage = () => {
             <RowDiv>
                 <ImageArea>
                     <ImageTitle>프로필 사진</ImageTitle>
-                    <ProfileImage imgSrc={userData?.imgSrc} />
+                    <ProfileImage imgSrc={userData?.imgSrc} changeImg={changeImg} />
                 </ImageArea>
                 <ContentsArea>
                     <UserDataArea>
