@@ -7,7 +7,7 @@ const ProfileImage = ({ imgSrc, changeImg, editMode }: MyPageProps.ProfileImgCha
             <ImageDiv>
                 <ImageSrc imgSrc={imgSrc} />
             </ImageDiv>
-            <ChangeImgLabel className="input_file"><input type="file" onClick={changeImg} accept=".jpg, .jpeg, .png" />사진 변경</ChangeImgLabel>
+            <ChangeImgLabel className={editMode ? "input_file" : "hide"}><input type="file" onClick={changeImg} accept=".jpg, .jpeg, .png" />사진 변경</ChangeImgLabel>
 
         </Div>
     );
@@ -48,6 +48,10 @@ const ImageSrc = styled.img.attrs(({imgSrc}: MyPageProps.ProfileImgProps) => ({
 const ChangeImgLabel = styled.label`
     margin-top: 30px;
     border-radius: 3px;
+
+    &.hide {
+        display: none;
+    }
 
     input {
         display: none;
