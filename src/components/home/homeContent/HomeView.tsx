@@ -16,6 +16,7 @@ export const HomeView = () => {
     const [userPortfolio, setUserPortfolio] = useState<JSX.Element[]>([]);
 
     const userInfo = useRecoilValue(userInfoData);
+    console.log(userInfo);
 
     useEffect(() => {
         userInfo.length > 0 &&

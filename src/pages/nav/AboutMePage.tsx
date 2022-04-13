@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { Summary, Skills, EditDetect } from '../../components';
@@ -13,6 +14,8 @@ const AboutMePage = () => {
         수정 모드임을 감지할수 있도록 설정
         수정 로직 각 컴포넌트에서 수정 클릭시 확인 버튼, input 창에 해당 데이터가 떠야함
     */
+    const location = useLocation();
+    console.log('어바웃미 로케이션', location);
 
     const controlEditMode = useRecoilValue(aboutMeEditState);
     const summaryData = useRecoilValue(aboutMeData);

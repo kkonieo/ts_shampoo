@@ -7,21 +7,22 @@ interface IProps {
     data: ProjectProps.ProjectDetail[];
     editMode?: boolean;
     handleSubmit?: (...args: any[]) => any;
+    currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
 }
 
-const ProjectDiv = ({ data, editMode, handleSubmit }: IProps) => {
+const ProjectDiv = ({ data, editMode, handleSubmit, currentUserData }: IProps) => {
     return (
         <form onSubmit={handleSubmit}>
             <GridDiv>
                 {data.map((project, idx) => {
                     return (
-                        <Link to={`${idx}`} key={project.title + idx}>
+                        <Link to={`${idx}`} key={project.title + idx} state={{ currentUserData }}>
                             <ProjectCard {...project} />
                         </Link>
                     );
                 })}
                 {editMode && (
-                    <Link to={'add'}>
+                    <Link to={'add'} state={{ currentUserData }}>
                         <AddButton>
                             <img src={`${process.env.PUBLIC_URL}/img/plus.svg`} alt="프로젝트 추가" />
                         </AddButton>

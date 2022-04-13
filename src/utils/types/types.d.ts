@@ -153,10 +153,12 @@ declare module 'MyPageModule' {
 declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
+            id: number;
             name: string;
             job: string;
             user_skill: string;
             img: string;
+            slug: string;
         }
         interface IFilterProps {
             isActive: boolean;
