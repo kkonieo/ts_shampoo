@@ -143,7 +143,7 @@ declare module 'MyPageModule' {
                 userName: string;
                 userJobGroup: string;
                 account?: string;
-                img?: string,
+                img?: string;
             };
             jobGroup: { id: string; value: string }[];
         }
@@ -217,9 +217,9 @@ declare module 'ContactModule' {
             email: string;
             name: string;
             github: string;
-        };
-    };
-};
+        }
+    }
+}
 
 declare module 'AutoCompleteModule' {
     export namespace AutoCompleteSpace {

@@ -16,9 +16,6 @@ const NavPage: React.FC = () => {
     const { state } = useLocation();
     const { currentUserData } = state as LocationState;
 
-    console.log('link to state: ', currentUserData);
-    console.log(outlet);
-
     const [userImg, setUserImg] = useState<string>(currentUserData.img || '/img/userDefault.png');
     const [userName, setUserName] = useState<string>(currentUserData.name);
 

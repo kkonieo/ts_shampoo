@@ -6,7 +6,6 @@ interface LocationState {
 
 const NavLink = ({ currentUserData }: LocationState) => {
     const { pathname } = useLocation();
-    // console.log('navlink', data);
 
     const links = [
         { url: 'aboutme', text: 'About me' },
