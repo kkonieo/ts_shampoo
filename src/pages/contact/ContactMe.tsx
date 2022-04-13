@@ -11,7 +11,7 @@ const ContactMe = () => {
 
     // 현재 보고있는 포트폴리오 id 값 가져오기
     const { pathname } = location;
-    const contactId: string = pathname.split("/")[1];
+    const contactId: string = pathname.split('/')[1];
 
     // 현재 보고있는 포트폴리오의 정보
     const [information, setInformation] = useState<ContactSpace.ContactInformation>();
@@ -20,9 +20,15 @@ const ContactMe = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        emailjs.sendForm(process.env.REACT_APP_SERVICE_ID || "", process.env.REACT_APP_TEMPLATE_ID || "", event.currentTarget, process.env.REACT_APP_USER_ID)
-        .then(result => console.log(result.text))
-        .catch(error => console.log(error.text));
+        emailjs
+            .sendForm(
+                process.env.REACT_APP_SERVICE_ID || '',
+                process.env.REACT_APP_TEMPLATE_ID || '',
+                event.currentTarget,
+                process.env.REACT_APP_USER_ID,
+            )
+            .then((result) => console.log(result.text))
+            .catch((error) => console.log(error.text));
     };
 
     // API 요청
@@ -30,7 +36,7 @@ const ContactMe = () => {
         (async () => {
             const response = await api(false).getContact(contactId);
             setInformation(response);
-        })()
+        })();
     }, []);
 
     return (
@@ -46,7 +52,7 @@ const ContactMe = () => {
                         </KeyDiv>
                         <ValueDiv>
                             <p>{information?.email}</p>
-                            <p>{information?.github === "None" ? "없음" : information?.github}</p>
+                            <p>{information?.github === 'None' ? '없음' : information?.github}</p>
                         </ValueDiv>
                     </RowDiv>
                 </UserDiv>
