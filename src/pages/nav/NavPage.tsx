@@ -23,7 +23,7 @@ const NavPage: React.FC = () => {
         <BackgroundDiv>
             <NavContainer>
                 <NavDiv>
-                    <IconDiv />
+                    <IconDiv currentUserData={currentUserData} />
                     <UserPicture src={userImg} />
                     <UserName>{userName}</UserName>
                     <NavLink currentUserData={currentUserData} />

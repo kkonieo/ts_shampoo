@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const IconDiv = () => {
+interface LocationState {
+    currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
+}
+
+const IconDiv = ({ currentUserData }: LocationState) => {
     // 로그인 유저인지 확인하기
     const userProfile: string | null = sessionStorage.getItem('userProfile');
 
@@ -15,7 +19,7 @@ const IconDiv = () => {
                 <img src={`${process.env.PUBLIC_URL}/img/home.svg`} alt="홈으로 가기" />
             </Link>
 
-            <Link to={userProfile ? '/nav/mypage' : ''} onClick={handleClick}>
+            <Link to={userProfile ? '/nav/mypage' : ''} state={{ currentUserData }} onClick={handleClick}>
                 <img src={`${process.env.PUBLIC_URL}/img/cogOutline.svg`} alt="마이 페이지" />
             </Link>
         </Div>
