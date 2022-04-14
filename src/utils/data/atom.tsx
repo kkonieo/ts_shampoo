@@ -45,3 +45,8 @@ export const userInfoData = atom<HomeProps.UserInfoProps[]>({
     key: 'userInfoData',
     default: [],
 });
+
+export const myPortpolio = atom<boolean>({
+    key: 'myPortpolio',
+    default: false,
+});

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { RecoilProps } from 'RecoilModule';
 import styled from 'styled-components';
-import { aboutMeEditState } from '../utils/data/atom';
+import { aboutMeEditState, myPortpolio } from '../utils/data/atom';
 
 interface Props {
     text: string;
@@ -12,6 +12,8 @@ interface Props {
 
 const SubTitle = ({ text, section, onClick }: Props) => {
     const [controlEditMode, setControlEditMode] = useRecoilState<RecoilProps.aboutMeEditProps[]>(aboutMeEditState);
+    //자신의 포트폴리오인지 확인
+    const isMyPortpolio = useRecoilValue(myPortpolio);
 
     const onEditClick = (e: React.MouseEvent<HTMLDivElement>) => {
         const targetTitle = e.currentTarget.dataset.section;
@@ -26,9 +28,11 @@ const SubTitle = ({ text, section, onClick }: Props) => {
     return (
         <SubTitleDiv>
             <TitleDiv>{text}</TitleDiv>
-            <EditButtonDiv onClick={onEditClick} data-section={section}>
-                <img src={`${process.env.PUBLIC_URL}/img/edit.svg`} alt="수정" />
-            </EditButtonDiv>
+            {isMyPortpolio && (
+                <EditButtonDiv onClick={onEditClick} data-section={section}>
+                    <img src={`${process.env.PUBLIC_URL}/img/edit.svg`} alt="수정" />
+                </EditButtonDiv>
+            )}
         </SubTitleDiv>
     );
 };

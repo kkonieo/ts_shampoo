@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userInfoData } from '../../utils/data/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { myPortpolio, userInfoData } from '../../utils/data/atom';
+import { useEffect } from 'react';
 
 interface LoggedInUser {
     id: string;
@@ -13,11 +14,15 @@ interface LocationState {
 }
 
 const IconDiv = ({ currentUserData }: LocationState) => {
+    const [isMyPortpolio, setIsMyPortpolio] = useRecoilState<boolean>(myPortpolio);
+
     // 로그인 유저인지 확인하기
     const userProfile: LoggedInUser | null = JSON.parse(sessionStorage.getItem('userProfile')!);
 
     // 현재 보고 있는 포트폴리오의 사용자가 현재 로그인한 사용자인지 판단
-    const isMyPortpolio = currentUserData.slug === userProfile?.id ? true : false;
+    useEffect(() => {
+        setIsMyPortpolio(currentUserData.slug === userProfile?.id ? true : false);
+    }, []);
 
     // const handleClick = () => {
     //     !userProfile && alert('로그인 유저만 볼 수 있는 페이지입니다');
