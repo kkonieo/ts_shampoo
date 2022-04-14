@@ -1,13 +1,26 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import Cookies from 'universal-cookie';
+import { userInfoData } from '../../utils/data/atom';
 import { Button } from '../Button';
+
+interface LoggedInUser {
+    id: string;
+    email: string;
+    name: string;
+}
 
 const cookies: Cookies = new Cookies();
 
 export const HeaderView = ({ name }: { name: string | undefined }) => {
     const [login, setLogin] = useState<boolean>(false);
+    const userInfo = useRecoilValue(userInfoData);
+
+    //non-null assertion operator
+    const loginUserObj: LoggedInUser | null = JSON.parse(sessionStorage.getItem('userProfile')!);
+    const myPortpolioObj = userInfo.find((i) => i.slug === loginUserObj?.id);
 
     useEffect(() => {
         if (typeof name === 'string') {
@@ -31,7 +44,21 @@ export const HeaderView = ({ name }: { name: string | undefined }) => {
     const Logout = () => {
         return (
             <>
-                <NavLink to="/id">나의 포트폴리오</NavLink>
+                <NavLink
+                    to={`/${myPortpolioObj?.id}`}
+                    state={{
+                        currentUserData: {
+                            id: myPortpolioObj?.id,
+                            name: myPortpolioObj?.name,
+                            job: myPortpolioObj?.job,
+                            user_skill: myPortpolioObj?.user_skill,
+                            img: myPortpolioObj?.img,
+                            slug: myPortpolioObj?.slug,
+                        },
+                    }}
+                >
+                    나의 포트폴리오
+                </NavLink>
                 <IdSpan>{name}님</IdSpan>
                 <NavLink
                     to="/"

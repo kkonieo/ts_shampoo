@@ -4,6 +4,8 @@ import { IconDiv, NavLink, UserPicture } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
 import { useEffect, useState } from 'react';
 import { HomeProps } from 'HomeModule';
+import { useRecoilValue } from 'recoil';
+import { userInfoData } from '../../utils/data/atom';
 
 interface LocationState {
     currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
@@ -12,6 +14,7 @@ interface LocationState {
 const NavPage: React.FC = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
+
     //현재 보고있는 포트폴리오의 소유자 유저 정보
     const { state } = useLocation();
     const { currentUserData } = state as LocationState;

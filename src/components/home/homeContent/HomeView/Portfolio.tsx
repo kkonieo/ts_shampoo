@@ -2,10 +2,6 @@ import { HomeProps } from 'HomeModule';
 import { RouteProps, Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface stateType {
-    data: HomeProps.UserInfoProps;
-}
-
 // Portfolio 카드 컴포넌트
 export const Portfolio = ({ id, name, job, user_skill, img, slug }: HomeProps.UserInfoProps): JSX.Element => {
     return (
