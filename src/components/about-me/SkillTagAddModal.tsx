@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { skillApi } from '../../utils/api/skill';
+import { skillApi } from '../../utils/api/aboutMe';
 import { allSkillData } from '../../utils/data/atom';
 import { AutoComplete } from '../autoComplete';
 
