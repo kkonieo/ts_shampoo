@@ -31,7 +31,7 @@ export const idState = atom<string>({
     default: '',
 });
 
-export const allSkillData = atom<{ id: number | null; name: string | null }[]>({
+export const allSkillData = atom<{ id: number; name: string }[]>({
     key: 'allSkillData',
     default: [],
 });
@@ -44,4 +44,9 @@ export const positionsData = atom<UserSpace.Job[]>({
 export const userInfoData = atom<HomeProps.UserInfoProps[]>({
     key: 'userInfoData',
     default: [],
+});
+
+export const myPortpolio = atom<boolean>({
+    key: 'myPortpolio',
+    default: false,
 });

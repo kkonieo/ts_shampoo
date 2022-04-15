@@ -1,11 +1,11 @@
 import { HomeProps } from 'HomeModule';
-import { Link } from 'react-router-dom';
+import { RouteProps, Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Portfolio 카드 컴포넌트
-export const Portfolio = ({ name, job, user_skill, img }: HomeProps.UserInfoProps): JSX.Element => {
+export const Portfolio = ({ id, name, job, user_skill, img, slug }: HomeProps.UserInfoProps): JSX.Element => {
     return (
-        <PortfolioLink to="/id">
+        <PortfolioLink to={`/${id}`} state={{ currentUserData: { id, name, job, user_skill, img, slug } }}>
             <PortfolioImage src={img ? img : `${process.env.PUBLIC_URL}/img/profile.png`} alt="profile" image={img} />
             <PortfolioTitleDiv>
                 <PortfolioName>{name}</PortfolioName>
@@ -16,6 +16,7 @@ export const Portfolio = ({ name, job, user_skill, img }: HomeProps.UserInfoProp
     );
 };
 
+// const PortfolioLink = styled(Link)`
 const PortfolioLink = styled(Link)`
     border: 1px solid ${(props) => props.theme.color.background};
     height: 277px;

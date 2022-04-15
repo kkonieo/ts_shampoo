@@ -3,9 +3,13 @@ import { useState, useMemo, useEffect } from 'react';
 import { ProjectProps } from 'ProjectPageModule';
 import styled from 'styled-components';
 import { ProjectApi } from '../../utils/api/ProjectApi';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
-const datas: any[] /*ProjectProps.IProjectProps[] */ = [
+interface LocationState {
+    currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
+}
+
+const datas: ProjectProps.ProjectDetail[] = [
     {
         id: '0',
         title: '프로젝트 토끼토끼',
@@ -64,6 +68,9 @@ const datas: any[] /*ProjectProps.IProjectProps[] */ = [
 ];
 
 const ProjectPage = () => {
+    const { state } = useLocation();
+    const { currentUserData } = state as LocationState;
+
     // 수정모드용 토글
     const [editToggle, setEditToggle] = useState<boolean>(false);
     const { id } = useParams();
@@ -94,7 +101,7 @@ const ProjectPage = () => {
     return (
         <Div>
             <SubTitleEdit text={`📂 Project`} onClick={handleChangeToggle} editMode={editToggle} />
-            <ProjectDiv {...data} editMode={editToggle} handleSubmit={handleSubmit} />
+            <ProjectDiv {...data} editMode={editToggle} handleSubmit={handleSubmit} currentUserData={currentUserData} />
         </Div>
     );
 };

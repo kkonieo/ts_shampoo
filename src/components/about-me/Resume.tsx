@@ -10,23 +10,7 @@ const Resume = ({ isEditMode }: Props) => {
     //타임라인 리스트
     //year은 선택, 단 year이 없으면 해당 년도에는 추가할 수 없음
     //year이 존재한다면 해당 년도에 무조건 하나는 detail이 있어야함 (detailDescribtion은 선택)
-    /*
-    [
-        {
-            year: number (선택),
-            detail: [
-                {
-                    detailTitle: '2019 대학교 졸업',
-                    detailDesribtion: '대학교 졸업에 대한 세부 사항입니다', (선택)
-                },
-                {
-                    detailTitle: '2019 엘리스 AI 트랙',
-                    detailDesribtion: null,
-                },
-            ],
-        },
-    ]
-    */
+
     const tmpTimeLine = [
         {
             year: 2019,
@@ -75,8 +59,8 @@ const Resume = ({ isEditMode }: Props) => {
         <Div>
             <SubTitle text="💼 Resume" section="resume" />
             <ResumeCardArea>
-                <ResumeCard title="🕰 TimeLine" resumeDetail={tmpTimeLine} />
-                <ResumeCard title="👑 Certificate & Awards" resumeDetail={tmpTimeLine} />
+                <ResumeCard title="🕰 TimeLine" resumeDetail={tmpTimeLine} isEditMode={isEditMode} />
+                <ResumeCard title="👑 Certificate & Awards" resumeDetail={tmpTimeLine} isEditMode={isEditMode} />
             </ResumeCardArea>
         </Div>
     );
