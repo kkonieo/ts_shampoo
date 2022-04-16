@@ -3,49 +3,31 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const UserInfoBox = ({ userData, editMode }: MyPageProps.UserInfoBoxProps) => {
-    const [userId, setUserId] = useState<string>("");
-    const [userName, setUserName] = useState<string>("");
-    const [userJobGroup, setUserJobGroup] = useState<string>("");
-
-    const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserId(e.currentTarget.value);
-    };
-
-    const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserName(e.currentTarget.value);
-    };
-
-    const onChangeUserJobGroup = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        e.preventDefault();
-        setUserJobGroup(e.target.value);
-    };
-
-    useEffect(() => {
-        setUserId(userData.id);
-        setUserName(userData.userName);
-        setUserJobGroup(userData.userJobGroup);
-    }, [userData]);
+    const userId: string = userData?.id || "";
+    const userName: string = userData?.userName || "";
+    const userJobGroup: string = userData?.userJobGroup || "";
+    const userGit: string = userData?.account || "없음";
 
     return (
         <div>
             <UserRowDiv>
                 <Label>아이디</Label>
-                {editMode ? <Input value={userId} onChange={onChangeId} /> : <p>{userId}</p>}
+                {editMode ? <Input defaultValue={userId} /> : <p>{userId}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>이름</Label>
-                {editMode ? <Input value={userName} onChange={onChangeUserName} /> : <p>{userName}</p>}
+                {editMode ? <Input defaultValue={userName} /> : <p>{userName}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>직군</Label>
                 {editMode ? 
-                <Select id="userJobGroup" onChange={onChangeUserJobGroup}>
-                    <DataOption value={userJobGroup}>{userData.userJobGroup}</DataOption>
+                <Select id="userJobGroup">
+                    <DataOption defaultValue={userJobGroup}>{userJobGroup}</DataOption>
                 </Select> : <p>{userJobGroup}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>GitHub</Label>
-                {editMode ? <Input value={userData?.account || "없음"} onChange={onChangeUserName} /> : <p>{userData?.account || "없음"}</p>}
+                {editMode ? <Input defaultValue={userGit} /> : <p>{userGit}</p>}
             </UserRowDiv>
         </div>
     );
