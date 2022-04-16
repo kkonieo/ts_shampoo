@@ -40,6 +40,7 @@ declare module 'AboutMePageModuel' {
                     detailDescriptions: string | null;
                 }[];
             }[];
+            isEditMode: boolean;
         }
     }
 }
@@ -76,15 +77,6 @@ declare module 'InformationModule' {
             id: number;
             name: string;
         }
-    }
-}
-
-declare module 'InformationModule' {
-    export namespace UserSpace {
-        interface Job {
-            id: number,
-            name: string,
-        };
     }
 }
 
@@ -156,7 +148,7 @@ declare module 'MyPageModule' {
                 userName: string;
                 userJobGroup: string;
                 account?: string;
-                img?: string,
+                img?: string;
             };
             editMode: boolean;
         }
@@ -166,10 +158,12 @@ declare module 'MyPageModule' {
 declare module 'HomeModule' {
     export namespace HomeProps {
         interface UserInfoProps {
+            id: number;
             name: string;
             job: string;
             user_skill: string;
             img: string;
+            slug: string;
         }
         interface IFilterProps {
             isActive: boolean;
@@ -219,14 +213,25 @@ declare module 'ButtonModule' {
         className: 'blue' | 'gray'; // 버튼 컬러 바꾸기용
         width?: string;
         height?: string;
-    };
-};
+    }
+}
 
 declare module 'ContactModule' {
     export namespace ContactSpace {
         interface ContactInformation {
             email: string;
             name: string;
-        };
-    };
-};
+            github: string;
+        }
+    }
+}
+
+declare module 'AutoCompleteModule' {
+    export namespace AutoCompleteSpace {
+        interface autoCompleteProps {
+            data: { id: number; name: string }[];
+            searchWord: string;
+            autoTagClickSkill: (e: React.MouseEvent<HTMLDivElement>) => void;
+        }
+    }
+}

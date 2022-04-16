@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import {
     HomePage,
     NavPage,
@@ -15,6 +15,7 @@ import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './utils/styles/global-styles';
 import { RecoilRoot } from 'recoil';
 import MyPage from './pages/mypage/MyPage';
+import { CustomNavigate } from './components/nav';
 //라우팅 및 전체 css 적용
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/intro" element={<Intro />}></Route>
                     <Route path=":id" element={<NavPage />}>
-                        <Route path="" element={<Navigate to="aboutme" />} />
+                        <Route index element={<CustomNavigate />} />
                         <Route path="aboutme" element={<AboutMePage />} />
                         <Route path="project" element={<ProjectPage />} />
                         <Route path="project/:id" element={<ProjectDetailPage />} />

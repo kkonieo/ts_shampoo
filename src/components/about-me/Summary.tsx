@@ -12,7 +12,7 @@ interface Props {
 const Summary = ({ isEditMode }: Props) => {
     const [contents, setContents] = useRecoilState(aboutMeData);
     const [summaryState, setSummaryState] = useState(contents.summary.split('\n'));
-    const [editSummary, setEditSummary] = useState(summaryState);
+    // const [editSummary, setEditSummary] = useState(summaryState);
     const [editSummaryText, setEditSummaryText] = useState<string>(contents.summary);
 
     const [controlEditMode, setControlEditMode] = useRecoilState<RecoilProps.aboutMeEditProps[]>(aboutMeEditState);

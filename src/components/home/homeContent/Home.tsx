@@ -2,7 +2,7 @@ import { HomeView } from './HomeView';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { allSkillData, positionsData, userInfoData } from '../../../utils/data/atom';
 import { useEffect } from 'react';
-import { skillApi } from '../../../utils/api/skill';
+import { skillApi } from '../../../utils/api/aboutMe';
 import { homeApi } from '../../../utils/api/home';
 import { positionsApi } from '../../../utils/api/positions';
 

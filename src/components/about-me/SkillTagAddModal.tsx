@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { skillApi } from '../../utils/api/skill';
+import { skillApi } from '../../utils/api/aboutMe';
 import { allSkillData } from '../../utils/data/atom';
+import { AutoComplete } from '../autoComplete';
 
 interface Props {
     skillModalOpen: boolean;
@@ -43,7 +44,13 @@ const SkillTagAddModal = ({ onAddSkill, onChangeSkillModalState, completeSkillMo
         }
     };
 
-    //TODO : Select로 바꿔야함
+    //자동완성에 넘겨줄 함수
+    const autoTagClickSkill = (e: React.MouseEvent<HTMLDivElement>) => {
+        console.log(e.currentTarget.dataset.title);
+        const targetSkill = String(e.currentTarget.dataset.title);
+        setNewSkillTitle(targetSkill);
+    };
+
     const onChangeSkillTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSkillTitle(e.target.value);
     };
@@ -107,6 +114,13 @@ const SkillTagAddModal = ({ onAddSkill, onChangeSkillModalState, completeSkillMo
                     <SkillTitleContainer>
                         <div>기술 이름</div>
                         <Input placeholder="기술" onChange={onChangeSkillTitle} value={newSkillTitle} />
+                        {newSkillTitle !== '' && (
+                            <AutoComplete
+                                data={skillStacks}
+                                searchWord={newSkillTitle}
+                                autoTagClickSkill={autoTagClickSkill}
+                            />
+                        )}
                     </SkillTitleContainer>
 
                     <SkillDescriptionContainer>
@@ -194,6 +208,8 @@ const Input = styled.input`
     box-sizing: border-box;
     padding: 5px;
     border-radius: 15px;
+    text-align: center;
+    border: 1px solid;
 `;
 
 const EditSubmitBtn = styled.button`
@@ -210,6 +226,9 @@ const EditSubmitBtn = styled.button`
 const SkillTitleContainer = styled.div`
     box-sizing: border-box;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const SkillDescriptionContainer = styled.div`

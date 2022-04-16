@@ -1,8 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+interface LocationState {
+    currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
+}
 
-const NavLink = () => {
+const NavLink = ({ currentUserData }: LocationState) => {
     const { pathname } = useLocation();
+
     const links = [
         { url: 'aboutme', text: 'About me' },
         { url: 'project', text: 'Project' },
@@ -12,7 +16,9 @@ const NavLink = () => {
         <NavLinkUl>
             {links.map((link) => (
                 <li key={link.text} className={pathname.includes(link.url) ? 'active' : 'inactive'}>
-                    <Link to={link.url}>{link.text}</Link>
+                    <Link to={link.url} state={{ currentUserData }}>
+                        {link.text}
+                    </Link>
                 </li>
             ))}
         </NavLinkUl>

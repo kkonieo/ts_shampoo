@@ -29,7 +29,7 @@ const Skills = ({ isEditMode }: Props) => {
         const targetIsValid = skillTagData.find((item) => item.title === targetSkill);
         if (targetIsValid === undefined && targetSkill !== '') {
             if (skillTagData.length !== 0) {
-                setTargetSkill(skillTagData[0].title);
+                setTargetSkill('');
                 return;
             }
             if (skillTagData.length === 0) {

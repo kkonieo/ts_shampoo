@@ -1,35 +1,35 @@
 import styled from 'styled-components';
-import { useOutlet ,useParams} from 'react-router-dom';
+import { RouteProps, useLocation, useNavigate, useOutlet, useParams } from 'react-router-dom';
 import { IconDiv, NavLink, UserPicture } from '../../components';
 import { ScrollProgress } from '../../components/scrollProgress';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { HomeProps } from 'HomeModule';
+import { useRecoilValue } from 'recoil';
+import { userInfoData } from '../../utils/data/atom';
 
+interface LocationState {
+    currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
+}
 
-const NavPage = () => {
+const NavPage: React.FC = () => {
     //중첩 라우팅된 페이지
     const outlet = useOutlet();
-    const name: string = 'Minyoung Lee';
-    // const navId = useParams();
-    // 현재 주소 파악
 
-    const detectScroll = (e: any) => {
-        const { scrollHeight } = e.target;
-        console.log(e.target);
-        if (scrollHeight === null) {
-            console.log('스크롤 없음');
-        }
-        console.log('onLoad', scrollHeight);
-    };
+    //현재 보고있는 포트폴리오의 소유자 유저 정보
+    const { state } = useLocation();
+    const { currentUserData } = state as LocationState;
 
+    const [userImg, setUserImg] = useState<string>(currentUserData.img || '/img/userDefault.png');
+    const [userName, setUserName] = useState<string>(currentUserData.name);
 
     return (
         <BackgroundDiv>
             <NavContainer>
                 <NavDiv>
-                    <IconDiv />
-                    <UserPicture src="/img/userDefault.png" />
-                    <UserName>{name}</UserName>
-                    <NavLink />
+                    <IconDiv currentUserData={currentUserData} />
+                    <UserPicture src={userImg} />
+                    <UserName>{userName}</UserName>
+                    <NavLink currentUserData={currentUserData} />
                 </NavDiv>
                 <ProgressContentsContainer>
                     {/*프로그래스바*/}
@@ -139,6 +139,5 @@ const UserPictureDiv = styled.div`
         padding: 7%;
         width: 80%;
     }
-
 `;
 // 사용자 이미지
