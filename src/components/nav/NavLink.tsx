@@ -35,6 +35,8 @@ const NavLinkUl = styled.ul`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
 
     li {
         width: 80%;
