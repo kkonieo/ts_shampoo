@@ -1,6 +1,5 @@
 import { MyPageProps } from 'MyPageModule';
 import styled from 'styled-components';
-import { LoginSpace } from 'LoginModule';
 import { MyPageSubTitle, ProfileImage } from '../../components/my-page';
 import UserInfoBox from '../../components/my-page/UserInfoBox';
 import { useEffect, useState } from 'react';
@@ -22,12 +21,16 @@ const MyPage = () => {
         userJobGroup: '',
     });
 
-    const tmpJobGroup = [
-        { id: 'front-end', value: '프론트엔드' },
-        { id: 'back-end', value: '백엔드' },
-        { id: 'AI', value: '인공지능' },
-        { id: 'data-analyst', value: '데이터 분석가' },
-    ];
+    // 수정 모드
+    const [editMode, setEditMode] = useState<boolean>(false);
+
+    const changeImg = (): void => {
+        alert('이미지를 변경했습니다');
+    };
+
+    const changeEditMode = (): void => {
+        setEditMode(!editMode);
+    };
 
     // 페이지 접근 시 정보 요청
     useEffect(() => {
@@ -56,16 +59,16 @@ const MyPage = () => {
             <RowDiv>
                 <ImageArea>
                     <ImageTitle>프로필 사진</ImageTitle>
-                    <ProfileImage imgSrc={userData?.imgSrc} />
+                    <ProfileImage imgSrc={userData?.imgSrc} editMode={editMode} changeImg={changeImg} />
                 </ImageArea>
                 <ContentsArea>
                     <UserDataArea>
-                        <UserInfoBox userData={userData} jobGroup={tmpJobGroup} />
+                        <UserInfoBox userData={userData} editMode={editMode} />
                     </UserDataArea>
                     <BtnArea>
                         <button>회원 탈퇴</button>
                         <BtnRowDiv>
-                            <button>수정하기</button>
+                            <button onClick={changeEditMode}>{editMode ? "취소하기" : "수정하기"}</button>
                             <button>저장하기</button>
                         </BtnRowDiv>
                     </BtnArea>
@@ -93,12 +96,15 @@ const RowDiv = styled.div`
     box-sizing: border-box;
     padding: 1%;
 
-    button {
+    button,
+    .input_file {
         padding: 15px;
 
         background-color: ${({ theme }) => theme.color.buttonBackground};
 
         border-radius: 5px;
+
+        cursor: pointer;
 
         :hover {
             background-color: ${(props) => props.theme.color.buttonHoverColor};

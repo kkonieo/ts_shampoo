@@ -1,58 +1,32 @@
 import { MyPageProps } from 'MyPageModule';
-import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const UserInfoBox = ({ userData, jobGroup }: MyPageProps.UserInfoBoxProps) => {
-    const otherJobGroup = jobGroup.filter((item) => item.id !== userData.userJobGroup);
-
-    const [userId, setUserId] = useState<string>("");
-    const [userName, setUserName] = useState<string>("");
-    const [userJobGroup, setUserJobGroup] = useState<string>("");
-
-    const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserId(e.currentTarget.value);
-    };
-
-    const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserName(e.currentTarget.value);
-    };
-
-    const onChangeUserJobGroup = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        e.preventDefault();
-        setUserJobGroup(e.target.value);
-    };
-
-    useEffect(() => {
-        setUserId(userData.id);
-        setUserName(userData.userName);
-        setUserJobGroup(userData.userJobGroup);
-    }, [userData]);
+const UserInfoBox = ({ userData, editMode }: MyPageProps.UserInfoBoxProps) => {
+    const userId: string = userData?.id || "";
+    const userName: string = userData?.userName || "";
+    const userJobGroup: string = userData?.userJobGroup || "";
+    const userGit: string = userData?.account || "없음";
 
     return (
         <div>
             <UserRowDiv>
                 <Label>아이디</Label>
-                <p>{userId}</p>
-                {/* <Input value={userId} onChange={onChangeId} /> */}
+                {editMode ? <Input defaultValue={userId} /> : <p>{userId}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>이름</Label>
-                <p>{userName}</p>
-                {/* <Input value={userName} onChange={onChangeUserName} /> */}
+                {editMode ? <Input defaultValue={userName} /> : <p>{userName}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>직군</Label>
-                <p>{userJobGroup}</p>
-                {/* <Select id="userJobGroup" onChange={onChangeUserJobGroup}>
-                    <DataOption value={userJobGroup}>{userData.userJobGroup}</DataOption>
-                    {otherJobGroup.map((item) => (
-                        <DataOption value={item.id}>{item.value}</DataOption>
-                    ))}
-                </Select> */}
+                {editMode ? 
+                <Select id="userJobGroup">
+                    <DataOption defaultValue={userJobGroup}>{userJobGroup}</DataOption>
+                </Select> : <p>{userJobGroup}</p>}
             </UserRowDiv>
             <UserRowDiv>
                 <Label>GitHub</Label>
-                <p>{userData?.account || "없음"}</p>
+                {editMode ? <Input defaultValue={userGit} /> : <p>{userGit}</p>}
             </UserRowDiv>
         </div>
     );
@@ -63,44 +37,27 @@ export default UserInfoBox;
 const UserRowDiv = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
+    p, input {
+        padding: 7px;
+    }
 `;
 
 const Label = styled.div`
+    width: 15%;
     font-weight: bold;
     margin-right: 20px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+    width: 50%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+`;
 
 const Select = styled.select`
     width: auto;
 `;
 
 const DataOption = styled.option``;
-
-const AccountTitle = styled.div`
-    font-weight: 500;
-    font-size: 17px;
-    margin-top: 30px;
-`;
-
-const AccountRowDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
-const AccountImageContainer = styled.div`
-    flex-grow: 1;
-`;
-
-//TODO : userData.account.id에 따라서 src가 변경되도록, github ,google,kakao
-const AccountImage = styled.img`
-    src: ${process.env.PUBLIC_URL}+ '/img/github.svg';
-`;
-
-const AccountId = styled.div`
-    flex-grow: 2;
-    font-size: 16px;
-    font-weight: 500;
-`;
