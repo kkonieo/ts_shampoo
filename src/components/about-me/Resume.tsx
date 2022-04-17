@@ -1,0 +1,83 @@
+import styled from 'styled-components';
+import SubTitle from '../SubTitle';
+import ResumeCard from './ResumeCard';
+
+interface Props {
+    isEditMode: boolean;
+}
+
+const Resume = ({ isEditMode }: Props) => {
+    //타임라인 리스트
+    //year은 선택, 단 year이 없으면 해당 년도에는 추가할 수 없음
+    //year이 존재한다면 해당 년도에 무조건 하나는 detail이 있어야함 (detailDescribtion은 선택)
+
+    const tmpTimeLine = [
+        {
+            year: 2019,
+            detail: [
+                {
+                    detailTitle: '2019 대학교 졸업',
+                    detailDescriptions: '대학교 졸업에 대한 세부 사항입니다',
+                },
+                {
+                    detailTitle: '2019 엘리스 AI 트랙',
+                    detailDescriptions: null,
+                },
+            ],
+        },
+        {
+            year: 2020,
+            detail: [
+                {
+                    detailTitle: '2020 대학교 졸업',
+                    detailDescriptions: '대학교 졸업에 대한 세부 사항',
+                },
+                {
+                    detailTitle: '엘리스 AI 트랙',
+                    detailDescriptions: '엘리스 AI 트랙에 대한 세부 사항입니다.',
+                },
+            ],
+        },
+        {
+            year: 2021,
+            detail: [
+                {
+                    detailTitle: 'string',
+                    detailDescriptions: 'string',
+                },
+                {
+                    detailTitle: 'string',
+                    detailDescriptions: null,
+                },
+            ],
+        },
+    ];
+
+    //수상 리스트
+
+    return (
+        <Div>
+            <SubTitle text="💼 Resume" section="resume" />
+            <ResumeCardArea>
+                <ResumeCard title="🕰 TimeLine" resumeDetail={tmpTimeLine} isEditMode={isEditMode} />
+                <ResumeCard title="👑 Certificate & Awards" resumeDetail={tmpTimeLine} isEditMode={isEditMode} />
+            </ResumeCardArea>
+        </Div>
+    );
+};
+
+export default Resume;
+
+const Div = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+`;
+
+const ResumeCardArea = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
