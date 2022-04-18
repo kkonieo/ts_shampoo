@@ -194,6 +194,12 @@ declare module 'RecoilModule' {
         interface aboutMeSummaryProps {
             summary: string;
         }
+        interface aboutMeSkillProps {
+            skills: { title: { id: number; name: string }; description: { id: number; content: string }[] }[];
+        }
+        interface aboutMeResumeProps {
+            resume: string[];
+        }
         interface skills {
             id: number;
             name: string;
@@ -227,6 +233,14 @@ declare module 'AutoCompleteModule' {
             data: { id: number; name: string }[];
             searchWord: string;
             autoTagClickSkill: (e: React.MouseEvent<HTMLDivElement>) => void;
+        }
+    }
+}
+
+declare module 'LinkStateModule' {
+    export namespace LinkStateData {
+        interface linkStateprops {
+            currentUserData: { id: number; name: string; job: string; user_skill: string[]; img: string; slug: string };
         }
     }
 }

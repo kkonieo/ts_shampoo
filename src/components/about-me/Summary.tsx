@@ -2,7 +2,10 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { RecoilProps } from 'RecoilModule';
 import styled, { keyframes } from 'styled-components';
-import { aboutMeData, aboutMeEditState } from '../../utils/data/atom';
+import Cookies from 'universal-cookie';
+import { summaryApi } from '../../utils/api/aboutMe';
+import { aboutMeSummaryData, aboutMeEditState, myPortpolio } from '../../utils/data/atom';
+import { Button } from '../Button';
 import SubTitle from '../SubTitle';
 
 interface Props {
@@ -10,18 +13,21 @@ interface Props {
 }
 
 const Summary = ({ isEditMode }: Props) => {
-    const [contents, setContents] = useRecoilState(aboutMeData);
-    const [summaryState, setSummaryState] = useState(contents.summary.split('\n'));
+    const cookies: Cookies = new Cookies();
+    const [contents, setContents] = useRecoilState<RecoilProps.aboutMeSummaryProps>(aboutMeSummaryData);
+    const [summaryState, setSummaryState] = useState<string[]>(contents.summary.trim().split('\n'));
     // const [editSummary, setEditSummary] = useState(summaryState);
     const [editSummaryText, setEditSummaryText] = useState<string>(contents.summary);
-
+    const isMyPortpolio = useRecoilValue(myPortpolio);
     const [controlEditMode, setControlEditMode] = useRecoilState<RecoilProps.aboutMeEditProps[]>(aboutMeEditState);
+    const [isCreateMode, setIsCreateMode] = useState<boolean>(false);
     const editTextRef = useRef<HTMLTextAreaElement>(null);
 
-    useEffect(() => {
-        console.log(contents.summary);
-        setSummaryState(contents.summary.split('\n'));
-    }, [contents]);
+    // useEffect(() => {
+    //     contents.summary === '' ? setSummaryState([]) : setSummaryState(contents.summary.trim().split('\n'));
+
+    //     console.log(contents.summary === '' ? true : false);
+    // }, [contents]);
 
     /*
         수정할때 (onChange) : setEditSummary
@@ -29,6 +35,21 @@ const Summary = ({ isEditMode }: Props) => {
      */
 
     useEffect(() => {
+        const tmpArr = contents.summary.trim().split('\n');
+        setEditSummaryText(contents.summary);
+        setSummaryState(tmpArr);
+    }, [contents]);
+
+    useEffect(() => {
+        if (!(summaryState.length === 1 && summaryState[0] === '')) {
+            setIsCreateMode(false);
+        }
+    }, [summaryState]);
+
+    useEffect(() => {
+        if (!isEditMode) {
+            setEditSummaryText('');
+        }
         if (editTextRef === null || editTextRef.current === null) {
             return;
         }
@@ -49,7 +70,6 @@ const Summary = ({ isEditMode }: Props) => {
         }
         //TODO : 로직 수정해야함
         setEditSummaryText(e.currentTarget.value);
-        //setEditSummary([...editSummary, editSummaryText]);
         console.log(e.currentTarget.value);
     };
 
@@ -64,8 +84,85 @@ const Summary = ({ isEditMode }: Props) => {
     const onEditTextSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (window.confirm('수정하시겠습니까?')) {
-            setContents({ summary: editSummaryText });
+            const tmpSummary = editSummaryText.trim().split('\n');
+
+            const token = cookies.get('accessToken');
+            console.log(token);
+            try {
+                summaryApi
+                    .editUserSummary(editSummaryText, token)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            setContents({ summary: editSummaryText });
+                        }
+                    })
+                    .catch((error) => {
+                        if (error.response) {
+                            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+                            console.log(error.response.data);
+                            console.log(error.response.status);
+                            console.log(error.response.headers);
+                        } else if (error.request) {
+                            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+                            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+                            // Node.js의 http.ClientRequest 인스턴스입니다.
+                            console.log(error.request);
+                            alert('네트워크 오류 발생');
+                        } else {
+                            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    });
+            } catch (e) {
+                alert('에러 발생!');
+                console.log(e);
+            }
+            setSummaryState(tmpSummary);
             onChangeSummaryEditMode();
+        } else {
+            alert('취소를 눌렀습니다');
+        }
+    };
+
+    const onSubmitCreateSummary = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (window.confirm('저장 하시겠습니까?')) {
+            const tmpSummary = editSummaryText.trim().split('\n');
+
+            const token = cookies.get('accessToken');
+            try {
+                summaryApi
+                    .createUserSummary(editSummaryText, token)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            setContents({ summary: editSummaryText });
+                        }
+                    })
+                    .catch((error) => {
+                        if (error.response) {
+                            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+                            console.log(error.response.data);
+                            console.log(error.response.status);
+                            console.log(error.response.headers);
+                        } else if (error.request) {
+                            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+                            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+                            // Node.js의 http.ClientRequest 인스턴스입니다.
+                            console.log(error.request);
+                            alert('네트워크 오류 발생');
+                        } else {
+                            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    });
+            } catch (e) {
+                alert('에러 발생!');
+                console.log(e);
+            }
+            setSummaryState(tmpSummary);
+            setIsCreateMode(false);
         } else {
             alert('취소를 눌렀습니다');
         }
@@ -73,12 +170,41 @@ const Summary = ({ isEditMode }: Props) => {
 
     return (
         <Div>
-            <SubTitle text="🧑‍💻 About me" section="summary" />
+            <SubTitle text="🧑‍💻 About me" section="summary" additionalData={contents} />
             {!isEditMode && (
                 <ContentsArea>
-                    {summaryState.map((item, idx) => (
-                        <UserIntroduce key={idx}>{item}</UserIntroduce>
-                    ))}
+                    {!isCreateMode && summaryState?.length === 1 && summaryState[0] === '' ? (
+                        <div>
+                            <div>자기 소개를 입력해보세요!</div>
+                            {isMyPortpolio && (
+                                <CreateSummaryBtn
+                                    onClick={() => {
+                                        setIsCreateMode(true);
+                                    }}
+                                >
+                                    <span>생성</span>
+                                </CreateSummaryBtn>
+                            )}
+                        </div>
+                    ) : (
+                        summaryState?.map((item, idx) => <UserIntroduce key={idx}>{item}</UserIntroduce>)
+                    )}
+                </ContentsArea>
+            )}
+            {isCreateMode && (
+                <ContentsArea>
+                    <div className="test">새로운 자기 소개</div>
+                    <EditArea>
+                        <EditForm onSubmit={onSubmitCreateSummary}>
+                            <TextArea
+                                ref={editTextRef}
+                                value={editSummaryText}
+                                onInput={handleResizeTextAreaHeight}
+                                onChange={onEditTextChange}
+                            />
+                            <EditSubmitBtn>제출</EditSubmitBtn>
+                        </EditForm>
+                    </EditArea>
                 </ContentsArea>
             )}
             {isEditMode && (
@@ -151,5 +277,17 @@ const EditSubmitBtn = styled.button`
     border-radius: 20%;
     &:hover {
         background-color: rgba(89, 147, 246, 0.5);
+    }
+`;
+
+const CreateSummaryBtn = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: ${(props) => props.theme.color.buttonColor};
+    &:hover {
+        background-color: ${(props) => props.theme.color.buttonHoverColor};
     }
 `;
