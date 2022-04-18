@@ -7,10 +7,10 @@ import { aboutMeEditState, myPortpolio } from '../utils/data/atom';
 interface Props {
     text: string;
     section: string;
-    onClick?: (...args: any[]) => any;
+    additionalData?: any | null;
 }
 
-const SubTitle = ({ text, section, onClick }: Props) => {
+const SubTitle = ({ text, section, additionalData }: Props) => {
     const [controlEditMode, setControlEditMode] = useRecoilState<RecoilProps.aboutMeEditProps[]>(aboutMeEditState);
     //자신의 포트폴리오인지 확인
     const isMyPortpolio = useRecoilValue(myPortpolio);
@@ -28,7 +28,7 @@ const SubTitle = ({ text, section, onClick }: Props) => {
     return (
         <SubTitleDiv>
             <TitleDiv>{text}</TitleDiv>
-            {isMyPortpolio && (
+            {isMyPortpolio && additionalData?.summary !== '' && (
                 <EditButtonDiv onClick={onEditClick} data-section={section}>
                     <img src={`${process.env.PUBLIC_URL}/img/edit.svg`} alt="수정" />
                 </EditButtonDiv>
